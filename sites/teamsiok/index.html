@@ -1,154 +1,231 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Teamsiok Insurance | Trusted Insurance Solutions</title>
-  <link rel="icon" href="https://teamsiok.com/favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&family=Merriweather+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    :root {
-      --primary: #D62311;
-      --accent: #AA1B0D;
-      --text: #403C3C;
-      --light-bg: #FAFAF9;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teamsiok Insurance Agency</title>
+    <link rel="icon" href="https://teamsiok.com/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        :root {
+            --primary: #D62311;
+            --accent: #AA1B0D;
+            --text: #403C3C;
+            --light-bg: #FAFAFA;
+        }
 
-    * {
-      font-family: 'Merriweather Sans', sans-serif;
-    }
+        * {
+            font-family: 'Source Sans Pro', sans-serif;
+        }
 
-    h1, h2, h3, h4, h5, h6 {
-      font-family: 'Source Sans Pro', sans-serif;
-    }
+        .font-heading {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
 
-    body {
-      background-color: var(--light-bg);
-      color: var(--text);
-      overflow-x: hidden;
-    }
+        .font-subheading {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
 
-    .hero-heading {
-      font-size: clamp(44px, 5vw, 96px);
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      line-height: 1.1;
-    }
+        .font-body {
+            font-family: 'Source Sans Pro', sans-serif;
+            font-weight: 400;
+            font-size: clamp(15px, 1.1vw, 18px);
+            line-height: 1.6;
+        }
 
-    .section-heading {
-      font-size: clamp(28px, 2.5vw, 48px);
-      font-weight: 700;
-      letter-spacing: -0.01em;
-    }
+        /* Typography Scale */
+        .text-hero {
+            font-size: clamp(48px, 6vw, 96px);
+            font-weight: 800;
+            line-height: 1.1;
+            letter-spacing: -0.02em;
+        }
 
-    .body-text {
-      font-size: clamp(15px, 1.1vw, 18px);
-      font-weight: 400;
-      line-height: 1.6;
-    }
+        .text-h2 {
+            font-size: clamp(28px, 2.5vw, 48px);
+            font-weight: 700;
+            line-height: 1.2;
+        }
 
-    .subhead-text {
-      font-size: clamp(18px, 1.3vw, 24px);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-    }
+        .text-h3 {
+            font-size: clamp(20px, 1.8vw, 32px);
+            font-weight: 700;
+        }
 
-    .gradient-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(60px);
-      opacity: 0.6;
-    }
+        /* CTA Button */
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+            padding: 14px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(214, 35, 17, 0.3);
+            border: none;
+            cursor: pointer;
+        }
 
-    .orb-primary {
-      background: radial-gradient(circle, rgba(214, 35, 17, 0.4) 0%, transparent 70%);
-    }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(214, 35, 17, 0.4);
+        }
 
-    .orb-secondary {
-      background: radial-gradient(circle, rgba(170, 27, 13, 0.3) 0%, transparent 70%);
-    }
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            padding: 14px 32px;
+            border-radius: 9999px;
+            font-weight: 600;
+            font-size: 14px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            border: 2px solid var(--accent);
+            cursor: pointer;
+        }
 
-    .glassmorphism {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateY(-2px);
+        }
 
-    .card-hover {
-      transition: all 0.3s cubic-bezier(0.33, 0.66, 0.66, 1);
-    }
+        /* Glassmorphism Card */
+        .card-glass {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            transition: all 0.3s ease;
+        }
 
-    .card-hover:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-    }
+        .card-glass:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+        }
 
-    .cta-button {
-      background-color: var(--primary);
-      color: white;
-      padding: 16px 48px;
-      border-radius: 9999px;
-      font-weight: 600;
-      border: none;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 15px rgba(214, 35, 17, 0.2);
-    }
+        .card-elevated {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
 
-    .cta-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 25px rgba(214, 35, 17, 0.4);
-    }
+        .card-elevated:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+        }
 
-    .cta-button-secondary {
-      background-color: transparent;
-      color: var(--accent);
-      border: 2px solid var(--accent);
-      padding: 14px 46px;
-    }
+        /* Gradient Orb */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.15;
+            filter: blur(40px);
+        }
 
-    .cta-button-secondary:hover {
-      background-color: rgba(170, 27, 13, 0.05);
-    }
+        .orb-primary {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary), transparent);
+        }
 
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(64, 60, 60, 0.1), transparent);
-    }
+        .orb-accent {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, var(--accent), transparent);
+        }
 
-    .section-padding {
-      padding-top: clamp(56px, 7vw, 112px);
-      padding-bottom: clamp(56px, 7vw, 112px);
-    }
+        /* Section Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #E5E5E5, transparent);
+        }
 
-    .scroll-indicator {
-      animation: bounce 2s infinite;
-    }
+        /* Dark Section */
+        .section-dark {
+            background: #1a1a1a;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
 
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
+        .section-dark::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(214, 35, 17, 0.05), transparent);
+            pointer-events: none;
+        }
 
-    .dot-pattern {
-      background-image: radial-gradient(circle, rgba(64, 60, 60, 0.03) 1px, transparent 1px);
-      background-size: 20px 20px;
-    }
+        /* Scroll Indicator */
+        .scroll-indicator {
+            animation: bounce 2s infinite;
+        }
 
-    .nav-link {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: color 0.2s ease;
-      font-size: 14px;
-    }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
 
-    .nav-link:hover {
-      color: var(--primary);
-    }
-  </style>
+        /* Light Section */
+        .section-light {
+            background: var(--light-bg);
+        }
+
+        /* Subtle Dot Pattern */
+        .dot-pattern {
+            background-image: radial-gradient(circle, #E5E5E5 1px, transparent 1px);
+            background-size: 24px 24px;
+        }
+
+        /* Grid Layout */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(20px, 2vw, 32px);
+        }
+
+        .bento-item-large {
+            grid-column: span 2;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .bento-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .bento-item-large {
+                grid-column: span 1;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Section Spacing */
+        .section-pad {
+            padding: clamp(56px, 8vw, 112px) clamp(24px, 5vw, 64px);
+        }
+
+        .hero-height {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+    </style>
 
 <style>
 /* Scroll-triggered animations */
@@ -304,239 +381,176 @@ nav, header nav, [class*="fixed"][class*="top"] {
 }
 </style>
 </head>
-<body>
-  <!-- HEADER / NAV -->
-  <header class="fixed top-0 w-full bg-white/80 backdrop-blur-md z-50 border-b border-gray-200">
-    <div class="max-w-7xl mx-auto px-8 py-4 flex items-center justify-between">
-      <div class="text-2xl font-bold text-gray-900">Teamsiok</div>
-      <nav class="hidden md:flex gap-8">
-        <a href="#" class="nav-link">Call</a>
-        <a href="#" class="nav-link">Text</a>
-        <a href="#" class="nav-link">#LifeInsurance</a>
-        <a href="#" class="nav-link">#FamilyFirst</a>
-      </nav>
-      <button class="md:hidden text-gray-900">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
-  </header>
+<body class="bg-white text-[#403C3C]">
 
-  <!-- HERO -->
-  <section class="relative h-screen flex items-center overflow-hidden bg-white pt-20" data-animate="fade-up">
-    <!-- Background Orbs -->
-    <div class="gradient-orb orb-primary" style="width: 600px; height: 600px; top: -200px; right: -100px;"></div>
-    <div class="gradient-orb orb-secondary" style="width: 400px; height: 400px; bottom: -150px; right: 100px;"></div>
+    <!-- HERO SECTION -->
+    <section class="hero-height section-dark relative overflow-hidden" data-animate="fade-up">
+        <div class="absolute top-0 left-10 orb orb-primary" style="top: -100px; left: -100px;"></div>
+        <div class="absolute bottom-20 right-0 orb orb-accent" style="bottom: -50px; right: -150px;"></div>
 
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-20 items-center relative z-10 px-8 w-full" data-stagger>
-      <!-- Left Content -->
-      <div>
-        <h1 class="hero-heading text-gray-900 mb-6 dp-gradient-text">
-          Insurance You Can Trust
-        </h1>
-        <p class="subhead-text text-gray-600 mb-8 font-light">
-          Professional guidance for life, family, and peace of mind.
-        </p>
-        <button class="cta-button">File a Claim</button>
-      </div>
+        <div class="relative z-10 w-full px-12 md:px-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
+            <!-- Left Content -->
+            <div class="flex-1 max-w-2xl">
+                <h1 class="text-hero font-heading text-white mb-8 dp-gradient-text">
+                    Teamsiok
+                </h1>
+                <p class="font-subheading text-white/70 text-lg md:text-2xl mb-12 font-light tracking-wide">
+                    Trusted insurance guidance for individuals and families
+                </p>
+                <button class="btn-primary">File a Claim</button>
+            </div>
 
-      <!-- Right Visual -->
-      <div class="relative h-96 flex items-center justify-center">
-        <div class="absolute w-64 h-64 bg-gradient-to-br from-red-400/20 to-orange-300/10 rounded-full blur-3xl"></div>
-        <div class="absolute w-48 h-48 bg-gradient-to-tl from-red-500/15 to-transparent rounded-full blur-2xl -top-10 -right-10"></div>
-        <svg class="relative z-10" width="280" height="280" viewBox="0 0 280 280" fill="none">
-          <circle cx="140" cy="140" r="120" stroke="url(#grad1)" stroke-width="2" opacity="0.3"/>
-          <circle cx="140" cy="140" r="100" stroke="url(#grad2)" stroke-width="2" opacity="0.5"/>
-          <path d="M140 40 L160 80 L200 90 L170 120 L180 160 L140 140 L100 160 L110 120 L80 90 L120 80 Z" fill="none" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
-          <defs>
-            <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#D62311;stop-opacity:0.4" />
-              <stop offset="100%" style="stop-color:#AA1B0D;stop-opacity:0.1" />
-            </linearGradient>
-            <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" style="stop-color:#AA1B0D;stop-opacity:0.5" />
-              <stop offset="100%" style="stop-color:#D62311;stop-opacity:0.2" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </div>
-    </div>
+            <!-- Right Abstract Visuals -->
+            <div class="flex-1 relative h-96 md:h-full hidden md:block">
+                <div class="absolute inset-0 flex items-center justify-center">
+                    <div class="w-80 h-80 rounded-full bg-gradient-to-br from-[#D62311]/20 to-transparent blur-3xl"></div>
+                </div>
+                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+                    <defs>
+                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#D62311;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#AA1B0D;stop-opacity:0.1" />
+                        </linearGradient>
+                    </defs>
+                    <circle cx="200" cy="100" r="80" fill="url(#grad1)" opacity="0.6"/>
+                    <circle cx="300" cy="250" r="60" fill="url(#grad1)" opacity="0.4"/>
+                    <circle cx="100" cy="300" r="100" fill="url(#grad1)" opacity="0.3"/>
+                    <path d="M 50 200 Q  250" stroke="#D62311" stroke-width="1" fill="none" opacity="0.3"/>
+                </svg>
+            </div>
+        </div>
 
-    <!-- Scroll Indicator -->
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-      <div class="scroll-indicator text-gray-400">
-        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-        </svg>
-      </div>
-    </div>
-
-    <div class="absolute bottom-0 w-full h-px divider"></div>
-  </section>
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+            <div class="text-white/50 text-xs font-light tracking-widest mb-2">SCROLL</div>
+            <div class="scroll-indicator text-white/50">↓</div>
+        </div>
+    </section>
 <div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
 
 
-  <!-- ABOUT / PROOF -->
-  <section class="section-padding bg-white dot-pattern relative" data-animate="fade-up">
-    <div class="max-w-7xl mx-auto grid grid-cols-2 gap-16 items-start px-8" data-stagger>
-      <div>
-        <h2 class="section-heading text-gray-900 mb-2">
-          Brad Siok Insurance Agency Inc
-        </h2>
-      </div>
-      <div>
-        <p class="body-text text-gray-600 mb-6 leading-relaxed">
-          Dedicated to providing professional insurance guidance to individuals and families seeking trusted coverage. Our mission is to make insurance simple, transparent, and accessible.
-        </p>
-        <div class="flex gap-4">
-          <button class="cta-button-secondary">Call</button>
-          <button class="cta-button-secondary">Text</button>
-        </div>
-      </div>
-    </div>
+    <!-- DIVIDER -->
+    <div class="divider"></div>
 
-    <!-- Trust Badges -->
-    <div class="max-w-7xl mx-auto mt-20 px-8">
-      <div class="text-gray-500 text-sm uppercase tracking-wider mb-8">Trusted by families</div>
-      <div class="grid grid-cols-4 gap-8 items-center" data-stagger>
-        <div class="glassmorphism p-6 text-center rounded-lg">
-          <div class="text-2xl font-bold text-gray-400">State Farm</div>
+    <!-- SERVICES SECTION -->
+    <section class="section-light section-pad" data-animate="fade-up">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-h2 font-heading mb-4">Our Services</h2>
+            <p class="font-subheading text-lg font-light tracking-wide mb-16 text-[#403C3C]/70 max-w-2xl">
+                Comprehensive insurance solutions tailored to your needs
+            </p>
+
+            <div class="bento-grid">
+                <!-- Large Service Card -->
+                <div class="bento-item-large card-elevated p-8 md:p-12">
+                    <h3 class="text-h3 font-heading mb-4">File a Claim</h3>
+                    <p class="font-body text-[#403C3C]/80">Streamlined claims process designed for your peace of mind</p>
+                </div>
+
+                <!-- Service Cards -->
+                <div class="card-elevated p-8">
+                    <h3 class="text-lg font-heading mb-3">Call Today</h3>
+                    <p class="font-body text-sm text-[#403C3C]/80">Direct support from our team</p>
+                </div>
+
+                <div class="card-elevated p-8">
+                    <h3 class="text-lg font-heading mb-3">Text Support</h3>
+                    <p class="font-body text-sm text-[#403C3C]/80">Convenient messaging options</p>
+                </div>
+
+                <div class="card-elevated p-8">
+                    <h3 class="text-lg font-heading mb-3">Moving Services</h3>
+                    <p class="font-body text-sm text-[#403C3C]/80">Relocation and policy updates</p>
+                </div>
+
+                <div class="card-elevated p-8">
+                    <h3 class="text-lg font-heading mb-3">Arizona Coverage</h3>
+                    <p class="font-body text-sm text-[#403C3C]/80">Local expertise and support</p>
+                </div>
+
+                <div class="card-elevated p-8">
+                    <h3 class="text-lg font-heading mb-3">Peoria Office</h3>
+                    <p class="font-body text-sm text-[#403C3C]/80">Local community presence</p>
+                </div>
+            </div>
         </div>
-        <div class="glassmorphism p-6 text-center rounded-lg">
-          <div class="text-2xl font-bold text-gray-400">Licensed Agent</div>
-        </div>
-        <div class="glassmorphism p-6 text-center rounded-lg">
-          <div class="text-2xl font-bold text-gray-400">Local Community</div>
-        </div>
-        <div class="glassmorphism p-6 text-center rounded-lg">
-          <div class="text-2xl font-bold text-gray-400">Peoria, AZ</div>
-        </div>
-      </div>
-    </div>
-  </section>
+    </section>
 <div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
 
 
-  <!-- SERVICES -->
-  <section class="section-padding bg-gray-900 relative overflow-hidden" data-animate="fade-in">
-    <!-- Background elements -->
-    <div class="gradient-orb orb-primary" style="width: 500px; height: 500px; top: -200px; left: 10%; opacity: 0.3;"></div>
-    
-    <div class="max-w-7xl mx-auto px-8 relative z-10">
-      <h2 class="section-heading text-white mb-16">Insurance Solutions</h2>
-      
-      <div class="grid grid-cols-3 gap-6 auto-rows-fr" data-stagger>
-        <!-- Large Featured Card -->
-        <div class="col-span-2 row-span-2 glassmorphism p-10 rounded-2xl card-hover flex flex-col justify-between">
-          <div>
-            <h3 class="text-3xl font-bold text-white mb-4">#LifeInsurance</h3>
-            <p class="body-text text-gray-200">Comprehensive life insurance coverage tailored to your family's needs.</p>
-          </div>
-          <div class="pt-6 border-t border-white/10">
-            <button class="cta-button text-sm">Learn More</button>
-          </div>
+    <!-- DIVIDER -->
+    <div class="divider"></div>
+
+    <!-- CTA BAND -->
+    <section class="section-dark section-pad relative overflow-hidden" data-animate="fade-in">
+        <div class="absolute inset-0 opacity-5">
+            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
+                        <circle cx="12" cy="12" r="1" fill="white"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#dots)"/>
+            </svg>
         </div>
 
-        <!-- Card 1 -->
-        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-bold text-white mb-3">#FamilyFirst</h3>
-            <p class="text-sm text-gray-300">Family protection and security.</p>
-          </div>
+        <div class="relative z-10 max-w-7xl mx-auto">
+            <h2 class="text-h2 font-heading text-white mb-8 max-w-3xl">
+                Ready to protect what matters most?
+            </h2>
+            <p class="font-body text-white/70 mb-12 max-w-2xl">
+                Get started with expert insurance guidance today
+            </p>
+            <button class="btn-primary">File a Claim</button>
         </div>
+    </section>
 
-        <!-- Card 2 -->
-        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-bold text-white mb-3">#TEAMSiok</h3>
-            <p class="text-sm text-gray-300">Expert guidance from our team.</p>
-          </div>
+    <!-- DIVIDER -->
+    <div class="divider"></div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white section-pad border-t border-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-start gap-16">
+                <!-- Brand -->
+                <div>
+                    <h3 class="text-4xl md:text-5xl font-heading font-light text-[#403C3C]">
+                        Teamsiok
+                    </h3>
+                    <p class="font-subheading text-sm mt-2 text-[#403C3C]/60 tracking-wider">
+                        Insurance Agency
+                    </p>
+                </div>
+
+                <!-- Navigation -->
+                <nav class="flex flex-col gap-4">
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Call Today</a>
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Text Support</a>
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">File a Claim</a>
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Send Payment</a>
+                </nav>
+
+                <!-- Secondary Links -->
+                <nav class="flex flex-col gap-4">
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Arizona Services</a>
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Peoria Office</a>
+                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">State Farm Partner</a>
+                </nav>
+            </div>
+
+            <div class="divider my-12"></div>
+
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="font-body text-sm text-[#403C3C]/50">
+                    Teamsiok Insurance Agency
+                </p>
+                <p class="font-body text-sm text-[#403C3C]/50 mt-4 md:mt-0">
+                    Dedicated to your protection
+                </p>
+            </div>
         </div>
+    </footer>
 
-        <!-- Card 3 -->
-        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-bold text-white mb-3">File a Claim</h3>
-            <p class="text-sm text-gray-300">Simple, straightforward claims process.</p>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="glassmorphism p-8 rounded-2xl card-hover flex flex-col justify-between">
-          <div>
-            <h3 class="text-xl font-bold text-white mb-3">Send Payment</h3>
-            <p class="text-sm text-gray-300">Secure and convenient payment options.</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- CTA BAND -->
-  <section class="section-padding" style="background-color: var(--primary);" data-animate="fade-up">
-    <div class="max-w-7xl mx-auto px-8 text-center relative z-10">
-      <h2 class="section-heading text-white mb-8">Ready to Protect Your Family?</h2>
-      <button class="cta-button" style="background-color: var(--accent);">File a Claim</button>
-    </div>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-950 text-white py-20 px-8">
-    <div class="max-w-7xl mx-auto">
-      <div class="grid grid-cols-4 gap-12 mb-16" data-stagger>
-        <div>
-          <h3 class="text-4xl font-bold mb-4">Teamsiok</h3>
-          <p class="text-gray-400 text-sm">Professional insurance guidance for families.</p>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4 text-white">Services</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#" class="nav-link text-gray-400">#LifeInsurance</a></li>
-            <li><a href="#" class="nav-link text-gray-400">#FamilyFirst</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4 text-white">Contact</h4>
-          <ul class="space-y-2 text-sm text-gray-400">
-            <li><a href="#" class="nav-link text-gray-400">Call</a></li>
-            <li><a href="#" class="nav-link text-gray-400">Text</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 class="font-semibold mb-4 text-white">Location</h4>
-          <p class="text-sm text-gray-400">#PeoriaAZ</p>
-        </div>
-      </div>
-      <div class="border-t border-gray-800 pt-8 text-center text-sm text-gray-500">
-        <p>Brad Siok Insurance Agency Inc. | All rights reserved.</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scroll behavior
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-
-    // Mobile menu toggle
-    const menuButton = document.querySelector('button.md\\:hidden');
-    if (menuButton) {
-      menuButton.addEventListener('click', () => {
-        const nav = document.querySelector('nav');
-        nav?.classList.toggle('hidden');
-      });
-    }
-  </script>
 
 <script>
 // Intersection Observer for scroll animations
