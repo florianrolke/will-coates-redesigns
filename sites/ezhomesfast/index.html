@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#248ADE">
+    <title>Ezhomesfast | Pre-Owned Manufactured Homes</title>
+    <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        * {
+            font-family: 'Roboto', sans-serif;
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        :root {
+            --primary: #248ADE;
+            --accent: #50A2E5;
+            --light-bg: #FFFFFF;
+            --dark-bg: #0F1419;
+            --text-dark: #1A1A1A;
+            --text-light: #F5F5F5;
+        }
+
+        body {
+            background: var(--light-bg);
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        .hero-heading {
+            font-size: clamp(44px, 5vw, 96px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.1;
+        }
+
+        .section-heading {
+            font-size: clamp(28px, 2.5vw, 48px);
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .body-text {
+            font-size: clamp(15px, 1.1vw, 18px);
+            line-height: 1.6;
+        }
+
+        .section-padding {
+            padding: clamp(56px, 7vw, 112px) 0;
+        }
+
+        .glass-card {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .glass-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .btn-primary {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 32px;
+            border-radius: 4px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+            box-shadow: 0 0 20px rgba(80, 162, 229, 0.3);
+        }
+
+        .btn-primary:hover {
+            box-shadow: 0 0 30px rgba(80, 162, 229, 0.6);
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+            padding: 12px 32px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-secondary:hover {
+            background: var(--accent);
+            color: white;
+        }
+
+        .gradient-orb {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 70%, rgba(80, 162, 229, 0.3), transparent);
+            filter: blur(40px);
+        }
+
+        .dot-pattern {
+            background-image: radial-gradient(circle, rgba(36, 138, 222, 0.05) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .scroll-indicator {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: center;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(8px); }
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 4px;
+            padding: 32px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px -10px rgba(36, 138, 222, 0.15);
+        }
+
+        .dark-section {
+            background: var(--dark-bg);
+            color: var(--text-light);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(80, 162, 229, 0.1), transparent);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+        }
+
+        .section-divider {
+            height: 1px;
+            background: rgba(0, 0, 0, 0.1);
+            margin: 0;
+        }
+
+        .section-divider.dark {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        @media (max-width: 768px) {
+            .hero-heading {
+                font-size: 48px;
+            }
+
+            .section-heading {
+                font-size: 32px;
+            }
+        }
+    </style>
+
+<style>
+/* Scroll-triggered animations */
+[data-animate] {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+[data-animate].visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+[data-animate="fade-up"] { transform: translateY(40px); }
+[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
+[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
+[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
+[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
+[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
+
+/* Staggered children */
+[data-stagger] > * { opacity: 0; transform: translateY(30px);
+    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
+[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
+[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
+[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
+[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
+[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
+[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
+
+/* Animated gradient background */
+@keyframes gradient-shift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+.animated-gradient {
+    background-size: 200% 200%;
+    animation: gradient-shift 8s ease infinite;
+}
+
+/* Parallax hero */
+.parallax-hero {
+    will-change: transform;
+    transition: transform 0.1s linear;
+}
+
+/* Premium button shimmer */
+@keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 200%; }
+}
+.btn-shimmer { position: relative; overflow: hidden; }
+.btn-shimmer::after {
+    content: '';
+    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
+    animation: shimmer 3s ease-in-out infinite;
+}
+
+/* Smooth image reveal */
+img { transition: opacity 0.6s ease, transform 0.6s ease; }
+img:hover { transform: scale(1.02); }
+
+/* Line draw animation */
+@keyframes line-grow { from { width: 0; } to { width: 100%; } }
+.line-reveal { overflow: hidden; }
+.line-reveal.visible > div, .line-reveal.visible > span {
+    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+</style>
+
+<style>
+
+/* Design Polish: tokens */
+:root {
+  --dp-bg0: #FFFFFF;
+  --dp-bg1: #f7f7f7;
+  --dp-card: rgba(0,0,0,0.02);
+  --dp-card-hover: rgba(0,0,0,0.04);
+  --dp-text: #50A2E5;
+  --dp-muted: rgba(0,0,0,0.55);
+  --dp-border: rgba(0,0,0,0.08);
+  --dp-border-hover: rgba(0,0,0,0.15);
+  --dp-primary: #248ADE;
+  --dp-accent: #50A2E5;
+  --dp-radius: 16px;
+  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
+  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --dp-t-hero: clamp(44px, 5vw, 96px);
+  --dp-t-h2: clamp(28px, 2.5vw, 48px);
+  --dp-t-body: clamp(15px, 1.1vw, 18px);
+  --dp-section-pad: clamp(56px, 7vw, 112px);
+}
+/* Design Polish: subtle noise texture */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.025;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+/* Design Polish: section rhythm */
+section {
+  padding-top: var(--dp-section-pad, 80px);
+  padding-bottom: var(--dp-section-pad, 80px);
+}
+section:first-of-type {
+  padding-top: 0;
+}
+/* Design Polish: card surfaces */
+.dp-card,
+[class*="backdrop-blur"],
+[class*="bg-white/"],
+[class*="bg-black/"] {
+  border: 1px solid var(--dp-border);
+  border-radius: var(--dp-radius);
+  box-shadow: var(--dp-shadow-sm);
+  transition: all 0.4s var(--dp-ease);
+}
+.dp-card:hover,
+[class*="backdrop-blur"]:hover,
+[class*="bg-white/"]:hover,
+[class*="bg-black/"]:hover {
+  border-color: var(--dp-border-hover);
+  box-shadow: var(--dp-shadow-lg);
+  transform: translateY(-4px);
+}
+/* Design Polish: gradient hero heading */
+.dp-gradient-text {
+  background: linear-gradient(135deg, #50A2E5 0%, #50A2E5 50%, #50A2E5 100%);
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: dp-gradient-shift 6s ease infinite;
+}
+@keyframes dp-gradient-shift {
+  0% { background-position: 0% center; }
+  50% { background-position: 100% center; }
+  100% { background-position: 0% center; }
+}
+/* Design Polish: sticky nav */
+nav, header nav, [class*="fixed"][class*="top"] {
+  backdrop-filter: blur(12px) saturate(1.5);
+  -webkit-backdrop-filter: blur(12px) saturate(1.5);
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER / NAV -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200/50">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <div class="text-xl font-bold" style="color: var(--primary);">Ezhomesfast</div>
+        <nav class="hidden md:flex gap-8 text-sm">
+            <a href="#home" class="hover:text-blue-500 transition">Home</a>
+            <a href="#contact" class="hover:text-blue-500 transition">Contact</a>
+            <a href="#details" class="hover:text-blue-500 transition">View Details</a>
+            <a href="#learn" class="hover:text-blue-500 transition">Learn More</a>
+        </nav>
+        <button class="md:hidden text-gray-600">☰</button>
+    </div>
+</header>
+
+<!-- HERO -->
+<section id="home" style="background: linear-gradient(135deg, #F9FAFB 0%, #F3F4F6 100%);" class="relative min-h-screen flex items-center pt-20 overflow-hidden" data-animate="fade-up">
+    <div class="absolute top-20 right-0 w-96 h-96" style="background: radial-gradient(circle at 30% 70%, rgba(80, 162, 229, 0.25), transparent); filter: blur(60px);"></div>
+    <div class="absolute bottom-0 left-1/2 w-80 h-80" style="background: radial-gradient(circle at 70% 30%, rgba(36, 138, 222, 0.15), transparent); filter: blur(80px); transform: translate(-50%, 50%);"></div>
+    
+    <div class="max-w-7xl mx-auto w-full px-6">
+        <div class="grid grid-cols-2 gap-16 items-center lg:gap-20" data-stagger>
+            <!-- LEFT: TEXT -->
+            <div class="relative z-10">
+                <h1 class="hero-heading mb-6 dp-gradient-text">Offering the Best in Pre-Owned Manufactured Homes</h1>
+                <p class="body-text text-gray-600 mb-8 max-w-lg">Select your areas of interest and only receive listing emails from the areas you chose.</p>
+                <button class="btn-primary">Search</button>
+            </div>
+            
+            <!-- RIGHT: ABSTRACT VISUAL -->
+            <div class="relative h-96 hidden lg:block">
+                <div class="absolute inset-0 bg-gradient-to-br from-blue-400/20 to-blue-600/10 rounded-3xl" style="backdrop-filter: blur(20px); border: 1px solid rgba(80, 162, 229, 0.3);"></div>
+                <div class="absolute top-12 right-12 w-40 h-40 rounded-full" style="background: radial-gradient(circle at 40% 40%, rgba(80, 162, 229, 0.4), transparent); filter: blur(40px);"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCROLL INDICATOR -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2">
+        <div class="scroll-indicator text-gray-400">
+            <span class="text-xs mb-2">scroll</span>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5v14"></path>
+                <path d="M19 12l-7 7-7-7"></path>
+            </svg>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- ABOUT / PROOF -->
+<section class="section-padding bg-white relative" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-2 gap-16 items-start lg:gap-20" data-stagger>
+            <div>
+                <h2 class="section-heading font-bold mb-4" style="color: var(--primary);">About Ezhomesfast</h2>
+            </div>
+            <div>
+                <p class="body-text text-gray-700 leading-relaxed">Select your areas of interest and only receive listing emails from the areas you chose. We understand that finding the right manufactured home requires attention to detail and personalized service. Our platform empowers you to control exactly which listings reach your inbox, ensuring you focus on homes that match your preferences and location requirements.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- SERVICES / BENTO -->
+<section class="section-padding bg-white" data-animate="fade-in">
+    <div class="max-w-7xl mx-auto px-6">
+        <h2 class="section-heading mb-16 text-center" style="color: var(--primary);">Homes for Sale</h2>
+        
+        <div class="grid grid-cols-3 gap-6 lg:gap-8" data-stagger>
+            <!-- LARGE CARD (Primary) -->
+            <div class="col-span-2 service-card">
+                <h3 class="text-2xl font-bold mb-3">View our list of available homes</h3>
+                <p class="body-text text-gray-600 mb-6">For additional information click on the "View Details" button.</p>
+                <button class="btn-primary">View Details</button>
+            </div>
+
+            <!-- SMALL CARD 1 -->
+            <div class="service-card">
+                <h3 class="text-lg font-bold mb-2">Retrieve Documents</h3>
+                <p class="body-text text-gray-600 text-sm mb-4">Retrieve shared documents on homes you've purchased.</p>
+                <button class="btn-secondary text-sm">View Details</button>
+            </div>
+
+            <!-- SMALL CARD 2 -->
+            <div class="service-card">
+                <h3 class="text-lg font-bold mb-2">Map Listings</h3>
+                <p class="body-text text-gray-600 text-sm mb-4">Instantly map a listing to any of your parks.</p>
+                <button class="btn-secondary text-sm">View Details</button>
+            </div>
+
+            <!-- SMALL CARD 3 -->
+            <div class="service-card">
+                <h3 class="text-lg font-bold mb-2">Purchase History</h3>
+                <p class="body-text text-gray-600 text-sm mb-4">Track your purchase history with us.</p>
+                <button class="btn-secondary text-sm">View Details</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr class="section-divider">
+
+<!-- CTA BAND -->
+<section class="dark-section section-padding relative" data-animate="fade-up">
+    <div class="max-w-7xl mx-auto px-6 relative z-20 text-center">
+        <h2 class="section-heading text-white mb-8 max-w-3xl mx-auto">Offering Manufactured Homes in Michigan, Ohio & throughout the US</h2>
+        <button class="btn-primary">Search</button>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="bg-gray-50 border-t border-gray-200 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+        <div class="grid grid-cols-4 gap-12 mb-12" data-stagger>
+            <div>
+                <h4 class="font-bold text-gray-900 mb-4">Ezhomesfast</h4>
+                <p class="text-sm text-gray-600">Pre-Owned Manufactured Homes</p>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-900 mb-4 text-sm">Navigation</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-blue-500 transition">Home</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Contact</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Employee Login</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-900 mb-4 text-sm">Services</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-blue-500 transition">View Details</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Learn More</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-900 mb-4 text-sm">Legal</h4>
+                <ul class="space-y-2 text-sm text-gray-600">
+                    <li><a href="#" class="hover:text-blue-500 transition">Terms of Use</a></li>
+                    <li><a href="#" class="hover:text-blue-500 transition">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <hr class="border-gray-200 mb-8">
+        <p class="text-center text-xs text-gray-500">Ezhomesfast. All rights reserved.</p>
+    </div>
+</footer>
+
+
+<script>
+// Intersection Observer for scroll animations
+document.addEventListener('DOMContentLoaded', () => {
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                observer.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
+        observer.observe(el);
+    });
+
+    // Parallax on hero
+    const hero = document.querySelector('.parallax-hero');
+    if (hero) {
+        window.addEventListener('scroll', () => {
+            const scroll = window.pageYOffset;
+            hero.style.transform = `translateY(${scroll * 0.3}px)`;
+        }, { passive: true });
+    }
+
+    // Add shimmer to primary CTA buttons
+    document.querySelectorAll('button, a').forEach(el => {
+        const text = el.textContent.trim().toLowerCase();
+        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
+            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
+            if (el.querySelector('span') || el.childNodes.length <= 3) {
+                el.classList.add('btn-shimmer');
+            }
+        }
+    });
+});
+</script>
+
+<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
+</body>
+</html>
