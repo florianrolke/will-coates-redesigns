@@ -1,172 +1,150 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Teamsiok Insurance Agency</title>
-    <link rel="icon" href="https://teamsiok.com/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Teamsiok — Insurance Services</title>
+<link href="https://teamsiok.com/favicon.ico" rel="icon"/>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;800&amp;family=Merriweather:wght@300;400&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
         :root {
             --primary: #D62311;
             --accent: #AA1B0D;
             --text: #403C3C;
-            --light-bg: #FAFAFA;
+            --light-bg: #F9F7F4;
+            --dark-bg: #1A1715;
         }
 
         * {
-            font-family: 'Source Sans Pro', sans-serif;
+            font-family: 'Source Sans Pro', 'Merriweather', sans-serif;
         }
 
-        .font-heading {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 800;
-            letter-spacing: -0.02em;
+        body {
+            color: var(--text);
+            background: var(--light-bg);
         }
 
-        .font-subheading {
+        .font-headings {
             font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 300;
-            letter-spacing: 0.05em;
         }
 
         .font-body {
-            font-family: 'Source Sans Pro', sans-serif;
-            font-weight: 400;
+            font-family: 'Merriweather', serif;
+        }
+
+        /* Hero heading with fluid scaling */
+        .hero-heading {
+            font-size: clamp(48px, 8vw, 120px);
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 0.95;
+        }
+
+        .subhead {
+            font-size: clamp(20px, 2vw, 28px);
+            font-weight: 300;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .section-heading {
+            font-size: clamp(32px, 3vw, 56px);
+            font-weight: 800;
+            letter-spacing: -0.01em;
+        }
+
+        .body-text {
             font-size: clamp(15px, 1.1vw, 18px);
             line-height: 1.6;
         }
 
-        /* Typography Scale */
-        .text-hero {
-            font-size: clamp(48px, 6vw, 96px);
-            font-weight: 800;
-            line-height: 1.1;
-            letter-spacing: -0.02em;
+        /* Glassmorphism */
+        .glass {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .text-h2 {
-            font-size: clamp(28px, 2.5vw, 48px);
-            font-weight: 700;
-            line-height: 1.2;
-        }
-
-        .text-h3 {
-            font-size: clamp(20px, 1.8vw, 32px);
-            font-weight: 700;
+        .glass-dark {
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         /* CTA Button */
-        .btn-primary {
-            background-color: var(--primary);
+        .cta-button {
+            background: var(--primary);
             color: white;
-            padding: 14px 32px;
             border-radius: 9999px;
+            padding: 14px 40px;
             font-weight: 600;
             font-size: 14px;
-            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
             display: inline-block;
+            text-decoration: none;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(214, 35, 17, 0.3);
+            box-shadow: 0 0 30px rgba(214, 35, 17, 0.3);
+            cursor: pointer;
             border: none;
-            cursor: pointer;
         }
 
-        .btn-primary:hover {
+        .cta-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 32px rgba(214, 35, 17, 0.4);
+            box-shadow: 0 0 50px rgba(214, 35, 17, 0.5);
         }
 
-        .btn-secondary {
+        .cta-button-secondary {
             background: transparent;
-            color: var(--primary);
-            padding: 14px 32px;
-            border-radius: 9999px;
-            font-weight: 600;
-            font-size: 14px;
-            text-decoration: none;
-            display: inline-block;
-            transition: all 0.3s ease;
+            color: var(--accent);
             border: 2px solid var(--accent);
-            cursor: pointer;
         }
 
-        .btn-secondary:hover {
+        .cta-button-secondary:hover {
             background: var(--accent);
             color: white;
-            transform: translateY(-2px);
         }
 
-        /* Glassmorphism Card */
-        .card-glass {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
-            transition: all 0.3s ease;
-        }
-
-        .card-glass:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
-        }
-
-        .card-elevated {
-            background: white;
-            border-radius: 16px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-        }
-
-        .card-elevated:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Gradient Orb */
+        /* Gradient orb */
         .orb {
             position: absolute;
             border-radius: 50%;
-            opacity: 0.15;
-            filter: blur(40px);
+            opacity: 0.8;
+            filter: blur(80px);
         }
 
-        .orb-primary {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, var(--primary), transparent);
-        }
-
-        .orb-accent {
+        .orb-1 {
             width: 300px;
             height: 300px;
-            background: radial-gradient(circle, var(--accent), transparent);
+            background: linear-gradient(135deg, rgba(214, 35, 17, 0.4), rgba(170, 27, 13, 0.2));
+            top: 20%;
+            right: 10%;
         }
 
-        /* Section Divider */
-        .divider {
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #E5E5E5, transparent);
+        .orb-2 {
+            width: 250px;
+            height: 250px;
+            background: linear-gradient(135deg, rgba(214, 35, 17, 0.3), rgba(64, 60, 60, 0.1));
+            bottom: 15%;
+            right: 5%;
         }
 
-        /* Dark Section */
-        .section-dark {
-            background: #1a1a1a;
-            color: white;
-            position: relative;
-            overflow: hidden;
+        /* Dot pattern */
+        .dot-pattern {
+            background-image: 
+                radial-gradient(circle, rgba(214, 35, 17, 0.08) 1px, transparent 1px);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
         }
 
-        .section-dark::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 20% 50%, rgba(214, 35, 17, 0.05), transparent);
-            pointer-events: none;
+        /* Section transitions */
+        section {
+            transition: all 0.6s ease;
         }
 
-        /* Scroll Indicator */
+        /* Scroll indicator */
         .scroll-indicator {
             animation: bounce 2s infinite;
         }
@@ -176,57 +154,40 @@
             50% { transform: translateY(8px); }
         }
 
-        /* Light Section */
-        .section-light {
-            background: var(--light-bg);
+        /* Card hover effect */
+        .service-card {
+            transition: all 0.3s ease;
         }
 
-        /* Subtle Dot Pattern */
-        .dot-pattern {
-            background-image: radial-gradient(circle, #E5E5E5 1px, transparent 1px);
-            background-size: 24px 24px;
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 60px rgba(214, 35, 17, 0.15);
         }
 
-        /* Grid Layout */
-        .bento-grid {
+        /* Divider */
+        .divider {
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(214, 35, 17, 0.2), transparent);
+        }
+
+        /* Responsive grid */
+        .service-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: clamp(20px, 2vw, 32px);
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 24px;
         }
 
-        .bento-item-large {
-            grid-column: span 2;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .bento-grid {
-                grid-template-columns: repeat(2, 1fr);
+        @media (min-width: 1024px) {
+            .service-grid {
+                grid-template-columns: repeat(5, 1fr);
             }
-            .bento-item-large {
-                grid-column: span 1;
+
+            .service-primary {
+                grid-column: span 2;
+                grid-row: span 2;
             }
-        }
-
-        @media (max-width: 640px) {
-            .bento-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Section Spacing */
-        .section-pad {
-            padding: clamp(56px, 8vw, 112px) clamp(24px, 5vw, 64px);
-        }
-
-        .hero-height {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
         }
     </style>
-
 <style>
 /* Scroll-triggered animations */
 [data-animate] {
@@ -298,7 +259,6 @@ img:hover { transform: scale(1.02); }
     animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 </style>
-
 <style>
 
 /* Design Polish: tokens */
@@ -380,178 +340,204 @@ nav, header nav, [class*="fixed"][class*="top"] {
   -webkit-backdrop-filter: blur(12px) saturate(1.5);
 }
 </style>
-</head>
-<body class="bg-white text-[#403C3C]">
-
-    <!-- HERO SECTION -->
-    <section class="hero-height section-dark relative overflow-hidden" data-animate="fade-up">
-        <div class="absolute top-0 left-10 orb orb-primary" style="top: -100px; left: -100px;"></div>
-        <div class="absolute bottom-20 right-0 orb orb-accent" style="bottom: -50px; right: -150px;"></div>
-
-        <div class="relative z-10 w-full px-12 md:px-20 max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-16">
-            <!-- Left Content -->
-            <div class="flex-1 max-w-2xl">
-                <h1 class="text-hero font-heading text-white mb-8 dp-gradient-text">
-                    Teamsiok
-                </h1>
-                <p class="font-subheading text-white/70 text-lg md:text-2xl mb-12 font-light tracking-wide">
-                    Trusted insurance guidance for individuals and families
-                </p>
-                <button class="btn-primary">File a Claim</button>
-            </div>
-
-            <!-- Right Abstract Visuals -->
-            <div class="flex-1 relative h-96 md:h-full hidden md:block">
-                <div class="absolute inset-0 flex items-center justify-center">
-                    <div class="w-80 h-80 rounded-full bg-gradient-to-br from-[#D62311]/20 to-transparent blur-3xl"></div>
-                </div>
-                <svg class="absolute inset-0 w-full h-full" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
-                    <defs>
-                        <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                            <stop offset="0%" style="stop-color:#D62311;stop-opacity:0.3" />
-                            <stop offset="100%" style="stop-color:#AA1B0D;stop-opacity:0.1" />
-                        </linearGradient>
-                    </defs>
-                    <circle cx="200" cy="100" r="80" fill="url(#grad1)" opacity="0.6"/>
-                    <circle cx="300" cy="250" r="60" fill="url(#grad1)" opacity="0.4"/>
-                    <circle cx="100" cy="300" r="100" fill="url(#grad1)" opacity="0.3"/>
-                    <path d="M 50 200 Q  250" stroke="#D62311" stroke-width="1" fill="none" opacity="0.3"/>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Scroll Indicator -->
-        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
-            <div class="text-white/50 text-xs font-light tracking-widest mb-2">SCROLL</div>
-            <div class="scroll-indicator text-white/50">↓</div>
-        </div>
-    </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
-
-
-    <!-- DIVIDER -->
-    <div class="divider"></div>
-
-    <!-- SERVICES SECTION -->
-    <section class="section-light section-pad" data-animate="fade-up">
-        <div class="max-w-7xl mx-auto">
-            <h2 class="text-h2 font-heading mb-4">Our Services</h2>
-            <p class="font-subheading text-lg font-light tracking-wide mb-16 text-[#403C3C]/70 max-w-2xl">
-                Comprehensive insurance solutions tailored to your needs
-            </p>
-
-            <div class="bento-grid">
-                <!-- Large Service Card -->
-                <div class="bento-item-large card-elevated p-8 md:p-12">
-                    <h3 class="text-h3 font-heading mb-4">File a Claim</h3>
-                    <p class="font-body text-[#403C3C]/80">Streamlined claims process designed for your peace of mind</p>
-                </div>
-
-                <!-- Service Cards -->
-                <div class="card-elevated p-8">
-                    <h3 class="text-lg font-heading mb-3">Call Today</h3>
-                    <p class="font-body text-sm text-[#403C3C]/80">Direct support from our team</p>
-                </div>
-
-                <div class="card-elevated p-8">
-                    <h3 class="text-lg font-heading mb-3">Text Support</h3>
-                    <p class="font-body text-sm text-[#403C3C]/80">Convenient messaging options</p>
-                </div>
-
-                <div class="card-elevated p-8">
-                    <h3 class="text-lg font-heading mb-3">Moving Services</h3>
-                    <p class="font-body text-sm text-[#403C3C]/80">Relocation and policy updates</p>
-                </div>
-
-                <div class="card-elevated p-8">
-                    <h3 class="text-lg font-heading mb-3">Arizona Coverage</h3>
-                    <p class="font-body text-sm text-[#403C3C]/80">Local expertise and support</p>
-                </div>
-
-                <div class="card-elevated p-8">
-                    <h3 class="text-lg font-heading mb-3">Peoria Office</h3>
-                    <p class="font-body text-sm text-[#403C3C]/80">Local community presence</p>
-                </div>
-            </div>
-        </div>
-    </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"/></svg></div>
-
-
-    <!-- DIVIDER -->
-    <div class="divider"></div>
-
-    <!-- CTA BAND -->
-    <section class="section-dark section-pad relative overflow-hidden" data-animate="fade-in">
-        <div class="absolute inset-0 opacity-5">
-            <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                    <pattern id="dots" x="0" y="0" width="24" height="24" patternUnits="userSpaceOnUse">
-                        <circle cx="12" cy="12" r="1" fill="white"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#dots)"/>
-            </svg>
-        </div>
-
-        <div class="relative z-10 max-w-7xl mx-auto">
-            <h2 class="text-h2 font-heading text-white mb-8 max-w-3xl">
-                Ready to protect what matters most?
+<style>
+.anim-fade-in-up {
+  opacity: 0;
+  transform: translateY(25px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.anim-fade-in-up.anim-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style></head>
+<body class="bg-white">
+<!-- HERO SECTION -->
+<section class="relative min-h-screen flex items-center overflow-hidden" data-animate="fade-up">
+<!-- Gradient orbs background -->
+<div class="absolute inset-0 pointer-events-none anim-fade-in-up" style=" transition-delay: 0.0s;">
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+</div>
+<div class="relative z-10 max-w-7xl mx-auto px-8 lg:px-16 py-20 w-full anim-fade-in-up" style=" transition-delay: 0.1s;">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center" data-stagger="">
+<!-- Left: Hero text -->
+<div>
+<h1 class="hero-heading font-headings mb-8 dp-gradient-text" style="color: var(--primary);">
+                        Teamsiok
+                    </h1>
+<p class="subhead font-headings mb-12 opacity-70">
+                        Professional Insurance Services
+                    </p>
+<p class="body-text font-body mb-12 leading-relaxed max-w-md opacity-90">
+                        Comprehensive insurance solutions designed with you in mind. We protect what matters most.
+                    </p>
+<button class="cta-button">File a Claim</button>
+</div>
+<!-- Right: Abstract visual -->
+<div class="relative h-96 lg:h-full hidden lg:block">
+<div class="absolute inset-0 bg-gradient-to-br from-white via-transparent to-transparent"></div>
+<svg class="absolute inset-0 w-full h-full" viewbox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<lineargradient id="grad1" x1="0%" x2="100%" y1="0%" y2="100%">
+<stop offset="0%" style="stop-color:rgba(214,35,17,0.15);stop-opacity:1"></stop>
+<stop offset="100%" style="stop-color:rgba(214,35,17,0.05);stop-opacity:1"></stop>
+</lineargradient>
+</defs>
+<circle cx="200" cy="100" fill="url(#grad1)" r="80"></circle>
+<path d="M 150 250 Q  250" fill="none" stroke="rgba(214,35,17,0.2)" stroke-width="2"></path>
+<rect fill="rgba(214,35,17,0.08)" height="60" rx="8" width="200" x="100" y="300"></rect>
+</svg>
+</div>
+</div>
+</div>
+<!-- Scroll indicator -->
+<div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 scroll-indicator anim-fade-in-up" style=" transition-delay: 0.2s;">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" style="color: var(--primary);" viewbox="0 0 24 24">
+<path d="M19 14l-7 7m0 0l-7-7m7 7V3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+</svg>
+</div>
+<!-- Divider -->
+<div class="absolute bottom-0 left-0 right-0 divider anim-fade-in-up" style=" transition-delay: 0.3s;"></div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"></path></svg></div>
+<!-- ABOUT SECTION -->
+<section class="py-20 lg:py-32 px-8 lg:px-16" data-animate="fade-up" style="background: var(--light-bg);">
+<div class="max-w-7xl mx-auto anim-fade-in-up" style=" transition-delay: 0.4s;">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start" data-stagger="">
+<div>
+<h2 class="section-heading font-headings mb-4" style="color: var(--primary);">
+                        About
+                    </h2>
+<div class="divider my-8"></div>
+</div>
+<div>
+<p class="body-text font-body leading-relaxed opacity-85 mb-6">
+                        Close Navigation Menu
+                    </p>
+<p class="body-text font-body leading-relaxed opacity-75 text-sm">
+                        We are committed to providing insurance solutions that protect your future with integrity and professional excellence.
+                    </p>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"></path></svg></div>
+<!-- SERVICES SECTION -->
+<section class="py-20 lg:py-32 px-8 lg:px-16 relative overflow-hidden" data-animate="fade-in" style="background: var(--dark-bg); color: white;">
+<div class="absolute inset-0 dot-pattern opacity-5 pointer-events-none anim-fade-in-up" style=" transition-delay: 0.5s;"></div>
+<div class="relative z-10 max-w-7xl mx-auto anim-fade-in-up" style=" transition-delay: 0.0s;">
+<h2 class="section-heading font-headings mb-16" style="color: #FFFFFF;">
+                Services
             </h2>
-            <p class="font-body text-white/70 mb-12 max-w-2xl">
-                Get started with expert insurance guidance today
+<div class="service-grid">
+<!-- Service 1: Call -->
+<div class="service-card glass-dark p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-headings font-bold mb-3" style="color: #FFFFFF;">
+                            Call
+                        </h3>
+<p class="body-text opacity-80">Speak with our team directly</p>
+</div>
+<button class="cta-button mt-6">Get Started</button>
+</div>
+<!-- Service 2: Text -->
+<div class="service-card glass-dark p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-headings font-bold mb-3" style="color: #FFFFFF;">
+                            Text
+                        </h3>
+<p class="body-text opacity-80">Quick messaging support</p>
+</div>
+<button class="cta-button mt-6">Get Started</button>
+</div>
+<!-- Service 3: File a Claim (Large primary) -->
+<div class="service-card service-primary glass-dark p-8 flex flex-col justify-between lg:row-span-2" style="border-color: rgba(214, 35, 17, 0.3); border: 2px solid rgba(214, 35, 17, 0.3);">
+<div>
+<h3 class="text-2xl font-headings font-bold mb-4" style="color: var(--primary);">
+                            File a Claim
+                        </h3>
+<p class="body-text opacity-90">Simple, fast claims process</p>
+</div>
+<button class="cta-button mt-8">File a Claim</button>
+</div>
+<!-- Service 4: Moving -->
+<div class="service-card glass-dark p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-headings font-bold mb-3" style="color: #FFFFFF;">
+                            Moving
+                        </h3>
+<p class="body-text opacity-80">Coverage for relocations</p>
+</div>
+<button class="cta-button mt-6">Get Started</button>
+</div>
+<!-- Service 5: AZ Bound -->
+<div class="service-card glass-dark p-8 flex flex-col justify-between">
+<div>
+<h3 class="text-xl font-headings font-bold mb-3" style="color: #FFFFFF;">
+                            AZ Bound
+                        </h3>
+<p class="body-text opacity-80">Arizona coverage specialist</p>
+</div>
+<button class="cta-button mt-6">Get Started</button>
+</div>
+</div>
+</div>
+</section>
+<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg style="display:block;width:100%" viewbox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#AA1B0D" fill-opacity="0.06"></path></svg></div>
+<!-- CTA BAND -->
+<section class="py-20 lg:py-32 px-8 lg:px-16" data-animate="fade-up" style="background: var(--primary); color: white;">
+<div class="max-w-7xl mx-auto text-center anim-fade-in-up" style=" transition-delay: 0.1s;">
+<h2 class="section-heading font-headings mb-8">
+                Ready to Protect What Matters
+            </h2>
+<p class="body-text font-body mb-12 opacity-90 max-w-2xl mx-auto">
+                Take action today and secure your insurance coverage
             </p>
-            <button class="btn-primary">File a Claim</button>
-        </div>
-    </section>
-
-    <!-- DIVIDER -->
-    <div class="divider"></div>
-
-    <!-- FOOTER -->
-    <footer class="bg-white section-pad border-t border-gray-100">
-        <div class="max-w-7xl mx-auto">
-            <div class="flex flex-col md:flex-row justify-between items-start gap-16">
-                <!-- Brand -->
-                <div>
-                    <h3 class="text-4xl md:text-5xl font-heading font-light text-[#403C3C]">
+<button class="cta-button" style="background: white; color: var(--primary);">
+                File a Claim
+            </button>
+</div>
+</section>
+<!-- FOOTER -->
+<footer class="py-16 px-8 lg:px-16 border-t" style="border-color: rgba(214, 35, 17, 0.1); background: var(--light-bg);">
+<div class="max-w-7xl mx-auto">
+<div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16" data-stagger="">
+<div>
+<h3 class="text-2xl font-headings font-bold mb-4" style="color: var(--primary);">
                         Teamsiok
                     </h3>
-                    <p class="font-subheading text-sm mt-2 text-[#403C3C]/60 tracking-wider">
-                        Insurance Agency
+<p class="text-sm opacity-60">
+                        Insurance Services
                     </p>
-                </div>
-
-                <!-- Navigation -->
-                <nav class="flex flex-col gap-4">
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Call Today</a>
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Text Support</a>
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">File a Claim</a>
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Send Payment</a>
-                </nav>
-
-                <!-- Secondary Links -->
-                <nav class="flex flex-col gap-4">
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Arizona Services</a>
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">Peoria Office</a>
-                    <a href="#" class="font-body text-[#403C3C]/70 hover:text-[#D62311] transition">State Farm Partner</a>
-                </nav>
-            </div>
-
-            <div class="divider my-12"></div>
-
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <p class="font-body text-sm text-[#403C3C]/50">
-                    Teamsiok Insurance Agency
-                </p>
-                <p class="font-body text-sm text-[#403C3C]/50 mt-4 md:mt-0">
-                    Dedicated to your protection
-                </p>
-            </div>
-        </div>
-    </footer>
-
-
+</div>
+<div>
+<p class="text-xs font-headings font-semibold uppercase opacity-70 mb-4">Connect</p>
+<ul class="space-y-2">
+<li><a class="text-sm opacity-70 hover:opacity-100 transition" href="#">Call Today</a></li>
+<li><a class="text-sm opacity-70 hover:opacity-100 transition" href="#">Send Payment</a></li>
+</ul>
+</div>
+<div>
+<p class="text-xs font-headings font-semibold uppercase opacity-70 mb-4">Service Areas</p>
+<ul class="space-y-2">
+<li><a class="text-sm opacity-70 hover:opacity-100 transition" href="#">Peoria AZ</a></li>
+<li><a class="text-sm opacity-70 hover:opacity-100 transition" href="#">AZ Bound</a></li>
+</ul>
+</div>
+<div>
+<p class="text-xs font-headings font-semibold uppercase opacity-70 mb-4">Carriers</p>
+<ul class="space-y-2">
+<li><a class="text-sm opacity-70 hover:opacity-100 transition" href="#">State Farm</a></li>
+</ul>
+</div>
+</div>
+<div class="divider my-8"></div>
+<p class="text-xs opacity-50 text-center">
+                © Teamsiok Insurance Agency Inc.
+            </p>
+</div>
+</footer>
 <script>
 // Intersection Observer for scroll animations
 document.addEventListener('DOMContentLoaded', () => {
@@ -589,7 +575,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 </script>
-
 <div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
-</body>
+<script>
+(function(){
+  var obs = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting) e.target.classList.add('anim-visible');
+    });
+  }, {threshold: 0.1});
+  document.querySelectorAll('.anim-fade-in-up').forEach(function(el){ obs.observe(el); });
+})();
+</script></body>
 </html>
