@@ -1,588 +1,895 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ezhomesfast — Pre-Owned Manufactured Homes</title>
-  <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
-  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>
-    * {
-      font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    }
-
-    h1, h2, h3, h4, h5, h6, .heading {
-      font-family: 'Open Sans', sans-serif;
-      font-weight: 700;
-      letter-spacing: -0.02em;
-    }
-
-    .hero-heading {
-      font-size: clamp(48px, 6vw, 96px);
-      font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-
-    .section-heading {
-      font-size: clamp(32px, 3.5vw, 56px);
-      font-weight: 800;
-      line-height: 1.2;
-    }
-
-    .subheading {
-      font-size: clamp(18px, 2vw, 24px);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-    }
-
-    .body-text {
-      font-size: clamp(15px, 1.1vw, 18px);
-      line-height: 1.6;
-      font-weight: 400;
-    }
-
-    body {
-      background: #fafafa;
-      color: #1a1a1a;
-    }
-
-    .btn-primary {
-      background: #50A2E5;
-      color: #ffffff;
-      border-radius: 4px;
-      padding: 14px 32px;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.3s ease;
-      border: 1px solid #50A2E5;
-      cursor: pointer;
-      box-shadow: 0 0 20px rgba(80, 162, 229, 0.3);
-    }
-
-    .btn-primary:hover {
-      background: #248ADE;
-      border-color: #248ADE;
-      box-shadow: 0 0 30px rgba(36, 138, 222, 0.5);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      background: transparent;
-      color: #50A2E5;
-      border-radius: 4px;
-      padding: 14px 32px;
-      font-weight: 600;
-      font-size: 15px;
-      transition: all 0.3s ease;
-      border: 1px solid #50A2E5;
-      cursor: pointer;
-    }
-
-    .btn-secondary:hover {
-      background: rgba(80, 162, 229, 0.1);
-      transform: translateY(-2px);
-    }
-
-    .glassmorphism {
-      background: rgba(255, 255, 255, 0.05);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 8px;
-    }
-
-    .service-card {
-      background: rgba(255, 255, 255, 0.95);
-      border-radius: 8px;
-      padding: 32px;
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
-      transition: all 0.4s cubic-bezier(0.33, 0.66, 0.66, 1);
-      border: 1px solid rgba(80, 162, 229, 0.1);
-    }
-
-    .service-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 24px 48px rgba(36, 138, 222, 0.2);
-      border-color: rgba(80, 162, 229, 0.3);
-    }
-
-    .dot-pattern {
-      background-image: radial-gradient(circle, rgba(80, 162, 229, 0.05) 1px, transparent 1px);
-      background-size: 40px 40px;
-    }
-
-    .gradient-orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.6;
-    }
-
-    .orb-blue {
-      width: 400px;
-      height: 400px;
-      background: linear-gradient(135deg, rgba(36, 138, 222, 0.4) 0%, rgba(80, 162, 229, 0.2) 100%);
-    }
-
-    .scroll-indicator {
-      display: inline-flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      opacity: 0.6;
-      animation: bounce 2s infinite;
-    }
-
-    .scroll-dot {
-      width: 8px;
-      height: 8px;
-      background: #50A2E5;
-      border-radius: 50%;
-    }
-
-    @keyframes bounce {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(8px); }
-    }
-
-    .nav-link {
-      color: #1a1a1a;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 500;
-      transition: color 0.3s ease;
-      cursor: pointer;
-    }
-
-    .nav-link:hover {
-      color: #50A2E5;
-    }
-
-    .divider-line {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(80, 162, 229, 0.3), transparent);
-    }
-
-    .dark-section {
-      background: #1a1a2e;
-      color: #f5f5f5;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .dark-section .section-heading,
-    .dark-section .hero-heading {
-      color: #ffffff;
-    }
-
-    .dark-section .body-text {
-      color: #d1d1d1;
-    }
-
-    .cta-band {
-      background: #248ADE;
-      color: #ffffff;
-    }
-
-    .cta-band h2 {
-      color: #ffffff;
-    }
-
-    section {
-      padding: clamp(56px, 7vw, 112px) 0;
-    }
-  </style>
-
-<style>
-/* Scroll-triggered animations */
-[data-animate] {
-    opacity: 0;
-    transform: translateY(40px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-[data-animate].visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-[data-animate="fade-up"] { transform: translateY(40px); }
-[data-animate="fade-in"] { transform: translateY(0) scale(0.98); }
-[data-animate="slide-left"] { transform: translateX(-60px); opacity: 0; }
-[data-animate="slide-left"].visible { transform: translateX(0); opacity: 1; }
-[data-animate="slide-right"] { transform: translateX(60px); opacity: 0; }
-[data-animate="slide-right"].visible { transform: translateX(0); opacity: 1; }
-
-/* Staggered children */
-[data-stagger] > * { opacity: 0; transform: translateY(30px);
-    transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
-[data-stagger].visible > *:nth-child(1) { transition-delay: 0ms; }
-[data-stagger].visible > *:nth-child(2) { transition-delay: 120ms; }
-[data-stagger].visible > *:nth-child(3) { transition-delay: 240ms; }
-[data-stagger].visible > *:nth-child(4) { transition-delay: 360ms; }
-[data-stagger].visible > *:nth-child(5) { transition-delay: 480ms; }
-[data-stagger].visible > * { opacity: 1; transform: translateY(0); }
-
-/* Animated gradient background */
-@keyframes gradient-shift {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
-.animated-gradient {
-    background-size: 200% 200%;
-    animation: gradient-shift 8s ease infinite;
-}
-
-/* Parallax hero */
-.parallax-hero {
-    will-change: transform;
-    transition: transform 0.1s linear;
-}
-
-/* Premium button shimmer */
-@keyframes shimmer {
-    0% { left: -100%; }
-    100% { left: 200%; }
-}
-.btn-shimmer { position: relative; overflow: hidden; }
-.btn-shimmer::after {
-    content: '';
-    position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
-    animation: shimmer 3s ease-in-out infinite;
-}
-
-/* Smooth image reveal */
-img { transition: opacity 0.6s ease, transform 0.6s ease; }
-img:hover { transform: scale(1.02); }
-
-/* Line draw animation */
-@keyframes line-grow { from { width: 0; } to { width: 100%; } }
-.line-reveal { overflow: hidden; }
-.line-reveal.visible > div, .line-reveal.visible > span {
-    animation: line-grow 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-</style>
-
-<style>
-
-/* Design Polish: tokens */
-:root {
-  --dp-bg0: #FFFFFF;
-  --dp-bg1: #f7f7f7;
-  --dp-card: rgba(0,0,0,0.02);
-  --dp-card-hover: rgba(0,0,0,0.04);
-  --dp-text: #50A2E5;
-  --dp-muted: rgba(0,0,0,0.55);
-  --dp-border: rgba(0,0,0,0.08);
-  --dp-border-hover: rgba(0,0,0,0.15);
-  --dp-primary: #248ADE;
-  --dp-accent: #50A2E5;
-  --dp-radius: 16px;
-  --dp-shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
-  --dp-shadow-lg: 0 12px 40px rgba(0,0,0,0.12);
-  --dp-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
-  --dp-t-hero: clamp(44px, 5vw, 96px);
-  --dp-t-h2: clamp(28px, 2.5vw, 48px);
-  --dp-t-body: clamp(15px, 1.1vw, 18px);
-  --dp-section-pad: clamp(56px, 7vw, 112px);
-}
-/* Design Polish: subtle noise texture */
-body::after {
-  content: '';
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  opacity: 0.025;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
-/* Design Polish: section rhythm */
-section {
-  padding-top: var(--dp-section-pad, 80px);
-  padding-bottom: var(--dp-section-pad, 80px);
-}
-section:first-of-type {
-  padding-top: 0;
-}
-/* Design Polish: card surfaces */
-.dp-card,
-[class*="backdrop-blur"],
-[class*="bg-white/"],
-[class*="bg-black/"] {
-  border: 1px solid var(--dp-border);
-  border-radius: var(--dp-radius);
-  box-shadow: var(--dp-shadow-sm);
-  transition: all 0.4s var(--dp-ease);
-}
-.dp-card:hover,
-[class*="backdrop-blur"]:hover,
-[class*="bg-white/"]:hover,
-[class*="bg-black/"]:hover {
-  border-color: var(--dp-border-hover);
-  box-shadow: var(--dp-shadow-lg);
-  transform: translateY(-4px);
-}
-/* Design Polish: gradient hero heading */
-.dp-gradient-text {
-  background: linear-gradient(135deg, #50A2E5 0%, #50A2E5 50%, #50A2E5 100%);
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  animation: dp-gradient-shift 6s ease infinite;
-}
-@keyframes dp-gradient-shift {
-  0% { background-position: 0% center; }
-  50% { background-position: 100% center; }
-  100% { background-position: 0% center; }
-}
-/* Design Polish: sticky nav */
-nav, header nav, [class*="fixed"][class*="top"] {
-  backdrop-filter: blur(12px) saturate(1.5);
-  -webkit-backdrop-filter: blur(12px) saturate(1.5);
-}
-</style>
-</head>
-<body>
-  <!-- Navigation -->
-  <nav class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <div class="heading text-xl font-bold" style="color: #248ADE;">Ezhomesfast</div>
-      <div class="hidden md:flex gap-8">
-        <a href="#home" class="nav-link">Home</a>
-        <a href="#about" class="nav-link">About</a>
-        <a href="#services" class="nav-link">Services</a>
-        <a href="#contact" class="nav-link">Contact</a>
-      </div>
-      <div class="hidden md:flex gap-4">
-        <a href="#" class="nav-link">Employee Login</a>
-        <a href="#" class="nav-link">Register</a>
-      </div>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="relative h-screen flex items-center pt-20 overflow-hidden" data-animate="fade-up">
-    <!-- AI Video Background -->
-    <div class="absolute inset-0 z-0">
-      <video autoplay loop muted playsinline
-        poster="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png"
-        src="hero.mp4"
-        style="width:100%;height:100%;object-fit:cover;will-change:transform;">
-      </video>
-      <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(10,25,47,0.75) 0%, rgba(36,138,222,0.45) 50%, rgba(80,162,229,0.3) 100%);"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-6 w-full relative z-10 text-center" data-stagger>
-      <h1 class="hero-heading mb-6 dp-gradient-text" style="color: #ffffff; text-shadow: 0 2px 40px rgba(0,0,0,0.3);">Offering the Best in Pre-Owned Manufactured Homes</h1>
-      <p class="subheading mb-12 font-light" style="color: rgba(255,255,255,0.9); letter-spacing: 0.08em; text-shadow: 0 1px 10px rgba(0,0,0,0.3);">Select your areas of interest and only receive listing emails from the areas you chose.</p>
-      <div class="flex gap-4 justify-center">
-        <button class="btn-primary inline-block" style="box-shadow: 0 0 30px rgba(80,162,229,0.5);">Search Inventory</button>
-        <button class="btn-secondary inline-block" style="color:#fff;border-color:rgba(255,255,255,0.5);">Sell a Home</button>
-      </div>
-    </div>
-
-    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20">
-      <div class="scroll-indicator">
-        <div class="scroll-dot" style="background:rgba(255,255,255,0.8);"></div>
-        <div class="scroll-dot opacity-50" style="background:rgba(255,255,255,0.5);"></div>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#50A2E5" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- Divider -->
-  <div class="max-w-7xl mx-auto px-6">
-    <div class="divider-line"></div>
-  </div>
-
-  <!-- About Section -->
-  <section id="about" class="bg-white" data-animate="fade-up">
-    <div class="max-w-7xl mx-auto px-6 grid grid-cols-2 gap-20 items-start" data-stagger>
-      <div>
-        <h2 class="section-heading mb-0" style="color: #248ADE;">Ezhomesfast</h2>
-      </div>
-      <div>
-        <p class="body-text leading-relaxed mb-8" style="color: #1a1a1a;">Select your areas of interest and only receive listing emails from the areas you chose.</p>
-        <p class="body-text leading-relaxed" style="color: #666;">Streamline your home search by filtering listings to match your preferences. Focus on properties in locations that matter to you.</p>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#50A2E5" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- Services Section -->
-  <section id="services" class="dark-section dot-pattern" data-animate="fade-in">
-    <div class="max-w-7xl mx-auto px-6">
-      <h2 class="section-heading mb-16">Homes for Sale</h2>
-      
-      <div class="grid grid-cols-4 gap-6" data-stagger>
-        <!-- Large Feature Card -->
-        <div class="col-span-2 row-span-2">
-          <div class="service-card h-full flex flex-col justify-between bg-gradient-to-br from-blue-50 to-white">
-            <div>
-              <h3 class="text-2xl font-bold mb-4" style="color: #248ADE;">Offering Manufactured Homes in Michigan, Ohio &amp; throughout the US</h3>
-              <p class="body-text" style="color: #666;">Explore our comprehensive inventory of quality pre-owned manufactured homes across multiple states.</p>
-            </div>
-            <button class="btn-primary mt-8 w-fit">View Details</button>
-          </div>
-        </div>
-
-        <!-- Card 1 -->
-        <div class="col-span-1">
-          <div class="service-card h-full">
-            <h3 class="heading text-lg mb-3" style="color: #248ADE;">Available Homes</h3>
-            <p class="body-text text-sm" style="color: #666;">View our list of available homes. For additional information click on the "View Details" button.</p>
-            <button class="btn-secondary mt-6 w-full text-sm">View Details</button>
-          </div>
-        </div>
-
-        <!-- Card 2 -->
-        <div class="col-span-1">
-          <div class="service-card h-full">
-            <h3 class="heading text-lg mb-3" style="color: #248ADE;">Purchase History</h3>
-            <p class="body-text text-sm" style="color: #666;">Track your purchase history with us.</p>
-            <button class="btn-secondary mt-6 w-full text-sm">Learn More</button>
-          </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-span-1">
-          <div class="service-card h-full">
-            <h3 class="heading text-lg mb-3" style="color: #248ADE;">Document Access</h3>
-            <p class="body-text text-sm" style="color: #666;">Retrieve shared documents on homes you've purchased.</p>
-            <button class="btn-secondary mt-6 w-full text-sm">View Details</button>
-          </div>
-        </div>
-
-        <!-- Card 4 -->
-        <div class="col-span-1">
-          <div class="service-card h-full">
-            <h3 class="heading text-lg mb-3" style="color: #248ADE;">Map Listings</h3>
-            <p class="body-text text-sm" style="color: #666;">Instantly map a listing to any of your parks.</p>
-            <button class="btn-secondary mt-6 w-full text-sm">View Details</button>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-<div style="overflow:hidden;line-height:0;margin:-1px 0;"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#50A2E5" fill-opacity="0.06"/></svg></div>
-
-
-  <!-- CTA Band -->
-  <section id="contact" class="cta-band py-24" data-animate="fade-up">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <h2 class="section-heading mb-12">Ready to find your next home?</h2>
-      <button class="btn-primary" style="background: #50A2E5; box-shadow: 0 0 30px rgba(80, 162, 229, 0.5);">Search</button>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-white border-t border-gray-200">
-    <div class="max-w-7xl mx-auto px-6 py-16">
-      <div class="grid grid-cols-3 gap-12 mb-16" data-stagger>
-        <div>
-          <div class="heading text-2xl font-bold mb-8" style="color: #248ADE;">Ezhomesfast</div>
-          <p class="body-text" style="color: #666; max-width: 300px;">Pre-owned manufactured homes across Michigan, Ohio, and the United States.</p>
-        </div>
-        
-        <div>
-          <h4 class="heading font-semibold mb-6" style="color: #1a1a1a;">Navigation</h4>
-          <div class="space-y-3">
-            <a href="#home" class="nav-link block">Home</a>
-            <a href="#about" class="nav-link block">About</a>
-            <a href="#services" class="nav-link block">Services</a>
-            <a href="#" class="nav-link block">Terms of Use</a>
-            <a href="#" class="nav-link block">Privacy Policy</a>
-          </div>
-        </div>
-
-        <div>
-          <h4 class="heading font-semibold mb-6" style="color: #1a1a1a;">Account</h4>
-          <div class="space-y-3">
-            <a href="#" class="nav-link block">Register or Sign In</a>
-            <a href="#" class="nav-link block">Employee Login</a>
-            <a href="#" class="nav-link block">Contact</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="divider-line mb-8"></div>
-
-      <div class="flex justify-between items-center">
-        <p class="body-text text-sm" style="color: #999;">Ezhomesfast</p>
-        <p class="body-text text-sm" style="color: #999;">A modern approach to manufactured home sales</p>
-      </div>
-    </div>
-  </footer>
-
-  <script>
-    // Smooth scrolling for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-      });
-    });
-
-    // Add scroll effect to nav
-    window.addEventListener('scroll', function() {
-      const nav = document.querySelector('nav');
-      if (window.scrollY > 50) {
-        nav.style.boxShadow = '0 4px 12px rgba(0,0,0,0.08)';
-      } else {
-        nav.style.boxShadow = 'none';
-      }
-    });
-  </script>
-
-<script>
-// Intersection Observer for scroll animations
-document.addEventListener('DOMContentLoaded', () => {
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-    document.querySelectorAll('[data-animate], [data-stagger]').forEach(el => {
-        observer.observe(el);
-    });
-
-    // Parallax on hero
-    const hero = document.querySelector('.parallax-hero');
-    if (hero) {
-        window.addEventListener('scroll', () => {
-            const scroll = window.pageYOffset;
-            hero.style.transform = `translateY(${scroll * 0.3}px)`;
-        }, { passive: true });
-    }
-
-    // Add shimmer to primary CTA buttons
-    document.querySelectorAll('button, a').forEach(el => {
-        const text = el.textContent.trim().toLowerCase();
-        if (el.classList.contains('bg-primary') || el.classList.contains('bg-accent') ||
-            text.includes('risk talks') || text.includes('get started') || text.includes('contact')) {
-            if (el.querySelector('span') || el.childNodes.length <= 3) {
-                el.classList.add('btn-shimmer');
-            }
-        }
-    });
-});
-</script>
-
-<div style="text-align:center;padding:16px 12px;font-size:11px;opacity:0.4;font-family:system-ui,sans-serif;letter-spacing:0.02em;">Demo generated from publicly available website content · No claims invented</div>
-</body>
-</html>
+<html lang="en"><head><style>
+.anim-video-bg video { transition: opacity 0.3s; }
+</style></head>
+<body class="index" id="page-top" style=""><svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden;">
+<defs>
+<filter color-interpolation-filters="sRGB" id="brandTint">
+<fecolormatrix type="saturate" values="0"></fecolormatrix>
+<fecolormatrix type="matrix" values="0.14 0 0 0 0.86 0.54 0 0 0 0.46 0.87 0 0 0 0.13 0 0 0 1 0"></fecolormatrix>
+</filter>
+</defs>
+</svg>
+<!-- Navigation -->
+<nav class="navbar navbar-default">
+<!-- Topbar Nav (hidden) -->
+<div class="topbar-nav clearfix">
+<div class="container">
+<ul class="topbar-left list-unstyled list-inline">
+<li> <span class="fa fa-phone"></span> (248) 760 - 3841 </li>
+<li> <span class="fa fa-phone"></span> (810) 614 - 9181 </li>
+</ul>
+<ul class="topbar-right list-unstyled list-inline topbar-social">
+<li class="hidden-xs hidden-sm hidden-md">Inventory Acquisition And Retention Specialists</li>
+<li><a class="register-or-login" href="https://www.ezhomesfast.com/#">register or sign</a></li>
+</ul>
+</div>
+</div>
+<div class="container" style="max-width: 1170px;">
+<!-- Brand and toggle get grouped for better mobile display -->
+<div class="navbar-header page-scroll">
+<button class="navbar-toggle" data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" type="button">
+<span class="sr-only">Toggle navigation</span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+<span class="icon-bar"></span>
+</button>
+<a class="navbar-brand page-scroll" href="https://www.ezhomesfast.com/#page-top"><img alt="" class="img-responsive img-logo" src="https://www.ezhomesfast.com/areas/sales/content/assets/img/EZHomes_Logo_color.png"/></a>
+</div>
+<!-- Collect the nav links, forms, and other content for toggling -->
+<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+<ul class="nav navbar-nav navbar-right">
+<li class="active hidden">
+<a href="https://www.ezhomesfast.com/#page-top">Home</a>
+</li>
+<li>
+<a class="page-scroll" href="https://www.ezhomesfast.com/"><span class="hidden-md hidden-sm">Current </span>Inventory</a>
+</li>
+<li>
+<a class="page-scroll" href="https://www.ezhomesfast.com/Sales/Inventory/Future">Future<span class="hidden-md hidden-sm"> Inventory</span></a>
+</li>
+<li><a class="register-or-login" href="https://www.ezhomesfast.com/#">Buy <span class="hidden-sm"> Leads</span></a></li>
+<li>
+<a class="page-scroll" href="https://www.ezhomesfast.com/Sales/Property/New?source=ezhomesfast">Sell<span class="hidden-sm"> a Home</span></a>
+</li>
+<li>
+<a class="page-scroll" href="https://www.ezhomesfast.com/Sales/Inventory/Sold">Sold<span class="hidden-md hidden-sm">  Homes</span></a>
+</li>
+<li>
+<a class="page-scroll" href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion">Contact</a>
+</li>
+</ul>
+</div>
+<!-- /.navbar-collapse -->
+</div>
+<!-- /.container-fluid -->
+</nav>
+<div id="page-body">
+<!-- Carousel
+   ================================================== -->
+<!-- Portfolio Grid Section -->
+<section id="portfolio" style="position: relative; overflow: hidden; "><div class="anim-video-bg" style="position:absolute;inset:0;z-index:0;overflow:hidden;">
+<video autoplay="" loop="" muted="" playsinline="" poster="https://images.pexels.com/photos/574919/pexels-photo-574919.jpeg?auto=compress&amp;cs=tinysrgb&amp;w=1920" preload="auto" style="width:100%;height:100%;object-fit:cover;filter:url(#brandTint);">
+<source src="https://videos.pexels.com/video-files/3571264/3571264-uhd_2560_1440_30fps.mp4" type="video/mp4"/>
+</video>
+<div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
+<div style="position:absolute;inset:0;background:radial-gradient(ellipse at center, transparent 40%, rgba(0,0,0,0.7) 100%);"></div>
+<div style="position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.03) 2px, rgba(0,0,0,0.03) 4px);"></div>
+</div>
+<div class="container" style="position: relative; z-index: 1; ">
+<h2 class="section-heading text-center mt70">Offering the Best in Pre-Owned Manufactured Homes</h2>
+<div class="row visible-lg visible-md visible-sm hidden-xs">
+<div class="col-lg-12">
+<img alt="" class="img-responsive visible-lg visible-md hidden-sm hidden-xs" src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png"/>
+<img alt="" class="img-responsive hidden-lg hidden-md visible-sm hidden-xs" src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2-sm.png"/>
+</div>
+</div>
+<div class="row hidden-lg hidden-md hidden-sm visible-xs">
+<div class="col col-xs-12">
+<img class="img-responsive" src="https://www.ezhomesfast.com/Areas/Sales/Content/banner-sm.jpg" style="border: 3px solid #bbbbbb"/>
+</div>
+<div class="col col-xs-12">
+<div style="background-color:#dedede; margin-top:10px;">
+<ul class="fa-ul pt15 pb5">
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Clean Titles With No Encumbrances</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Detailed Home Descriptions Provided</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Tons of Photos Provided</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Competitive Pricing</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>High Integrity</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Document Sharing</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Select Your Areas of Interest</li>
+<li class="mb10"><i class="fa-li fa fa-check-square"></i>Easy Park Mapping</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="col-md-12 text-center">
+<hr/>
+<h2 class="section-subheading">Homes for Sale</h2>
+<h3 class="section-subheading text-muted" style="margin-bottom: 20px">View our list of available homes. For additional information click on the "View Details" button.</h3>
+</div>
+</div>
+<div class="row">
+<div class="col-md-9 col-sm-12">
+<div class="row mb15">
+<div class="col-md-8"><input class="form-control search-bar" id="searchKeyword" placeholder="Search by Address, City, State" type="text"/></div>
+<div class="col-md-2 mt10 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; display: inline;" title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-x-condition star-1 star-l star-1-l" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-x-condition star-1 star-r star-1-r dim" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-x-condition star-2 star-l star-2-l dim" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-x-condition star-2 star-r star-2-r dim" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-x-condition star-3 star-l star-3-l dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-x-condition star-3 star-r star-3-r dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-x-condition star-4 star-l star-4-l dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-x-condition star-4 star-r star-4-r dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+<div class="col-md-2"><a class="btn btn-sm btn-warning btn-search" href="https://www.ezhomesfast.com/#"><i class="fa fa-search"></i> Search</a></div>
+</div>
+<div id="search"> <div class="table table-striped table-hover admin-form grid-mvc" data-gridname="listings" data-lang="en" data-multiplefilters="false" data-selectable="false">
+<div class="grid-wrap">
+<table class="table table-striped grid-table">
+<thead>
+<tr>
+<th class="grid-header"><div class="grid-header-title"><span></span></div></th> </tr>
+</thead>
+<tbody>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=129180&amp;LeadID=31009"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>39252 Brooks</h3>
+<em>New Boston, MI 48164</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$25,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3c452ad9-87b6-4c90-96c5-60dd3fe9b555 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 28 x 48 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31009">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128914&amp;LeadID=30998"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>13550  Heritage street</h3>
+<em>Carleton , MI 48117</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$47,500 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-c0973937-eb16-492d-b7f0-87321bca0dc5 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 28 x 52 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 4 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30998">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=129149&amp;LeadID=31005"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>3628 Birch st</h3>
+<em>Clarkston , MI 48348</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$40,000 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-4 star-l star-4-l Star-Condition" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c354140-3679-4a01-a9c0-4e1cfff4a1b3 star-4 star-r star-4-r Star-Condition" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 2 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31005">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=129218&amp;LeadID=31002"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>2837 W. Washington Center Rd., Lot 377</h3>
+<em>Ft Wayne , IN 46818</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$37,000 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-0e5e74f9-5eee-4c90-b3c9-2979b6efdc46 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31002">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128989&amp;LeadID=31004"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>2541 Horn road </h3>
+<em>Jackson, MI 49202</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$17,000 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-11498e6c-5e83-4180-afa6-9b5edbb7a698 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 68 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31004">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128812&amp;LeadID=30995"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>80 Woodlake Run</h3>
+<em>Yoder, IN 46798</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$19,500 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-2b48d632-7696-41f5-b257-2b39870f44dc star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 26 x 52 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30995">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128970&amp;LeadID=31000"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>7328 Kensington Dr east</h3>
+<em>Ft wayne, IN 46818</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$45,000 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-097f1a90-ab81-4b12-80cb-e0003b63a536 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 28 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31000">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128957&amp;LeadID=31001"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>875 Stevens trail</h3>
+<em>Monroe, MI 48161</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$42,000 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-4 star-l star-4-l Star-Condition" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-3d5aed7c-1d89-43c0-a0ec-ecdbc3c3cd6a star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 26 x 44 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=31001">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128900&amp;LeadID=30997"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>3585 E Anderson Rd</h3>
+<em>Bloomington, IN 47401</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$18,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-83d93194-d099-4436-9bcc-972905c3b3e2 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30997">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128521&amp;LeadID=30984"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>340 Decoy Ln </h3>
+<em>Lapeer, MI 48446</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$26,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c5177fe-473d-424d-8c22-c20c60211e57 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 28 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30984">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=126717&amp;LeadID=30921"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>573 Dinnerbell Rd</h3>
+<em>Butler, PA 16001</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$16,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-5a50420d-e029-4f9e-84b8-4b31e3430fec star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 2 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30921">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=126654&amp;LeadID=30911"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>5989 state route 141</h3>
+<em>Gallipolis , OH 45631</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$32,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-abae422f-a9a5-4ed1-9d2e-a2a8aa9e530a star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30911">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128616&amp;LeadID=30979"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>15 Sparrow Hill Drive</h3>
+<em>Orion, MI 48359</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$12,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-1c7ea2c0-4dde-4c2d-869f-fce8229bc2a7 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30979">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=127630&amp;LeadID=30954"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>997 Estate Drive</h3>
+<em>Flint, MI 48506</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$17,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-f18880b5-c844-4011-bc6f-86c07469eb90 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 28 x 64 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 5 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 3 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30954">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=125805&amp;LeadID=30877"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>123 Hillside drive</h3>
+<em>Howard, PA 16841</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$6,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-58c787c2-e540-498a-a300-11f1ad4a1fdc star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 67 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30877">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=128193&amp;LeadID=30956"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>139 Hunters Hollow</h3>
+<em>Collinsville, IL 62234</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$59,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-86d85ed2-6b6e-4406-acc1-15e2f3218cc4 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 27 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 3 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30956">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=127423&amp;LeadID=30944"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>637 Gordon Rd</h3>
+<em>Mansfield, OH 44905</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$22,700 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-b7a6928a-5481-400a-9a56-ba3293945c84 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30944">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=126229&amp;LeadID=30891"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>49635 Au Lac Dr E, Lot Bay 1</h3>
+<em>Chesterfield Twp, MI 48051</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$15,700 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-2 star-r star-2-r Star-Condition dim" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-281be182-c7c6-40ca-9cbc-a328688cf483 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30891">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=116437&amp;LeadID=30160"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>1607 Union St</h3>
+<em>New Castle, PA 16101</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$18,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-3 star-r star-3-r Star-Condition" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-9c113faf-ad09-498b-8e41-b03f57d2162b star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 68 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 2 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30160">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=121092&amp;LeadID=30761"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>7037 Ranger Dr</h3>
+<em>Romulus, MI 48174</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$11,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-2 star-r star-2-r Star-Condition dim" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-4b208be3-c49c-4b79-a98a-5f3c6019b92b star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 2 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30761">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=120771&amp;LeadID=30753"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>13948 Jackson Dr, Lot 74A</h3>
+<em>Plymouth, MI 48170</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$8,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-2 star-r star-2-r Star-Condition dim" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-82ab2ae2-1577-427f-bad5-c445c993150b star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 66 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 2 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30753">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=120559&amp;LeadID=30742"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>28180  Oregon Rd, Lot 753</h3>
+<em>Perrysburg , OH 43551</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$17,900 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-3 star-l star-3-l Star-Condition" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-26a42971-05e5-4a2f-972b-4f057420a058 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 14 x 68 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=30742">View Details</a></div>
+</div>
+</div></td> </tr>
+<tr class="grid-row">
+<td class="grid-cell" data-name="LeadID"><div class="row">
+<div class="col-md-6 col-sm-12"><img src="https://www.ezhomesfast.com/areas/sales/content/sale-pending.png" style="position: absolute; margin-top: 20px"/><img alt="" class="img-responsive img-centered img-rounded img-bordered" src="https://www.ezhomesfast.com/leads/resourcestream/?ResourceID=97351&amp;LeadID=24116"/></div>
+<div class="col-md-6 col-sm-12">
+<h3>205 N Briarwood Cir.</h3>
+<em>Frankfort, IN 46041</em>
+<div class="row">
+<div class="col-sm-6"><h4 class="price">$11,200 OBO</h4></div><div class="col-sm-6 mt15 mb10">
+<div data-placement="top" data-toggle="tooltip" style="max-width: 150px; white-space: nowrap; " title="Indicate overall condition. Click the left side of a star to indicate half.">
+<img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-1 star-l star-1-l Star-Condition" data-score="10" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-1 star-r star-1-r Star-Condition" data-score="20" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-2 star-l star-2-l Star-Condition" data-score="30" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-2 star-r star-2-r Star-Condition" data-score="40" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-3 star-l star-3-l Star-Condition dim" data-score="50" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-3 star-r star-3-r Star-Condition dim" data-score="60" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+<img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-4 star-l star-4-l Star-Condition dim" data-score="70" src="https://www.ezhomesfast.com/Content/assets/img/star-l.png"/><img class="star-7984fe5e-31d1-4da0-a97a-6ec467dacb67 star-4 star-r star-4-r Star-Condition dim" data-score="80" src="https://www.ezhomesfast.com/Content/assets/img/star-r.png"/>
+</div>
+</div>
+</div>
+<div class="boxed">
+<div class="row">
+<div class="col-sm-4"><i class="fa fa-home mr5"></i> 16 x 76 box</div>
+<div class="col-sm-3"><i class="fa fa-bed mr5"></i> 3 beds</div>
+<div class="col-sm-4"><i class="fa fa-sun-o mr5"></i> 2 baths</div>
+</div>
+</div>
+<div class="text-center"><a class="btn btn-primary btn-expand mt10 mb10" href="https://www.ezhomesfast.com/sales/property/view?id=24116">View Details</a></div>
+</div>
+</div></td> </tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="col-md-3 col-sm-12">
+<!-- Row -->
+<div class="row">
+<!-- Column -->
+<div class="col-lg-12">
+<!-- Panel -->
+<div class="panel panel-tile text-center br-a br-grey">
+<div class="panel-body p0">
+<img alt="" class="img-responsive" src="https://www.ezhomesfast.com/areas/sales/content/listings-sm.jpg"/>
+</div>
+<div class="panel-footer br-t p12">
+<span class="fs11">
+                                    Select your areas of interest and only receive listing emails from the areas you chose.
+                                </span><br/>
+<div class="text-center"><a class="btn btn-wire btn-primary mt10" href="https://www.ezhomesfast.com/BrokerDashboard/Profile" target="_blank">Learn More</a></div>
+</div>
+</div>
+<!-- /Panel -->
+</div>
+<!-- /Column -->
+</div>
+<div class="row">
+<!-- Column -->
+<div class="col-lg-12">
+<!-- Panel -->
+<div class="panel panel-tile text-center br-a br-grey">
+<div class="panel-body p0">
+<img alt="" class="img-responsive" src="https://www.ezhomesfast.com/areas/sales/content/profiles-sm2.jpg"/>
+</div>
+<div class="panel-footer br-t p12">
+<span class="fs11">
+                                    Retrieve shared documents on homes you’ve purchased.
+                                </span><br/>
+<div class="text-center"><a class="btn btn-wire btn-primary mt10" href="https://www.ezhomesfast.com/BrokerDashboard/Profile" target="_blank">Learn More</a></div>
+</div>
+</div>
+<!-- /Panel -->
+</div>
+<!-- /Column -->
+</div>
+<div class="row">
+<!-- Column -->
+<div class="col-lg-12">
+<!-- Panel -->
+<div class="panel panel-tile text-center br-a br-grey">
+<div class="panel-body p0">
+<img alt="" class="img-responsive" src="https://www.ezhomesfast.com/areas/sales/content/signup-sm.jpg"/>
+</div>
+<div class="panel-footer br-t p12">
+<span class="fs11">
+                                    Instantly map a listing to any of your parks.
+                                </span><br/>
+<div class="text-center"><a class="btn btn-wire btn-primary mt10" href="https://www.ezhomesfast.com/BrokerDashboard/Profile" target="_blank">Learn More</a></div>
+</div>
+</div>
+<!-- /Panel -->
+</div>
+<!-- /Column -->
+</div>
+<!-- /Row -->
+<div class="row">
+<!-- Column -->
+<div class="col-lg-12">
+<!-- Panel -->
+<div class="panel panel-tile text-center br-a br-grey">
+<div class="panel-body p0">
+<img alt="" class="img-responsive" src="https://www.ezhomesfast.com/areas/sales/content/track-purchase-history.jpg"/>
+</div>
+<div class="panel-footer br-t p12">
+<span class="fs11">
+                                    Track your purchase history with us.
+                                </span><br/>
+<div class="text-center"><a class="btn btn-wire btn-primary mt10" href="https://www.ezhomesfast.com/BrokerDashboard/Profile" target="_blank">Learn More</a></div>
+</div>
+</div>
+<!-- /Panel -->
+</div>
+<!-- /Column -->
+</div>
+<!-- /Row -->
+</div>
+</div>
+</div>
+</section>
+<!-- Clients Section -->
+<section class="bg-light" id="clients">
+<div class="container mw1000">
+<div class="row">
+<div class="client-logo">
+<img alt="" class="img-responsive img-centered mw100" src="https://www.ezhomesfast.com/areas/sales/content/assets/img/external/1.png"/>
+</div>
+<div class="client-logo">
+<a href="https://www.facebook.com/mobilehomesell/">
+<img alt="" class="img-responsive img-centered mw100" src="https://www.ezhomesfast.com/areas/sales/content/assets/img/external/5.png"/>
+</a>
+</div>
+<div class="client-logo">
+<a href="https://twitter.com/EZHomes">
+<img alt="" class="img-responsive img-centered mw100" src="https://www.ezhomesfast.com/areas/sales/content/assets/img/external/4.png"/>
+</a>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Contact Section -->
+<section id="contact">
+<div class="container">
+<div class="row">
+<div class="col-lg-12 text-center">
+<h2 class="section-heading">Offering Manufactured Homes in Michigan, Ohio &amp; throughout the US</h2>
+<p> If you're a manufactured home community owner or operator, a manufactured home dealer or retailer, or just someone looking for a budget-friendly, pre-owned manufactured home to call your own, you've come to the right place! Here at EZ Homes, you're sure to find the home that perfectly suits your needs at very reasonable rates.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer id="footer">
+<div class="container mw850">
+<div class="row">
+<div class="col-md-3 text-center">
+<span class="copyright text-muted">Copyright ©<b>EZ Homes</b>2016</span>
+</div>
+<div class="col-md-6 text-center">
+<div>
+<a href="https://www.ezhomesfast.com/Leads" style="font-size: 11px;">Employee Login</a> · <a class="page-scroll" href="https://www.ezhomesfast.com/Sales/About/TermsOfUse" style="font-size: 11px;">Terms of Use</a> · <a class="page-scroll" href="https://www.ezhomesfast.com/Sales/About/PrivacyPolicy" style="font-size: 11px;">Privacy Policy</a>
+</div>
+<div>
+<span><a href="https://www.tdhca.state.tx.us/" style="font-size: 11px;">Texas Department of Housing and Community Affairs</a></span>
+</div>
+</div>
+<div class="col-md-3 text-center">
+<ul class="list-inline social-buttons">
+<li>
+<a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a>
+</li>
+<li>
+<a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a>
+</li>
+</ul>
+<div class="hidden-lg text-center line15">
+<span class="fa fa-phone"></span> (248) 760-3841   |   <span class="fa fa-phone"></span> (810) 614-9181<br/>
+</div>
+</div>
+</div>
+</div>
+</footer>
+<!-- Registration modal -->
+<div class="modal fade" data-backdrop="static" id="registration-modal" role="dialog" style="" tabindex="-1">
+<div class="modal-dialog">
+<div class="modal-content">
+<div class="modal-body" id="registration-modal-body">
+</div>
+</div>
+</div>
+</div>
+</body></html>
