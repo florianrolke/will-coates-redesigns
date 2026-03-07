@@ -3,18 +3,646 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EZ Homes Fast</title>
-    <script>
-        window.hl_chatbot_widget = { locationId: "V99IPPukYvrLIB1hYHGG" };
-    </script>
-    <script src="https://widgets.leadconnectorhq.com/loader.js" data-resources-url="https://widgets.leadconnectorhq.com/chat-widget/loader.js"></script>
+    <title>EZ Homes Fast — What If You Could Recover 98% of Lost Leads?</title>
+    <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        html, body { width: 100%; height: 100%; overflow: hidden; }
-        iframe { width: 100%; height: 100%; border: none; display: block; }
+        /* ===== RESET + BASE (match original site) ===== */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            font-size: 16px;
+            color: #333;
+            background: #fff;
+            -webkit-font-smoothing: antialiased;
+        }
+        a { color: #50A2E5; text-decoration: none; }
+        a:hover { color: #248ADE; text-decoration: underline; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1170px; margin: 0 auto; padding: 0 15px; }
+
+        /* ===== CLONED NAV (identical to ezhomesfast.com) ===== */
+        .navbar {
+            background: #fff;
+            border-bottom: 1px solid #e7e7e7;
+            padding: 0;
+            position: relative;
+            z-index: 100;
+        }
+        .topbar-nav {
+            background: #248ADE;
+            color: #fff;
+            font-size: 13px;
+            padding: 6px 0;
+        }
+        .topbar-nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .topbar-nav ul {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+        .topbar-nav li { display: inline; }
+        .topbar-nav a { color: #fff; }
+        .topbar-nav .fa-phone { margin-right: 4px; }
+        .navbar-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 0;
+        }
+        .img-logo { max-height: 50px; }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+        .nav-links li a {
+            display: block;
+            padding: 10px 14px;
+            color: #555;
+            font-size: 14px;
+            text-transform: none;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        .nav-links li a:hover { color: #248ADE; text-decoration: none; }
+
+        /* ===== CLONED HERO BANNER (identical layout) ===== */
+        .hero-banner {
+            text-align: center;
+            padding: 40px 0 20px;
+        }
+        .hero-banner h2 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .hero-banner img {
+            max-width: 100%;
+            border-radius: 0;
+        }
+        .hero-features {
+            background: #dedede;
+            padding: 15px 20px 5px;
+            margin-top: 15px;
+            display: none;
+        }
+        .hero-features li {
+            margin-bottom: 10px;
+            list-style: none;
+        }
+        .hero-features .fa { color: #248ADE; margin-right: 8px; }
+
+        /* ===== TRANSITION DIVIDER ===== */
+        .transition-section {
+            background: linear-gradient(180deg, #fff 0%, #f0f7ff 100%);
+            padding: 50px 0 30px;
+            text-align: center;
+        }
+        .transition-section .hook-line {
+            font-size: 22px;
+            font-weight: 300;
+            color: #666;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        .transition-section .hook-line strong {
+            color: #248ADE;
+            font-weight: 700;
+        }
+
+        /* ===== CASE STUDY SECTION ===== */
+        .case-study {
+            background: #f0f7ff;
+            padding: 60px 0 70px;
+        }
+        .case-study .section-label {
+            text-transform: uppercase;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: #248ADE;
+            margin-bottom: 12px;
+        }
+        .case-study h2 {
+            font-size: 36px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+        .case-study .subtitle {
+            font-size: 18px;
+            color: #666;
+            max-width: 650px;
+            margin: 0 auto 50px;
+            line-height: 1.6;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+        .stat-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 32px 20px;
+            text-align: center;
+            box-shadow: 0 2px 12px rgba(36, 138, 222, 0.08);
+            border: 1px solid rgba(36, 138, 222, 0.1);
+            transition: transform 0.25s, box-shadow 0.25s;
+        }
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(36, 138, 222, 0.15);
+        }
+        .stat-number {
+            font-size: 42px;
+            font-weight: 800;
+            color: #248ADE;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: #555;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .stat-detail {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        /* Before / After */
+        .before-after {
+            display: grid;
+            grid-template-columns: 1fr 60px 1fr;
+            gap: 0;
+            align-items: stretch;
+            margin-bottom: 60px;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .ba-card {
+            padding: 36px 32px;
+            border-radius: 12px;
+        }
+        .ba-before {
+            background: #fff5f5;
+            border: 1px solid #ffcccc;
+        }
+        .ba-after {
+            background: #f0fff4;
+            border: 1px solid #b2f2bb;
+        }
+        .ba-card h3 {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .ba-before h3 { color: #c53030; }
+        .ba-after h3 { color: #2f855a; }
+        .ba-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        .ba-card li {
+            font-size: 15px;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.06);
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+            line-height: 1.5;
+        }
+        .ba-card li:last-child { border-bottom: none; }
+        .ba-before li .icon { color: #e53e3e; }
+        .ba-after li .icon { color: #38a169; }
+        .ba-arrow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #248ADE;
+            font-weight: 700;
+        }
+
+        /* Quote */
+        .quote-block {
+            background: #fff;
+            border-left: 4px solid #248ADE;
+            padding: 28px 36px;
+            border-radius: 0 12px 12px 0;
+            max-width: 750px;
+            margin: 0 auto 60px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+        .quote-block p {
+            font-size: 18px;
+            font-style: italic;
+            color: #444;
+            line-height: 1.7;
+            margin-bottom: 12px;
+        }
+        .quote-block .attribution {
+            font-size: 14px;
+            font-weight: 600;
+            color: #248ADE;
+            font-style: normal;
+        }
+
+        /* ROI Box */
+        .roi-box {
+            background: linear-gradient(135deg, #248ADE 0%, #1a6cb3 100%);
+            border-radius: 16px;
+            padding: 48px 40px;
+            color: #fff;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto 60px;
+            box-shadow: 0 8px 32px rgba(36, 138, 222, 0.3);
+        }
+        .roi-box h3 {
+            font-size: 28px;
+            font-weight: 800;
+            margin-bottom: 12px;
+        }
+        .roi-box .roi-subtitle {
+            font-size: 16px;
+            opacity: 0.85;
+            margin-bottom: 32px;
+        }
+        .roi-math {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-bottom: 32px;
+        }
+        .roi-step {
+            background: rgba(255,255,255,0.12);
+            border-radius: 10px;
+            padding: 20px 16px;
+        }
+        .roi-step .number {
+            font-size: 32px;
+            font-weight: 800;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .roi-step .label {
+            font-size: 13px;
+            opacity: 0.85;
+        }
+        .roi-bottom {
+            font-size: 22px;
+            font-weight: 700;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.2);
+        }
+        .roi-bottom span {
+            font-size: 36px;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: #fff;
+            padding: 60px 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-size: 30px;
+            font-weight: 800;
+            color: #1a1a2e;
+            margin-bottom: 14px;
+        }
+        .cta-section .cta-sub {
+            font-size: 17px;
+            color: #666;
+            margin-bottom: 32px;
+            max-width: 550px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-btn {
+            display: inline-block;
+            background: #248ADE;
+            color: #fff;
+            padding: 16px 40px;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: 700;
+            text-decoration: none;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 4px 16px rgba(36, 138, 222, 0.3);
+        }
+        .cta-btn:hover {
+            background: #1a6cb3;
+            transform: translateY(-2px);
+            color: #fff;
+            text-decoration: none;
+        }
+        .cta-note {
+            font-size: 13px;
+            color: #999;
+            margin-top: 14px;
+        }
+
+        /* ===== CLONED FOOTER ===== */
+        .footer {
+            background: #222;
+            color: #999;
+            padding: 30px 0;
+            font-size: 13px;
+        }
+        .footer .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer a { color: #aaa; font-size: 12px; }
+        .footer a:hover { color: #fff; }
+        .footer .social-buttons {
+            list-style: none;
+            display: flex;
+            gap: 10px;
+            padding: 0;
+        }
+        .footer .social-buttons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #333;
+            border-radius: 50%;
+            color: #aaa;
+            font-size: 16px;
+            transition: background 0.2s;
+        }
+        .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+            .stat-number { font-size: 32px; }
+            .before-after { grid-template-columns: 1fr; gap: 16px; }
+            .ba-arrow { transform: rotate(90deg); }
+            .roi-math { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero-banner h2 { font-size: 24px; }
+            .case-study h2 { font-size: 28px; }
+            .hero-features { display: block; }
+            .topbar-nav ul { flex-wrap: wrap; gap: 10px; }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        .fade-up {
+            opacity: 0;
+            transform: translateY(24px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-up.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
-    <iframe src="https://www.ezhomesfast.com/" allow="autoplay; fullscreen" loading="eager"></iframe>
+
+<!-- ============================================================
+     CLONED NAV — identical to ezhomesfast.com
+     ============================================================ -->
+<nav class="navbar">
+    <div class="topbar-nav">
+        <div class="container">
+            <ul>
+                <li><span class="fa fa-phone"></span> (810) 614 - 9181</li>
+                <li><span class="fa fa-phone"></span> (248) 760 - 3841</li>
+            </ul>
+            <ul>
+                <li>Inventory Acquisition And Retention Specialists</li>
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="navbar-main">
+            <a href="https://www.ezhomesfast.com/#page-top">
+                <img src="https://www.ezhomesfast.com/areas/sales/content/assets/img/EZHomes_Logo_color.png" class="img-logo" alt="EZ Homes">
+            </a>
+            <ul class="nav-links">
+                <li><a href="https://www.ezhomesfast.com/">Current Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Future">Future Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Property/New?source=ezhomesfast">Sell a Home</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Sold">Sold Homes</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ============================================================
+     CLONED HERO BANNER — identical layout + imagery
+     ============================================================ -->
+<section class="hero-banner">
+    <div class="container">
+        <h2>Offering the Best in Pre-Owned Manufactured Homes</h2>
+        <img src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png" alt="EZ Homes Banner">
+
+        <!-- Mobile feature list (hidden on desktop, same as original) -->
+        <div class="hero-features">
+            <ul>
+                <li><i class="fa fa-check-square"></i> Clean Titles With No Encumbrances</li>
+                <li><i class="fa fa-check-square"></i> Detailed Home Descriptions Provided</li>
+                <li><i class="fa fa-check-square"></i> Tons of Photos Provided</li>
+                <li><i class="fa fa-check-square"></i> Competitive Pricing</li>
+                <li><i class="fa fa-check-square"></i> High Integrity</li>
+                <li><i class="fa fa-check-square"></i> Document Sharing</li>
+                <li><i class="fa fa-check-square"></i> Select Your Areas of Interest</li>
+                <li><i class="fa fa-check-square"></i> Easy Park Mapping</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     TRANSITION — bridges the cloned header into our personalized section
+     ============================================================ -->
+<section class="transition-section">
+    <div class="container">
+        <p class="hook-line">
+            Dan, you told us you get <strong>300 leads every single month</strong>.<br>
+            What if you could turn the <strong>98% you're currently losing</strong> into closed deals?
+        </p>
+    </div>
+</section>
+
+<!-- ============================================================
+     PERSONALIZED CASE STUDY SECTION — real numbers from your engagement
+     ============================================================ -->
+<section class="case-study">
+    <div class="container" style="text-align: center;">
+
+        <div class="section-label fade-up">Results From Our Partnership</div>
+        <h2 class="fade-up">Here's What Changed in the First 8 Weeks</h2>
+        <p class="subtitle fade-up">
+            When we sat down with you, the math was clear. 3,600 leads a year and a 2% close rate
+            meant thousands of buyers were slipping through the cracks. Here's what we fixed.
+        </p>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid fade-up">
+            <div class="stat-card">
+                <div class="stat-number">3,528</div>
+                <div class="stat-label">Lost Leads / Year</div>
+                <div class="stat-detail">98% of your pipeline — recovered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">24h+</div>
+                <div class="stat-label">Old Response Time</div>
+                <div class="stat-detail">Now: instant AI response 24/7</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Extra Deals Closed</div>
+                <div class="stat-detail">In just the first 8 weeks</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">$10K+</div>
+                <div class="stat-label">Margin Per Deal</div>
+                <div class="stat-detail">Pure profit, same inventory</div>
+            </div>
+        </div>
+
+        <!-- Before / After -->
+        <div class="before-after fade-up">
+            <div class="ba-card ba-before">
+                <h3><i class="fa fa-times-circle"></i> Before</h3>
+                <ul>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> CRM capped at 98 records — couldn't add more without paying someone to do it manually</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> Outsourced answering service (Aspire) with 24+ hour response time</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> Both owners handling ALL lead triage by hand</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> "Never Neverland" — leads contacted once, then abandoned forever</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> No lead scoring — hot and cold leads treated the same</li>
+                </ul>
+            </div>
+            <div class="ba-arrow">&#10132;</div>
+            <div class="ba-card ba-after">
+                <h3><i class="fa fa-check-circle"></i> After</h3>
+                <ul>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Unlimited CRM with automatic lead capture from every channel</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Conversational AI agent — responds to every lead in under 60 seconds, 24/7</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Automated lead scoring: motivation, urgency, property type, qualification</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> 90-day nurture sequences re-engaging the 98% that used to disappear</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Multi-brand separation — clean pipeline, zero confusion</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Dan's Quote -->
+        <div class="quote-block fade-up">
+            <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
+            <div class="attribution">— Dan, Co-Owner, EZ Homes</div>
+        </div>
+
+        <!-- ROI Box -->
+        <div class="roi-box fade-up">
+            <h3>The Math That Made This a No-Brainer</h3>
+            <div class="roi-subtitle">Your own numbers told the story</div>
+            <div class="roi-math">
+                <div class="roi-step">
+                    <span class="number">3,528</span>
+                    <span class="label">Wasted leads per year at 98% loss rate</span>
+                </div>
+                <div class="roi-step">
+                    <span class="number">35</span>
+                    <span class="label">Additional deals if you recover just 1%</span>
+                </div>
+                <div class="roi-step">
+                    <span class="number">$350K+</span>
+                    <span class="label">Recovered revenue at $10K margin per deal</span>
+                </div>
+            </div>
+            <div class="roi-bottom">
+                Projected annual impact:
+                <span>$930,000 — $1,720,000</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- ============================================================
+     CTA
+     ============================================================ -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="fade-up">Ready to See What Else We Can Unlock?</h2>
+        <p class="cta-sub fade-up">
+            The lead recovery system is just the beginning. Let's talk about what Phase 2 looks like for EZ Homes.
+        </p>
+        <a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion" class="cta-btn fade-up">Book a Strategy Call</a>
+        <p class="cta-note fade-up">No pressure. Just numbers and a plan.</p>
+    </div>
+</section>
+
+<!-- ============================================================
+     CLONED FOOTER — matches original site
+     ============================================================ -->
+<footer class="footer">
+    <div class="container">
+        <div>
+            <span>Copyright &copy; <b>EZ Homes</b> 2016</span>
+        </div>
+        <div>
+            <a href="https://www.ezhomesfast.com/Sales/About/TermsOfUse">Terms of Use</a> &middot;
+            <a href="https://www.ezhomesfast.com/Sales/About/PrivacyPolicy">Privacy Policy</a>
+        </div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <ul class="social-buttons">
+                <li><a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a></li>
+            </ul>
+            <span><span class="fa fa-phone"></span> (248) 760-3841 &nbsp;|&nbsp; <span class="fa fa-phone"></span> (810) 614-9181</span>
+        </div>
+    </div>
+</footer>
+
+<!-- Scroll animation -->
+<script>
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
 </body>
 </html>
