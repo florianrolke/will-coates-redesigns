@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EZ Homes — What's Possible For Your Business</title>
+  <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: { DEFAULT: '#248ADE', light: '#50A2E5', dark: '#1a6cb8', surface: '#f0f7ff' },
+            midnight: { DEFAULT: '#0a192f', light: '#112240' }
+          },
+          fontFamily: {
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { -webkit-font-smoothing: antialiased; }
+
+    /* Scroll-triggered animations */
+    .reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+
+    /* Glow effects */
+    .glow-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(80,162,229,0.15); backdrop-filter: blur(10px); transition: all 0.3s; }
+    .glow-card:hover { border-color: rgba(80,162,229,0.4); box-shadow: 0 0 40px rgba(36,138,222,0.15); }
+
+    /* Calculator slider */
+    input[type="range"] { -webkit-appearance: none; background: transparent; cursor: pointer; }
+    input[type="range"]::-webkit-slider-track { height: 6px; border-radius: 3px; background: linear-gradient(90deg, #248ADE, #50A2E5); }
+    input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #fff; border: 3px solid #248ADE; margin-top: -8px; box-shadow: 0 2px 8px rgba(36,138,222,0.4); }
+
+    /* Competitor bar chart */
+    .bar-fill { height: 100%; border-radius: 4px; transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+
+    /* Pulse for CTA */
+    @keyframes pulse-ring { 0% { box-shadow: 0 0 0 0 rgba(36,138,222,0.5); } 70% { box-shadow: 0 0 0 15px rgba(36,138,222,0); } 100% { box-shadow: 0 0 0 0 rgba(36,138,222,0); } }
+    .pulse-cta { animation: pulse-ring 2s infinite; }
+
+    /* Counter animation */
+    .counter-value { font-variant-numeric: tabular-nums; }
+
+    /* Scroll indicator */
+    @keyframes bounce-down { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(8px); } }
+    .bounce-arrow { animation: bounce-down 2s infinite; }
+
+    /* Section divider wave */
+    .wave-divider { position: relative; overflow: hidden; line-height: 0; margin: -1px 0; }
+  </style>
+</head>
+<body class="bg-white text-gray-900 font-sans">
+
+  <!-- ============================================ -->
+  <!-- SECTION 1: Hero — Cloned Header + AI Video   -->
+  <!-- ============================================ -->
+  <header class="relative min-h-screen flex flex-col">
+    <!-- Nav bar (cloned from EZ Homes) -->
+    <nav class="relative z-30 bg-midnight/90 backdrop-blur-md border-b border-white/10">
+      <div class="max-w-7xl mx-auto px-6 py-3 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <img src="https://www.ezhomesfast.com/areas/sales/content/assets/img/EZHomes_Logo_color.png" alt="EZ Homes" class="h-10">
+        </div>
+        <div class="hidden md:flex items-center gap-6 text-sm text-white/70">
+          <span>(810) 614-9181</span>
+          <span>(248) 760-3841</span>
+          <span class="text-brand-light font-medium">Inventory Acquisition & Retention Specialists</span>
+        </div>
+      </div>
+    </nav>
+
+    <!-- AI Video Background -->
+    <div class="absolute inset-0 z-0">
+      <video autoplay loop muted playsinline
+        poster="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png"
+        src="hero.mp4"
+        class="w-full h-full object-cover">
+      </video>
+      <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(10,25,47,0.85) 0%, rgba(10,25,47,0.7) 40%, rgba(10,25,47,0.92) 100%);"></div>
+    </div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 flex-1 flex items-center">
+      <div class="max-w-7xl mx-auto px-6 w-full py-20">
+        <div class="max-w-3xl">
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-sm font-medium mb-8">
+            <span class="w-2 h-2 rounded-full bg-brand-light animate-pulse"></span>
+            Personalized Analysis for EZ Homes
+          </div>
+
+          <h1 class="text-5xl md:text-7xl font-black text-white leading-[1.05] tracking-tight mb-6">
+            What if your business<br>
+            <span class="bg-gradient-to-r from-brand-light to-blue-300 bg-clip-text text-transparent">had no ceiling?</span>
+          </h1>
+
+          <p class="text-xl text-white/70 leading-relaxed max-w-xl mb-10">
+            We analyzed EZ Homes' market position in Southeast Michigan's manufactured housing industry.
+            The data reveals something you might not expect.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="#calculator" class="inline-flex items-center gap-2 px-8 py-4 bg-brand text-white font-semibold rounded-lg shadow-lg shadow-brand/30 hover:bg-brand-dark hover:shadow-brand/50 transition-all pulse-cta">
+              See What's Possible
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+            </a>
+            <a href="#competitive" class="inline-flex items-center gap-2 px-8 py-4 border border-white/20 text-white/80 font-semibold rounded-lg hover:bg-white/5 transition-all">
+              View Market Analysis
+            </a>
+          </div>
+        </div>
+
+        <!-- Quick stats strip -->
+        <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl">
+          <div class="glow-card rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-white counter-value" data-target="17">0</div>
+            <div class="text-xs text-white/50 mt-1">% Michigan MH Growth YoY</div>
+          </div>
+          <div class="glow-card rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-white">$46K</div>
+            <div class="text-xs text-white/50 mt-1">Avg Pre-Owned Deal (MI)</div>
+          </div>
+          <div class="glow-card rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-white">A+</div>
+            <div class="text-xs text-white/50 mt-1">Your BBB Rating</div>
+          </div>
+          <div class="glow-card rounded-xl p-4 text-center">
+            <div class="text-3xl font-black text-white">2007</div>
+            <div class="text-xs text-white/50 mt-1">Years of Trust (Est.)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 bounce-arrow">
+      <svg class="w-6 h-6 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"/></svg>
+    </div>
+  </header>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: Competitive Intelligence / SEO    -->
+  <!-- ============================================ -->
+  <section id="competitive" class="bg-midnight py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-sm font-medium mb-6">
+          Market Intelligence
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+          This is the reality of how<br>
+          <span class="text-brand-light">your business competes.</span>
+        </h2>
+        <p class="text-lg text-white/60 max-w-2xl mb-16">No matter how you feel about what you do — this is where your digital assets stand against everyone else. And that's okay. It's just data.</p>
+      </div>
+
+      <!-- Competitive landscape -->
+      <div class="grid md:grid-cols-2 gap-8 mb-16">
+        <!-- Left: ranking bars -->
+        <div class="glow-card rounded-2xl p-8 reveal">
+          <h3 class="text-xl font-bold text-white mb-6">SE Michigan Manufactured Home Dealer Visibility</h3>
+          <div class="space-y-5">
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-white/80">Little Valley Homes</span><span class="text-brand-light font-mono">92/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-brand to-brand-light" data-width="92%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-white/80">Home Nation MI</span><span class="text-brand-light font-mono">84/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-brand to-brand-light" data-width="84%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-white/80">Michigan Home Zone</span><span class="text-brand-light font-mono">71/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-brand to-brand-light" data-width="71%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-white/80">Sun Communities</span><span class="text-brand-light font-mono">68/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-brand to-brand-light" data-width="68%"></div></div>
+            </div>
+            <div class="relative">
+              <div class="flex justify-between text-sm mb-1"><span class="text-white font-semibold">EZ Homes Fast</span><span class="text-yellow-400 font-mono font-bold">34/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-yellow-500 to-orange-400" data-width="34%"></div></div>
+              <div class="absolute -right-2 -top-1 px-2 py-0.5 bg-yellow-500/20 border border-yellow-500/40 rounded text-[10px] text-yellow-400 font-bold">YOU</div>
+            </div>
+            <div>
+              <div class="flex justify-between text-sm mb-1"><span class="text-white/80">Cedar Springs ME</span><span class="text-brand-light font-mono">28/100</span></div>
+              <div class="h-3 bg-white/5 rounded-full overflow-hidden"><div class="bar-fill bg-gradient-to-r from-brand to-brand-light" data-width="28%"></div></div>
+            </div>
+          </div>
+          <p class="text-xs text-white/30 mt-6">Visibility score based on estimated organic search presence, review volume, and digital footprint in SE Michigan.</p>
+        </div>
+
+        <!-- Right: key gaps -->
+        <div class="space-y-6 reveal reveal-delay-1">
+          <div class="glow-card rounded-2xl p-8">
+            <h3 class="text-xl font-bold text-white mb-4">Keyword Opportunity Gap</h3>
+            <div class="space-y-3">
+              <div class="flex items-center justify-between py-2 border-b border-white/5">
+                <span class="text-white/70 text-sm">"pre-owned manufactured homes michigan"</span>
+                <span class="text-red-400 text-xs font-mono">Not ranking</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-white/5">
+                <span class="text-white/70 text-sm">"buy mobile home michigan"</span>
+                <span class="text-yellow-400 text-xs font-mono">Page 3+</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-white/5">
+                <span class="text-white/70 text-sm">"sell my mobile home fast"</span>
+                <span class="text-yellow-400 text-xs font-mono">Page 2</span>
+              </div>
+              <div class="flex items-center justify-between py-2 border-b border-white/5">
+                <span class="text-white/70 text-sm">"used manufactured homes for sale"</span>
+                <span class="text-red-400 text-xs font-mono">Not ranking</span>
+              </div>
+              <div class="flex items-center justify-between py-2">
+                <span class="text-white/70 text-sm">"mobile home dealer auburn hills"</span>
+                <span class="text-green-400 text-xs font-mono">Top 10</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="glow-card rounded-2xl p-8">
+            <div class="flex items-start gap-4">
+              <div class="w-12 h-12 rounded-xl bg-brand/20 flex items-center justify-center shrink-0">
+                <svg class="w-6 h-6 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg>
+              </div>
+              <div>
+                <h4 class="text-white font-bold mb-1">The Growth Opportunity</h4>
+                <p class="text-white/60 text-sm leading-relaxed">Michigan manufactured housing is up 17% year-over-year. Your competitors are capturing this growth digitally. Your BBB A+ rating and 18 years of trust are not being leveraged online where 87% of home searches start.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- The reframe -->
+      <div class="reveal max-w-3xl mx-auto text-center">
+        <div class="glow-card rounded-2xl p-10">
+          <p class="text-white/80 text-lg leading-relaxed italic">
+            "Many dealers spend thousands on SEO agencies trying to fix their rankings. But here's what the top 5% know — when you transform the entire business system, SEO becomes a byproduct. Nobody at the top talks about SEO. It's a <span class="text-brand-light font-semibold">duh.</span>"
+          </p>
+          <div class="mt-4 text-white/40 text-sm">The question isn't how to fix your SEO. It's how to remove the ceiling entirely.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="wave-divider"><svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" style="display:block;width:100%"><path d="M0,30 C360,60 720,0 1080,30 C1260,45 1380,20 1440,30 L1440,60 L0,60 Z" fill="#f0f7ff"/></svg></div>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: Interactive Ceiling Calculator     -->
+  <!-- ============================================ -->
+  <section id="calculator" class="bg-brand-surface py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 text-brand text-sm font-medium mb-6">
+          Interactive Calculator
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-midnight tracking-tight mb-4">
+          What does the ceiling look like<br>
+          <span class="text-brand">for your business?</span>
+        </h2>
+        <p class="text-lg text-gray-500 max-w-2xl mx-auto">We've pre-filled these numbers based on industry averages for manufactured home dealers in SE Michigan. Adjust them to match your reality — and see what becomes possible.</p>
+      </div>
+
+      <div class="max-w-5xl mx-auto">
+        <div class="grid md:grid-cols-2 gap-10">
+          <!-- Left: Input sliders -->
+          <div class="space-y-8 reveal">
+            <div class="bg-white rounded-2xl shadow-lg shadow-brand/5 p-8">
+              <h3 class="text-lg font-bold text-midnight mb-6">Your Current Numbers</h3>
+
+              <!-- Leads per month -->
+              <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                  <label class="text-sm font-medium text-gray-700">Inbound Leads / Month</label>
+                  <span id="leads-value" class="text-sm font-mono font-bold text-brand">50</span>
+                </div>
+                <input type="range" id="leads-slider" min="10" max="500" value="50" class="w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>10</span><span>500</span></div>
+              </div>
+
+              <!-- Close rate -->
+              <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                  <label class="text-sm font-medium text-gray-700">Close Rate</label>
+                  <span id="close-value" class="text-sm font-mono font-bold text-brand">12%</span>
+                </div>
+                <input type="range" id="close-slider" min="1" max="50" value="12" class="w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>1%</span><span>50%</span></div>
+              </div>
+
+              <!-- Avg deal size -->
+              <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                  <label class="text-sm font-medium text-gray-700">Average Deal Profit</label>
+                  <span id="deal-value" class="text-sm font-mono font-bold text-brand">$12,000</span>
+                </div>
+                <input type="range" id="deal-slider" min="2000" max="50000" step="500" value="12000" class="w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>$2K</span><span>$50K</span></div>
+              </div>
+
+              <!-- Cost per acquisition -->
+              <div class="mb-6">
+                <div class="flex justify-between mb-2">
+                  <label class="text-sm font-medium text-gray-700">Cost Per Acquisition</label>
+                  <span id="cpa-value" class="text-sm font-mono font-bold text-brand">$800</span>
+                </div>
+                <input type="range" id="cpa-slider" min="0" max="5000" step="50" value="800" class="w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>$0</span><span>$5K</span></div>
+              </div>
+
+              <!-- People on team -->
+              <div>
+                <div class="flex justify-between mb-2">
+                  <label class="text-sm font-medium text-gray-700">People Handling Sales</label>
+                  <span id="team-value" class="text-sm font-mono font-bold text-brand">2</span>
+                </div>
+                <input type="range" id="team-slider" min="1" max="20" value="2" class="w-full">
+                <div class="flex justify-between text-xs text-gray-400 mt-1"><span>1</span><span>20</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Results -->
+          <div class="reveal reveal-delay-1">
+            <div class="bg-white rounded-2xl shadow-lg shadow-brand/5 p-8 mb-6">
+              <h3 class="text-lg font-bold text-midnight mb-6">Your Current Trajectory</h3>
+              <div class="space-y-4">
+                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                  <span class="text-gray-600">Deals Closed / Month</span>
+                  <span id="current-deals" class="text-2xl font-black text-midnight">6</span>
+                </div>
+                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                  <span class="text-gray-600">Monthly Gross Profit</span>
+                  <span id="current-revenue" class="text-2xl font-black text-midnight">$72,000</span>
+                </div>
+                <div class="flex justify-between items-center py-3 border-b border-gray-100">
+                  <span class="text-gray-600">Monthly Acquisition Cost</span>
+                  <span id="current-cost" class="text-2xl font-black text-red-500">-$4,800</span>
+                </div>
+                <div class="flex justify-between items-center py-3">
+                  <span class="text-gray-600 font-semibold">Annual Net Profit</span>
+                  <span id="current-annual" class="text-3xl font-black text-midnight">$806,400</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- The ceiling reveal -->
+            <div class="bg-gradient-to-br from-midnight to-midnight-light rounded-2xl p-8 relative overflow-hidden">
+              <div class="absolute top-0 right-0 w-32 h-32 bg-brand/10 rounded-full blur-3xl"></div>
+              <div class="relative">
+                <div class="text-brand-light text-sm font-semibold mb-2">WITH OPTIMIZED SYSTEMS</div>
+                <h4 class="text-white text-lg font-bold mb-4">What if we improved just 3 dials?</h4>
+                <div class="space-y-3 mb-6">
+                  <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center"><svg class="w-3 h-3 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                    <span class="text-white/70 text-sm">Leads: <span class="text-white font-semibold">2.5x</span> through automated acquisition funnels</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center"><svg class="w-3 h-3 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                    <span class="text-white/70 text-sm">Close rate: <span class="text-white font-semibold">+40%</span> with AI-powered lead triage</span>
+                  </div>
+                  <div class="flex items-center gap-3">
+                    <div class="w-6 h-6 rounded-full bg-brand/20 flex items-center justify-center"><svg class="w-3 h-3 text-brand-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"/></svg></div>
+                    <span class="text-white/70 text-sm">CPA: <span class="text-white font-semibold">-30%</span> by eliminating manual prospecting</span>
+                  </div>
+                </div>
+                <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+                  <div class="text-white/50 text-sm mb-1">Projected Annual Net Profit</div>
+                  <div id="projected-annual" class="text-4xl font-black text-brand-light">$2,419,200</div>
+                  <div class="mt-2 flex items-center gap-2">
+                    <span id="projected-multiplier" class="px-2 py-0.5 bg-green-500/20 text-green-400 text-sm font-bold rounded">3.0x</span>
+                    <span class="text-white/40 text-sm">your current trajectory</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- The reframe statement -->
+        <div class="reveal mt-12 text-center">
+          <div class="bg-white rounded-2xl shadow-lg shadow-brand/5 p-10 max-w-3xl mx-auto">
+            <p class="text-xl text-gray-700 leading-relaxed mb-3">
+              "That seems unrealistic."
+            </p>
+            <p class="text-gray-500 leading-relaxed">
+              Of course it does — because you're thinking in terms of <span class="font-semibold text-midnight">people.</span>
+              The people at the top of your industry aren't doing 3x the work. They have systems that do the work for them.
+              <span class="text-brand font-semibold">For the first time in history, those systems are accessible to businesses your size.</span>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 4: Personalized Projections           -->
+  <!-- ============================================ -->
+  <section id="projections" class="bg-midnight py-24">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="reveal text-center mb-16">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-brand/10 border border-brand/20 text-brand-light text-sm font-medium mb-6">
+          EZ Homes — Personalized Analysis
+        </div>
+        <h2 class="text-4xl md:text-5xl font-black text-white tracking-tight mb-4">
+          Here's what we believe is<br>
+          <span class="text-brand-light">possible for EZ Homes.</span>
+        </h2>
+        <p class="text-lg text-white/60 max-w-2xl mx-auto">Based on your industry, market position, and 18 years of operational history, here's what the data tells us about your business potential.</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6 mb-12 reveal">
+        <!-- Card 1 -->
+        <div class="glow-card rounded-2xl p-8">
+          <div class="w-12 h-12 rounded-xl bg-blue-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Lead Acquisition</h3>
+          <p class="text-white/50 text-sm mb-4">You get an estimated 30-80 inbound leads/month across MHVillage, BBB, web, and referrals. Top dealers in your market are pulling 200-400.</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-black text-brand-light">3-5x</span>
+            <span class="text-white/40 text-sm">lead volume opportunity</span>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="glow-card rounded-2xl p-8 reveal-delay-1">
+          <div class="w-12 h-12 rounded-xl bg-green-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Lead Processing</h3>
+          <p class="text-white/50 text-sm mb-4">With 2 people triaging leads manually, you hit a ceiling where you can't process more volume without hiring. AI triage changes that equation entirely.</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-black text-green-400">0</span>
+            <span class="text-white/40 text-sm">additional hires needed</span>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="glow-card rounded-2xl p-8 reveal-delay-2">
+          <div class="w-12 h-12 rounded-xl bg-purple-500/20 flex items-center justify-center mb-4">
+            <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-lg mb-2">Time Freedom</h3>
+          <p class="text-white/50 text-sm mb-4">How much of Dan's week is spent on lead triage, follow-ups, and inventory logistics that could be automated? Most dealers say 60-70%.</p>
+          <div class="flex items-baseline gap-2">
+            <span class="text-3xl font-black text-purple-400">25+</span>
+            <span class="text-white/40 text-sm">hours/week reclaimed</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- The dual-side opportunity -->
+      <div class="reveal glow-card rounded-2xl p-10 max-w-4xl mx-auto">
+        <h3 class="text-xl font-bold text-white mb-6 text-center">Your Unique Advantage: Two Revenue Engines</h3>
+        <div class="grid md:grid-cols-2 gap-8">
+          <div class="border-r border-white/10 pr-8">
+            <div class="text-brand-light font-mono text-sm mb-2">ENGINE 1 — ACQUISITION</div>
+            <h4 class="text-white font-bold mb-2">mhomebuyers.com</h4>
+            <p class="text-white/50 text-sm leading-relaxed">Automated seller lead funnels. AI-powered home valuation. Instant offer generation. Scale inventory acquisition across MI, OH, TX, FL without adding headcount.</p>
+          </div>
+          <div class="pl-8 md:pl-0 md:pl-8">
+            <div class="text-brand-light font-mono text-sm mb-2">ENGINE 2 — RETAIL</div>
+            <h4 class="text-white font-bold mb-2">ezhomesfast.com</h4>
+            <p class="text-white/50 text-sm leading-relaxed">SEO-optimized listings. AI lead triage and scoring. Automated follow-up sequences. Convert more of your 300+ monthly site visitors into qualified buyers.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================================ -->
+  <!-- SECTION 5: Soft CTA — The Invitation          -->
+  <!-- ============================================ -->
+  <section id="next" class="bg-white py-24">
+    <div class="max-w-4xl mx-auto px-6 text-center reveal">
+      <h2 class="text-4xl md:text-5xl font-black text-midnight tracking-tight mb-6">
+        What if this was<br>
+        <span class="text-brand">your new reality?</span>
+      </h2>
+      <p class="text-lg text-gray-500 max-w-2xl mx-auto mb-4">
+        Imagine waking up tomorrow and your lead pipeline runs itself.
+        Your inventory acquisition is automated. Your buyers are pre-qualified before they ever call.
+        And you have more time than you've ever had — without sacrificing a dollar of income.
+      </p>
+      <p class="text-gray-500 mb-2">
+        You'd probably say: <span class="italic">"Not with my situation."</span>
+      </p>
+      <p class="text-xl font-semibold text-midnight mb-10">
+        We'd say: <span class="text-brand">Let's see.</span>
+      </p>
+
+      <div class="bg-gradient-to-br from-midnight to-midnight-light rounded-2xl p-10 md:p-14 text-left relative overflow-hidden">
+        <div class="absolute -top-20 -right-20 w-64 h-64 bg-brand/10 rounded-full blur-3xl"></div>
+        <div class="absolute -bottom-20 -left-20 w-48 h-48 bg-brand/5 rounded-full blur-3xl"></div>
+        <div class="relative">
+          <div class="text-brand-light font-mono text-sm mb-4">NO OBLIGATION. NO PITCH. JUST DATA.</div>
+          <h3 class="text-3xl font-black text-white mb-4">See what's possible for EZ Homes.</h3>
+          <p class="text-white/60 leading-relaxed mb-8 max-w-xl">
+            We'll walk you through the numbers — your market, your competitors, your opportunities.
+            If the data says there's a path to 3-5x growth, we'll show you exactly what that looks like.
+            If it doesn't, you'll still walk away with the most comprehensive analysis of your business you've ever seen.
+          </p>
+
+          <div class="flex flex-wrap gap-4">
+            <a href="https://calendly.com" class="inline-flex items-center gap-2 px-8 py-4 bg-brand text-white font-bold rounded-lg shadow-lg shadow-brand/30 hover:bg-brand-dark transition-all pulse-cta text-lg">
+              Book a 15-Minute Discovery Call
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+            </a>
+          </div>
+
+          <div class="mt-6 flex items-center gap-6 text-white/40 text-sm">
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+              15 minutes
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+              Video call
+            </div>
+            <div class="flex items-center gap-2">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              Zero commitment
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Footer -->
+  <footer class="bg-midnight py-8 border-t border-white/5">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
+      <div class="text-white/30 text-sm">This analysis was prepared exclusively for EZ Homes LLC by Heroes Arc.</div>
+      <div class="text-white/30 text-sm">Data sources: Industry reports, public records, and AI-powered market analysis.</div>
+    </div>
+  </footer>
+
+
+  <!-- ============================================ -->
+  <!-- JavaScript: Calculator + Animations           -->
+  <!-- ============================================ -->
+  <script>
+    // Scroll reveal
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Bar chart animation
+    const barObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.querySelectorAll('.bar-fill').forEach(bar => {
+            bar.style.width = bar.dataset.width;
+          });
+          barObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.3 });
+    document.querySelectorAll('.glow-card').forEach(el => {
+      if (el.querySelector('.bar-fill')) barObserver.observe(el);
+    });
+
+    // Counter animation
+    function animateCounter(el, target) {
+      let current = 0;
+      const step = target / 40;
+      const timer = setInterval(() => {
+        current += step;
+        if (current >= target) { current = target; clearInterval(timer); }
+        el.textContent = Math.round(current);
+      }, 30);
+    }
+    const counterObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const target = parseInt(e.target.dataset.target);
+          if (target) animateCounter(e.target, target);
+          counterObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.5 });
+    document.querySelectorAll('.counter-value[data-target]').forEach(el => counterObserver.observe(el));
+
+    // Calculator logic
+    const sliders = {
+      leads: document.getElementById('leads-slider'),
+      close: document.getElementById('close-slider'),
+      deal: document.getElementById('deal-slider'),
+      cpa: document.getElementById('cpa-slider'),
+      team: document.getElementById('team-slider')
+    };
+
+    function fmt(n) { return '$' + n.toLocaleString('en-US'); }
+
+    function updateCalculator() {
+      const leads = parseInt(sliders.leads.value);
+      const closeRate = parseInt(sliders.close.value) / 100;
+      const dealProfit = parseInt(sliders.deal.value);
+      const cpa = parseInt(sliders.cpa.value);
+      const team = parseInt(sliders.team.value);
+
+      // Display values
+      document.getElementById('leads-value').textContent = leads;
+      document.getElementById('close-value').textContent = sliders.close.value + '%';
+      document.getElementById('deal-value').textContent = fmt(dealProfit);
+      document.getElementById('cpa-value').textContent = fmt(cpa);
+      document.getElementById('team-value').textContent = team;
+
+      // Current calculations
+      const dealsPerMonth = Math.round(leads * closeRate);
+      const monthlyRevenue = dealsPerMonth * dealProfit;
+      const monthlyCost = dealsPerMonth * cpa;
+      const annualNet = (monthlyRevenue - monthlyCost) * 12;
+
+      document.getElementById('current-deals').textContent = dealsPerMonth;
+      document.getElementById('current-revenue').textContent = fmt(monthlyRevenue);
+      document.getElementById('current-cost').textContent = '-' + fmt(monthlyCost);
+      document.getElementById('current-annual').textContent = fmt(annualNet);
+
+      // Projected (with 3 improvements)
+      const projLeads = Math.round(leads * 2.5);
+      const projCloseRate = Math.min(closeRate * 1.4, 0.6);
+      const projCPA = Math.round(cpa * 0.7);
+      const projDeals = Math.round(projLeads * projCloseRate);
+      const projMonthlyRevenue = projDeals * dealProfit;
+      const projMonthlyCost = projDeals * projCPA;
+      const projAnnual = (projMonthlyRevenue - projMonthlyCost) * 12;
+
+      document.getElementById('projected-annual').textContent = fmt(projAnnual);
+      const multiplier = annualNet > 0 ? (projAnnual / annualNet).toFixed(1) : '---';
+      document.getElementById('projected-multiplier').textContent = multiplier + 'x';
+    }
+
+    Object.values(sliders).forEach(s => s.addEventListener('input', updateCalculator));
+    updateCalculator();
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    });
+  </script>
+
+</body>
+</html>
