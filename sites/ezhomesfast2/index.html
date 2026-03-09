@@ -9,13 +9,13 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
         a { color: #50A2E5; text-decoration: none; }
         a:hover { color: #248ADE; }
         img { max-width: 100%; height: auto; }
-        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
 
-        /* NAV */
+        /* ── NAV ── */
         .navbar { background: #fff; border-bottom: 1px solid #e7e7e7; }
         .topbar-nav { background: #248ADE; color: #fff; font-size: 13px; padding: 6px 0; }
         .topbar-nav .container { display: flex; justify-content: space-between; align-items: center; }
@@ -27,145 +27,358 @@
         .nav-links li a { display: block; padding: 10px 14px; color: #555; font-size: 14px; transition: color 0.2s; }
         .nav-links li a:hover { color: #248ADE; }
 
-        /* HERO */
+        /* ── HERO ── */
         .hero-banner { text-align: center; padding: 40px 0 0; position: relative; }
         .hero-banner h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 25px; }
 
-        /* HERO-TO-CONTENT GRADIENT FADE — flows from hero bg into personalized sections */
+        /* ── HERO GRADIENT FADE ── */
         .hero-gradient {
             height: 120px;
-            background: linear-gradient(180deg, #fff 0%, rgba(36,138,222,0.06) 40%, rgba(36,138,222,0.12) 100%);
+            background: linear-gradient(180deg, #fff 0%, rgba(36,138,222,0.06) 40%, rgba(15,27,45,1) 100%);
             position: relative;
         }
-        .hero-gradient::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent 0%, rgba(36,138,222,0.15) 30%, rgba(36,138,222,0.15) 70%, transparent 100%);
+
+        /* ── SECTION SHARED ── */
+        section { padding: 90px 0; }
+        .section-label {
+            text-transform: uppercase; font-size: 11px; font-weight: 700;
+            letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px;
+        }
+        .section-accent {
+            width: 50px; height: 3px; background: #248ADE;
+            margin: 0 auto 20px; border-radius: 2px;
+        }
+        .section-title {
+            font-size: 38px; font-weight: 800; color: #1a1a2e;
+            margin-bottom: 16px; line-height: 1.2;
+        }
+        .section-sub {
+            font-size: 17px; color: #666; max-width: 640px;
+            margin: 0 auto 48px; line-height: 1.7;
         }
 
-        /* SECTION SHARED */
-        section { padding: 60px 0; }
-        .section-label { text-transform: uppercase; font-size: 12px; font-weight: 700; letter-spacing: 3px; color: #248ADE; margin-bottom: 10px; }
-        .section-title { font-size: 32px; font-weight: 800; color: #1a1a2e; margin-bottom: 14px; line-height: 1.25; }
-        .section-sub { font-size: 17px; color: #666; max-width: 640px; margin: 0 auto 40px; line-height: 1.6; }
+        /* Dark section variants */
+        .dark-section { background: #0f1b2d; }
+        .dark-section .section-label { color: #50A2E5; }
+        .dark-section .section-title { color: #fff; }
+        .dark-section .section-sub { color: rgba(255,255,255,0.6); }
 
-        /* S1: HOOK / TRANSITION */
-        .hook-section { background: rgba(36,138,222,0.12); padding: 50px 0 30px; text-align: center; }
-        .hook-line { font-size: 22px; font-weight: 300; color: #666; max-width: 720px; margin: 0 auto; line-height: 1.6; }
-        .hook-line strong { color: #248ADE; font-weight: 700; }
+        /* ── SVG WAVE DIVIDERS ── */
+        .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
+        .wave-divider svg { display: block; width: 100%; height: 70px; }
+        .wave-divider.flip { transform: rotate(180deg); }
 
-        /* S2: CASE STUDY STATS */
-        .case-study { background: linear-gradient(180deg, rgba(36,138,222,0.12) 0%, #f0f7ff 30%, #f0f7ff 100%); text-align: center; }
-        .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-bottom: 50px; }
-        .stat-card { background: #fff; border-radius: 12px; padding: 28px 16px; text-align: center; box-shadow: 0 2px 12px rgba(36,138,222,0.08); border: 1px solid rgba(36,138,222,0.1); transition: transform 0.25s; }
-        .stat-card:hover { transform: translateY(-4px); }
-        .stat-number { font-size: 38px; font-weight: 800; color: #248ADE; line-height: 1; margin-bottom: 6px; }
-        .stat-label { font-size: 12px; font-weight: 600; color: #555; text-transform: uppercase; letter-spacing: 0.5px; }
-        .stat-detail { font-size: 11px; color: #999; margin-top: 4px; }
+        /* ── S1: HOOK ── */
+        .hook-section {
+            background: #0f1b2d; padding: 70px 0 50px; text-align: center;
+        }
+        .hook-line {
+            font-size: 26px; font-weight: 300; color: rgba(255,255,255,0.85);
+            max-width: 740px; margin: 0 auto; line-height: 1.65;
+        }
+        .hook-line strong { color: #50A2E5; font-weight: 700; }
+
+        /* ── S2: CASE STUDY STATS ── */
+        .case-study { background: #fff; text-align: center; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin-bottom: 60px;
+        }
+        .stat-card {
+            background: transparent; border-radius: 16px; padding: 36px 20px;
+            text-align: center; border: 2px solid #e2eaf3;
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+        }
+        .stat-card:hover { border-color: #248ADE; transform: translateY(-6px); }
+        .stat-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 2px solid #248ADE; display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 18px;
+            color: #248ADE; font-size: 22px;
+        }
+        .stat-number {
+            font-size: 48px; font-weight: 800; color: #248ADE;
+            line-height: 1; margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 12px; font-weight: 700; color: #555;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .stat-detail { font-size: 13px; color: #999; margin-top: 6px; }
 
         /* BEFORE/AFTER */
-        .before-after { display: grid; grid-template-columns: 1fr 50px 1fr; align-items: stretch; margin-bottom: 50px; max-width: 880px; margin-left: auto; margin-right: auto; }
-        .ba-card { padding: 32px 28px; border-radius: 12px; }
-        .ba-before { background: #fff5f5; border: 1px solid #ffcccc; }
-        .ba-after { background: #f0fff4; border: 1px solid #b2f2bb; }
-        .ba-card h3 { font-size: 17px; font-weight: 700; margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
-        .ba-before h3 { color: #c53030; } .ba-after h3 { color: #2f855a; }
+        .before-after {
+            display: grid; grid-template-columns: 1fr 60px 1fr;
+            align-items: stretch; margin-bottom: 60px;
+            max-width: 920px; margin-left: auto; margin-right: auto;
+        }
+        .ba-card { padding: 36px 32px; border-radius: 16px; }
+        .ba-before { background: #fef7f7; border: 2px solid #fce4e4; }
+        .ba-after { background: #f0faf4; border: 2px solid #c6f0d5; }
+        .ba-card h3 {
+            font-size: 16px; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .ba-before h3 { color: #c53030; }
+        .ba-after h3 { color: #2f855a; }
         .ba-card ul { list-style: none; padding: 0; }
-        .ba-card li { font-size: 14px; padding: 7px 0; border-bottom: 1px solid rgba(0,0,0,0.06); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
+        .ba-card li {
+            font-size: 14px; padding: 9px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
+        }
         .ba-card li:last-child { border-bottom: none; }
-        .ba-before li .icon { color: #e53e3e; } .ba-after li .icon { color: #38a169; }
-        .ba-arrow { display: flex; align-items: center; justify-content: center; font-size: 26px; color: #248ADE; }
+        .ba-before li .icon { color: #e53e3e; font-size: 13px; margin-top: 3px; }
+        .ba-after li .icon { color: #38a169; font-size: 13px; margin-top: 3px; }
+        .ba-arrow { display: flex; align-items: center; justify-content: center; }
+        .ba-arrow-circle {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: #248ADE; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 20px;
+            box-shadow: 0 4px 16px rgba(36,138,222,0.3);
+        }
 
         /* QUOTE */
-        .quote-block { background: #fff; border-left: 4px solid #248ADE; padding: 24px 32px; border-radius: 0 12px 12px 0; max-width: 720px; margin: 0 auto 50px; box-shadow: 0 2px 10px rgba(0,0,0,0.04); }
-        .quote-block p { font-size: 17px; font-style: italic; color: #444; line-height: 1.7; margin-bottom: 10px; }
-        .quote-block .attribution { font-size: 13px; font-weight: 600; color: #248ADE; font-style: normal; }
+        .quote-block {
+            position: relative; max-width: 760px; margin: 0 auto 60px;
+            padding: 40px 48px 36px; text-align: center;
+        }
+        .quote-mark {
+            font-size: 120px; font-weight: 800; color: rgba(36,138,222,0.1);
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            line-height: 1; font-family: Georgia, serif; pointer-events: none;
+        }
+        .quote-block p {
+            font-size: 20px; font-style: italic; color: #444;
+            line-height: 1.7; margin-bottom: 16px; position: relative;
+        }
+        .quote-block .attribution {
+            font-size: 14px; font-weight: 700; color: #248ADE;
+            font-style: normal; letter-spacing: 0.5px;
+        }
 
-        /* S3: CEILING — "What's your ceiling?" */
-        .ceiling-section { background: #fff; text-align: center; }
-        .ceiling-intro { font-size: 18px; color: #555; max-width: 660px; margin: 0 auto 36px; line-height: 1.7; }
-        .ceiling-intro strong { color: #1a1a2e; }
+        /* ── S3: CEILING ── */
+        .ceiling-section { background: #0f1b2d; text-align: center; }
+        .ceiling-intro {
+            font-size: 19px; color: rgba(255,255,255,0.7); max-width: 720px;
+            margin: 0 auto 36px; line-height: 1.75;
+        }
+        .ceiling-intro strong { color: #fff; }
+        .ceiling-highlight {
+            display: inline-block; background: rgba(36,138,222,0.15);
+            border: 1px solid rgba(36,138,222,0.3); border-radius: 8px;
+            padding: 4px 14px; color: #50A2E5; font-weight: 700;
+        }
 
-        /* S4: CALCULATOR */
-        .calculator-section { background: #f7faff; text-align: center; }
-        .calc-box { background: #fff; border-radius: 16px; padding: 40px 36px; max-width: 700px; margin: 0 auto; box-shadow: 0 4px 24px rgba(36,138,222,0.1); border: 1px solid rgba(36,138,222,0.12); text-align: left; }
-        .calc-box h3 { font-size: 22px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; text-align: center; }
-        .calc-box .calc-subtitle { font-size: 14px; color: #888; text-align: center; margin-bottom: 28px; }
-        .calc-row { margin-bottom: 20px; }
-        .calc-row label { display: block; font-size: 13px; font-weight: 600; color: #555; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px; }
-        .calc-row .input-row { display: flex; align-items: center; gap: 12px; }
-        .calc-row input[type="range"] { flex: 1; accent-color: #248ADE; height: 6px; }
-        .calc-row .val { min-width: 80px; font-size: 18px; font-weight: 700; color: #248ADE; text-align: right; }
-        .calc-divider { border: none; border-top: 1px dashed #ddd; margin: 28px 0; }
-        .calc-result { background: linear-gradient(135deg, #248ADE 0%, #1a6cb3 100%); border-radius: 12px; padding: 28px 24px; color: #fff; text-align: center; }
-        .calc-result .result-label { font-size: 13px; opacity: 0.8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 1px; }
-        .calc-result .result-number { font-size: 40px; font-weight: 800; }
-        .calc-result .result-sub { font-size: 14px; opacity: 0.75; margin-top: 6px; }
-        .calc-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
-        .calc-results-grid .mini-result { background: rgba(255,255,255,0.12); border-radius: 8px; padding: 16px; }
-        .calc-results-grid .mini-number { font-size: 24px; font-weight: 800; }
-        .calc-results-grid .mini-label { font-size: 12px; opacity: 0.8; }
-        .calc-note { font-size: 12px; color: #999; text-align: center; margin-top: 16px; }
+        /* ── S4: CALCULATOR ── */
+        .calculator-section { background: #f8fafc; text-align: center; }
+        .calc-box {
+            background: #fff; border-radius: 20px; padding: 48px 44px;
+            max-width: 720px; margin: 0 auto;
+            border: 2px solid #e8eef5; text-align: left;
+        }
+        .calc-box h3 {
+            font-size: 24px; font-weight: 800; color: #1a1a2e;
+            margin-bottom: 6px; text-align: center;
+        }
+        .calc-box .calc-subtitle {
+            font-size: 14px; color: #888; text-align: center; margin-bottom: 32px;
+        }
+        .calc-row { margin-bottom: 24px; }
+        .calc-row label {
+            display: block; font-size: 12px; font-weight: 700; color: #555;
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .calc-row .input-row { display: flex; align-items: center; gap: 16px; }
+        .calc-row input[type="range"] {
+            flex: 1; accent-color: #248ADE; height: 8px;
+            -webkit-appearance: none; appearance: none;
+            background: #e2eaf3; border-radius: 4px; outline: none;
+        }
+        .calc-row input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: #248ADE; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
+        }
+        .calc-row input[type="range"]::-moz-range-thumb {
+            width: 22px; height: 22px; border-radius: 50%; border: none;
+            background: #248ADE; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
+        }
+        .calc-row .val {
+            min-width: 90px; font-size: 20px; font-weight: 800;
+            color: #248ADE; text-align: right;
+        }
+        .calc-divider { border: none; border-top: 2px dashed #e2eaf3; margin: 32px 0; }
+        .calc-result {
+            background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%);
+            border-radius: 16px; padding: 32px 28px; color: #fff; text-align: center;
+            box-shadow: 0 8px 32px rgba(36,138,222,0.25);
+        }
+        .calc-result .result-label {
+            font-size: 12px; opacity: 0.8; margin-bottom: 6px;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .calc-result .result-number { font-size: 44px; font-weight: 800; }
+        .calc-result .result-sub { font-size: 14px; opacity: 0.75; margin-top: 8px; }
+        .calc-results-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
+        }
+        .calc-results-grid .mini-result {
+            background: rgba(255,255,255,0.12); border-radius: 12px; padding: 18px;
+        }
+        .calc-results-grid .mini-number { font-size: 26px; font-weight: 800; }
+        .calc-results-grid .mini-label { font-size: 11px; opacity: 0.8; letter-spacing: 0.5px; }
+        .calc-note { font-size: 12px; color: #aaa; text-align: center; margin-top: 18px; }
 
-        /* S5: NEW VEHICLE (Expert Secrets) */
+        /* ── S5: NEW VEHICLE ── */
         .vehicle-section { background: #fff; text-align: center; }
-        .vehicle-grid { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: center; max-width: 800px; margin: 0 auto 40px; gap: 0; }
-        .vehicle-card { padding: 28px 24px; border-radius: 12px; text-align: center; }
-        .vehicle-old { background: #f9f9f9; border: 1px solid #e0e0e0; }
-        .vehicle-new { background: #eef6ff; border: 1px solid #c4ddf6; }
-        .vehicle-card h4 { font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px; }
+        .vehicle-grid {
+            display: grid; grid-template-columns: 1fr 60px 1fr;
+            align-items: stretch; max-width: 860px; margin: 0 auto 48px; gap: 0;
+        }
+        .vehicle-card { padding: 36px 28px; border-radius: 16px; text-align: center; }
+        .vehicle-old {
+            background: #f9fafb; border: 2px solid #e5e7eb;
+            border-top: 4px solid #e5a8a8;
+        }
+        .vehicle-new {
+            background: #eef6ff; border: 2px solid #c4ddf6;
+            border-top: 4px solid #248ADE;
+            box-shadow: 0 4px 20px rgba(36,138,222,0.1);
+        }
+        .vehicle-card h4 {
+            font-size: 13px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 16px;
+        }
         .vehicle-old h4 { color: #999; }
         .vehicle-new h4 { color: #248ADE; }
         .vehicle-card ul { list-style: none; text-align: left; padding: 0; }
-        .vehicle-card li { font-size: 14px; padding: 6px 0; color: #555; display: flex; gap: 8px; }
-        .vehicle-arrow { font-size: 28px; color: #248ADE; text-align: center; }
-        .vehicle-punchline { font-size: 20px; font-weight: 300; color: #555; max-width: 600px; margin: 0 auto 16px; line-height: 1.6; }
+        .vehicle-card li {
+            font-size: 14px; padding: 8px 0; color: #555;
+            display: flex; gap: 10px; line-height: 1.5;
+        }
+        .vehicle-arrow { display: flex; align-items: center; justify-content: center; }
+        .vehicle-arrow-icon {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #248ADE; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 18px;
+            box-shadow: 0 4px 16px rgba(36,138,222,0.3);
+        }
+        .vehicle-punchline {
+            font-size: 21px; font-weight: 300; color: #555;
+            max-width: 620px; margin: 0 auto 16px; line-height: 1.65;
+        }
         .vehicle-punchline strong { color: #248ADE; font-weight: 700; }
 
-        /* S6: SEO PREVIEW */
-        .seo-section { background: #f7faff; text-align: center; }
-        .seo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; max-width: 800px; margin: 0 auto 40px; }
-        .seo-card { background: #fff; border-radius: 12px; padding: 24px 20px; border: 1px solid #e8eef5; text-align: left; }
-        .seo-card h4 { font-size: 15px; font-weight: 700; color: #1a1a2e; margin-bottom: 10px; display: flex; align-items: center; gap: 8px; }
-        .seo-card h4 .fa { color: #248ADE; }
-        .seo-card .seo-metric { font-size: 28px; font-weight: 800; color: #248ADE; margin-bottom: 4px; }
-        .seo-card .seo-desc { font-size: 13px; color: #777; line-height: 1.5; }
-        .seo-note { font-size: 14px; color: #888; max-width: 600px; margin: 0 auto; line-height: 1.6; }
+        /* ── S6: SEO PREVIEW ── */
+        .seo-section { background: #0f1b2d; text-align: center; }
+        .seo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+            max-width: 860px; margin: 0 auto 48px;
+        }
+        .seo-card {
+            background: #162440; border-radius: 16px; padding: 32px 24px;
+            border-top: 3px solid #248ADE; text-align: left;
+        }
+        .seo-card h4 {
+            font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9);
+            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+        }
+        .seo-card h4 .fa { color: #50A2E5; font-size: 16px; }
+        .seo-card .seo-metric {
+            font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 8px;
+        }
+        .seo-card .seo-desc {
+            font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
+        }
+        .seo-note {
+            font-size: 14px; color: rgba(255,255,255,0.45);
+            max-width: 600px; margin: 0 auto; line-height: 1.7;
+        }
 
-        /* CTA */
-        .cta-section { background: #fff; text-align: center; padding: 70px 0; }
-        .cta-section h2 { font-size: 28px; font-weight: 800; color: #1a1a2e; margin-bottom: 14px; }
-        .cta-sub { font-size: 17px; color: #666; margin-bottom: 30px; max-width: 540px; margin-left: auto; margin-right: auto; }
-        .cta-btn { display: inline-block; background: #248ADE; color: #fff; padding: 16px 40px; border-radius: 8px; font-size: 17px; font-weight: 700; transition: background 0.2s, transform 0.2s; box-shadow: 0 4px 16px rgba(36,138,222,0.3); }
-        .cta-btn:hover { background: #1a6cb3; transform: translateY(-2px); color: #fff; }
-        .cta-note { font-size: 13px; color: #999; margin-top: 14px; }
+        /* ── CTA ── */
+        .cta-section {
+            background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%);
+            text-align: center; padding: 90px 0; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            font-size: 34px; font-weight: 800; color: #fff;
+            margin-bottom: 16px; position: relative;
+        }
+        .cta-sub {
+            font-size: 18px; color: rgba(255,255,255,0.8);
+            margin-bottom: 36px; max-width: 540px;
+            margin-left: auto; margin-right: auto; line-height: 1.6;
+            position: relative;
+        }
+        .cta-btn {
+            display: inline-block; background: #fff; color: #248ADE;
+            padding: 18px 48px; border-radius: 8px; font-size: 17px; font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
+            letter-spacing: 0.3px;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); color: #1a5fa8; }
+        .cta-note {
+            font-size: 13px; color: rgba(255,255,255,0.55);
+            margin-top: 16px; position: relative;
+        }
 
-        /* FOOTER */
-        .footer { background: #222; color: #999; padding: 28px 0; font-size: 13px; }
-        .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer a { color: #aaa; font-size: 12px; } .footer a:hover { color: #fff; }
+        /* ── FOOTER ── */
+        .footer {
+            background: #0a0e17; color: rgba(255,255,255,0.4); padding: 36px 0;
+            font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer .container {
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+        .footer a { color: rgba(255,255,255,0.4); font-size: 12px; }
+        .footer a:hover { color: #fff; }
         .footer .social-buttons { list-style: none; display: flex; gap: 10px; padding: 0; }
-        .footer .social-buttons a { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; background: #333; border-radius: 50%; color: #aaa; font-size: 15px; transition: background 0.2s; }
+        .footer .social-buttons a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; background: rgba(255,255,255,0.06);
+            border-radius: 50%; color: rgba(255,255,255,0.4);
+            font-size: 15px; transition: background 0.2s, color 0.2s;
+        }
         .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
 
-        /* RESPONSIVE */
+        /* ── RESPONSIVE ── */
         @media (max-width: 768px) {
+            section { padding: 60px 0; }
+            .section-title { font-size: 28px; }
             .stats-grid { grid-template-columns: repeat(2, 1fr); }
-            .before-after, .vehicle-grid { grid-template-columns: 1fr; gap: 12px; }
-            .ba-arrow, .vehicle-arrow { transform: rotate(90deg); }
+            .before-after, .vehicle-grid { grid-template-columns: 1fr; gap: 16px; }
+            .ba-arrow, .vehicle-arrow { padding: 8px 0; }
+            .ba-arrow-circle, .vehicle-arrow-icon { transform: rotate(90deg); }
             .seo-grid { grid-template-columns: 1fr; }
             .calc-results-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .hero-banner h2 { font-size: 24px; }
-            .section-title { font-size: 26px; }
+            .hook-line { font-size: 20px; }
+            .stat-number { font-size: 36px; }
+            .calc-box { padding: 32px 20px; }
+            .quote-block { padding: 32px 24px; }
+            .quote-block p { font-size: 17px; }
+            .cta-section h2 { font-size: 26px; }
         }
 
-        /* ANIM */
-        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+        /* ── ANIMATION ── */
+        .fade-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
@@ -214,30 +427,42 @@
     </div>
 </section>
 
+<!-- Wave: dark → white -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#ffffff"/>
+    </svg>
+</div>
+
 <!-- ======== S2: CASE STUDY RESULTS ======== -->
 <section class="case-study">
     <div class="container">
         <div class="section-label fade-up">Results From Our Partnership</div>
+        <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">Here's What Changed in the First 8 Weeks</h2>
         <p class="section-sub fade-up">3,600 leads a year. A 2% close rate. Thousands of buyers slipping through the cracks. Here's what we fixed.</p>
 
         <div class="stats-grid fade-up">
             <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
                 <div class="stat-number">3,528</div>
                 <div class="stat-label">Lost Leads / Year</div>
                 <div class="stat-detail">98% of pipeline — now recovered</div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-clock-o"></i></div>
                 <div class="stat-number">24h+</div>
                 <div class="stat-label">Old Response Time</div>
                 <div class="stat-detail">Now: instant AI, 24/7</div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-handshake-o"></i></div>
                 <div class="stat-number">+2</div>
                 <div class="stat-label">Extra Deals Closed</div>
                 <div class="stat-detail">First 8 weeks alone</div>
             </div>
             <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-dollar"></i></div>
                 <div class="stat-number">$10K+</div>
                 <div class="stat-label">Margin / Deal</div>
                 <div class="stat-detail">Pure profit, same inventory</div>
@@ -255,7 +480,9 @@
                     <li><span class="icon"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
                 </ul>
             </div>
-            <div class="ba-arrow">&#10132;</div>
+            <div class="ba-arrow">
+                <div class="ba-arrow-circle"><i class="fa fa-arrow-right"></i></div>
+            </div>
             <div class="ba-card ba-after">
                 <h3><i class="fa fa-check-circle"></i> After</h3>
                 <ul>
@@ -269,20 +496,29 @@
         </div>
 
         <div class="quote-block fade-up">
+            <div class="quote-mark">"</div>
             <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
             <div class="attribution">— Dan, Co-Owner, EZ Homes</div>
         </div>
     </div>
 </section>
 
+<!-- Wave: white → dark -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#0f1b2d"/>
+    </svg>
+</div>
+
 <!-- ======== S3: WHAT'S YOUR CEILING? ======== -->
-<section class="ceiling-section">
+<section class="ceiling-section dark-section">
     <div class="container">
         <div class="section-label fade-up">Let's Talk About Your Ceiling</div>
+        <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">What's the Most You Can Make in This Business?</h2>
         <p class="ceiling-intro fade-up">
             Most manufactured home dealers we've spoken to believe their ceiling is somewhere around <strong>$700K — $1.2M in annual revenue</strong>.
-            The top 5% are doing <strong>$3M — $8M+</strong>. The difference isn't more trucks or more people.
+            The top 5% are doing <span class="ceiling-highlight">$3M — $8M+</span>. The difference isn't more trucks or more people.
             It's <strong>how many of their leads actually turn into deals</strong>.
         </p>
         <p class="ceiling-intro fade-up" style="margin-bottom: 0;">
@@ -292,10 +528,18 @@
     </div>
 </section>
 
+<!-- Wave: dark → light -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#f8fafc"/>
+    </svg>
+</div>
+
 <!-- ======== S4: INTERACTIVE CALCULATOR ======== -->
 <section class="calculator-section">
     <div class="container">
         <div class="section-label fade-up">Your Numbers, Your Opportunity</div>
+        <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">See What's Possible — Adjust the Sliders</h2>
         <p class="section-sub fade-up">These are pre-filled with industry averages for manufactured home dealers. Adjust them to match your business.</p>
 
@@ -354,10 +598,18 @@
     </div>
 </section>
 
+<!-- Wave: light → white -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#ffffff"/>
+    </svg>
+</div>
+
 <!-- ======== S5: NEW VEHICLE (Expert Secrets Framework) ======== -->
 <section class="vehicle-section">
     <div class="container">
         <div class="section-label fade-up">A Different Way to Get There</div>
+        <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">You Don't Need More Leads. You Need a New Vehicle.</h2>
         <p class="section-sub fade-up">
             For years, the playbook has been the same: more marketing spend, more people, more hours.
@@ -375,7 +627,9 @@
                     <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Lose 98% of leads anyway</li>
                 </ul>
             </div>
-            <div class="vehicle-arrow">&#10132;</div>
+            <div class="vehicle-arrow">
+                <div class="vehicle-arrow-icon"><i class="fa fa-arrow-right"></i></div>
+            </div>
             <div class="vehicle-card vehicle-new">
                 <h4>The new vehicle</h4>
                 <ul>
@@ -395,10 +649,18 @@
     </div>
 </section>
 
+<!-- Wave: white → dark -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#0f1b2d"/>
+    </svg>
+</div>
+
 <!-- ======== S6: SEO / COMPETITIVE PREVIEW ======== -->
-<section class="seo-section">
+<section class="seo-section dark-section">
     <div class="container">
         <div class="section-label fade-up">Your Online Presence — A Snapshot</div>
+        <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">Here's How You Compare to the Market</h2>
         <p class="section-sub fade-up">This isn't about SEO. It's about how your digital assets stack up against everyone else — regardless of how you feel about it.</p>
 
@@ -426,6 +688,13 @@
         </p>
     </div>
 </section>
+
+<!-- Wave: dark → gradient -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#248ADE"/>
+    </svg>
+</div>
 
 <!-- ======== CTA ======== -->
 <section class="cta-section">
