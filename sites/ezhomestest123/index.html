@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZ Homes — What's Really Possible For Your Business?</title>
+    <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        a { color: #50A2E5; text-decoration: none; }
+        a:hover { color: #248ADE; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* ── NAV ── */
+        .navbar { background: #fff; border-bottom: 1px solid #e7e7e7; }
+        .topbar-nav { background: #248ADE; color: #fff; font-size: 13px; padding: 6px 0; }
+        .topbar-nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .topbar-nav ul { list-style: none; display: flex; gap: 20px; }
+        .topbar-nav .fa-phone { margin-right: 4px; }
+        .navbar-main { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+        .img-logo { max-height: 50px; }
+        .nav-links { list-style: none; display: flex; gap: 0; }
+        .nav-links li a { display: block; padding: 10px 14px; color: #555; font-size: 14px; transition: color 0.2s; }
+        .nav-links li a:hover { color: #248ADE; }
+
+        /* ── HERO ── */
+        .hero-banner { text-align: center; padding: 40px 0 0; position: relative; }
+        .hero-banner h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 25px; }
+
+        /* ── HERO GRADIENT FADE ── */
+        .hero-gradient {
+            height: 120px;
+            background: linear-gradient(180deg, #fff 0%, rgba(36,138,222,0.06) 40%, rgba(15,27,45,1) 100%);
+            position: relative;
+        }
+
+        /* ── SECTION SHARED ── */
+        section { padding: 90px 0; }
+        .section-label {
+            text-transform: uppercase; font-size: 11px; font-weight: 700;
+            letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px;
+        }
+        .section-accent {
+            width: 50px; height: 3px; background: #248ADE;
+            margin: 0 auto 20px; border-radius: 2px;
+        }
+        .section-title {
+            font-size: 38px; font-weight: 800; color: #1a1a2e;
+            margin-bottom: 16px; line-height: 1.2;
+        }
+        .section-sub {
+            font-size: 17px; color: #666; max-width: 640px;
+            margin: 0 auto 48px; line-height: 1.7;
+        }
+
+        /* Dark section variants */
+        .dark-section { background: #0f1b2d; }
+        .dark-section .section-label { color: #50A2E5; }
+        .dark-section .section-title { color: #fff; }
+        .dark-section .section-sub { color: rgba(255,255,255,0.6); }
+
+        /* ── SVG WAVE DIVIDERS ── */
+        .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
+        .wave-divider svg { display: block; width: 100%; height: 70px; }
+        .wave-divider.flip { transform: rotate(180deg); }
+
+        /* ── S1: HOOK ── */
+        .hook-section {
+            background: #0f1b2d; padding: 70px 0 50px; text-align: center;
+        }
+        .hook-line {
+            font-size: 26px; font-weight: 300; color: rgba(255,255,255,0.85);
+            max-width: 740px; margin: 0 auto; line-height: 1.65;
+        }
+        .hook-line strong { color: #50A2E5; font-weight: 700; }
+
+        /* ── S2: CASE STUDY STATS ── */
+        .case-study { background: #fff; text-align: center; }
+        .stats-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr);
+            gap: 24px; margin-bottom: 60px;
+        }
+        .stat-card {
+            background: transparent; border-radius: 16px; padding: 36px 20px;
+            text-align: center; border: 2px solid #e2eaf3;
+            transition: border-color 0.3s, transform 0.3s;
+            position: relative;
+        }
+        .stat-card:hover { border-color: #248ADE; transform: translateY(-6px); }
+        .stat-icon {
+            width: 56px; height: 56px; border-radius: 50%;
+            border: 2px solid #248ADE; display: flex; align-items: center;
+            justify-content: center; margin: 0 auto 18px;
+            color: #248ADE; font-size: 22px;
+        }
+        .stat-number {
+            font-size: 48px; font-weight: 800; color: #248ADE;
+            line-height: 1; margin-bottom: 8px;
+        }
+        .stat-label {
+            font-size: 12px; font-weight: 700; color: #555;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .stat-detail { font-size: 13px; color: #999; margin-top: 6px; }
+
+        /* BEFORE/AFTER */
+        .before-after {
+            display: grid; grid-template-columns: 1fr 60px 1fr;
+            align-items: stretch; margin-bottom: 60px;
+            max-width: 920px; margin-left: auto; margin-right: auto;
+        }
+        .ba-card { padding: 36px 32px; border-radius: 16px; }
+        .ba-before { background: #fef7f7; border: 2px solid #fce4e4; }
+        .ba-after { background: #f0faf4; border: 2px solid #c6f0d5; }
+        .ba-card h3 {
+            font-size: 16px; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
+            text-transform: uppercase; letter-spacing: 1px;
+        }
+        .ba-before h3 { color: #c53030; }
+        .ba-after h3 { color: #2f855a; }
+        .ba-card ul { list-style: none; padding: 0; }
+        .ba-card li {
+            font-size: 14px; padding: 9px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            display: flex; align-items: flex-start; gap: 10px; line-height: 1.55;
+        }
+        .ba-card li:last-child { border-bottom: none; }
+        .ba-before li .icon { color: #e53e3e; font-size: 13px; margin-top: 3px; }
+        .ba-after li .icon { color: #38a169; font-size: 13px; margin-top: 3px; }
+        .ba-arrow { display: flex; align-items: center; justify-content: center; }
+        .ba-arrow-circle {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: #248ADE; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 20px;
+            box-shadow: 0 4px 16px rgba(36,138,222,0.3);
+        }
+
+        /* QUOTE */
+        .quote-block {
+            position: relative; max-width: 760px; margin: 0 auto 60px;
+            padding: 40px 48px 36px; text-align: center;
+        }
+        .quote-mark {
+            font-size: 120px; font-weight: 800; color: rgba(36,138,222,0.1);
+            position: absolute; top: -20px; left: 50%; transform: translateX(-50%);
+            line-height: 1; font-family: Georgia, serif; pointer-events: none;
+        }
+        .quote-block p {
+            font-size: 20px; font-style: italic; color: #444;
+            line-height: 1.7; margin-bottom: 16px; position: relative;
+        }
+        .quote-block .attribution {
+            font-size: 14px; font-weight: 700; color: #248ADE;
+            font-style: normal; letter-spacing: 0.5px;
+        }
+
+        /* ── S3: CEILING ── */
+        .ceiling-section { background: #0f1b2d; text-align: center; }
+        .ceiling-intro {
+            font-size: 19px; color: rgba(255,255,255,0.7); max-width: 720px;
+            margin: 0 auto 36px; line-height: 1.75;
+        }
+        .ceiling-intro strong { color: #fff; }
+        .ceiling-highlight {
+            display: inline-block; background: rgba(36,138,222,0.15);
+            border: 1px solid rgba(36,138,222,0.3); border-radius: 8px;
+            padding: 4px 14px; color: #50A2E5; font-weight: 700;
+        }
+
+        /* ── S4: CALCULATOR ── */
+        .calculator-section { background: #f8fafc; text-align: center; }
+        .calc-box {
+            background: #fff; border-radius: 20px; padding: 48px 44px;
+            max-width: 720px; margin: 0 auto;
+            border: 2px solid #e8eef5; text-align: left;
+        }
+        .calc-box h3 {
+            font-size: 24px; font-weight: 800; color: #1a1a2e;
+            margin-bottom: 6px; text-align: center;
+        }
+        .calc-box .calc-subtitle {
+            font-size: 14px; color: #888; text-align: center; margin-bottom: 32px;
+        }
+        .calc-row { margin-bottom: 24px; }
+        .calc-row label {
+            display: block; font-size: 12px; font-weight: 700; color: #555;
+            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+        }
+        .calc-row .input-row { display: flex; align-items: center; gap: 16px; }
+        .calc-row input[type="range"] {
+            flex: 1; accent-color: #248ADE; height: 8px;
+            -webkit-appearance: none; appearance: none;
+            background: #e2eaf3; border-radius: 4px; outline: none;
+        }
+        .calc-row input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 22px; height: 22px; border-radius: 50%;
+            background: #248ADE; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
+        }
+        .calc-row input[type="range"]::-moz-range-thumb {
+            width: 22px; height: 22px; border-radius: 50%; border: none;
+            background: #248ADE; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
+        }
+        .calc-row .val {
+            min-width: 90px; font-size: 20px; font-weight: 800;
+            color: #248ADE; text-align: right;
+        }
+        .calc-divider { border: none; border-top: 2px dashed #e2eaf3; margin: 32px 0; }
+        .calc-result {
+            background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%);
+            border-radius: 16px; padding: 32px 28px; color: #fff; text-align: center;
+            box-shadow: 0 8px 32px rgba(36,138,222,0.25);
+        }
+        .calc-result .result-label {
+            font-size: 12px; opacity: 0.8; margin-bottom: 6px;
+            text-transform: uppercase; letter-spacing: 2px;
+        }
+        .calc-result .result-number { font-size: 44px; font-weight: 800; }
+        .calc-result .result-sub { font-size: 14px; opacity: 0.75; margin-top: 8px; }
+        .calc-results-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px;
+        }
+        .calc-results-grid .mini-result {
+            background: rgba(255,255,255,0.12); border-radius: 12px; padding: 18px;
+        }
+        .calc-results-grid .mini-number { font-size: 26px; font-weight: 800; }
+        .calc-results-grid .mini-label { font-size: 11px; opacity: 0.8; letter-spacing: 0.5px; }
+        .calc-note { font-size: 12px; color: #aaa; text-align: center; margin-top: 18px; }
+
+        /* ── S5: NEW VEHICLE ── */
+        .vehicle-section { background: #fff; text-align: center; }
+        .vehicle-grid {
+            display: grid; grid-template-columns: 1fr 60px 1fr;
+            align-items: stretch; max-width: 860px; margin: 0 auto 48px; gap: 0;
+        }
+        .vehicle-card { padding: 36px 28px; border-radius: 16px; text-align: center; }
+        .vehicle-old {
+            background: #f9fafb; border: 2px solid #e5e7eb;
+            border-top: 4px solid #e5a8a8;
+        }
+        .vehicle-new {
+            background: #eef6ff; border: 2px solid #c4ddf6;
+            border-top: 4px solid #248ADE;
+            box-shadow: 0 4px 20px rgba(36,138,222,0.1);
+        }
+        .vehicle-card h4 {
+            font-size: 13px; font-weight: 800; text-transform: uppercase;
+            letter-spacing: 2px; margin-bottom: 16px;
+        }
+        .vehicle-old h4 { color: #999; }
+        .vehicle-new h4 { color: #248ADE; }
+        .vehicle-card ul { list-style: none; text-align: left; padding: 0; }
+        .vehicle-card li {
+            font-size: 14px; padding: 8px 0; color: #555;
+            display: flex; gap: 10px; line-height: 1.5;
+        }
+        .vehicle-arrow { display: flex; align-items: center; justify-content: center; }
+        .vehicle-arrow-icon {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #248ADE; display: flex; align-items: center;
+            justify-content: center; color: #fff; font-size: 18px;
+            box-shadow: 0 4px 16px rgba(36,138,222,0.3);
+        }
+        .vehicle-punchline {
+            font-size: 21px; font-weight: 300; color: #555;
+            max-width: 620px; margin: 0 auto 16px; line-height: 1.65;
+        }
+        .vehicle-punchline strong { color: #248ADE; font-weight: 700; }
+
+        /* ── S6: SEO PREVIEW ── */
+        .seo-section { background: #0f1b2d; text-align: center; }
+        .seo-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+            max-width: 860px; margin: 0 auto 48px;
+        }
+        .seo-card {
+            background: #162440; border-radius: 16px; padding: 32px 24px;
+            border-top: 3px solid #248ADE; text-align: left;
+        }
+        .seo-card h4 {
+            font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.9);
+            margin-bottom: 14px; display: flex; align-items: center; gap: 10px;
+        }
+        .seo-card h4 .fa { color: #50A2E5; font-size: 16px; }
+        .seo-card .seo-metric {
+            font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 8px;
+        }
+        .seo-card .seo-desc {
+            font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
+        }
+        .seo-note {
+            font-size: 14px; color: rgba(255,255,255,0.45);
+            max-width: 600px; margin: 0 auto; line-height: 1.7;
+        }
+
+        /* ── CTA ── */
+        .cta-section {
+            background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%);
+            text-align: center; padding: 90px 0; position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; top: -50%; left: -50%;
+            width: 200%; height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        .cta-section h2 {
+            font-size: 34px; font-weight: 800; color: #fff;
+            margin-bottom: 16px; position: relative;
+        }
+        .cta-sub {
+            font-size: 18px; color: rgba(255,255,255,0.8);
+            margin-bottom: 36px; max-width: 540px;
+            margin-left: auto; margin-right: auto; line-height: 1.6;
+            position: relative;
+        }
+        .cta-btn {
+            display: inline-block; background: #fff; color: #248ADE;
+            padding: 18px 48px; border-radius: 8px; font-size: 17px; font-weight: 800;
+            transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
+            letter-spacing: 0.3px;
+        }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); color: #1a5fa8; }
+        .cta-note {
+            font-size: 13px; color: rgba(255,255,255,0.55);
+            margin-top: 16px; position: relative;
+        }
+
+        /* ── FOOTER ── */
+        .footer {
+            background: #0a0e17; color: rgba(255,255,255,0.4); padding: 36px 0;
+            font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06);
+        }
+        .footer .container {
+            display: flex; justify-content: space-between;
+            align-items: center; flex-wrap: wrap; gap: 16px;
+        }
+        .footer a { color: rgba(255,255,255,0.4); font-size: 12px; }
+        .footer a:hover { color: #fff; }
+        .footer .social-buttons { list-style: none; display: flex; gap: 10px; padding: 0; }
+        .footer .social-buttons a {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 36px; height: 36px; background: rgba(255,255,255,0.06);
+            border-radius: 50%; color: rgba(255,255,255,0.4);
+            font-size: 15px; transition: background 0.2s, color 0.2s;
+        }
+        .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
+
+        /* ── RESPONSIVE ── */
+        @media (max-width: 768px) {
+            section { padding: 60px 0; }
+            .section-title { font-size: 28px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+            .before-after, .vehicle-grid { grid-template-columns: 1fr; gap: 16px; }
+            .ba-arrow, .vehicle-arrow { padding: 8px 0; }
+            .ba-arrow-circle, .vehicle-arrow-icon { transform: rotate(90deg); }
+            .seo-grid { grid-template-columns: 1fr; }
+            .calc-results-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero-banner h2 { font-size: 24px; }
+            .hook-line { font-size: 20px; }
+            .stat-number { font-size: 36px; }
+            .calc-box { padding: 32px 20px; }
+            .quote-block { padding: 32px 24px; }
+            .quote-block p { font-size: 17px; }
+            .cta-section h2 { font-size: 26px; }
+        }
+
+        /* ── ANIMATION ── */
+        .fade-up {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<!-- ======== CLONED NAV ======== -->
+<nav class="navbar">
+    <div class="topbar-nav">
+        <div class="container">
+            <ul><li><span class="fa fa-phone"></span> (810) 614 - 9181</li><li><span class="fa fa-phone"></span> (248) 760 - 3841</li></ul>
+            <ul><li>Inventory Acquisition And Retention Specialists</li></ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="navbar-main">
+            <a href="https://www.ezhomesfast.com/"><img src="https://www.ezhomesfast.com/areas/sales/content/assets/img/EZHomes_Logo_color.png" class="img-logo" alt="EZ Homes"></a>
+            <ul class="nav-links">
+                <li><a href="https://www.ezhomesfast.com/">Current Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Future">Future Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Property/New?source=ezhomesfast">Sell a Home</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Sold">Sold Homes</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ======== CLONED HERO ======== -->
+<section class="hero-banner" style="padding-bottom: 0;">
+    <div class="container">
+        <h2>Offering the Best in Pre-Owned Manufactured Homes</h2>
+        <img src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png" alt="EZ Homes Banner">
+    </div>
+</section>
+
+<!-- ======== HERO→CONTENT GRADIENT FADE ======== -->
+<div class="hero-gradient"></div>
+
+<!-- ======== S1: HOOK ======== -->
+<section class="hook-section">
+    <div class="container">
+        <p class="hook-line fade-up">
+            Dan, you told us you get <strong>300 leads every single month</strong>.<br>
+            What if you could turn the <strong>98% you're currently losing</strong> into closed deals?
+        </p>
+    </div>
+</section>
+
+<!-- Wave: dark → white -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#ffffff"/>
+    </svg>
+</div>
+
+<!-- ======== S2: CASE STUDY RESULTS ======== -->
+<section class="case-study">
+    <div class="container">
+        <div class="section-label fade-up">Results From Our Partnership</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">Here's What Changed in the First 8 Weeks</h2>
+        <p class="section-sub fade-up">3,600 leads a year. A 2% close rate. Thousands of buyers slipping through the cracks. Here's what we fixed.</p>
+
+        <div class="stats-grid fade-up">
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-users"></i></div>
+                <div class="stat-number">3,528</div>
+                <div class="stat-label">Lost Leads / Year</div>
+                <div class="stat-detail">98% of pipeline — now recovered</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-clock-o"></i></div>
+                <div class="stat-number">24h+</div>
+                <div class="stat-label">Old Response Time</div>
+                <div class="stat-detail">Now: instant AI, 24/7</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-handshake-o"></i></div>
+                <div class="stat-number">+2</div>
+                <div class="stat-label">Extra Deals Closed</div>
+                <div class="stat-detail">First 8 weeks alone</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon"><i class="fa fa-dollar"></i></div>
+                <div class="stat-number">$10K+</div>
+                <div class="stat-label">Margin / Deal</div>
+                <div class="stat-detail">Pure profit, same inventory</div>
+            </div>
+        </div>
+
+        <div class="before-after fade-up">
+            <div class="ba-card ba-before">
+                <h3><i class="fa fa-times-circle"></i> Before</h3>
+                <ul>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> CRM capped at 98 records — couldn't add more without manual cost</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> Outsourced answering service with 24h+ response time</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> Both owners doing ALL lead triage by hand</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> Leads contacted once, then abandoned forever</li>
+                    <li><span class="icon"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
+                </ul>
+            </div>
+            <div class="ba-arrow">
+                <div class="ba-arrow-circle"><i class="fa fa-arrow-right"></i></div>
+            </div>
+            <div class="ba-card ba-after">
+                <h3><i class="fa fa-check-circle"></i> After</h3>
+                <ul>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Unlimited CRM, auto-capture from every channel</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> AI agent responds in under 60 seconds, 24/7</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Auto lead scoring: motivation, urgency, qualification</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> 90-day nurture re-engaging the 98% that disappeared</li>
+                    <li><span class="icon"><i class="fa fa-check"></i></span> Multi-brand separation — clean pipeline, zero confusion</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-block fade-up">
+            <div class="quote-mark">"</div>
+            <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
+            <div class="attribution">— Dan, Co-Owner, EZ Homes</div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave: white → dark -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#0f1b2d"/>
+    </svg>
+</div>
+
+<!-- ======== S3: WHAT'S YOUR CEILING? ======== -->
+<section class="ceiling-section dark-section">
+    <div class="container">
+        <div class="section-label fade-up">Let's Talk About Your Ceiling</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">What's the Most You Can Make in This Business?</h2>
+        <p class="ceiling-intro fade-up">
+            Most manufactured home dealers we've spoken to believe their ceiling is somewhere around <strong>$700K — $1.2M in annual revenue</strong>.
+            The top 5% are doing <span class="ceiling-highlight">$3M — $8M+</span>. The difference isn't more trucks or more people.
+            It's <strong>how many of their leads actually turn into deals</strong>.
+        </p>
+        <p class="ceiling-intro fade-up" style="margin-bottom: 0;">
+            If you have <strong>300 leads a month</strong> and you're closing <strong>2%</strong>, you don't have a lead problem.
+            You have a <strong>conversion infrastructure problem</strong>. And that's the easiest kind to fix.
+        </p>
+    </div>
+</section>
+
+<!-- Wave: dark → light -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#f8fafc"/>
+    </svg>
+</div>
+
+<!-- ======== S4: INTERACTIVE CALCULATOR ======== -->
+<section class="calculator-section">
+    <div class="container">
+        <div class="section-label fade-up">Your Numbers, Your Opportunity</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">See What's Possible — Adjust the Sliders</h2>
+        <p class="section-sub fade-up">These are pre-filled with industry averages for manufactured home dealers. Adjust them to match your business.</p>
+
+        <div class="calc-box fade-up">
+            <h3>ROI Calculator</h3>
+            <div class="calc-subtitle">What happens when we improve your conversion infrastructure?</div>
+
+            <div class="calc-row">
+                <label>Leads per month</label>
+                <div class="input-row">
+                    <input type="range" id="leads" min="50" max="1000" value="300" step="10">
+                    <span class="val" id="leads-val">300</span>
+                </div>
+            </div>
+            <div class="calc-row">
+                <label>Current close rate</label>
+                <div class="input-row">
+                    <input type="range" id="closeRate" min="0.5" max="15" value="2" step="0.5">
+                    <span class="val" id="closeRate-val">2%</span>
+                </div>
+            </div>
+            <div class="calc-row">
+                <label>Average profit per deal</label>
+                <div class="input-row">
+                    <input type="range" id="margin" min="2000" max="50000" value="10000" step="500">
+                    <span class="val" id="margin-val">$10,000</span>
+                </div>
+            </div>
+            <div class="calc-row">
+                <label>Close rate after optimization</label>
+                <div class="input-row">
+                    <input type="range" id="newRate" min="1" max="20" value="5" step="0.5">
+                    <span class="val" id="newRate-val">5%</span>
+                </div>
+            </div>
+
+            <hr class="calc-divider">
+
+            <div class="calc-result">
+                <div class="result-label">Additional Annual Revenue</div>
+                <div class="result-number" id="result-revenue">$360,000</div>
+                <div class="result-sub" id="result-sub">That's 36 extra deals you're currently leaving on the table</div>
+                <div class="calc-results-grid">
+                    <div class="mini-result">
+                        <div class="mini-number" id="result-current">$72,000</div>
+                        <div class="mini-label">Current Annual Revenue</div>
+                    </div>
+                    <div class="mini-result">
+                        <div class="mini-number" id="result-new">$432,000</div>
+                        <div class="mini-label">Projected Annual Revenue</div>
+                    </div>
+                </div>
+            </div>
+            <p class="calc-note">These calculations use your inputs only. No data is sent anywhere.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Wave: light → white -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#ffffff"/>
+    </svg>
+</div>
+
+<!-- ======== S5: NEW VEHICLE (Expert Secrets Framework) ======== -->
+<section class="vehicle-section">
+    <div class="container">
+        <div class="section-label fade-up">A Different Way to Get There</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">You Don't Need More Leads. You Need a New Vehicle.</h2>
+        <p class="section-sub fade-up">
+            For years, the playbook has been the same: more marketing spend, more people, more hours.
+            But what if the bottleneck isn't volume — it's infrastructure?
+        </p>
+
+        <div class="vehicle-grid fade-up">
+            <div class="vehicle-card vehicle-old">
+                <h4>The old way</h4>
+                <ul>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hire more salespeople</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Spend $5K+/mo on marketing</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Answer every call yourself</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hope the CRM doesn't break</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Lose 98% of leads anyway</li>
+                </ul>
+            </div>
+            <div class="vehicle-arrow">
+                <div class="vehicle-arrow-icon"><i class="fa fa-arrow-right"></i></div>
+            </div>
+            <div class="vehicle-card vehicle-new">
+                <h4>The new vehicle</h4>
+                <ul>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> AI responds in &lt;60 seconds, 24/7</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Every lead scored & routed automatically</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> 90-day nurture runs itself</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> You only talk to qualified, ready buyers</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Close 3-5x more from the same leads</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="vehicle-punchline fade-up">
+            Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>
+            For the first time in history, this is actually realistic.
+        </p>
+    </div>
+</section>
+
+<!-- Wave: white → dark -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#0f1b2d"/>
+    </svg>
+</div>
+
+<!-- ======== S6: SEO / COMPETITIVE PREVIEW ======== -->
+<section class="seo-section dark-section">
+    <div class="container">
+        <div class="section-label fade-up">Your Online Presence — A Snapshot</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">Here's How You Compare to the Market</h2>
+        <p class="section-sub fade-up">This isn't about SEO. It's about how your digital assets stack up against everyone else — regardless of how you feel about it.</p>
+
+        <div class="seo-grid fade-up">
+            <div class="seo-card">
+                <h4><i class="fa fa-search"></i> Keyword Gaps</h4>
+                <div class="seo-metric">12+</div>
+                <div class="seo-desc">High-intent search terms like "manufactured homes Michigan" and "mobile homes for sale near me" where competitors outrank you.</div>
+            </div>
+            <div class="seo-card">
+                <h4><i class="fa fa-map-marker"></i> Local Visibility</h4>
+                <div class="seo-metric">Position 6-10</div>
+                <div class="seo-desc">For your core terms, you're on page 1 — but not in the top 3 where 75% of clicks happen. That's recoverable traffic.</div>
+            </div>
+            <div class="seo-card">
+                <h4><i class="fa fa-line-chart"></i> Easy Wins</h4>
+                <div class="seo-metric">3-5</div>
+                <div class="seo-desc">Quick optimizations (page titles, schema, content gaps) that could move you into the top 3 and increase organic traffic 2-3x.</div>
+            </div>
+        </div>
+
+        <p class="seo-note fade-up">
+            Nobody at the top talks about SEO — it's a "duh" that gets done through the transformation process.<br>
+            We don't sell SEO. We optimize everything, and search visibility is a natural byproduct.
+        </p>
+    </div>
+</section>
+
+<!-- Wave: dark → gradient -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 70" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,70 1080,70 1440,0 L1440,70 L0,70 Z" fill="#248ADE"/>
+    </svg>
+</div>
+
+<!-- ======== CTA ======== -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="fade-up">Want to See What This Looks Like for You?</h2>
+        <p class="cta-sub fade-up">
+            No pitch. No commitment. We'll walk through your numbers and show you what's actually possible.
+        </p>
+        <a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion" class="cta-btn fade-up">Let's See What's Possible</a>
+        <p class="cta-note fade-up">15 minutes. Your numbers. Zero pressure.</p>
+    </div>
+</section>
+
+<!-- ======== FOOTER ======== -->
+<footer class="footer">
+    <div class="container">
+        <div><span>Copyright &copy; <b>EZ Homes</b> 2016</span></div>
+        <div><a href="https://www.ezhomesfast.com/Sales/About/TermsOfUse">Terms of Use</a> &middot; <a href="https://www.ezhomesfast.com/Sales/About/PrivacyPolicy">Privacy Policy</a></div>
+        <div style="display: flex; align-items: center; gap: 16px;">
+            <ul class="social-buttons">
+                <li><a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a></li>
+                <li><a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a></li>
+            </ul>
+            <span><span class="fa fa-phone"></span> (248) 760-3841 | <span class="fa fa-phone"></span> (810) 614-9181</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+// Scroll animations
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+// Calculator logic
+const $ = id => document.getElementById(id);
+function fmt(n) { return n >= 1000 ? '$' + n.toLocaleString('en-US') : '$' + n; }
+
+function calc() {
+    const leads = +$('leads').value;
+    const closeRate = +$('closeRate').value;
+    const margin = +$('margin').value;
+    const newRate = +$('newRate').value;
+
+    const currentDeals = leads * 12 * (closeRate / 100);
+    const newDeals = leads * 12 * (newRate / 100);
+    const extraDeals = newDeals - currentDeals;
+    const extraRev = extraDeals * margin;
+    const currentRev = currentDeals * margin;
+    const newRev = newDeals * margin;
+
+    $('leads-val').textContent = leads;
+    $('closeRate-val').textContent = closeRate + '%';
+    $('margin-val').textContent = fmt(margin);
+    $('newRate-val').textContent = newRate + '%';
+
+    $('result-revenue').textContent = fmt(Math.round(extraRev));
+    $('result-sub').textContent = "That's " + Math.round(extraDeals) + " extra deals you're currently leaving on the table";
+    $('result-current').textContent = fmt(Math.round(currentRev));
+    $('result-new').textContent = fmt(Math.round(newRev));
+}
+
+['leads', 'closeRate', 'margin', 'newRate'].forEach(id => {
+    $(id).addEventListener('input', calc);
+});
+calc();
+</script>
+
+</body>
+</html>
