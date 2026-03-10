@@ -5,15 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EZ Homes — Your Transformation Path</title>
     <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; }
+        body { font-family: 'Open Sans', sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; }
         a { color: #50A2E5; text-decoration: none; }
-        a:hover { color: #248ADE; }
         img { max-width: 100%; height: auto; }
         .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+
+        /* Storytelling serif font for narrative passages */
+        .narrative { font-family: 'Playfair Display', Georgia, serif; }
 
         /* ── NAV ── */
         .navbar { background: #fff; border-bottom: 1px solid #e7e7e7; }
@@ -24,329 +26,263 @@
         .navbar-main { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
         .img-logo { max-height: 50px; }
         .nav-links { list-style: none; display: flex; gap: 0; }
-        .nav-links li a { display: block; padding: 10px 14px; color: #555; font-size: 14px; transition: color 0.2s; }
-        .nav-links li a:hover { color: #248ADE; }
+        .nav-links li a { display: block; padding: 10px 14px; color: #555; font-size: 14px; }
 
         /* ── HERO ── */
         .hero-banner { text-align: center; padding: 40px 0 0; }
         .hero-banner h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 25px; }
 
-        /* ── HERO GRADIENT FADE ── */
-        .hero-gradient {
-            height: 100px;
-            background: linear-gradient(180deg, #fff 0%, #d6eaf8 100%);
-        }
+        .hero-gradient { height: 100px; background: linear-gradient(180deg, #fff 0%, #d6eaf8 100%); }
 
         /* ── HOOK ── */
-        .hook-section {
-            background: #d6eaf8; padding: 40px 0 30px; text-align: center;
-        }
-        .hook-line {
-            font-size: 24px; font-weight: 300; color: #2c3e50;
-            max-width: 700px; margin: 0 auto; line-height: 1.6;
-        }
+        .hook-section { background: #d6eaf8; padding: 40px 0 20px; text-align: center; }
+        .hook-line { font-size: 24px; font-weight: 300; color: #2c3e50; max-width: 700px; margin: 0 auto; line-height: 1.6; }
         .hook-line strong { color: #248ADE; font-weight: 700; }
 
         /* ══════════════════════════════════════════
-           HERO'S ARC PATH — Pigglee-style
+           STORYTELLING PATH
            ══════════════════════════════════════════ */
-        .path-section {
-            background: linear-gradient(180deg, #d6eaf8 0%, #bfe0f5 20%, #a8d4ef 60%, #8ec5e8 100%);
-            padding: 60px 0 100px;
+        .story-section {
+            background: linear-gradient(180deg, #d6eaf8 0%, #c4dff5 15%, #b0d4f0 50%, #9cc9eb 100%);
+            padding: 60px 0 40px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Cityscape silhouette at bottom */
-        .path-section::after {
-            content: '';
-            position: absolute;
-            bottom: 0; left: 0; right: 0;
-            height: 120px;
-            background:
-                /* Buildings silhouette */
-                linear-gradient(180deg, transparent 0%, rgba(44,62,80,0.06) 60%, rgba(44,62,80,0.12) 100%);
-            pointer-events: none;
-        }
-
-        .path-header {
-            text-align: center; margin-bottom: 50px;
-        }
-        .path-header h2 {
-            font-size: 34px; font-weight: 800; color: #2c3e50;
+        .story-header { text-align: center; margin-bottom: 50px; }
+        .story-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px; font-weight: 700; color: #1a3a5c;
             margin-bottom: 10px;
         }
-        .path-header p {
-            font-size: 16px; color: #5a7d9a; max-width: 550px;
-            margin: 0 auto; line-height: 1.6;
+        .story-header p { font-size: 15px; color: #5a7d9a; max-width: 520px; margin: 0 auto; }
+
+        /* ── STORY CHAPTER (full-width narrative block with image) ── */
+        .chapter {
+            max-width: 960px; margin: 0 auto 0;
+            position: relative;
         }
 
-        /* The vertical dashed line */
-        .timeline {
-            position: relative;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px 0;
-        }
-        .timeline::before {
-            content: '';
+        /* Winding path SVG overlay */
+        .winding-path {
             position: absolute;
-            left: 50%;
-            top: 0; bottom: 0;
-            width: 3px;
-            background: repeating-linear-gradient(
-                180deg,
-                #7ab8d9 0px,
-                #7ab8d9 10px,
-                transparent 10px,
-                transparent 20px
-            );
+            left: 50%; top: 0; bottom: 0;
+            width: 4px;
             transform: translateX(-50%);
         }
-
-        /* Each node row */
-        .path-row {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 70px;
-        }
-        .path-row:last-of-type { margin-bottom: 30px; }
-
-        /* The double-ring circle node */
-        .node {
-            position: relative;
-            z-index: 2;
-            flex-shrink: 0;
-        }
-        .node-outer {
-            width: 100px; height: 100px;
-            border-radius: 50%;
-            border: 3px solid #e8a838;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: transparent;
-            position: relative;
-        }
-        .node-inner {
-            width: 76px; height: 76px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #5dade2 0%, #3498db 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #fff;
-            font-size: 32px;
-            box-shadow: 0 4px 16px rgba(52,152,219,0.3);
+        .winding-path svg {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            width: 120px;
+            height: 100%;
         }
 
-        /* Small connector dot on the center line */
-        .node::after {
+        /* Chapter layout — image + narrative side by side */
+        .chapter-block {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            margin-bottom: 20px;
+            padding: 40px 0;
+            position: relative;
+        }
+        .chapter-block.reverse { direction: rtl; }
+        .chapter-block.reverse > * { direction: ltr; }
+
+        .chapter-img {
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(26,58,92,0.15);
+            border: 3px solid rgba(255,255,255,0.6);
+        }
+        .chapter-img img { display: block; width: 100%; border-radius: 13px; }
+
+        .chapter-text { padding: 0 10px; }
+        .chapter-number {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 48px; height: 48px; border-radius: 50%;
+            font-size: 18px; font-weight: 800; color: #fff;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .ch-num-red { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        .ch-num-gold { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .ch-num-green { background: linear-gradient(135deg, #27ae60, #1e8449); }
+        .ch-num-blue { background: linear-gradient(135deg, #3498db, #2471a3); }
+        .ch-num-navy { background: linear-gradient(135deg, #34495e, #1c2833); }
+        .ch-num-teal { background: linear-gradient(135deg, #1abc9c, #148f77); }
+
+        .chapter-label {
+            font-size: 11px; font-weight: 700; text-transform: uppercase;
+            letter-spacing: 3px; color: #7f8c8d; margin-bottom: 8px;
+        }
+        .chapter-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px; font-weight: 700; color: #1a3a5c;
+            margin-bottom: 12px; line-height: 1.3;
+        }
+        .chapter-body {
+            font-size: 15px; color: #5a7d9a; line-height: 1.7;
+        }
+        .chapter-body strong { color: #1a3a5c; }
+        .chapter-stat {
+            display: inline-block; background: rgba(36,138,222,0.1);
+            border: 1px solid rgba(36,138,222,0.2); border-radius: 6px;
+            padding: 3px 10px; color: #248ADE; font-weight: 700; font-size: 15px;
+        }
+
+        /* Narrative divider between chapters */
+        .story-divider {
+            text-align: center; padding: 30px 0;
+            position: relative;
+        }
+        .story-divider::before {
             content: '';
             position: absolute;
-            width: 12px; height: 12px;
-            border-radius: 50%;
-            background: #7ab8d9;
-            border: 2px solid #fff;
-            top: 50%; transform: translateY(-50%);
+            left: 50%; top: 0; bottom: 0; width: 3px;
+            background: repeating-linear-gradient(180deg, #7ab8d9 0px, #7ab8d9 8px, transparent 8px, transparent 16px);
+            transform: translateX(-50%);
+        }
+        .divider-node {
+            display: inline-flex; align-items: center; justify-content: center;
+            width: 44px; height: 44px; border-radius: 50%;
+            color: #fff; font-size: 18px;
+            position: relative; z-index: 2;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
         }
 
-        /* Pill label */
-        .pill-label {
-            background: #e8a838;
-            color: #fff;
-            padding: 8px 20px;
-            border-radius: 25px;
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
-            position: relative;
+        /* Node-only stops (no image, just icon + text centered) */
+        .node-stop {
+            text-align: center; padding: 30px 0; position: relative;
         }
-
-        /* Connector arm (horizontal line between node and pill) */
-        .connector {
-            width: 40px; height: 3px;
-            background: #c9dce8;
-            flex-shrink: 0;
+        .node-stop .node-icon {
+            width: 80px; height: 80px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 16px; color: #fff; font-size: 30px;
+            position: relative; z-index: 2;
         }
-
-        /* ── LEFT node layout: [pill] --- [connector] --- [node] ── */
-        .path-row.left {
-            flex-direction: row;
+        .node-stop .node-icon::before {
+            content: ''; position: absolute;
+            width: 96px; height: 96px; border-radius: 50%;
+            border: 3px solid rgba(255,255,255,0.5);
+            top: -8px; left: -8px;
         }
-        .path-row.left .node { order: 3; margin-left: -2px; }
-        .path-row.left .connector { order: 2; }
-        .path-row.left .pill-label { order: 1; }
-        .path-row.left .spacer { order: 4; flex: 1; }
-        .path-row.left .pill-side { order: 0; flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 0; }
-
-        /* ── RIGHT node layout: [node] --- [connector] --- [pill] ── */
-        .path-row.right {
-            flex-direction: row;
+        .node-stop .pill {
+            display: inline-block; padding: 6px 20px;
+            border-radius: 20px; font-size: 11px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 2px; color: #fff;
+            margin-bottom: 10px;
         }
-        .path-row.right .spacer { order: 0; flex: 1; }
-        .path-row.right .node { order: 1; margin-right: -2px; }
-        .path-row.right .connector { order: 2; }
-        .path-row.right .pill-label { order: 3; }
-        .path-row.right .pill-side { order: 4; flex: 1; }
-
-        /* Connector dot position */
-        .path-row.left .node::after { right: -8px; left: auto; }
-        .path-row.right .node::after { left: -8px; right: auto; }
-
-        /* Brief description below each row */
-        .path-desc {
-            text-align: center;
-            margin-top: -50px;
-            margin-bottom: 50px;
-            position: relative; z-index: 1;
+        .node-stop h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px; color: #1a3a5c; margin-bottom: 6px;
         }
-        .path-desc p {
-            font-size: 14px; color: #5a7d9a;
-            max-width: 400px; margin: 0 auto;
-            line-height: 1.5;
+        .node-stop p {
+            font-size: 14px; color: #5a7d9a; max-width: 420px; margin: 0 auto;
         }
-        .path-desc .stat-highlight {
-            font-size: 28px; font-weight: 800; color: #2c3e50;
+        .node-stop .big-stat {
+            font-size: 40px; font-weight: 800; color: #1a3a5c;
             display: block; margin-bottom: 4px;
         }
 
-        /* Center-line small node (for the money/transition icons) */
-        .center-dot {
-            display: flex; justify-content: center;
-            margin: -20px 0 40px; position: relative; z-index: 2;
+        /* Dashed center line for node stops */
+        .node-stop::before {
+            content: ''; position: absolute;
+            left: 50%; top: 0; height: 100%; width: 3px;
+            background: repeating-linear-gradient(180deg, #7ab8d9 0px, #7ab8d9 8px, transparent 8px, transparent 16px);
+            transform: translateX(-50%);
         }
-        .center-dot .mini-circle {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: #27ae60; color: #fff;
+
+        /* ── QUOTE INTERLUDE ── */
+        .quote-interlude {
+            background: rgba(26,58,92,0.06);
+            border-radius: 16px; padding: 36px 40px;
+            max-width: 700px; margin: 10px auto 20px;
+            text-align: center; position: relative;
+        }
+        .quote-interlude::before {
+            content: '\201C'; position: absolute; top: 8px; left: 50%;
+            transform: translateX(-50%); font-size: 80px; font-weight: 800;
+            color: rgba(36,138,222,0.1); font-family: Georgia, serif;
+        }
+        .quote-interlude p {
+            font-family: 'Playfair Display', serif;
+            font-size: 18px; font-style: italic; color: #2c3e50;
+            line-height: 1.7; position: relative; margin-bottom: 10px;
+        }
+        .quote-interlude .attr {
+            font-size: 13px; font-weight: 700; color: #248ADE;
+            font-family: 'Open Sans', sans-serif; font-style: normal;
+        }
+
+        /* End of path */
+        .story-end {
+            text-align: center; padding: 40px 0 20px; position: relative;
+        }
+        .end-star {
+            width: 70px; height: 70px; border-radius: 50%;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff; font-size: 28px;
             display: flex; align-items: center; justify-content: center;
-            font-size: 16px; border: 3px solid #fff;
-            box-shadow: 0 2px 10px rgba(39,174,96,0.3);
+            margin: 0 auto 16px;
+            box-shadow: 0 6px 24px rgba(243,156,18,0.35), 0 0 0 6px rgba(243,156,18,0.15);
+            position: relative; z-index: 2;
         }
-
-        /* Pill color variants */
-        .pill-orange { background: #e8a838; }
-        .pill-blue { background: #3498db; }
-        .pill-green { background: #27ae60; }
-        .pill-red { background: #e74c3c; }
-        .pill-teal { background: #1abc9c; }
-        .pill-purple { background: #8e44ad; }
-        .pill-navy { background: #2c3e50; }
-
-        /* Node inner color variants */
-        .node-green { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
-        .node-red { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); box-shadow: 0 4px 16px rgba(231,76,60,0.3); }
-        .node-gold { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); box-shadow: 0 4px 16px rgba(243,156,18,0.3); }
-        .node-navy { background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%); box-shadow: 0 4px 16px rgba(44,62,80,0.3); }
-        .node-teal { background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); box-shadow: 0 4px 16px rgba(26,188,156,0.3); }
-        .node-purple { background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); box-shadow: 0 4px 16px rgba(155,89,182,0.3); }
-
-        /* Outer ring color variants */
-        .ring-orange { border-color: #e8a838; }
-        .ring-red { border-color: #e74c3c; }
-        .ring-green { border-color: #27ae60; }
-        .ring-blue { border-color: #3498db; }
-        .ring-teal { border-color: #1abc9c; }
-        .ring-purple { border-color: #8e44ad; }
-        .ring-navy { border-color: #2c3e50; }
+        .story-end p {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px; color: #1a3a5c; max-width: 480px;
+            margin: 0 auto; line-height: 1.5;
+        }
+        .story-end p strong { color: #248ADE; }
 
         /* ══════════════════════════════════════════
-           DETAILED SECTIONS (below the path)
+           BELOW-PATH SECTIONS
            ══════════════════════════════════════════ */
-
-        /* Transition from path to detail */
-        .path-to-detail {
+        .transition-gradient {
             height: 80px;
-            background: linear-gradient(180deg, #8ec5e8 0%, #0f1b2d 100%);
+            background: linear-gradient(180deg, #9cc9eb 0%, #0f1b2d 100%);
         }
 
         section.detail { padding: 80px 0; }
-        .detail .section-label {
-            text-transform: uppercase; font-size: 11px; font-weight: 700;
-            letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px;
-        }
-        .detail .section-accent {
-            width: 50px; height: 3px; background: #248ADE;
-            margin: 0 auto 20px; border-radius: 2px;
-        }
-        .detail .section-title {
-            font-size: 34px; font-weight: 800; margin-bottom: 14px; line-height: 1.2;
-        }
-        .detail .section-sub {
-            font-size: 16px; max-width: 600px;
-            margin: 0 auto 40px; line-height: 1.7;
-        }
+        .detail .section-label { text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px; }
+        .detail .section-accent { width: 50px; height: 3px; background: #248ADE; margin: 0 auto 20px; border-radius: 2px; }
+        .detail .section-title { font-size: 34px; font-weight: 800; margin-bottom: 14px; line-height: 1.2; }
+        .detail .section-sub { font-size: 16px; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
 
-        /* Dark detail section */
-        .detail-dark {
-            background: #0f1b2d; text-align: center;
-        }
+        .detail-dark { background: #0f1b2d; text-align: center; }
         .detail-dark .section-title { color: #fff; }
         .detail-dark .section-sub { color: rgba(255,255,255,0.55); }
 
-        /* Light detail section */
-        .detail-light {
-            background: #fff; text-align: center;
-        }
+        .detail-light { background: #fff; text-align: center; }
         .detail-light .section-title { color: #1a1a2e; }
         .detail-light .section-sub { color: #666; }
 
-        /* Before/After cards */
-        .ba-grid {
-            display: grid; grid-template-columns: 1fr 60px 1fr;
-            align-items: stretch; max-width: 880px; margin: 0 auto 50px;
-        }
+        /* Before/After */
+        .ba-grid { display: grid; grid-template-columns: 1fr 60px 1fr; align-items: stretch; max-width: 880px; margin: 0 auto 50px; }
         .ba-card { padding: 32px 28px; border-radius: 16px; }
         .ba-before { background: rgba(231,76,60,0.08); border: 2px solid rgba(231,76,60,0.2); }
         .ba-after { background: rgba(39,174,96,0.08); border: 2px solid rgba(39,174,96,0.2); }
-        .ba-card h3 {
-            font-size: 15px; font-weight: 700; margin-bottom: 16px;
-            text-transform: uppercase; letter-spacing: 1px;
-            display: flex; align-items: center; gap: 8px;
-        }
+        .ba-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 16px; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; }
         .ba-before h3 { color: #e74c3c; }
         .ba-after h3 { color: #27ae60; }
         .ba-card ul { list-style: none; padding: 0; }
-        .ba-card li {
-            font-size: 14px; padding: 7px 0; color: rgba(255,255,255,0.75);
-            border-bottom: 1px solid rgba(255,255,255,0.06);
-            display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
-        }
+        .ba-card li { font-size: 14px; padding: 7px 0; color: rgba(255,255,255,0.75); border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 8px; line-height: 1.5; }
         .ba-card li:last-child { border-bottom: none; }
         .ba-before li .ic { color: #e74c3c; }
         .ba-after li .ic { color: #27ae60; }
-        .ba-arrow {
-            display: flex; align-items: center; justify-content: center;
-        }
-        .ba-arrow-circle {
-            width: 44px; height: 44px; border-radius: 50%;
-            background: #248ADE; color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 18px; box-shadow: 0 4px 16px rgba(36,138,222,0.3);
-        }
+        .ba-arrow { display: flex; align-items: center; justify-content: center; }
+        .ba-arrow-circle { width: 44px; height: 44px; border-radius: 50%; background: #248ADE; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 4px 16px rgba(36,138,222,0.3); }
 
-        /* Quote */
-        .quote-block {
-            max-width: 700px; margin: 0 auto; text-align: center;
-            position: relative; padding: 30px 40px;
-        }
-        .quote-mark {
-            font-size: 100px; font-weight: 800; color: rgba(36,138,222,0.1);
-            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
-            font-family: Georgia, serif; pointer-events: none;
-        }
-        .quote-block p {
-            font-size: 18px; font-style: italic; color: rgba(255,255,255,0.8);
-            line-height: 1.7; margin-bottom: 12px; position: relative;
-        }
-        .quote-block .attribution {
-            font-size: 13px; font-weight: 700; color: #50A2E5;
-        }
+        /* Quote block */
+        .detail-quote { max-width: 700px; margin: 0 auto; text-align: center; position: relative; padding: 30px 40px; }
+        .detail-quote-mark { font-size: 100px; font-weight: 800; color: rgba(36,138,222,0.1); position: absolute; top: -10px; left: 50%; transform: translateX(-50%); font-family: Georgia, serif; }
+        .detail-quote p { font-size: 18px; font-style: italic; color: rgba(255,255,255,0.8); line-height: 1.7; margin-bottom: 12px; position: relative; }
+        .detail-quote .attr { font-size: 13px; font-weight: 700; color: #50A2E5; }
 
-        /* Wave divider */
+        /* Wave */
         .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
         .wave-divider svg { display: block; width: 100%; height: 60px; }
 
@@ -354,164 +290,82 @@
         .calc-section { background: #f8fafc; text-align: center; padding: 80px 0; }
         .calc-section .section-title { color: #1a1a2e; }
         .calc-section .section-sub { color: #666; }
-        .calc-box {
-            background: #fff; border-radius: 20px; padding: 44px 40px;
-            max-width: 700px; margin: 0 auto;
-            border: 2px solid #e8eef5; text-align: left;
-        }
-        .calc-box h3 {
-            font-size: 22px; font-weight: 800; color: #1a1a2e;
-            margin-bottom: 4px; text-align: center;
-        }
-        .calc-box .calc-subtitle {
-            font-size: 13px; color: #888; text-align: center; margin-bottom: 28px;
-        }
+        .calc-box { background: #fff; border-radius: 20px; padding: 44px 40px; max-width: 700px; margin: 0 auto; border: 2px solid #e8eef5; text-align: left; }
+        .calc-box h3 { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; text-align: center; }
+        .calc-box .calc-subtitle { font-size: 13px; color: #888; text-align: center; margin-bottom: 28px; }
         .calc-row { margin-bottom: 22px; }
-        .calc-row label {
-            display: block; font-size: 11px; font-weight: 700; color: #555;
-            margin-bottom: 7px; text-transform: uppercase; letter-spacing: 1px;
-        }
+        .calc-row label { display: block; font-size: 11px; font-weight: 700; color: #555; margin-bottom: 7px; text-transform: uppercase; letter-spacing: 1px; }
         .calc-row .input-row { display: flex; align-items: center; gap: 14px; }
-        .calc-row input[type="range"] {
-            flex: 1; height: 8px;
-            -webkit-appearance: none; appearance: none;
-            background: #e2eaf3; border-radius: 4px; outline: none;
-        }
-        .calc-row input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
-            background: #248ADE; cursor: pointer;
-            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
-        }
-        .calc-row input[type="range"]::-moz-range-thumb {
-            width: 22px; height: 22px; border-radius: 50%; border: none;
-            background: #248ADE; cursor: pointer;
-        }
-        .calc-row .val {
-            min-width: 85px; font-size: 18px; font-weight: 800;
-            color: #248ADE; text-align: right;
-        }
+        .calc-row input[type="range"] { flex: 1; height: 8px; -webkit-appearance: none; appearance: none; background: #e2eaf3; border-radius: 4px; outline: none; }
+        .calc-row input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #248ADE; cursor: pointer; box-shadow: 0 2px 8px rgba(36,138,222,0.3); }
+        .calc-row input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; border: none; background: #248ADE; cursor: pointer; }
+        .calc-row .val { min-width: 85px; font-size: 18px; font-weight: 800; color: #248ADE; text-align: right; }
         .calc-divider { border: none; border-top: 2px dashed #e2eaf3; margin: 28px 0; }
-        .calc-result {
-            background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%);
-            border-radius: 14px; padding: 28px 24px; color: #fff; text-align: center;
-            box-shadow: 0 8px 32px rgba(36,138,222,0.25);
-        }
-        .calc-result .result-label {
-            font-size: 11px; opacity: 0.8; margin-bottom: 4px;
-            text-transform: uppercase; letter-spacing: 2px;
-        }
+        .calc-result { background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%); border-radius: 14px; padding: 28px 24px; color: #fff; text-align: center; box-shadow: 0 8px 32px rgba(36,138,222,0.25); }
+        .calc-result .result-label { font-size: 11px; opacity: 0.8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 2px; }
         .calc-result .result-number { font-size: 42px; font-weight: 800; }
         .calc-result .result-sub { font-size: 13px; opacity: 0.7; margin-top: 6px; }
-        .calc-results-grid {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px;
-        }
-        .calc-results-grid .mini-result {
-            background: rgba(255,255,255,0.1); border-radius: 10px; padding: 14px;
-        }
+        .calc-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .calc-results-grid .mini-result { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; }
         .calc-results-grid .mini-number { font-size: 22px; font-weight: 800; }
         .calc-results-grid .mini-label { font-size: 10px; opacity: 0.75; }
         .calc-note { font-size: 11px; color: #aaa; text-align: center; margin-top: 16px; }
 
-        /* Vehicle comparison */
-        .vehicle-grid {
-            display: grid; grid-template-columns: 1fr 50px 1fr;
-            align-items: stretch; max-width: 820px; margin: 0 auto 40px;
-        }
+        /* Vehicle */
+        .vehicle-grid { display: grid; grid-template-columns: 1fr 50px 1fr; align-items: stretch; max-width: 820px; margin: 0 auto 40px; }
         .v-card { padding: 32px 24px; border-radius: 16px; text-align: center; }
         .v-old { background: #f9fafb; border: 2px solid #e5e7eb; border-top: 4px solid #e5a8a8; }
         .v-new { background: #eef6ff; border: 2px solid #c4ddf6; border-top: 4px solid #248ADE; box-shadow: 0 4px 20px rgba(36,138,222,0.08); }
         .v-card h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
-        .v-old h4 { color: #999; }
-        .v-new h4 { color: #248ADE; }
+        .v-old h4 { color: #999; } .v-new h4 { color: #248ADE; }
         .v-card ul { list-style: none; text-align: left; padding: 0; }
         .v-card li { font-size: 13px; padding: 6px 0; color: #555; display: flex; gap: 8px; }
         .v-arrow { display: flex; align-items: center; justify-content: center; }
-        .v-arrow-icon {
-            width: 40px; height: 40px; border-radius: 50%;
-            background: #248ADE; color: #fff;
-            display: flex; align-items: center; justify-content: center;
-            font-size: 16px;
-        }
-        .v-punchline {
-            font-size: 19px; font-weight: 300; color: #555;
-            max-width: 580px; margin: 0 auto; line-height: 1.6;
-        }
+        .v-arrow-icon { width: 40px; height: 40px; border-radius: 50%; background: #248ADE; color: #fff; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+        .v-punchline { font-size: 19px; font-weight: 300; color: #555; max-width: 580px; margin: 0 auto; line-height: 1.6; }
         .v-punchline strong { color: #248ADE; font-weight: 700; }
 
         /* CTA */
-        .cta-section {
-            background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%);
-            text-align: center; padding: 80px 0; position: relative; overflow: hidden;
-        }
-        .cta-section::before {
-            content: ''; position: absolute; top: -50%; left: -50%;
-            width: 200%; height: 200%;
-            background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%);
-        }
+        .cta-section { background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%); text-align: center; padding: 80px 0; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%); }
         .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 14px; position: relative; }
         .cta-sub { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; position: relative; }
-        .cta-btn {
-            display: inline-block; background: #fff; color: #248ADE;
-            padding: 16px 44px; border-radius: 8px; font-size: 17px; font-weight: 800;
-            transition: transform 0.2s, box-shadow 0.2s;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
-        }
+        .cta-btn { display: inline-block; background: #fff; color: #248ADE; padding: 16px 44px; border-radius: 8px; font-size: 17px; font-weight: 800; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); color: #1a5fa8; }
         .cta-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 14px; position: relative; }
 
         /* Footer */
-        .footer {
-            background: #0a0e17; color: rgba(255,255,255,0.4); padding: 32px 0;
-            font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06);
-        }
+        .footer { background: #0a0e17; color: rgba(255,255,255,0.4); padding: 32px 0; font-size: 13px; }
         .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
-        .footer a { color: rgba(255,255,255,0.4); font-size: 12px; }
-        .footer a:hover { color: #fff; }
+        .footer a { color: rgba(255,255,255,0.4); font-size: 12px; } .footer a:hover { color: #fff; }
         .footer .social-buttons { list-style: none; display: flex; gap: 10px; padding: 0; }
-        .footer .social-buttons a {
-            display: inline-flex; align-items: center; justify-content: center;
-            width: 36px; height: 36px; background: rgba(255,255,255,0.06);
-            border-radius: 50%; color: rgba(255,255,255,0.4); font-size: 15px;
-            transition: background 0.2s;
-        }
+        .footer .social-buttons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.06); border-radius: 50%; color: rgba(255,255,255,0.4); font-size: 15px; }
         .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .timeline::before { left: 30px; }
-            .path-row { flex-wrap: wrap; justify-content: flex-start; padding-left: 0; }
-            .path-row.left, .path-row.right { flex-direction: row; }
-            .path-row .spacer, .path-row .pill-side { display: none; }
-            .path-row .node { order: 1; margin: 0 12px 0 0; }
-            .path-row .connector { order: 2; width: 20px; }
-            .path-row .pill-label { order: 3; }
-            .path-row.left .node::after,
-            .path-row.right .node::after { left: -8px; right: auto; }
-            .node-outer { width: 70px; height: 70px; }
-            .node-inner { width: 52px; height: 52px; font-size: 22px; }
-            .path-header h2 { font-size: 26px; }
-            .path-desc { margin-top: -30px; text-align: left; padding-left: 100px; }
+            .chapter-block, .chapter-block.reverse { grid-template-columns: 1fr; direction: ltr; }
+            .chapter-block.reverse > * { direction: ltr; }
+            .story-header h2 { font-size: 28px; }
+            .chapter-title { font-size: 22px; }
+            .node-stop .big-stat { font-size: 30px; }
             .ba-grid, .vehicle-grid { grid-template-columns: 1fr; gap: 12px; }
             .ba-arrow, .v-arrow { padding: 8px 0; }
             .calc-box { padding: 28px 18px; }
             .calc-results-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
-            .hero-banner h2 { font-size: 24px; }
+            .hero-banner h2, .cta-section h2 { font-size: 24px; }
             .detail .section-title { font-size: 26px; }
-            .cta-section h2 { font-size: 26px; }
+            .node-stop::before, .story-divider::before { display: none; }
         }
 
-        /* Animation */
-        .fade-up {
-            opacity: 0; transform: translateY(24px);
-            transition: opacity 0.7s ease, transform 0.7s ease;
-        }
+        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
-<!-- ══════ CLONED NAV ══════ -->
+<!-- ══════ NAV ══════ -->
 <nav class="navbar">
     <div class="topbar-nav">
         <div class="container">
@@ -533,15 +387,13 @@
     </div>
 </nav>
 
-<!-- ══════ CLONED HERO ══════ -->
-<section class="hero-banner" style="padding-bottom: 0;">
+<!-- ══════ HERO ══════ -->
+<section class="hero-banner" style="padding-bottom:0;">
     <div class="container">
         <h2>Offering the Best in Pre-Owned Manufactured Homes</h2>
         <img src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png" alt="EZ Homes Banner">
     </div>
 </section>
-
-<!-- ══════ HERO GRADIENT ══════ -->
 <div class="hero-gradient"></div>
 
 <!-- ══════ HOOK ══════ -->
@@ -554,167 +406,154 @@
     </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════
-     HERO'S ARC PATH — Visual Journey (Pigglee-style)
-     ══════════════════════════════════════════════════════ -->
-<div class="path-section">
+<!-- ══════════════════════════════════════════
+     THE HERO'S ARC — Visual Story Path
+     ══════════════════════════════════════════ -->
+<div class="story-section">
     <div class="container">
-        <div class="path-header fade-up">
-            <h2>Your Transformation Path</h2>
-            <p>Follow the journey from where you are today to where you could be in 8 weeks.</p>
+        <div class="story-header fade-up">
+            <h2>Every Hero Has an Arc</h2>
+            <p>This is the story of a business owner who built everything himself — and what happened when he finally got the guide he needed.</p>
         </div>
     </div>
 
-    <div class="timeline">
+    <div class="chapter">
 
-        <!-- NODE 1: Discovery (left) -->
-        <div class="path-row left fade-up">
-            <div class="pill-side">
-                <div class="pill-label pill-orange">Discovery</div>
-                <div class="connector"></div>
-            </div>
-            <div class="node">
-                <div class="node-outer ring-orange">
-                    <div class="node-inner"><i class="fa fa-search"></i></div>
+        <!-- ── CHAPTER 1: The Ordinary World ── -->
+        <div class="container">
+            <div class="chapter-block fade-up">
+                <div class="chapter-img">
+                    <img src="stage1-ordinary-world.png" alt="Business owner at cluttered desk, overwhelmed">
+                </div>
+                <div class="chapter-text">
+                    <div class="chapter-number ch-num-red">1</div>
+                    <div class="chapter-label">Chapter One</div>
+                    <h3 class="chapter-title">The Ordinary World</h3>
+                    <p class="chapter-body">
+                        <strong>300 leads pour in every month.</strong> The phone rings. The CRM is maxed at 98 records.
+                        An outsourced answering service takes 24 hours to respond. By then, the buyer has already called three competitors.<br><br>
+                        You've built this business from nothing. Decades of work, thousands of deals. But you're stuck at a ceiling —
+                        doing <strong>everything yourself</strong>, grinding harder for the same result. The dream of scaling has faded into
+                        the reality of just keeping up.
+                    </p>
                 </div>
             </div>
-            <div class="spacer"></div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">3,528 leads lost / year</span>
-            <p>300 leads/month, 2% close rate. 98% of the pipeline was vanishing.</p>
         </div>
 
-        <!-- NODE 2: Pain Points (right) -->
-        <div class="path-row right fade-up">
-            <div class="spacer"></div>
-            <div class="node">
-                <div class="node-outer ring-red">
-                    <div class="node-inner node-red"><i class="fa fa-times"></i></div>
+        <!-- Divider -->
+        <div class="story-divider" style="height:60px;">
+            <div class="divider-node" style="background:#e74c3c; margin-top:8px;"><i class="fa fa-arrow-down"></i></div>
+        </div>
+
+        <!-- ── CHAPTER 2: Meeting the Guide ── -->
+        <div class="container">
+            <div class="chapter-block reverse fade-up">
+                <div class="chapter-img">
+                    <img src="stage2-meeting-the-guide.png" alt="Business owner meeting consultant, looking at dashboard">
+                </div>
+                <div class="chapter-text">
+                    <div class="chapter-number ch-num-gold">2</div>
+                    <div class="chapter-label">Chapter Two</div>
+                    <h3 class="chapter-title">Meeting the Guide</h3>
+                    <p class="chapter-body">
+                        Then something shifts. A guide appears — not to be the hero, but to <strong>show the hero what's possible</strong>.<br><br>
+                        The ceiling isn't about effort. It's about infrastructure. For the first time, you see a dashboard instead of a spreadsheet.
+                        An AI that responds in <strong>under 60 seconds</strong> — while you sleep. Leads scored, routed, nurtured automatically.
+                        <br><br>
+                        <em>The guide doesn't rescue you. The guide gives you <strong>new capabilities</strong> — and it's up to you to use them.</em>
+                    </p>
                 </div>
             </div>
-            <div class="connector"></div>
-            <div class="pill-label pill-red">Pain Points</div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">24h+ response time</span>
-            <p>CRM capped at 98 records. Outsourced answering. Leads contacted once, then abandoned.</p>
         </div>
 
-        <!-- Center transition dot -->
-        <div class="center-dot fade-up">
-            <div class="mini-circle"><i class="fa fa-bolt"></i></div>
+        <!-- Quote Interlude -->
+        <div class="container">
+            <div class="quote-interlude fade-up">
+                <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
+                <div class="attr">— Dan, Co-Owner, EZ Homes</div>
+            </div>
         </div>
 
-        <!-- NODE 3: Transformation (left) -->
-        <div class="path-row left fade-up">
-            <div class="pill-side">
-                <div class="pill-label pill-green">Transformation</div>
-                <div class="connector"></div>
+        <!-- ── NODE 3: The Transformation ── -->
+        <div class="node-stop fade-up">
+            <div class="node-icon" style="background: linear-gradient(135deg, #27ae60, #1e8449); box-shadow: 0 4px 20px rgba(39,174,96,0.3);">
+                <i class="fa fa-check"></i>
             </div>
-            <div class="node">
-                <div class="node-outer ring-green">
-                    <div class="node-inner node-green"><i class="fa fa-cogs"></i></div>
-                </div>
-            </div>
-            <div class="spacer"></div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">AI responds in &lt;60s</span>
-            <p>Unlimited CRM. Auto lead scoring. 90-day nurture. Multi-brand pipeline.</p>
+            <div class="pill" style="background:#27ae60;">Transformation</div>
+            <h3>The First 8 Weeks</h3>
+            <span class="big-stat">+2 deals closed</span>
+            <p>$10K+ margin per deal. From reduced response time alone — before the full system was even finished.</p>
         </div>
 
-        <!-- NODE 4: Results (right) -->
-        <div class="path-row right fade-up">
-            <div class="spacer"></div>
-            <div class="node">
-                <div class="node-outer ring-orange">
-                    <div class="node-inner node-gold"><i class="fa fa-trophy"></i></div>
-                </div>
-            </div>
-            <div class="connector"></div>
-            <div class="pill-label pill-orange">Results</div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">+2 extra deals in 8 weeks</span>
-            <p>$10K+ margin per deal. From reduced response time alone.</p>
+        <!-- Divider -->
+        <div class="story-divider" style="height:50px;">
+            <div class="divider-node" style="background:#248ADE;"><i class="fa fa-arrow-down"></i></div>
         </div>
 
-        <!-- Center transition dot -->
-        <div class="center-dot fade-up">
-            <div class="mini-circle" style="background:#248ADE;"><i class="fa fa-arrow-up"></i></div>
+        <!-- ── NODE 4: The Ceiling Shatters ── -->
+        <div class="node-stop fade-up">
+            <div class="node-icon" style="background: linear-gradient(135deg, #34495e, #1c2833); box-shadow: 0 4px 20px rgba(44,62,80,0.3);">
+                <i class="fa fa-line-chart"></i>
+            </div>
+            <div class="pill" style="background:#2c3e50;">Your Ceiling</div>
+            <h3>What's the Most You Can Make?</h3>
+            <span class="big-stat">$3M — $8M+</span>
+            <p>The top 5% of manufactured home dealers. Not more trucks. Not more people. Better <strong>conversion infrastructure</strong>.</p>
         </div>
 
-        <!-- NODE 5: Ceiling (left) -->
-        <div class="path-row left fade-up">
-            <div class="pill-side">
-                <div class="pill-label pill-navy">Your Ceiling</div>
-                <div class="connector"></div>
-            </div>
-            <div class="node">
-                <div class="node-outer ring-navy">
-                    <div class="node-inner node-navy"><i class="fa fa-line-chart"></i></div>
-                </div>
-            </div>
-            <div class="spacer"></div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">$3M — $8M+</span>
-            <p>Top 5% of dealers. Not more trucks or people — better conversion infrastructure.</p>
+        <!-- Divider -->
+        <div class="story-divider" style="height:50px;">
+            <div class="divider-node" style="background:#3498db;"><i class="fa fa-arrow-down"></i></div>
         </div>
 
-        <!-- NODE 6: New Vehicle (right) -->
-        <div class="path-row right fade-up">
-            <div class="spacer"></div>
-            <div class="node">
-                <div class="node-outer ring-blue">
-                    <div class="node-inner"><i class="fa fa-rocket"></i></div>
-                </div>
+        <!-- ── NODE 5: The New Vehicle ── -->
+        <div class="node-stop fade-up">
+            <div class="node-icon" style="background: linear-gradient(135deg, #3498db, #2471a3); box-shadow: 0 4px 20px rgba(52,152,219,0.3);">
+                <i class="fa fa-rocket"></i>
             </div>
-            <div class="connector"></div>
-            <div class="pill-label pill-blue">New Vehicle</div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">Close 3-5x more</span>
+            <div class="pill" style="background:#3498db;">New Vehicle</div>
+            <h3>You Don't Need More Leads</h3>
+            <span class="big-stat">Close 3-5x more</span>
             <p>Same leads. AI-powered infrastructure. You only talk to qualified, ready buyers.</p>
         </div>
 
-        <!-- NODE 7: SEO Snapshot (left) -->
-        <div class="path-row left fade-up">
-            <div class="pill-side">
-                <div class="pill-label pill-teal">SEO Snapshot</div>
-                <div class="connector"></div>
+        <!-- Divider -->
+        <div class="story-divider" style="height:50px;">
+            <div class="divider-node" style="background:#1abc9c;"><i class="fa fa-arrow-down"></i></div>
+        </div>
+
+        <!-- ── NODE 6: SEO Snapshot ── -->
+        <div class="node-stop fade-up">
+            <div class="node-icon" style="background: linear-gradient(135deg, #1abc9c, #148f77); box-shadow: 0 4px 20px rgba(26,188,156,0.3);">
+                <i class="fa fa-globe"></i>
             </div>
-            <div class="node">
-                <div class="node-outer ring-teal">
-                    <div class="node-inner node-teal"><i class="fa fa-globe"></i></div>
-                </div>
-            </div>
-            <div class="spacer"></div>
-        </div>
-        <div class="path-desc fade-up">
-            <span class="stat-highlight">12+ keyword gaps</span>
-            <p>Position 6-10 on page 1. 3-5 quick wins to break into top 3.</p>
+            <div class="pill" style="background:#1abc9c;">SEO Snapshot</div>
+            <h3>Your Online Presence</h3>
+            <span class="big-stat">12+ keyword gaps</span>
+            <p>Position 6-10 on page 1. 3-5 quick wins to break into the top 3 where 75% of clicks happen.</p>
         </div>
 
-        <!-- Center end dot -->
-        <div class="center-dot fade-up">
-            <div class="mini-circle" style="background:#e8a838; width:50px; height:50px; font-size:20px;"><i class="fa fa-star"></i></div>
+        <!-- ── END NODE ── -->
+        <div class="story-end fade-up">
+            <div class="end-star"><i class="fa fa-star"></i></div>
+            <p>
+                Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>
+                For the first time in history, this is actually realistic.
+            </p>
         </div>
 
-    </div>
-</div>
+    </div><!-- .chapter -->
+</div><!-- .story-section -->
 
-<!-- ══════ TRANSITION TO DETAIL ══════ -->
-<div class="path-to-detail"></div>
+<!-- ══════ TRANSITION ══════ -->
+<div class="transition-gradient"></div>
 
-<!-- ══════ BEFORE / AFTER DETAIL ══════ -->
+<!-- ══════ BEFORE / AFTER ══════ -->
 <section class="detail detail-dark">
     <div class="container">
         <div class="section-label fade-up">The Full Picture</div>
         <div class="section-accent fade-up"></div>
-        <h2 class="section-title fade-up">Before vs. After — Side by Side</h2>
-
+        <h2 class="section-title fade-up">Before vs. After</h2>
         <div class="ba-grid fade-up">
             <div class="ba-card ba-before">
                 <h3><i class="fa fa-times-circle"></i> Before</h3>
@@ -726,9 +565,7 @@
                     <li><span class="ic"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
                 </ul>
             </div>
-            <div class="ba-arrow">
-                <div class="ba-arrow-circle"><i class="fa fa-arrow-right"></i></div>
-            </div>
+            <div class="ba-arrow"><div class="ba-arrow-circle"><i class="fa fa-arrow-right"></i></div></div>
             <div class="ba-card ba-after">
                 <h3><i class="fa fa-check-circle"></i> After</h3>
                 <ul>
@@ -740,21 +577,15 @@
                 </ul>
             </div>
         </div>
-
-        <div class="quote-block fade-up">
-            <div class="quote-mark">"</div>
+        <div class="detail-quote fade-up">
+            <div class="detail-quote-mark">"</div>
             <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
-            <div class="attribution">— Dan, Co-Owner, EZ Homes</div>
+            <div class="attr">— Dan, Co-Owner, EZ Homes</div>
         </div>
     </div>
 </section>
 
-<!-- Wave -->
-<div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#f8fafc"/>
-    </svg>
-</div>
+<div class="wave-divider"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#f8fafc"/></svg></div>
 
 <!-- ══════ CALCULATOR ══════ -->
 <section class="calc-section">
@@ -763,55 +594,21 @@
         <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">See What's Possible</h2>
         <p class="section-sub fade-up">Pre-filled with industry averages. Adjust to match your business.</p>
-
         <div class="calc-box fade-up">
             <h3>ROI Calculator</h3>
             <div class="calc-subtitle">What happens when we improve your conversion infrastructure?</div>
-
-            <div class="calc-row">
-                <label>Leads per month</label>
-                <div class="input-row">
-                    <input type="range" id="leads" min="50" max="1000" value="300" step="10">
-                    <span class="val" id="leads-val">300</span>
-                </div>
-            </div>
-            <div class="calc-row">
-                <label>Current close rate</label>
-                <div class="input-row">
-                    <input type="range" id="closeRate" min="0.5" max="15" value="2" step="0.5">
-                    <span class="val" id="closeRate-val">2%</span>
-                </div>
-            </div>
-            <div class="calc-row">
-                <label>Average profit per deal</label>
-                <div class="input-row">
-                    <input type="range" id="margin" min="2000" max="50000" value="10000" step="500">
-                    <span class="val" id="margin-val">$10,000</span>
-                </div>
-            </div>
-            <div class="calc-row">
-                <label>Close rate after optimization</label>
-                <div class="input-row">
-                    <input type="range" id="newRate" min="1" max="20" value="5" step="0.5">
-                    <span class="val" id="newRate-val">5%</span>
-                </div>
-            </div>
-
+            <div class="calc-row"><label>Leads per month</label><div class="input-row"><input type="range" id="leads" min="50" max="1000" value="300" step="10"><span class="val" id="leads-val">300</span></div></div>
+            <div class="calc-row"><label>Current close rate</label><div class="input-row"><input type="range" id="closeRate" min="0.5" max="15" value="2" step="0.5"><span class="val" id="closeRate-val">2%</span></div></div>
+            <div class="calc-row"><label>Average profit per deal</label><div class="input-row"><input type="range" id="margin" min="2000" max="50000" value="10000" step="500"><span class="val" id="margin-val">$10,000</span></div></div>
+            <div class="calc-row"><label>Close rate after optimization</label><div class="input-row"><input type="range" id="newRate" min="1" max="20" value="5" step="0.5"><span class="val" id="newRate-val">5%</span></div></div>
             <hr class="calc-divider">
-
             <div class="calc-result">
                 <div class="result-label">Additional Annual Revenue</div>
                 <div class="result-number" id="result-revenue">$360,000</div>
                 <div class="result-sub" id="result-sub">That's 36 extra deals you're currently leaving on the table</div>
                 <div class="calc-results-grid">
-                    <div class="mini-result">
-                        <div class="mini-number" id="result-current">$72,000</div>
-                        <div class="mini-label">Current Annual Revenue</div>
-                    </div>
-                    <div class="mini-result">
-                        <div class="mini-number" id="result-new">$432,000</div>
-                        <div class="mini-label">Projected Annual Revenue</div>
-                    </div>
+                    <div class="mini-result"><div class="mini-number" id="result-current">$72,000</div><div class="mini-label">Current Annual Revenue</div></div>
+                    <div class="mini-result"><div class="mini-number" id="result-new">$432,000</div><div class="mini-label">Projected Annual Revenue</div></div>
                 </div>
             </div>
             <p class="calc-note">These calculations use your inputs only. No data is sent anywhere.</p>
@@ -819,12 +616,7 @@
     </div>
 </section>
 
-<!-- Wave -->
-<div class="wave-divider">
-    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#ffffff"/>
-    </svg>
-</div>
+<div class="wave-divider"><svg viewBox="0 0 1440 60" preserveAspectRatio="none"><path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#ffffff"/></svg></div>
 
 <!-- ══════ NEW VEHICLE ══════ -->
 <section class="detail detail-light">
@@ -833,37 +625,12 @@
         <div class="section-accent fade-up"></div>
         <h2 class="section-title fade-up">You Don't Need More Leads. You Need a New Vehicle.</h2>
         <p class="section-sub fade-up">The old playbook doesn't scale. What if the bottleneck isn't volume — it's infrastructure?</p>
-
         <div class="vehicle-grid fade-up">
-            <div class="v-card v-old">
-                <h4>The Old Way</h4>
-                <ul>
-                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hire more salespeople</li>
-                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Spend $5K+/mo on marketing</li>
-                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Answer every call yourself</li>
-                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hope the CRM doesn't break</li>
-                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Lose 98% of leads anyway</li>
-                </ul>
-            </div>
-            <div class="v-arrow">
-                <div class="v-arrow-icon"><i class="fa fa-arrow-right"></i></div>
-            </div>
-            <div class="v-card v-new">
-                <h4>The New Vehicle</h4>
-                <ul>
-                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> AI responds in &lt;60 seconds, 24/7</li>
-                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Every lead scored & routed automatically</li>
-                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> 90-day nurture runs itself</li>
-                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> You only talk to qualified, ready buyers</li>
-                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Close 3-5x more from the same leads</li>
-                </ul>
-            </div>
+            <div class="v-card v-old"><h4>The Old Way</h4><ul><li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hire more salespeople</li><li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Spend $5K+/mo on marketing</li><li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Answer every call yourself</li><li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hope the CRM doesn't break</li><li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Lose 98% of leads anyway</li></ul></div>
+            <div class="v-arrow"><div class="v-arrow-icon"><i class="fa fa-arrow-right"></i></div></div>
+            <div class="v-card v-new"><h4>The New Vehicle</h4><ul><li><i class="fa fa-bolt" style="color:#248ADE;"></i> AI responds in &lt;60 seconds, 24/7</li><li><i class="fa fa-bolt" style="color:#248ADE;"></i> Every lead scored & routed automatically</li><li><i class="fa fa-bolt" style="color:#248ADE;"></i> 90-day nurture runs itself</li><li><i class="fa fa-bolt" style="color:#248ADE;"></i> You only talk to qualified, ready buyers</li><li><i class="fa fa-bolt" style="color:#248ADE;"></i> Close 3-5x more from the same leads</li></ul></div>
         </div>
-
-        <p class="v-punchline fade-up">
-            Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>
-            For the first time in history, this is actually realistic.
-        </p>
+        <p class="v-punchline fade-up">Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>For the first time in history, this is actually realistic.</p>
     </div>
 </section>
 
@@ -877,16 +644,12 @@
     </div>
 </section>
 
-<!-- ══════ FOOTER ══════ -->
 <footer class="footer">
     <div class="container">
         <div><span>Copyright &copy; <b>EZ Homes</b> 2016</span></div>
         <div><a href="https://www.ezhomesfast.com/Sales/About/TermsOfUse">Terms of Use</a> &middot; <a href="https://www.ezhomesfast.com/Sales/About/PrivacyPolicy">Privacy Policy</a></div>
-        <div style="display: flex; align-items: center; gap: 16px;">
-            <ul class="social-buttons">
-                <li><a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a></li>
-                <li><a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a></li>
-            </ul>
+        <div style="display:flex;align-items:center;gap:16px;">
+            <ul class="social-buttons"><li><a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a></li><li><a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a></li></ul>
             <span><span class="fa fa-phone"></span> (248) 760-3841 | <span class="fa fa-phone"></span> (810) 614-9181</span>
         </div>
     </div>
@@ -900,36 +663,21 @@ document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
 const $ = id => document.getElementById(id);
 function fmt(n) { return n >= 1000 ? '$' + n.toLocaleString('en-US') : '$' + n; }
-
 function calc() {
-    const leads = +$('leads').value;
-    const closeRate = +$('closeRate').value;
-    const margin = +$('margin').value;
-    const newRate = +$('newRate').value;
-
-    const currentDeals = leads * 12 * (closeRate / 100);
-    const newDeals = leads * 12 * (newRate / 100);
-    const extraDeals = newDeals - currentDeals;
-    const extraRev = extraDeals * margin;
-    const currentRev = currentDeals * margin;
-    const newRev = newDeals * margin;
-
+    const leads = +$('leads').value, closeRate = +$('closeRate').value, margin = +$('margin').value, newRate = +$('newRate').value;
+    const currentDeals = leads * 12 * (closeRate / 100), newDeals = leads * 12 * (newRate / 100);
+    const extraDeals = newDeals - currentDeals, extraRev = extraDeals * margin;
     $('leads-val').textContent = leads;
     $('closeRate-val').textContent = closeRate + '%';
     $('margin-val').textContent = fmt(margin);
     $('newRate-val').textContent = newRate + '%';
-
     $('result-revenue').textContent = fmt(Math.round(extraRev));
     $('result-sub').textContent = "That's " + Math.round(extraDeals) + " extra deals you're currently leaving on the table";
-    $('result-current').textContent = fmt(Math.round(currentRev));
-    $('result-new').textContent = fmt(Math.round(newRev));
+    $('result-current').textContent = fmt(Math.round(currentDeals * margin));
+    $('result-new').textContent = fmt(Math.round(newDeals * margin));
 }
-
-['leads', 'closeRate', 'margin', 'newRate'].forEach(id => {
-    $(id).addEventListener('input', calc);
-});
+['leads', 'closeRate', 'margin', 'newRate'].forEach(id => { $(id).addEventListener('input', calc); });
 calc();
 </script>
-
 </body>
 </html>
