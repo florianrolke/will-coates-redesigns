@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EZ Homes — Your Transformation Path</title>
+    <link rel="icon" href="https://www.ezhomesfast.com/areas/sales/content/assets/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700;800&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Open Sans', sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; }
+        a { color: #50A2E5; text-decoration: none; }
+        img { max-width: 100%; height: auto; }
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .narrative { font-family: 'Playfair Display', Georgia, serif; }
+
+        /* ── NAV ── */
+        .navbar { background: #fff; border-bottom: 1px solid #e7e7e7; }
+        .topbar-nav { background: #248ADE; color: #fff; font-size: 13px; padding: 6px 0; }
+        .topbar-nav .container { display: flex; justify-content: space-between; align-items: center; }
+        .topbar-nav ul { list-style: none; display: flex; gap: 20px; }
+        .topbar-nav .fa-phone { margin-right: 4px; }
+        .navbar-main { display: flex; align-items: center; justify-content: space-between; padding: 10px 0; }
+        .img-logo { max-height: 50px; }
+        .nav-links { list-style: none; display: flex; gap: 0; }
+        .nav-links li a { display: block; padding: 10px 14px; color: #555; font-size: 14px; }
+
+        /* ── HERO ── */
+        .hero-banner { text-align: center; padding: 40px 0 0; }
+        .hero-banner h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 25px; }
+        .hero-gradient { height: 100px; background: linear-gradient(180deg, #fff 0%, #d6eaf8 100%); }
+
+        /* ── HOOK ── */
+        .hook-section { background: #d6eaf8; padding: 40px 0 20px; text-align: center; }
+        .hook-line { font-size: 24px; font-weight: 300; color: #2c3e50; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+        .hook-line strong { color: #248ADE; font-weight: 700; }
+
+        /* ══════════════════════════════════════════
+           WINDING ROAD PATH
+           ══════════════════════════════════════════ */
+        .story-section {
+            background: linear-gradient(180deg, #d6eaf8 0%, #c8e2f7 20%, #bddaf3 50%, #aed0ee 80%, #9cc9eb 100%);
+            padding: 60px 0 40px;
+            position: relative;
+            overflow: hidden;
+        }
+        .story-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 60%;
+            opacity: 0.04;
+            background-image:
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 300'%3E%3Crect x='50' y='100' width='60' height='200' fill='%231a3a5c'/%3E%3Crect x='120' y='60' width='40' height='240' fill='%231a3a5c'/%3E%3Crect x='170' y='130' width='70' height='170' fill='%231a3a5c'/%3E%3Crect x='260' y='80' width='50' height='220' fill='%231a3a5c'/%3E%3Crect x='320' y='150' width='80' height='150' fill='%231a3a5c'/%3E%3Crect x='420' y='90' width='45' height='210' fill='%231a3a5c'/%3E%3Crect x='480' y='120' width='65' height='180' fill='%231a3a5c'/%3E%3Crect x='560' y='70' width='55' height='230' fill='%231a3a5c'/%3E%3Crect x='630' y='140' width='75' height='160' fill='%231a3a5c'/%3E%3Crect x='720' y='100' width='50' height='200' fill='%231a3a5c'/%3E%3Crect x='790' y='60' width='40' height='240' fill='%231a3a5c'/%3E%3Crect x='850' y='110' width='70' height='190' fill='%231a3a5c'/%3E%3Crect x='940' y='80' width='55' height='220' fill='%231a3a5c'/%3E%3Crect x='1010' y='130' width='60' height='170' fill='%231a3a5c'/%3E%3Crect x='1090' y='90' width='45' height='210' fill='%231a3a5c'/%3E%3C/svg%3E");
+            background-size: 1200px 300px;
+            background-repeat: repeat-x;
+            background-position: bottom;
+            pointer-events: none;
+        }
+
+        .story-header { text-align: center; margin-bottom: 50px; position: relative; z-index: 2; }
+        .story-header h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #1a3a5c; margin-bottom: 10px; }
+        .story-header p { font-size: 15px; color: #5a7d9a; max-width: 520px; margin: 0 auto; }
+
+        .road-wrapper { position: relative; max-width: 1000px; margin: 0 auto; padding: 0 20px; }
+        .road-svg-container { position: absolute; top: 0; left: 0; right: 0; bottom: 0; z-index: 0; pointer-events: none; }
+        .road-svg-container svg { width: 100%; height: 100%; }
+
+        .road-stop { position: relative; z-index: 2; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; padding: 50px 0; }
+        .road-stop-content { padding: 0 10px; }
+        .road-stop-visual { display: flex; justify-content: center; align-items: center; }
+        .road-stop.left .road-stop-content { grid-column: 1; }
+        .road-stop.left .road-stop-visual { grid-column: 2; }
+        .road-stop.right .road-stop-visual { grid-column: 1; grid-row: 1; }
+        .road-stop.right .road-stop-content { grid-column: 2; grid-row: 1; }
+        .road-img { border-radius: 16px; overflow: hidden; box-shadow: 0 8px 32px rgba(26,58,92,0.18); border: 3px solid rgba(255,255,255,0.7); max-width: 420px; }
+        .road-img img { display: block; width: 100%; border-radius: 13px; }
+        .road-node { width: 100px; height: 100px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-size: 36px; position: relative; box-shadow: 0 6px 24px rgba(0,0,0,0.15); }
+        .road-node::before { content: ''; position: absolute; width: 120px; height: 120px; border-radius: 50%; border: 3px solid rgba(255,255,255,0.5); top: -10px; left: -10px; }
+        .road-node::after { content: ''; position: absolute; width: 130px; height: 130px; border-radius: 50%; border: 3px solid rgba(243,156,18,0.5); border-top-color: transparent; border-left-color: transparent; top: -15px; left: -15px; }
+
+        .chapter-number { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; border-radius: 50%; font-size: 16px; font-weight: 800; color: #fff; margin-bottom: 14px; box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+        .chapter-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 3px; color: #7f8c8d; margin-bottom: 8px; }
+        .chapter-title { font-family: 'Playfair Display', serif; font-size: 26px; font-weight: 700; color: #1a3a5c; margin-bottom: 12px; line-height: 1.3; }
+        .chapter-body { font-size: 15px; color: #5a7d9a; line-height: 1.7; }
+        .chapter-body strong { color: #1a3a5c; }
+
+        .pill-label { display: inline-block; padding: 6px 20px; border-radius: 20px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #fff; margin-bottom: 10px; }
+        .big-stat { font-size: 40px; font-weight: 800; color: #1a3a5c; display: block; margin-bottom: 6px; }
+        .stop-desc { font-size: 14px; color: #5a7d9a; max-width: 380px; line-height: 1.6; }
+        .stop-desc strong { color: #1a3a5c; }
+
+        .quote-interlude { background: rgba(26,58,92,0.06); border-radius: 16px; padding: 36px 40px; max-width: 700px; margin: 0 auto; text-align: center; position: relative; z-index: 2; }
+        .quote-interlude::before { content: '\201C'; position: absolute; top: 8px; left: 50%; transform: translateX(-50%); font-size: 80px; font-weight: 800; color: rgba(36,138,222,0.1); font-family: Georgia, serif; }
+        .quote-interlude p { font-family: 'Playfair Display', serif; font-size: 18px; font-style: italic; color: #2c3e50; line-height: 1.7; position: relative; margin-bottom: 10px; }
+        .quote-interlude .attr { font-size: 13px; font-weight: 700; color: #248ADE; font-family: 'Open Sans', sans-serif; font-style: normal; }
+
+        .road-end { text-align: center; padding: 40px 0 20px; position: relative; z-index: 2; }
+        .end-star { width: 70px; height: 70px; border-radius: 50%; background: linear-gradient(135deg, #f39c12, #e67e22); color: #fff; font-size: 28px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; box-shadow: 0 6px 24px rgba(243,156,18,0.35), 0 0 0 6px rgba(243,156,18,0.15); }
+        .road-end p { font-family: 'Playfair Display', serif; font-size: 20px; color: #1a3a5c; max-width: 480px; margin: 0 auto; line-height: 1.5; }
+        .road-end p strong { color: #248ADE; }
+
+        /* ══════════════════════════════════════════
+           SPLIT-PANEL SECTIONS (99designs inspired)
+           ══════════════════════════════════════════ */
+
+        /* Before/After — Dilworth Capital diagonal style */
+        .ba-split { position: relative; min-height: 600px; display: flex; overflow: hidden; }
+        .ba-split-left, .ba-split-right { flex: 1; position: relative; display: flex; align-items: center; justify-content: center; padding: 60px 40px; }
+        .ba-split-left { background: linear-gradient(135deg, #1a2332 0%, #0f1b2d 100%); }
+        .ba-split-left::after {
+            content: '';
+            position: absolute;
+            top: 0; right: -80px; bottom: 0;
+            width: 160px;
+            background: linear-gradient(135deg, #1a2332 0%, #0f1b2d 100%);
+            transform: skewX(-6deg);
+            z-index: 2;
+        }
+        .ba-split-right {
+            background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1200&q=70');
+            background-size: cover;
+            background-position: center;
+        }
+        .ba-split-right::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(36,138,222,0.85) 0%, rgba(21,101,160,0.9) 100%);
+        }
+        .ba-card-panel { position: relative; z-index: 3; max-width: 420px; }
+        .ba-card-panel .panel-tag { display: inline-block; padding: 6px 18px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: #fff; margin-bottom: 18px; }
+        .ba-card-panel h3 { font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 700; color: #fff; margin-bottom: 20px; line-height: 1.3; }
+        .ba-card-panel ul { list-style: none; padding: 0; }
+        .ba-card-panel li { font-size: 15px; padding: 10px 0; color: rgba(255,255,255,0.85); border-bottom: 1px solid rgba(255,255,255,0.08); display: flex; align-items: flex-start; gap: 10px; line-height: 1.5; }
+        .ba-card-panel li:last-child { border-bottom: none; }
+        .ba-card-panel li .ic { color: #e74c3c; flex-shrink: 0; margin-top: 3px; }
+        .ba-card-panel.after-panel li .ic { color: #27ae60; }
+
+        .ba-center-badge {
+            position: absolute;
+            left: 50%; top: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 10;
+            width: 80px; height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 8px 32px rgba(243,156,18,0.4), 0 0 0 6px rgba(255,255,255,0.2);
+        }
+
+        /* Quote banner — Lumina Medtech blue gradient style */
+        .quote-banner {
+            background: linear-gradient(135deg, #248ADE 0%, #1a6fc4 40%, #1565a0 100%);
+            padding: 60px 24px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .quote-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%; right: -20%;
+            width: 80%;
+            height: 200%;
+            background: rgba(255,255,255,0.04);
+            border-radius: 50%;
+            transform: rotate(-15deg);
+        }
+        .quote-banner blockquote {
+            font-family: 'Playfair Display', serif;
+            font-size: 22px;
+            font-style: italic;
+            color: #fff;
+            max-width: 700px;
+            margin: 0 auto 12px;
+            line-height: 1.7;
+            position: relative;
+        }
+        .quote-banner .q-attr { font-size: 14px; font-weight: 700; color: rgba(255,255,255,0.7); position: relative; }
+
+        /* Calculator — Tampa real estate clean card style */
+        .calc-section {
+            background: #f8fafc;
+            text-align: center;
+            padding: 90px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .calc-section::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 200px;
+            background: linear-gradient(180deg, transparent, rgba(36,138,222,0.03));
+        }
+        .section-label { text-transform: uppercase; font-size: 11px; font-weight: 700; letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px; }
+        .section-accent { width: 50px; height: 3px; background: #248ADE; margin: 0 auto 20px; border-radius: 2px; }
+        .section-title { font-size: 34px; font-weight: 800; margin-bottom: 14px; line-height: 1.2; color: #1a1a2e; }
+        .section-sub { font-size: 16px; max-width: 600px; margin: 0 auto 40px; line-height: 1.7; color: #666; }
+
+        .calc-box { background: #fff; border-radius: 20px; padding: 44px 40px; max-width: 700px; margin: 0 auto; border: 2px solid #e8eef5; text-align: left; position: relative; z-index: 1; box-shadow: 0 4px 24px rgba(0,0,0,0.04); }
+        .calc-box h3 { font-size: 22px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; text-align: center; }
+        .calc-box .calc-subtitle { font-size: 13px; color: #888; text-align: center; margin-bottom: 28px; }
+        .calc-row { margin-bottom: 22px; }
+        .calc-row label { display: block; font-size: 11px; font-weight: 700; color: #555; margin-bottom: 7px; text-transform: uppercase; letter-spacing: 1px; }
+        .calc-row .input-row { display: flex; align-items: center; gap: 14px; }
+        .calc-row input[type="range"] { flex: 1; height: 8px; -webkit-appearance: none; appearance: none; background: #e2eaf3; border-radius: 4px; outline: none; }
+        .calc-row input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #248ADE; cursor: pointer; box-shadow: 0 2px 8px rgba(36,138,222,0.3); }
+        .calc-row input[type="range"]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; border: none; background: #248ADE; cursor: pointer; }
+        .calc-row .val { min-width: 85px; font-size: 18px; font-weight: 800; color: #248ADE; text-align: right; }
+        .calc-divider { border: none; border-top: 2px dashed #e2eaf3; margin: 28px 0; }
+        .calc-result { background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%); border-radius: 14px; padding: 28px 24px; color: #fff; text-align: center; box-shadow: 0 8px 32px rgba(36,138,222,0.25); }
+        .calc-result .result-label { font-size: 11px; opacity: 0.8; margin-bottom: 4px; text-transform: uppercase; letter-spacing: 2px; }
+        .calc-result .result-number { font-size: 42px; font-weight: 800; }
+        .calc-result .result-sub { font-size: 13px; opacity: 0.7; margin-top: 6px; }
+        .calc-results-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+        .calc-results-grid .mini-result { background: rgba(255,255,255,0.1); border-radius: 10px; padding: 14px; }
+        .calc-results-grid .mini-number { font-size: 22px; font-weight: 800; }
+        .calc-results-grid .mini-label { font-size: 10px; opacity: 0.75; }
+        .calc-note { font-size: 11px; color: #aaa; text-align: center; margin-top: 16px; }
+
+        /* ══════════════════════════════════════════
+           DUAL IMAGE PANELS — Tampa Real Estate style
+           ══════════════════════════════════════════ */
+        .dual-panels { display: grid; grid-template-columns: 1fr 1fr; min-height: 550px; }
+        .dual-panel { position: relative; display: flex; align-items: flex-end; justify-content: center; padding: 60px 40px; overflow: hidden; }
+        .dual-panel .dp-bg { position: absolute; inset: 0; background-size: cover; background-position: center; transition: transform 0.5s ease; }
+        .dual-panel:hover .dp-bg { transform: scale(1.03); }
+        .dual-panel .dp-overlay { position: absolute; inset: 0; }
+        .dp-card {
+            position: relative; z-index: 2;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(8px);
+            border-radius: 12px;
+            padding: 36px 32px;
+            max-width: 380px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+        }
+        .dp-card h3 { font-family: 'Playfair Display', serif; font-size: 24px; font-weight: 700; color: #1a1a2e; margin-bottom: 6px; letter-spacing: 2px; text-transform: uppercase; }
+        .dp-card .dp-rule { width: 40px; height: 3px; background: #248ADE; margin: 12px auto 16px; border-radius: 2px; }
+        .dp-card p { font-size: 14px; color: #555; line-height: 1.7; margin-bottom: 20px; }
+        .dp-card .dp-btn { display: inline-block; padding: 12px 32px; border: 2px solid #1a1a2e; color: #1a1a2e; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: all 0.3s; }
+        .dp-card .dp-btn:hover { background: #248ADE; border-color: #248ADE; color: #fff; }
+
+        /* ══════════════════════════════════════════
+           CITYSCAPE ICON BANNER — Tampa footer style
+           ══════════════════════════════════════════ */
+        .icon-banner {
+            position: relative;
+            background: linear-gradient(180deg, #e8f2fa 0%, #d0e5f5 100%);
+            padding: 60px 24px;
+            text-align: center;
+            overflow: hidden;
+        }
+        .icon-banner::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 120px;
+            opacity: 0.06;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Crect x='50' y='20' width='30' height='100' fill='%231a3a5c'/%3E%3Crect x='90' y='40' width='50' height='80' fill='%231a3a5c'/%3E%3Crect x='150' y='10' width='25' height='110' fill='%231a3a5c'/%3E%3Crect x='185' y='50' width='40' height='70' fill='%231a3a5c'/%3E%3Crect x='240' y='30' width='35' height='90' fill='%231a3a5c'/%3E%3Crect x='290' y='15' width='20' height='105' fill='%231a3a5c'/%3E%3Crect x='325' y='45' width='55' height='75' fill='%231a3a5c'/%3E%3Crect x='400' y='25' width='30' height='95' fill='%231a3a5c'/%3E%3Crect x='450' y='35' width='45' height='85' fill='%231a3a5c'/%3E%3Crect x='510' y='10' width='25' height='110' fill='%231a3a5c'/%3E%3Crect x='550' y='50' width='60' height='70' fill='%231a3a5c'/%3E%3Crect x='630' y='20' width='35' height='100' fill='%231a3a5c'/%3E%3Crect x='680' y='40' width='40' height='80' fill='%231a3a5c'/%3E%3Crect x='740' y='15' width='25' height='105' fill='%231a3a5c'/%3E%3Crect x='780' y='30' width='50' height='90' fill='%231a3a5c'/%3E%3Crect x='850' y='45' width='30' height='75' fill='%231a3a5c'/%3E%3Crect x='900' y='10' width='40' height='110' fill='%231a3a5c'/%3E%3Crect x='960' y='35' width='35' height='85' fill='%231a3a5c'/%3E%3Crect x='1010' y='20' width='55' height='100' fill='%231a3a5c'/%3E%3Crect x='1080' y='40' width='30' height='80' fill='%231a3a5c'/%3E%3Crect x='1130' y='25' width='45' height='95' fill='%231a3a5c'/%3E%3C/svg%3E");
+            background-size: 1200px 120px;
+            background-repeat: repeat-x;
+            background-position: bottom;
+        }
+        .icon-banner .ib-quote { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: #5a7d9a; max-width: 700px; margin: 0 auto 10px; position: relative; }
+        .icon-banner .ib-tagline { font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #1a3a5c; margin-bottom: 36px; position: relative; }
+        .icon-row { display: flex; justify-content: center; gap: 60px; flex-wrap: wrap; position: relative; }
+        .icon-item { text-align: center; }
+        .icon-item .ii-circle { width: 56px; height: 56px; margin: 0 auto 10px; border-radius: 50%; background: #fff; display: flex; align-items: center; justify-content: center; color: #248ADE; font-size: 22px; box-shadow: 0 2px 12px rgba(36,138,222,0.1); }
+        .icon-item .ii-label { font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: #1a3a5c; }
+
+        /* ══════════════════════════════════════════
+           FULL-BLEED STORY ARC SECTIONS
+           ══════════════════════════════════════════ */
+        .fb-story { position: relative; min-height: 85vh; display: flex; align-items: center; justify-content: center; overflow: hidden; z-index: 1; }
+        .fb-story .fb-bg { position: absolute; inset: -20px; background-size: cover; background-position: center; z-index: 0; }
+        .fb-story .fb-overlay { position: absolute; inset: 0; z-index: 1; }
+        .fb-story .fb-content { position: relative; z-index: 2; max-width: 880px; padding: 80px 32px; text-align: center; }
+        .fb-eyebrow { font-size: 12px; font-weight: 700; letter-spacing: 5px; text-transform: uppercase; margin-bottom: 18px; }
+        .fb-headline { font-size: 46px; font-weight: 800; line-height: 1.15; margin-bottom: 22px; color: #fff; }
+        .fb-body { font-size: 18px; font-weight: 300; line-height: 1.7; max-width: 620px; margin: 0 auto 24px; color: rgba(255,255,255,0.8); }
+        .fb-stat { font-size: 60px; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+        .fb-stat-label { font-size: 13px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,0.55); }
+        .fb-divider { width: 50px; height: 3px; margin: 18px auto; border-radius: 2px; }
+
+        .fb-s1 .fb-bg { background-image: url('https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=1800&q=70'); background-position: center 40%; }
+        .fb-s1 .fb-overlay { background: linear-gradient(180deg, rgba(15,27,45,0.88) 0%, rgba(15,27,45,0.6) 45%, rgba(15,27,45,0.82) 100%); }
+        .fb-s1 .fb-eyebrow { color: #e8a838; } .fb-s1 .fb-stat { color: #e8a838; } .fb-s1 .fb-divider { background: #e8a838; }
+
+        .fb-s2 .fb-bg { background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=1800&q=70'); background-position: center 30%; }
+        .fb-s2 .fb-overlay { background: linear-gradient(180deg, rgba(10,14,23,0.55) 0%, rgba(10,14,23,0.35) 35%, rgba(10,14,23,0.7) 100%); }
+        .fb-s2 .fb-eyebrow { color: #50A2E5; } .fb-s2 .fb-stat { color: #fff; } .fb-s2 .fb-divider { background: #50A2E5; }
+
+        .fb-s3 .fb-bg { background-image: url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=1800&q=70'); background-position: center 60%; }
+        .fb-s3 .fb-overlay { background: linear-gradient(180deg, rgba(15,27,45,0.85) 0%, rgba(15,27,45,0.55) 50%, rgba(15,27,45,0.82) 100%); }
+        .fb-s3 .fb-eyebrow { color: #27ae60; } .fb-s3 .fb-stat { color: #27ae60; } .fb-s3 .fb-divider { background: #27ae60; }
+
+        .fb-s4 .fb-bg { background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=1800&q=70'); }
+        .fb-s4 .fb-overlay { background: linear-gradient(180deg, rgba(15,27,45,0.75) 0%, rgba(36,138,222,0.2) 50%, rgba(15,27,45,0.8) 100%); }
+        .fb-s4 .fb-eyebrow { color: #f39c12; } .fb-s4 .fb-stat { color: #f39c12; } .fb-s4 .fb-divider { background: #f39c12; }
+
+        /* ══════════════════════════════════════════
+           TEAM — Dilworth Capital diagonal hero + Lumina grid
+           ══════════════════════════════════════════ */
+        .team-diagonal {
+            position: relative;
+            min-height: 500px;
+            display: flex;
+            overflow: hidden;
+            background: #fff;
+        }
+        .team-diag-photo {
+            flex: 1;
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=1200&q=70');
+            background-size: cover;
+            background-position: center;
+        }
+        .team-diag-content {
+            flex: 1;
+            position: relative;
+            display: flex;
+            align-items: center;
+            padding: 60px 50px;
+            background: #fff;
+        }
+        .team-diag-content::before {
+            content: '';
+            position: absolute;
+            top: 0; left: -80px; bottom: 0;
+            width: 160px;
+            background: #fff;
+            transform: skewX(-6deg);
+            z-index: 2;
+        }
+        .team-diag-inner { position: relative; z-index: 3; max-width: 460px; }
+        .team-diag-inner .td-label { font-size: 12px; font-weight: 700; letter-spacing: 4px; text-transform: uppercase; color: #248ADE; margin-bottom: 16px; }
+        .team-diag-inner h2 { font-family: 'Playfair Display', serif; font-size: 36px; font-weight: 700; color: #1a1a2e; line-height: 1.2; margin-bottom: 20px; }
+        .team-diag-inner .td-rule { width: 50px; height: 3px; background: #248ADE; margin-bottom: 20px; border-radius: 2px; }
+        .team-diag-inner p { font-size: 15px; color: #555; line-height: 1.8; margin-bottom: 14px; }
+
+        /* Team features — Lumina Medtech card row */
+        .team-features { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; max-width: 1100px; margin: 0 auto; padding: 60px 24px 80px; }
+        .team-feature-card { background: #f8fafc; border: 1px solid #e8eef5; border-radius: 16px; padding: 32px 24px; text-align: left; transition: transform 0.2s, box-shadow 0.2s; }
+        .team-feature-card:hover { transform: translateY(-4px); box-shadow: 0 8px 32px rgba(36,138,222,0.08); }
+        .team-feature-card .feature-icon { width: 52px; height: 52px; border-radius: 12px; background: linear-gradient(135deg, #248ADE, #1a5fa8); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 22px; margin-bottom: 18px; }
+        .team-feature-card h4 { font-size: 15px; font-weight: 800; color: #1a1a2e; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 10px; }
+        .team-feature-card p { font-size: 13px; color: #777; line-height: 1.6; }
+
+        /* Team members */
+        .team-members-section { background: #f8fafc; padding: 80px 0; }
+        .team-members-header { padding: 0 24px; max-width: 1100px; margin: 0 auto 48px; }
+        .team-members-header h3 { font-size: 36px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
+        .team-members-header .tm-subtitle { font-size: 14px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase; color: #888; margin-bottom: 16px; }
+        .team-members-header .tm-rule { width: 50px; height: 3px; background: #248ADE; border-radius: 2px; }
+        .team-members-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+        .team-member { text-align: center; }
+        .team-member .member-photo { width: 100%; aspect-ratio: 3/4; border-radius: 16px; background: linear-gradient(135deg, #e8eef5, #d6e4f0); display: flex; flex-direction: column; align-items: center; justify-content: center; color: #b0c4d8; font-size: 14px; margin-bottom: 16px; border: 2px dashed #c8d8e8; overflow: hidden; }
+        .team-member .member-photo i { font-size: 48px; margin-bottom: 8px; }
+        .team-member h4 { font-size: 18px; font-weight: 800; color: #1a1a2e; margin-bottom: 4px; }
+        .team-member .member-role { font-size: 13px; color: #248ADE; font-weight: 600; }
+
+        /* CTA */
+        .cta-section { background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%); text-align: center; padding: 90px 0; position: relative; overflow: hidden; }
+        .cta-section::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%); }
+        .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 14px; position: relative; z-index: 1; }
+        .cta-sub { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; position: relative; z-index: 1; }
+        .cta-btn { display: inline-block; background: #fff; color: #248ADE; padding: 16px 44px; border-radius: 8px; font-size: 17px; font-weight: 800; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative; z-index: 1; }
+        .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); color: #1a5fa8; }
+        .cta-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 14px; position: relative; z-index: 1; }
+
+        .footer { background: #0a0e17; color: rgba(255,255,255,0.4); padding: 32px 0; font-size: 13px; }
+        .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+        .footer a { color: rgba(255,255,255,0.4); font-size: 12px; } .footer a:hover { color: #fff; }
+        .footer .social-buttons { list-style: none; display: flex; gap: 10px; padding: 0; }
+        .footer .social-buttons a { display: inline-flex; align-items: center; justify-content: center; width: 36px; height: 36px; background: rgba(255,255,255,0.06); border-radius: 50%; color: rgba(255,255,255,0.4); font-size: 15px; }
+        .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
+
+        @media (max-width: 768px) {
+            .road-stop { grid-template-columns: 1fr; gap: 20px; }
+            .road-stop.right .road-stop-visual { grid-column: 1; grid-row: 1; }
+            .road-stop.right .road-stop-content { grid-column: 1; grid-row: 2; }
+            .road-svg-container { display: none; }
+            .story-header h2 { font-size: 28px; }
+            .chapter-title { font-size: 22px; }
+            .big-stat { font-size: 30px; }
+            .calc-box { padding: 28px 18px; }
+            .calc-results-grid { grid-template-columns: 1fr; }
+            .nav-links { display: none; }
+            .hero-banner h2, .cta-section h2 { font-size: 24px; }
+            .section-title { font-size: 26px; }
+            .fb-headline { font-size: 30px; }
+            .fb-stat { font-size: 42px; }
+            .fb-story { min-height: 70vh; }
+            .ba-split { flex-direction: column; }
+            .ba-split-left::after { display: none; }
+            .ba-split-left, .ba-split-right { min-height: 400px; }
+            .dual-panels { grid-template-columns: 1fr; }
+            .dual-panel { min-height: 400px; }
+            .icon-row { gap: 30px; }
+            .team-diagonal { flex-direction: column; }
+            .team-diag-content::before { display: none; }
+            .team-diag-photo { min-height: 300px; }
+            .team-features { grid-template-columns: 1fr 1fr; }
+            .team-members-grid { grid-template-columns: 1fr; max-width: 360px; }
+            .team-diag-inner h2 { font-size: 28px; }
+        }
+
+        .fade-up { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .fade-up.visible { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+
+<!-- ══════ NAV ══════ -->
+<nav class="navbar">
+    <div class="topbar-nav">
+        <div class="container">
+            <ul><li><span class="fa fa-phone"></span> (810) 614 - 9181</li><li><span class="fa fa-phone"></span> (248) 760 - 3841</li></ul>
+            <ul><li>Inventory Acquisition And Retention Specialists</li></ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="navbar-main">
+            <a href="https://www.ezhomesfast.com/"><img src="https://www.ezhomesfast.com/areas/sales/content/assets/img/EZHomes_Logo_color.png" class="img-logo" alt="EZ Homes"></a>
+            <ul class="nav-links">
+                <li><a href="https://www.ezhomesfast.com/">Current Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Future">Future Inventory</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Property/New?source=ezhomesfast">Sell a Home</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/Inventory/Sold">Sold Homes</a></li>
+                <li><a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<!-- ══════ HERO ══════ -->
+<section class="hero-banner" style="padding-bottom:0;">
+    <div class="container">
+        <h2>Offering the Best in Pre-Owned Manufactured Homes</h2>
+        <img src="https://www.ezhomesfast.com/Areas/Sales/Content/banner2.png" alt="EZ Homes Banner">
+    </div>
+</section>
+<div class="hero-gradient"></div>
+
+<!-- ══════ HOOK ══════ -->
+<section class="hook-section">
+    <div class="container">
+        <p class="hook-line fade-up">
+            Dan, you told us you get <strong>300 leads every single month</strong>.<br>
+            What if you could turn the <strong>98% you're currently losing</strong> into closed deals?
+        </p>
+    </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     THE HERO'S ARC — Winding Road Path
+     ══════════════════════════════════════════ -->
+<div class="story-section">
+    <div class="container">
+        <div class="story-header fade-up">
+            <h2>Every Hero Has an Arc</h2>
+            <p>This is the story of a business owner who built everything himself — and what happened when he finally got the guide he needed.</p>
+        </div>
+    </div>
+
+    <div class="road-wrapper" id="roadWrapper">
+        <div class="road-svg-container" id="roadSvg"></div>
+
+        <!-- STOP 1: The Ordinary World -->
+        <div class="road-stop left fade-up">
+            <div class="road-stop-content">
+                <div class="chapter-number" style="background: linear-gradient(135deg, #e74c3c, #c0392b);">1</div>
+                <div class="chapter-label">Chapter One</div>
+                <h3 class="chapter-title">The Ordinary World</h3>
+                <p class="chapter-body">
+                    <strong>300 leads pour in every month.</strong> The phone rings. The CRM is maxed at 98 records.
+                    An outsourced answering service takes 24 hours to respond. By then, the buyer has already called three competitors.<br><br>
+                    You've built this business from nothing. Decades of work, thousands of deals. But you're stuck at a ceiling —
+                    doing <strong>everything yourself</strong>, grinding harder for the same result.
+                </p>
+            </div>
+            <div class="road-stop-visual">
+                <div class="road-img">
+                    <img src="stage1-ordinary-world.png" alt="Business owner at cluttered desk, overwhelmed">
+                </div>
+            </div>
+        </div>
+
+        <!-- STOP 2: Meeting the Guide -->
+        <div class="road-stop right fade-up">
+            <div class="road-stop-visual">
+                <div class="road-img">
+                    <img src="stage2-meeting-the-guide.png" alt="Business owner meeting consultant">
+                </div>
+            </div>
+            <div class="road-stop-content">
+                <div class="chapter-number" style="background: linear-gradient(135deg, #f39c12, #e67e22);">2</div>
+                <div class="chapter-label">Chapter Two</div>
+                <h3 class="chapter-title">Meeting the Guide</h3>
+                <p class="chapter-body">
+                    Then something shifts. A guide appears — not to be the hero, but to <strong>show the hero what's possible</strong>.<br><br>
+                    For the first time, you see a dashboard instead of a spreadsheet.
+                    An AI that responds in <strong>under 60 seconds</strong> — while you sleep.
+                    <br><br>
+                    <em>The guide gives you <strong>new capabilities</strong> — it's up to you to use them.</em>
+                </p>
+            </div>
+        </div>
+
+        <!-- Quote interlude -->
+        <div style="padding: 20px 0;">
+            <div class="quote-interlude fade-up">
+                <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
+                <div class="attr">— Dan, Co-Owner, EZ Homes</div>
+            </div>
+        </div>
+
+        <!-- STOP 3: Transformation -->
+        <div class="road-stop left fade-up">
+            <div class="road-stop-content">
+                <div class="pill-label" style="background:#27ae60;">Transformation</div>
+                <h3 class="chapter-title">The First 8 Weeks</h3>
+                <span class="big-stat">+2 deals closed</span>
+                <p class="stop-desc">$10K+ margin per deal. From reduced response time alone — before the full system was even finished.</p>
+            </div>
+            <div class="road-stop-visual">
+                <div class="road-node" style="background: linear-gradient(135deg, #27ae60, #1e8449); box-shadow: 0 6px 24px rgba(39,174,96,0.3);">
+                    <i class="fa fa-check"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- STOP 4: The Ceiling -->
+        <div class="road-stop right fade-up">
+            <div class="road-stop-visual">
+                <div class="road-node" style="background: linear-gradient(135deg, #34495e, #1c2833); box-shadow: 0 6px 24px rgba(44,62,80,0.3);">
+                    <i class="fa fa-line-chart"></i>
+                </div>
+            </div>
+            <div class="road-stop-content">
+                <div class="pill-label" style="background:#2c3e50;">Your Ceiling</div>
+                <h3 class="chapter-title">What's the Most You Can Make?</h3>
+                <span class="big-stat">$3M — $8M+</span>
+                <p class="stop-desc">The top 5% of manufactured home dealers. Not more trucks. Not more people. Better <strong>conversion infrastructure</strong>.</p>
+            </div>
+        </div>
+
+        <!-- STOP 5: New Vehicle -->
+        <div class="road-stop left fade-up">
+            <div class="road-stop-content">
+                <div class="pill-label" style="background:#3498db;">New Vehicle</div>
+                <h3 class="chapter-title">You Don't Need More Leads</h3>
+                <span class="big-stat">Close 3-5x more</span>
+                <p class="stop-desc">Same leads. AI-powered infrastructure. You only talk to qualified, ready buyers.</p>
+            </div>
+            <div class="road-stop-visual">
+                <div class="road-node" style="background: linear-gradient(135deg, #3498db, #2471a3); box-shadow: 0 6px 24px rgba(52,152,219,0.3);">
+                    <i class="fa fa-rocket"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- STOP 6: SEO -->
+        <div class="road-stop right fade-up">
+            <div class="road-stop-visual">
+                <div class="road-node" style="background: linear-gradient(135deg, #1abc9c, #148f77); box-shadow: 0 6px 24px rgba(26,188,156,0.3);">
+                    <i class="fa fa-globe"></i>
+                </div>
+            </div>
+            <div class="road-stop-content">
+                <div class="pill-label" style="background:#1abc9c;">SEO Snapshot</div>
+                <h3 class="chapter-title">Your Online Presence</h3>
+                <span class="big-stat">12+ keyword gaps</span>
+                <p class="stop-desc">Position 6-10 on page 1. 3-5 quick wins to break into the top 3 where 75% of clicks happen.</p>
+            </div>
+        </div>
+
+        <!-- End of road -->
+        <div class="road-end fade-up">
+            <div class="end-star"><i class="fa fa-star"></i></div>
+            <p>Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>For the first time in history, this is actually realistic.</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- ══════ BEFORE / AFTER — Diagonal Split (Dilworth Capital style) ══════ -->
+<section class="ba-split fade-up">
+    <div class="ba-split-left">
+        <div class="ba-card-panel">
+            <div class="panel-tag" style="background: #e74c3c;">Before</div>
+            <h3>Where You Are Now</h3>
+            <ul>
+                <li><span class="ic"><i class="fa fa-times"></i></span> CRM capped at 98 records</li>
+                <li><span class="ic"><i class="fa fa-times"></i></span> 24h+ response time</li>
+                <li><span class="ic"><i class="fa fa-times"></i></span> Both owners doing lead triage by hand</li>
+                <li><span class="ic"><i class="fa fa-times"></i></span> Leads contacted once, then abandoned</li>
+                <li><span class="ic"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
+            </ul>
+        </div>
+    </div>
+    <div class="ba-center-badge"><i class="fa fa-arrow-right"></i></div>
+    <div class="ba-split-right">
+        <div class="ba-card-panel after-panel">
+            <div class="panel-tag" style="background: #27ae60;">After</div>
+            <h3>Where You Could Be</h3>
+            <ul>
+                <li><span class="ic"><i class="fa fa-check"></i></span> Unlimited CRM, auto-capture</li>
+                <li><span class="ic"><i class="fa fa-check"></i></span> AI responds in &lt;60 seconds, 24/7</li>
+                <li><span class="ic"><i class="fa fa-check"></i></span> Auto lead scoring &amp; routing</li>
+                <li><span class="ic"><i class="fa fa-check"></i></span> 90-day nurture re-engages the 98%</li>
+                <li><span class="ic"><i class="fa fa-check"></i></span> Multi-brand pipeline separation</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ QUOTE BANNER — Lumina Medtech blue gradient ══════ -->
+<section class="quote-banner fade-up">
+    <blockquote>&ldquo;If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that&rsquo;s another $200,000 in margin.&rdquo;</blockquote>
+    <div class="q-attr">&mdash; Dan, Co-Owner, EZ Homes</div>
+</section>
+
+<!-- ══════ CALCULATOR ══════ -->
+<section class="calc-section">
+    <div class="container">
+        <div class="section-label fade-up">Your Numbers, Your Opportunity</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">See What's Possible</h2>
+        <p class="section-sub fade-up">Pre-filled with industry averages. Adjust to match your business.</p>
+        <div class="calc-box fade-up">
+            <h3>ROI Calculator</h3>
+            <div class="calc-subtitle">What happens when we improve your conversion infrastructure?</div>
+            <div class="calc-row"><label>Leads per month</label><div class="input-row"><input type="range" id="leads" min="50" max="1000" value="300" step="10"><span class="val" id="leads-val">300</span></div></div>
+            <div class="calc-row"><label>Current close rate</label><div class="input-row"><input type="range" id="closeRate" min="0.5" max="15" value="2" step="0.5"><span class="val" id="closeRate-val">2%</span></div></div>
+            <div class="calc-row"><label>Average profit per deal</label><div class="input-row"><input type="range" id="margin" min="2000" max="50000" value="10000" step="500"><span class="val" id="margin-val">$10,000</span></div></div>
+            <div class="calc-row"><label>Close rate after optimization</label><div class="input-row"><input type="range" id="newRate" min="1" max="20" value="5" step="0.5"><span class="val" id="newRate-val">5%</span></div></div>
+            <hr class="calc-divider">
+            <div class="calc-result">
+                <div class="result-label">Additional Annual Revenue</div>
+                <div class="result-number" id="result-revenue">$360,000</div>
+                <div class="result-sub" id="result-sub">That's 36 extra deals you're currently leaving on the table</div>
+                <div class="calc-results-grid">
+                    <div class="mini-result"><div class="mini-number" id="result-current">$72,000</div><div class="mini-label">Current Annual Revenue</div></div>
+                    <div class="mini-result"><div class="mini-number" id="result-new">$432,000</div><div class="mini-label">Projected Annual Revenue</div></div>
+                </div>
+            </div>
+            <p class="calc-note">These calculations use your inputs only. No data is sent anywhere.</p>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ DUAL PANELS — Tampa Real Estate style ══════ -->
+<section class="dual-panels fade-up">
+    <div class="dual-panel">
+        <div class="dp-bg" style="background-image: url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=900&q=70');"></div>
+        <div class="dp-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);"></div>
+        <div class="dp-card">
+            <h3>Lead Recovery</h3>
+            <div class="dp-rule"></div>
+            <p>Your 300 monthly leads deserve more than one call and a prayer. Our AI nurture system re-engages the 98% you're currently losing — automatically, for 90 days.</p>
+            <a href="#" class="dp-btn">See How It Works</a>
+        </div>
+    </div>
+    <div class="dual-panel">
+        <div class="dp-bg" style="background-image: url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=70');"></div>
+        <div class="dp-overlay" style="background: linear-gradient(180deg, rgba(0,0,0,0.15) 0%, rgba(0,0,0,0.5) 100%);"></div>
+        <div class="dp-card">
+            <h3>Instant Response</h3>
+            <div class="dp-rule"></div>
+            <p>When a buyer calls at 11 PM, your AI answers in under 60 seconds — qualifying, scoring, and routing the lead before your competitors even wake up.</p>
+            <a href="#" class="dp-btn">Learn More</a>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ ICON BANNER — Cityscape silhouette (Tampa footer style) ══════ -->
+<section class="icon-banner fade-up">
+    <div class="ib-quote">"With a combination of AI-powered tools and proven systems, you can be sure to close the right deals for your business."</div>
+    <div class="ib-tagline">The Complete Infrastructure</div>
+    <div class="icon-row">
+        <div class="icon-item">
+            <div class="ii-circle"><i class="fa fa-bolt"></i></div>
+            <div class="ii-label">AI Response</div>
+        </div>
+        <div class="icon-item">
+            <div class="ii-circle"><i class="fa fa-filter"></i></div>
+            <div class="ii-label">Lead Scoring</div>
+        </div>
+        <div class="icon-item">
+            <div class="ii-circle"><i class="fa fa-refresh"></i></div>
+            <div class="ii-label">Auto Nurture</div>
+        </div>
+        <div class="icon-item">
+            <div class="ii-circle"><i class="fa fa-bar-chart"></i></div>
+            <div class="ii-label">Live Dashboard</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ FULL-BLEED STORY ARC SECTIONS ══════ -->
+<section class="fb-story fb-s1 fade-up">
+    <div class="fb-bg"></div>
+    <div class="fb-overlay"></div>
+    <div class="fb-content">
+        <div class="fb-eyebrow">The Reality</div>
+        <div class="fb-divider"></div>
+        <h2 class="fb-headline">Every Month, 294 Families<br>Slip Through Your Fingers</h2>
+        <p class="fb-body">They called. They were interested. They were ready to buy a home. But nobody answered fast enough. Nobody followed up.</p>
+        <div class="fb-stat">$2.9M</div>
+        <div class="fb-stat-label">Left on the table every year</div>
+    </div>
+</section>
+
+<section class="fb-story fb-s2 fade-up">
+    <div class="fb-bg"></div>
+    <div class="fb-overlay"></div>
+    <div class="fb-content">
+        <div class="fb-eyebrow">The Opportunity</div>
+        <div class="fb-divider"></div>
+        <h2 class="fb-headline">What If the Summit<br>Was Closer Than You Think?</h2>
+        <p class="fb-body">The top 5% of manufactured home dealers don't work harder. They built infrastructure that converts while they sleep.</p>
+        <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:16px;">
+            <div><div class="fb-stat">&lt;60s</div><div class="fb-stat-label">AI Response Time</div></div>
+            <div><div class="fb-stat">24/7</div><div class="fb-stat-label">Never Misses a Lead</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="fb-story fb-s3 fade-up">
+    <div class="fb-bg"></div>
+    <div class="fb-overlay"></div>
+    <div class="fb-content">
+        <div class="fb-eyebrow">The Result</div>
+        <div class="fb-divider"></div>
+        <h2 class="fb-headline">This Is What<br>&ldquo;Fully Optimized&rdquo; Looks Like</h2>
+        <p class="fb-body">Every lead scored. Every hot buyer routed instantly. Cold leads nurtured automatically for 90 days.</p>
+        <div style="display:flex;justify-content:center;gap:60px;flex-wrap:wrap;margin-top:16px;">
+            <div><div class="fb-stat">3&ndash;5x</div><div class="fb-stat-label">More Closes</div></div>
+            <div><div class="fb-stat">90</div><div class="fb-stat-label">Day Auto-Nurture</div></div>
+        </div>
+    </div>
+</section>
+
+<section class="fb-story fb-s4 fade-up">
+    <div class="fb-bg"></div>
+    <div class="fb-overlay"></div>
+    <div class="fb-content">
+        <div class="fb-eyebrow">The Future</div>
+        <div class="fb-divider"></div>
+        <h2 class="fb-headline">The Ceiling Isn't Real.<br>The Infrastructure Was Missing.</h2>
+        <p class="fb-body"><em>&ldquo;If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that&rsquo;s another $200,000 in margin.&rdquo;</em></p>
+        <div class="fb-stat">8</div>
+        <div class="fb-stat-label">Weeks to Launch</div>
+    </div>
+</section>
+
+<!-- ══════ TEAM — Diagonal Hero (Dilworth Capital style) ══════ -->
+<section class="team-diagonal fade-up">
+    <div class="team-diag-photo"></div>
+    <div class="team-diag-content">
+        <div class="team-diag-inner">
+            <div class="td-label">Who We Are</div>
+            <h2>We Build the Infrastructure That Scales Your Business</h2>
+            <div class="td-rule"></div>
+            <p>We're not a marketing agency. We don't run ads. We build AI-powered systems that convert the leads you already have into closed deals — automatically, reliably, 24/7.</p>
+            <p>Our team combines decades of experience in manufactured housing, automation engineering, and AI deployment. We've seen what works and we've built the playbook.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Team Features -->
+<div class="team-features fade-up">
+    <div class="team-feature-card">
+        <div class="feature-icon"><i class="fa fa-bolt"></i></div>
+        <h4>AI-First Approach</h4>
+        <p>Every system we build starts with AI at the core — not bolted on as an afterthought.</p>
+    </div>
+    <div class="team-feature-card">
+        <div class="feature-icon"><i class="fa fa-cogs"></i></div>
+        <h4>Custom Automation</h4>
+        <p>Lead scoring, nurture sequences, and pipeline routing built specifically for your business.</p>
+    </div>
+    <div class="team-feature-card">
+        <div class="feature-icon"><i class="fa fa-line-chart"></i></div>
+        <h4>Proven Results</h4>
+        <p>Our systems recover lost leads that translate directly to revenue growth within weeks.</p>
+    </div>
+    <div class="team-feature-card">
+        <div class="feature-icon"><i class="fa fa-handshake-o"></i></div>
+        <h4>Hands-On Support</h4>
+        <p>We don't just set it up and leave. Ongoing optimization, training, and strategy sessions.</p>
+    </div>
+</div>
+
+<!-- ══════ TEAM MEMBERS ══════ -->
+<section class="team-members-section">
+    <div class="team-members-header fade-up">
+        <h3>Meet the Team</h3>
+        <div class="tm-subtitle">The People Behind Your Transformation</div>
+        <div class="tm-rule"></div>
+    </div>
+    <div class="team-members-grid fade-up">
+        <div class="team-member">
+            <div class="member-photo"><i class="fa fa-user"></i><span>Chris</span></div>
+            <h4>Chris</h4>
+            <div class="member-role">Strategy & Client Relations</div>
+        </div>
+        <div class="team-member">
+            <div class="member-photo"><i class="fa fa-user"></i><span>Marc</span></div>
+            <h4>Marc</h4>
+            <div class="member-role">Systems Architecture</div>
+        </div>
+        <div class="team-member">
+            <div class="member-photo"><i class="fa fa-user"></i><span>Florian</span></div>
+            <h4>Florian</h4>
+            <div class="member-role">AI & Automation Engineering</div>
+        </div>
+    </div>
+</section>
+
+<!-- ══════ CTA ══════ -->
+<section class="cta-section">
+    <div class="container">
+        <h2 class="fade-up">Want to See What This Looks Like for You?</h2>
+        <p class="cta-sub fade-up">No pitch. No commitment. We'll walk through your numbers and show you what's actually possible.</p>
+        <a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion" class="cta-btn fade-up">Let's See What's Possible</a>
+        <p class="cta-note fade-up">15 minutes. Your numbers. Zero pressure.</p>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="container">
+        <div><span>Copyright &copy; <b>EZ Homes</b> 2016</span></div>
+        <div><a href="https://www.ezhomesfast.com/Sales/About/TermsOfUse">Terms of Use</a> &middot; <a href="https://www.ezhomesfast.com/Sales/About/PrivacyPolicy">Privacy Policy</a></div>
+        <div style="display:flex;align-items:center;gap:16px;">
+            <ul class="social-buttons"><li><a href="https://twitter.com/EZHomes"><i class="fa fa-twitter"></i></a></li><li><a href="https://www.facebook.com/mobilehomesell/"><i class="fa fa-facebook"></i></a></li></ul>
+            <span><span class="fa fa-phone"></span> (248) 760-3841 | <span class="fa fa-phone"></span> (810) 614-9181</span>
+        </div>
+    </div>
+</footer>
+
+<script>
+/* Fade-up observer */
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.12 });
+document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
+
+/* Calculator */
+const $ = id => document.getElementById(id);
+function fmt(n) { return n >= 1000 ? '$' + n.toLocaleString('en-US') : '$' + n; }
+function calc() {
+    const leads = +$('leads').value, closeRate = +$('closeRate').value, margin = +$('margin').value, newRate = +$('newRate').value;
+    const currentDeals = leads * 12 * (closeRate / 100), newDeals = leads * 12 * (newRate / 100);
+    const extraDeals = newDeals - currentDeals, extraRev = extraDeals * margin;
+    $('leads-val').textContent = leads;
+    $('closeRate-val').textContent = closeRate + '%';
+    $('margin-val').textContent = fmt(margin);
+    $('newRate-val').textContent = newRate + '%';
+    $('result-revenue').textContent = fmt(Math.round(extraRev));
+    $('result-sub').textContent = "That's " + Math.round(extraDeals) + " extra deals you're currently leaving on the table";
+    $('result-current').textContent = fmt(Math.round(currentDeals * margin));
+    $('result-new').textContent = fmt(Math.round(newDeals * margin));
+}
+['leads', 'closeRate', 'margin', 'newRate'].forEach(id => { $(id).addEventListener('input', calc); });
+calc();
+
+/* Winding Road SVG Generator */
+function drawRoad() {
+    const wrapper = document.getElementById('roadWrapper');
+    const container = document.getElementById('roadSvg');
+    if (!wrapper || !container) return;
+    const W = wrapper.offsetWidth;
+    const H = wrapper.offsetHeight;
+    if (H < 100) return;
+    const roadWidth = 44;
+    const centerX = W / 2;
+    const amplitude = W * 0.22;
+    const stops = wrapper.querySelectorAll('.road-stop, .quote-interlude, .road-end');
+    const numStops = stops.length;
+    const yPositions = [];
+    for (let i = 0; i < numStops; i++) {
+        const rect = stops[i].getBoundingClientRect();
+        const wrapperRect = wrapper.getBoundingClientRect();
+        yPositions.push(rect.top - wrapperRect.top + rect.height / 2);
+    }
+    let pathD = 'M ' + centerX + ' 0';
+    for (let i = 0; i < yPositions.length; i++) {
+        const y = yPositions[i];
+        const prevY = i > 0 ? yPositions[i - 1] : 0;
+        const midY = (prevY + y) / 2;
+        const direction = (i % 2 === 0) ? 1 : -1;
+        const curveX = centerX + (amplitude * direction);
+        pathD += ' C ' + centerX + ' ' + midY + ', ' + curveX + ' ' + midY + ', ' + curveX + ' ' + y;
+        if (i < yPositions.length - 1) {
+            const nextY = yPositions[i + 1];
+            const nextMidY = (y + nextY) / 2;
+            pathD += ' C ' + curveX + ' ' + nextMidY + ', ' + centerX + ' ' + nextMidY + ', ' + centerX + ' ' + nextMidY;
+        }
+    }
+    const lastX = centerX + (amplitude * ((yPositions.length - 1) % 2 === 0 ? 1 : -1));
+    pathD += ' C ' + lastX + ' ' + (H - 40) + ', ' + centerX + ' ' + (H - 20) + ', ' + centerX + ' ' + H;
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+    svg.setAttribute('preserveAspectRatio', 'none');
+    svg.style.width = '100%';
+    svg.style.height = '100%';
+    /* Road border */
+    const borderPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    borderPath.setAttribute('d', pathD);
+    borderPath.setAttribute('stroke', 'rgba(26,58,92,0.12)');
+    borderPath.setAttribute('stroke-width', roadWidth + 8);
+    borderPath.setAttribute('fill', 'none');
+    borderPath.setAttribute('stroke-linecap', 'round');
+    borderPath.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(borderPath);
+    /* Road fill */
+    const roadPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    roadPath.setAttribute('d', pathD);
+    roadPath.setAttribute('stroke', 'rgba(26,58,92,0.18)');
+    roadPath.setAttribute('stroke-width', roadWidth);
+    roadPath.setAttribute('fill', 'none');
+    roadPath.setAttribute('stroke-linecap', 'round');
+    roadPath.setAttribute('stroke-linejoin', 'round');
+    svg.appendChild(roadPath);
+    /* Dashed center line */
+    const dashPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    dashPath.setAttribute('d', pathD);
+    dashPath.setAttribute('stroke', 'rgba(255,255,255,0.7)');
+    dashPath.setAttribute('stroke-width', '2.5');
+    dashPath.setAttribute('fill', 'none');
+    dashPath.setAttribute('stroke-dasharray', '12 10');
+    dashPath.setAttribute('stroke-linecap', 'round');
+    svg.appendChild(dashPath);
+    /* Dot markers at each stop */
+    for (let i = 0; i < yPositions.length; i++) {
+        const direction = (i % 2 === 0) ? 1 : -1;
+        const cx = centerX + (amplitude * direction);
+        const cy = yPositions[i];
+        const outerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        outerCircle.setAttribute('cx', cx);
+        outerCircle.setAttribute('cy', cy);
+        outerCircle.setAttribute('r', '10');
+        outerCircle.setAttribute('fill', 'rgba(255,255,255,0.8)');
+        outerCircle.setAttribute('stroke', 'rgba(26,58,92,0.15)');
+        outerCircle.setAttribute('stroke-width', '2');
+        svg.appendChild(outerCircle);
+        const innerCircle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        innerCircle.setAttribute('cx', cx);
+        innerCircle.setAttribute('cy', cy);
+        innerCircle.setAttribute('r', '4');
+        innerCircle.setAttribute('fill', '#248ADE');
+        svg.appendChild(innerCircle);
+    }
+    container.innerHTML = '';
+    container.appendChild(svg);
+}
+window.addEventListener('load', function() { setTimeout(drawRoad, 200); });
+window.addEventListener('resize', drawRoad);
+document.addEventListener('DOMContentLoaded', function() { setTimeout(drawRoad, 500); });
+</script>
+</body>
+</html>
