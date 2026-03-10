@@ -9,7 +9,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+        body { font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 16px; color: #333; background: #fff; -webkit-font-smoothing: antialiased; }
         a { color: #50A2E5; text-decoration: none; }
         a:hover { color: #248ADE; }
         img { max-width: 100%; height: auto; }
@@ -28,399 +28,373 @@
         .nav-links li a:hover { color: #248ADE; }
 
         /* ── HERO ── */
-        .hero-banner { text-align: center; padding: 40px 0 0; position: relative; }
+        .hero-banner { text-align: center; padding: 40px 0 0; }
         .hero-banner h2 { font-size: 32px; font-weight: 700; color: #333; margin-bottom: 25px; }
 
         /* ── HERO GRADIENT FADE ── */
         .hero-gradient {
-            height: 120px;
-            background: linear-gradient(180deg, #fff 0%, rgba(36,138,222,0.06) 40%, #eaf4fc 100%);
+            height: 100px;
+            background: linear-gradient(180deg, #fff 0%, #d6eaf8 100%);
         }
 
         /* ── HOOK ── */
         .hook-section {
-            background: #eaf4fc; padding: 50px 0 40px; text-align: center;
+            background: #d6eaf8; padding: 40px 0 30px; text-align: center;
         }
         .hook-line {
-            font-size: 26px; font-weight: 300; color: #1a1a2e;
-            max-width: 740px; margin: 0 auto; line-height: 1.65;
+            font-size: 24px; font-weight: 300; color: #2c3e50;
+            max-width: 700px; margin: 0 auto; line-height: 1.6;
         }
         .hook-line strong { color: #248ADE; font-weight: 700; }
 
         /* ══════════════════════════════════════════
-           HERO'S ARC PATH — Vertical Timeline
+           HERO'S ARC PATH — Pigglee-style
            ══════════════════════════════════════════ */
-        .path-wrapper {
-            background: linear-gradient(180deg, #eaf4fc 0%, #f0f7ff 5%, #f4f8fc 50%, #f0f4f8 100%);
-            padding: 60px 0 40px;
+        .path-section {
+            background: linear-gradient(180deg, #d6eaf8 0%, #bfe0f5 20%, #a8d4ef 60%, #8ec5e8 100%);
+            padding: 60px 0 100px;
             position: relative;
             overflow: hidden;
         }
 
-        /* Subtle cityscape silhouette at bottom (like references) */
-        .path-wrapper::after {
+        /* Cityscape silhouette at bottom */
+        .path-section::after {
             content: '';
             position: absolute;
             bottom: 0; left: 0; right: 0;
-            height: 80px;
-            background: linear-gradient(180deg, transparent 0%, rgba(36,138,222,0.04) 100%);
+            height: 120px;
+            background:
+                /* Buildings silhouette */
+                linear-gradient(180deg, transparent 0%, rgba(44,62,80,0.06) 60%, rgba(44,62,80,0.12) 100%);
             pointer-events: none;
         }
 
-        .path-intro {
-            text-align: center; margin-bottom: 60px;
+        .path-header {
+            text-align: center; margin-bottom: 50px;
         }
-        .path-intro .section-label {
-            text-transform: uppercase; font-size: 11px; font-weight: 700;
-            letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px;
+        .path-header h2 {
+            font-size: 34px; font-weight: 800; color: #2c3e50;
+            margin-bottom: 10px;
         }
-        .path-intro .section-accent {
-            width: 50px; height: 3px; background: #248ADE;
-            margin: 0 auto 20px; border-radius: 2px;
-        }
-        .path-intro h2 {
-            font-size: 38px; font-weight: 800; color: #1a1a2e;
-            margin-bottom: 14px; line-height: 1.2;
-        }
-        .path-intro p {
-            font-size: 17px; color: #666; max-width: 600px;
-            margin: 0 auto; line-height: 1.7;
+        .path-header p {
+            font-size: 16px; color: #5a7d9a; max-width: 550px;
+            margin: 0 auto; line-height: 1.6;
         }
 
-        /* The vertical path line */
+        /* The vertical dashed line */
         .timeline {
             position: relative;
-            max-width: 960px;
+            max-width: 800px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 20px 0;
         }
         .timeline::before {
             content: '';
             position: absolute;
             left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg,
-                #248ADE 0%,
-                #50A2E5 30%,
-                #248ADE 60%,
-                #50A2E5 100%
-            );
-            border-radius: 2px;
-            transform: translateX(-50%);
-        }
-
-        /* Animated dashed overlay on the line */
-        .timeline::after {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            transform: translateX(-50%);
+            top: 0; bottom: 0;
+            width: 3px;
             background: repeating-linear-gradient(
                 180deg,
-                transparent 0px,
-                transparent 8px,
-                rgba(255,255,255,0.4) 8px,
-                rgba(255,255,255,0.4) 16px
+                #7ab8d9 0px,
+                #7ab8d9 10px,
+                transparent 10px,
+                transparent 20px
             );
-            border-radius: 2px;
+            transform: translateX(-50%);
         }
 
-        /* Each stop on the path */
-        .path-stop {
+        /* Each node row */
+        .path-row {
             position: relative;
-            display: grid;
-            grid-template-columns: 1fr 80px 1fr;
-            align-items: start;
-            margin-bottom: 60px;
-        }
-        .path-stop:last-child { margin-bottom: 20px; }
-
-        /* Numbered circle node on the line */
-        .path-node {
-            grid-column: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            z-index: 2;
-            position: relative;
-        }
-        .node-circle {
-            width: 64px; height: 64px;
-            border-radius: 50%;
-            background: #248ADE;
-            color: #fff;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 22px;
-            font-weight: 800;
-            box-shadow: 0 4px 20px rgba(36,138,222,0.35), 0 0 0 6px rgba(36,138,222,0.12);
-            position: relative;
+            margin-bottom: 70px;
         }
-        .node-circle .fa { font-size: 24px; }
+        .path-row:last-of-type { margin-bottom: 30px; }
 
-        /* Outer ring animation */
-        .node-circle::before {
-            content: '';
-            position: absolute;
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            border: 2px solid rgba(36,138,222,0.2);
-            top: -8px; left: -8px;
-        }
-
-        /* Pill label below node */
-        .node-label {
-            margin-top: 10px;
-            background: #248ADE;
-            color: #fff;
-            padding: 4px 14px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            white-space: nowrap;
-        }
-
-        /* Content cards — alternate left/right */
-        .path-content {
-            padding: 0 20px;
-        }
-
-        .path-stop:nth-child(odd) .path-content { grid-column: 1; grid-row: 1; text-align: right; }
-        .path-stop:nth-child(odd) .path-node { grid-column: 2; grid-row: 1; }
-        .path-stop:nth-child(odd) .path-spacer { grid-column: 3; grid-row: 1; }
-
-        .path-stop:nth-child(even) .path-content { grid-column: 3; grid-row: 1; text-align: left; }
-        .path-stop:nth-child(even) .path-node { grid-column: 2; grid-row: 1; }
-        .path-stop:nth-child(even) .path-spacer { grid-column: 1; grid-row: 1; }
-
-        /* Connector arm from node to card */
-        .path-stop:nth-child(odd) .path-content::after {
-            content: '';
-            position: absolute;
-            right: -20px;
-            top: 28px;
-            width: 20px; height: 3px;
-            background: rgba(36,138,222,0.3);
-        }
-        .path-stop:nth-child(even) .path-content::before {
-            content: '';
-            position: absolute;
-            left: -20px;
-            top: 28px;
-            width: 20px; height: 3px;
-            background: rgba(36,138,222,0.3);
-        }
-        .path-content { position: relative; }
-
-        .path-card {
-            background: #fff;
-            border-radius: 16px;
-            padding: 32px 28px;
-            border: 2px solid #e2eaf3;
-            transition: border-color 0.3s, transform 0.3s;
-        }
-        .path-card:hover { border-color: #248ADE; transform: translateY(-4px); }
-        .path-card h3 {
-            font-size: 20px; font-weight: 800; color: #1a1a2e;
-            margin-bottom: 10px;
-        }
-        .path-card .card-sub {
-            font-size: 14px; color: #888; margin-bottom: 16px; line-height: 1.6;
-        }
-
-        /* Stats inside path cards */
-        .mini-stats {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-        }
-        .mini-stat {
-            background: #f7faff; border-radius: 10px; padding: 14px 12px;
-            text-align: center; border: 1px solid #e8eef5;
-        }
-        .mini-stat .num {
-            font-size: 28px; font-weight: 800; color: #248ADE; line-height: 1;
-        }
-        .mini-stat .lbl {
-            font-size: 10px; font-weight: 700; color: #888;
-            text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px;
-        }
-
-        /* Before/After inside path card */
-        .ba-mini { margin-top: 12px; }
-        .ba-mini h4 {
-            font-size: 13px; font-weight: 700; text-transform: uppercase;
-            letter-spacing: 1px; margin-bottom: 8px;
-        }
-        .ba-mini.before h4 { color: #c53030; }
-        .ba-mini.after h4 { color: #2f855a; }
-        .ba-mini ul { list-style: none; padding: 0; }
-        .ba-mini li {
-            font-size: 13px; padding: 5px 0; color: #555;
-            display: flex; align-items: flex-start; gap: 8px; line-height: 1.45;
-        }
-        .ba-mini.before li .ic { color: #e53e3e; }
-        .ba-mini.after li .ic { color: #38a169; }
-
-        /* Quote in path card */
-        .path-quote {
-            font-size: 16px; font-style: italic; color: #444;
-            line-height: 1.65; margin-bottom: 10px;
-            position: relative; padding-left: 20px;
-        }
-        .path-quote::before {
-            content: '\201C';
-            position: absolute; left: 0; top: -4px;
-            font-size: 40px; color: rgba(36,138,222,0.2);
-            font-family: Georgia, serif; font-style: normal;
-        }
-        .path-attribution {
-            font-size: 13px; font-weight: 700; color: #248ADE;
-        }
-
-        /* Ceiling highlights */
-        .ceiling-stat {
-            display: inline-block; background: rgba(36,138,222,0.08);
-            border: 1px solid rgba(36,138,222,0.2); border-radius: 6px;
-            padding: 3px 10px; color: #248ADE; font-weight: 700; font-size: 15px;
-        }
-        .ceiling-text {
-            font-size: 15px; color: #555; line-height: 1.7;
-        }
-        .ceiling-text strong { color: #1a1a2e; }
-
-        /* Vehicle comparison inside card */
-        .vehicle-mini {
-            display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
-        }
-        .vm-col { padding: 16px 14px; border-radius: 10px; }
-        .vm-old { background: #f9fafb; border: 1px solid #e5e7eb; }
-        .vm-new { background: #eef6ff; border: 1px solid #c4ddf6; }
-        .vm-col h5 {
-            font-size: 11px; font-weight: 800; text-transform: uppercase;
-            letter-spacing: 1px; margin-bottom: 8px;
-        }
-        .vm-old h5 { color: #999; }
-        .vm-new h5 { color: #248ADE; }
-        .vm-col ul { list-style: none; padding: 0; }
-        .vm-col li { font-size: 12px; padding: 3px 0; color: #555; display: flex; gap: 6px; }
-
-        /* SEO mini cards */
-        .seo-mini-grid {
-            display: grid; grid-template-columns: 1fr; gap: 10px;
-        }
-        .seo-mini {
-            background: #f7faff; border-radius: 10px; padding: 14px 16px;
-            border: 1px solid #e8eef5; display: flex; align-items: center; gap: 12px;
-        }
-        .seo-mini-icon {
-            width: 36px; height: 36px; border-radius: 50%;
-            background: rgba(36,138,222,0.1); color: #248ADE;
-            display: flex; align-items: center; justify-content: center;
-            flex-shrink: 0; font-size: 14px;
-        }
-        .seo-mini-body .seo-num {
-            font-size: 18px; font-weight: 800; color: #248ADE;
-        }
-        .seo-mini-body .seo-txt {
-            font-size: 11px; color: #888; line-height: 1.4;
-        }
-
-        /* ══════════════════════════════════════════
-           END OF PATH — Calculator + CTA full width
-           ══════════════════════════════════════════ */
-
-        /* Path end node */
-        .path-end {
-            text-align: center;
+        /* The double-ring circle node */
+        .node {
             position: relative;
             z-index: 2;
-            padding-top: 20px;
+            flex-shrink: 0;
         }
-        .end-node {
-            width: 80px; height: 80px; border-radius: 50%;
-            background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%);
-            color: #fff; display: flex; align-items: center; justify-content: center;
-            margin: 0 auto 16px;
-            font-size: 28px;
-            box-shadow: 0 6px 28px rgba(36,138,222,0.4), 0 0 0 8px rgba(36,138,222,0.12);
+        .node-outer {
+            width: 100px; height: 100px;
+            border-radius: 50%;
+            border: 3px solid #e8a838;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            position: relative;
         }
-        .end-text {
-            font-size: 22px; font-weight: 300; color: #1a1a2e; line-height: 1.5;
-            max-width: 500px; margin: 0 auto;
+        .node-inner {
+            width: 76px; height: 76px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #5dade2 0%, #3498db 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 32px;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.3);
         }
-        .end-text strong { color: #248ADE; font-weight: 700; }
 
-        /* ── CALCULATOR (full width, below path) ── */
-        .calculator-section {
-            background: #0f1b2d; text-align: center; padding: 80px 0;
+        /* Small connector dot on the center line */
+        .node::after {
+            content: '';
+            position: absolute;
+            width: 12px; height: 12px;
+            border-radius: 50%;
+            background: #7ab8d9;
+            border: 2px solid #fff;
+            top: 50%; transform: translateY(-50%);
         }
-        .calculator-section .section-label {
+
+        /* Pill label */
+        .pill-label {
+            background: #e8a838;
+            color: #fff;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 13px;
+            font-weight: 700;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(232,168,56,0.3);
+            position: relative;
+        }
+
+        /* Connector arm (horizontal line between node and pill) */
+        .connector {
+            width: 40px; height: 3px;
+            background: #c9dce8;
+            flex-shrink: 0;
+        }
+
+        /* ── LEFT node layout: [pill] --- [connector] --- [node] ── */
+        .path-row.left {
+            flex-direction: row;
+        }
+        .path-row.left .node { order: 3; margin-left: -2px; }
+        .path-row.left .connector { order: 2; }
+        .path-row.left .pill-label { order: 1; }
+        .path-row.left .spacer { order: 4; flex: 1; }
+        .path-row.left .pill-side { order: 0; flex: 1; display: flex; justify-content: flex-end; align-items: center; gap: 0; }
+
+        /* ── RIGHT node layout: [node] --- [connector] --- [pill] ── */
+        .path-row.right {
+            flex-direction: row;
+        }
+        .path-row.right .spacer { order: 0; flex: 1; }
+        .path-row.right .node { order: 1; margin-right: -2px; }
+        .path-row.right .connector { order: 2; }
+        .path-row.right .pill-label { order: 3; }
+        .path-row.right .pill-side { order: 4; flex: 1; }
+
+        /* Connector dot position */
+        .path-row.left .node::after { right: -8px; left: auto; }
+        .path-row.right .node::after { left: -8px; right: auto; }
+
+        /* Brief description below each row */
+        .path-desc {
+            text-align: center;
+            margin-top: -50px;
+            margin-bottom: 50px;
+            position: relative; z-index: 1;
+        }
+        .path-desc p {
+            font-size: 14px; color: #5a7d9a;
+            max-width: 400px; margin: 0 auto;
+            line-height: 1.5;
+        }
+        .path-desc .stat-highlight {
+            font-size: 28px; font-weight: 800; color: #2c3e50;
+            display: block; margin-bottom: 4px;
+        }
+
+        /* Center-line small node (for the money/transition icons) */
+        .center-dot {
+            display: flex; justify-content: center;
+            margin: -20px 0 40px; position: relative; z-index: 2;
+        }
+        .center-dot .mini-circle {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #27ae60; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px; border: 3px solid #fff;
+            box-shadow: 0 2px 10px rgba(39,174,96,0.3);
+        }
+
+        /* Pill color variants */
+        .pill-orange { background: #e8a838; }
+        .pill-blue { background: #3498db; }
+        .pill-green { background: #27ae60; }
+        .pill-red { background: #e74c3c; }
+        .pill-teal { background: #1abc9c; }
+        .pill-purple { background: #8e44ad; }
+        .pill-navy { background: #2c3e50; }
+
+        /* Node inner color variants */
+        .node-green { background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%); box-shadow: 0 4px 16px rgba(39,174,96,0.3); }
+        .node-red { background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%); box-shadow: 0 4px 16px rgba(231,76,60,0.3); }
+        .node-gold { background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%); box-shadow: 0 4px 16px rgba(243,156,18,0.3); }
+        .node-navy { background: linear-gradient(135deg, #34495e 0%, #2c3e50 100%); box-shadow: 0 4px 16px rgba(44,62,80,0.3); }
+        .node-teal { background: linear-gradient(135deg, #1abc9c 0%, #16a085 100%); box-shadow: 0 4px 16px rgba(26,188,156,0.3); }
+        .node-purple { background: linear-gradient(135deg, #9b59b6 0%, #8e44ad 100%); box-shadow: 0 4px 16px rgba(155,89,182,0.3); }
+
+        /* Outer ring color variants */
+        .ring-orange { border-color: #e8a838; }
+        .ring-red { border-color: #e74c3c; }
+        .ring-green { border-color: #27ae60; }
+        .ring-blue { border-color: #3498db; }
+        .ring-teal { border-color: #1abc9c; }
+        .ring-purple { border-color: #8e44ad; }
+        .ring-navy { border-color: #2c3e50; }
+
+        /* ══════════════════════════════════════════
+           DETAILED SECTIONS (below the path)
+           ══════════════════════════════════════════ */
+
+        /* Transition from path to detail */
+        .path-to-detail {
+            height: 80px;
+            background: linear-gradient(180deg, #8ec5e8 0%, #0f1b2d 100%);
+        }
+
+        section.detail { padding: 80px 0; }
+        .detail .section-label {
             text-transform: uppercase; font-size: 11px; font-weight: 700;
             letter-spacing: 4px; color: #50A2E5; margin-bottom: 12px;
         }
-        .calculator-section .section-accent {
+        .detail .section-accent {
             width: 50px; height: 3px; background: #248ADE;
             margin: 0 auto 20px; border-radius: 2px;
         }
-        .calculator-section h2 {
-            font-size: 34px; font-weight: 800; color: #fff;
-            margin-bottom: 12px; line-height: 1.2;
+        .detail .section-title {
+            font-size: 34px; font-weight: 800; margin-bottom: 14px; line-height: 1.2;
         }
-        .calculator-section .section-sub {
-            font-size: 16px; color: rgba(255,255,255,0.55);
-            max-width: 580px; margin: 0 auto 40px; line-height: 1.7;
+        .detail .section-sub {
+            font-size: 16px; max-width: 600px;
+            margin: 0 auto 40px; line-height: 1.7;
         }
+
+        /* Dark detail section */
+        .detail-dark {
+            background: #0f1b2d; text-align: center;
+        }
+        .detail-dark .section-title { color: #fff; }
+        .detail-dark .section-sub { color: rgba(255,255,255,0.55); }
+
+        /* Light detail section */
+        .detail-light {
+            background: #fff; text-align: center;
+        }
+        .detail-light .section-title { color: #1a1a2e; }
+        .detail-light .section-sub { color: #666; }
+
+        /* Before/After cards */
+        .ba-grid {
+            display: grid; grid-template-columns: 1fr 60px 1fr;
+            align-items: stretch; max-width: 880px; margin: 0 auto 50px;
+        }
+        .ba-card { padding: 32px 28px; border-radius: 16px; }
+        .ba-before { background: rgba(231,76,60,0.08); border: 2px solid rgba(231,76,60,0.2); }
+        .ba-after { background: rgba(39,174,96,0.08); border: 2px solid rgba(39,174,96,0.2); }
+        .ba-card h3 {
+            font-size: 15px; font-weight: 700; margin-bottom: 16px;
+            text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px;
+        }
+        .ba-before h3 { color: #e74c3c; }
+        .ba-after h3 { color: #27ae60; }
+        .ba-card ul { list-style: none; padding: 0; }
+        .ba-card li {
+            font-size: 14px; padding: 7px 0; color: rgba(255,255,255,0.75);
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex; align-items: flex-start; gap: 8px; line-height: 1.5;
+        }
+        .ba-card li:last-child { border-bottom: none; }
+        .ba-before li .ic { color: #e74c3c; }
+        .ba-after li .ic { color: #27ae60; }
+        .ba-arrow {
+            display: flex; align-items: center; justify-content: center;
+        }
+        .ba-arrow-circle {
+            width: 44px; height: 44px; border-radius: 50%;
+            background: #248ADE; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 18px; box-shadow: 0 4px 16px rgba(36,138,222,0.3);
+        }
+
+        /* Quote */
+        .quote-block {
+            max-width: 700px; margin: 0 auto; text-align: center;
+            position: relative; padding: 30px 40px;
+        }
+        .quote-mark {
+            font-size: 100px; font-weight: 800; color: rgba(36,138,222,0.1);
+            position: absolute; top: -10px; left: 50%; transform: translateX(-50%);
+            font-family: Georgia, serif; pointer-events: none;
+        }
+        .quote-block p {
+            font-size: 18px; font-style: italic; color: rgba(255,255,255,0.8);
+            line-height: 1.7; margin-bottom: 12px; position: relative;
+        }
+        .quote-block .attribution {
+            font-size: 13px; font-weight: 700; color: #50A2E5;
+        }
+
+        /* Wave divider */
+        .wave-divider { width: 100%; overflow: hidden; line-height: 0; }
+        .wave-divider svg { display: block; width: 100%; height: 60px; }
+
+        /* Calculator */
+        .calc-section { background: #f8fafc; text-align: center; padding: 80px 0; }
+        .calc-section .section-title { color: #1a1a2e; }
+        .calc-section .section-sub { color: #666; }
         .calc-box {
-            background: rgba(255,255,255,0.06); border-radius: 20px; padding: 44px 40px;
+            background: #fff; border-radius: 20px; padding: 44px 40px;
             max-width: 700px; margin: 0 auto;
-            border: 1px solid rgba(255,255,255,0.1); text-align: left;
-            backdrop-filter: blur(10px);
+            border: 2px solid #e8eef5; text-align: left;
         }
         .calc-box h3 {
-            font-size: 22px; font-weight: 800; color: #fff;
+            font-size: 22px; font-weight: 800; color: #1a1a2e;
             margin-bottom: 4px; text-align: center;
         }
         .calc-box .calc-subtitle {
-            font-size: 13px; color: rgba(255,255,255,0.45); text-align: center; margin-bottom: 28px;
+            font-size: 13px; color: #888; text-align: center; margin-bottom: 28px;
         }
         .calc-row { margin-bottom: 22px; }
         .calc-row label {
-            display: block; font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.6);
-            margin-bottom: 8px; text-transform: uppercase; letter-spacing: 1px;
+            display: block; font-size: 11px; font-weight: 700; color: #555;
+            margin-bottom: 7px; text-transform: uppercase; letter-spacing: 1px;
         }
         .calc-row .input-row { display: flex; align-items: center; gap: 14px; }
         .calc-row input[type="range"] {
-            flex: 1; accent-color: #248ADE; height: 6px;
+            flex: 1; height: 8px;
             -webkit-appearance: none; appearance: none;
-            background: rgba(255,255,255,0.12); border-radius: 3px; outline: none;
+            background: #e2eaf3; border-radius: 4px; outline: none;
         }
         .calc-row input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none; appearance: none;
-            width: 20px; height: 20px; border-radius: 50%;
-            background: #50A2E5; cursor: pointer;
-            box-shadow: 0 2px 10px rgba(36,138,222,0.5);
+            -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%;
+            background: #248ADE; cursor: pointer;
+            box-shadow: 0 2px 8px rgba(36,138,222,0.3);
         }
         .calc-row input[type="range"]::-moz-range-thumb {
-            width: 20px; height: 20px; border-radius: 50%; border: none;
-            background: #50A2E5; cursor: pointer;
-            box-shadow: 0 2px 10px rgba(36,138,222,0.5);
+            width: 22px; height: 22px; border-radius: 50%; border: none;
+            background: #248ADE; cursor: pointer;
         }
         .calc-row .val {
             min-width: 85px; font-size: 18px; font-weight: 800;
-            color: #50A2E5; text-align: right;
+            color: #248ADE; text-align: right;
         }
-        .calc-divider { border: none; border-top: 1px solid rgba(255,255,255,0.08); margin: 28px 0; }
+        .calc-divider { border: none; border-top: 2px dashed #e2eaf3; margin: 28px 0; }
         .calc-result {
             background: linear-gradient(135deg, #248ADE 0%, #1565a0 100%);
             border-radius: 14px; padding: 28px 24px; color: #fff; text-align: center;
-            box-shadow: 0 8px 32px rgba(36,138,222,0.3);
+            box-shadow: 0 8px 32px rgba(36,138,222,0.25);
         }
         .calc-result .result-label {
             font-size: 11px; opacity: 0.8; margin-bottom: 4px;
@@ -435,10 +409,36 @@
             background: rgba(255,255,255,0.1); border-radius: 10px; padding: 14px;
         }
         .calc-results-grid .mini-number { font-size: 22px; font-weight: 800; }
-        .calc-results-grid .mini-label { font-size: 10px; opacity: 0.75; letter-spacing: 0.5px; }
-        .calc-note { font-size: 11px; color: rgba(255,255,255,0.3); text-align: center; margin-top: 16px; }
+        .calc-results-grid .mini-label { font-size: 10px; opacity: 0.75; }
+        .calc-note { font-size: 11px; color: #aaa; text-align: center; margin-top: 16px; }
 
-        /* ── CTA ── */
+        /* Vehicle comparison */
+        .vehicle-grid {
+            display: grid; grid-template-columns: 1fr 50px 1fr;
+            align-items: stretch; max-width: 820px; margin: 0 auto 40px;
+        }
+        .v-card { padding: 32px 24px; border-radius: 16px; text-align: center; }
+        .v-old { background: #f9fafb; border: 2px solid #e5e7eb; border-top: 4px solid #e5a8a8; }
+        .v-new { background: #eef6ff; border: 2px solid #c4ddf6; border-top: 4px solid #248ADE; box-shadow: 0 4px 20px rgba(36,138,222,0.08); }
+        .v-card h4 { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 14px; }
+        .v-old h4 { color: #999; }
+        .v-new h4 { color: #248ADE; }
+        .v-card ul { list-style: none; text-align: left; padding: 0; }
+        .v-card li { font-size: 13px; padding: 6px 0; color: #555; display: flex; gap: 8px; }
+        .v-arrow { display: flex; align-items: center; justify-content: center; }
+        .v-arrow-icon {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: #248ADE; color: #fff;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 16px;
+        }
+        .v-punchline {
+            font-size: 19px; font-weight: 300; color: #555;
+            max-width: 580px; margin: 0 auto; line-height: 1.6;
+        }
+        .v-punchline strong { color: #248ADE; font-weight: 700; }
+
+        /* CTA */
         .cta-section {
             background: linear-gradient(135deg, #248ADE 0%, #1a5fa8 50%, #134a85 100%);
             text-align: center; padding: 80px 0; position: relative; overflow: hidden;
@@ -447,18 +447,9 @@
             content: ''; position: absolute; top: -50%; left: -50%;
             width: 200%; height: 200%;
             background: radial-gradient(circle at 30% 50%, rgba(255,255,255,0.06) 0%, transparent 50%);
-            pointer-events: none;
         }
-        .cta-section h2 {
-            font-size: 32px; font-weight: 800; color: #fff;
-            margin-bottom: 14px; position: relative;
-        }
-        .cta-sub {
-            font-size: 17px; color: rgba(255,255,255,0.8);
-            margin-bottom: 32px; max-width: 500px;
-            margin-left: auto; margin-right: auto; line-height: 1.6;
-            position: relative;
-        }
+        .cta-section h2 { font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 14px; position: relative; }
+        .cta-sub { font-size: 17px; color: rgba(255,255,255,0.8); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.6; position: relative; }
         .cta-btn {
             display: inline-block; background: #fff; color: #248ADE;
             padding: 16px 44px; border-radius: 8px; font-size: 17px; font-weight: 800;
@@ -466,58 +457,53 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.15); position: relative;
         }
         .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(0,0,0,0.25); color: #1a5fa8; }
-        .cta-note {
-            font-size: 13px; color: rgba(255,255,255,0.5);
-            margin-top: 14px; position: relative;
-        }
+        .cta-note { font-size: 13px; color: rgba(255,255,255,0.5); margin-top: 14px; position: relative; }
 
-        /* ── FOOTER ── */
+        /* Footer */
         .footer {
             background: #0a0e17; color: rgba(255,255,255,0.4); padding: 32px 0;
             font-size: 13px; border-top: 1px solid rgba(255,255,255,0.06);
         }
-        .footer .container {
-            display: flex; justify-content: space-between;
-            align-items: center; flex-wrap: wrap; gap: 16px;
-        }
+        .footer .container { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
         .footer a { color: rgba(255,255,255,0.4); font-size: 12px; }
         .footer a:hover { color: #fff; }
         .footer .social-buttons { list-style: none; display: flex; gap: 10px; padding: 0; }
         .footer .social-buttons a {
             display: inline-flex; align-items: center; justify-content: center;
             width: 36px; height: 36px; background: rgba(255,255,255,0.06);
-            border-radius: 50%; color: rgba(255,255,255,0.4);
-            font-size: 15px; transition: background 0.2s, color 0.2s;
+            border-radius: 50%; color: rgba(255,255,255,0.4); font-size: 15px;
+            transition: background 0.2s;
         }
         .footer .social-buttons a:hover { background: #248ADE; color: #fff; }
 
-        /* ── RESPONSIVE ── */
+        /* Responsive */
         @media (max-width: 768px) {
-            .timeline::before, .timeline::after { left: 24px; }
-            .path-stop { grid-template-columns: 56px 1fr; gap: 0; }
-            .path-stop .path-node { grid-column: 1; }
-            .path-stop:nth-child(odd) .path-content,
-            .path-stop:nth-child(even) .path-content { grid-column: 2; text-align: left; padding: 0 0 0 16px; }
-            .path-stop .path-spacer { display: none; }
-            .path-stop:nth-child(odd) .path-content::after,
-            .path-stop:nth-child(even) .path-content::before { display: none; }
-            .node-circle { width: 48px; height: 48px; font-size: 18px; }
-            .node-circle::before { width: 60px; height: 60px; top: -6px; left: -6px; }
-            .node-label { font-size: 8px; padding: 3px 8px; }
-            .path-intro h2 { font-size: 28px; }
-            .mini-stats { grid-template-columns: 1fr; }
-            .vehicle-mini { grid-template-columns: 1fr; }
-            .calculator-section h2 { font-size: 26px; }
-            .calc-box { padding: 28px 20px; }
+            .timeline::before { left: 30px; }
+            .path-row { flex-wrap: wrap; justify-content: flex-start; padding-left: 0; }
+            .path-row.left, .path-row.right { flex-direction: row; }
+            .path-row .spacer, .path-row .pill-side { display: none; }
+            .path-row .node { order: 1; margin: 0 12px 0 0; }
+            .path-row .connector { order: 2; width: 20px; }
+            .path-row .pill-label { order: 3; }
+            .path-row.left .node::after,
+            .path-row.right .node::after { left: -8px; right: auto; }
+            .node-outer { width: 70px; height: 70px; }
+            .node-inner { width: 52px; height: 52px; font-size: 22px; }
+            .path-header h2 { font-size: 26px; }
+            .path-desc { margin-top: -30px; text-align: left; padding-left: 100px; }
+            .ba-grid, .vehicle-grid { grid-template-columns: 1fr; gap: 12px; }
+            .ba-arrow, .v-arrow { padding: 8px 0; }
+            .calc-box { padding: 28px 18px; }
             .calc-results-grid { grid-template-columns: 1fr; }
             .nav-links { display: none; }
             .hero-banner h2 { font-size: 24px; }
+            .detail .section-title { font-size: 26px; }
             .cta-section h2 { font-size: 26px; }
         }
 
-        /* ── ANIMATION ── */
+        /* Animation */
         .fade-up {
-            opacity: 0; transform: translateY(28px);
+            opacity: 0; transform: translateY(24px);
             transition: opacity 0.7s ease, transform 0.7s ease;
         }
         .fade-up.visible { opacity: 1; transform: translateY(0); }
@@ -525,7 +511,7 @@
 </head>
 <body>
 
-<!-- ======== CLONED NAV ======== -->
+<!-- ══════ CLONED NAV ══════ -->
 <nav class="navbar">
     <div class="topbar-nav">
         <div class="container">
@@ -547,7 +533,7 @@
     </div>
 </nav>
 
-<!-- ======== CLONED HERO ======== -->
+<!-- ══════ CLONED HERO ══════ -->
 <section class="hero-banner" style="padding-bottom: 0;">
     <div class="container">
         <h2>Offering the Best in Pre-Owned Manufactured Homes</h2>
@@ -555,10 +541,10 @@
     </div>
 </section>
 
-<!-- ======== HERO→CONTENT GRADIENT FADE ======== -->
+<!-- ══════ HERO GRADIENT ══════ -->
 <div class="hero-gradient"></div>
 
-<!-- ======== HOOK ======== -->
+<!-- ══════ HOOK ══════ -->
 <section class="hook-section">
     <div class="container">
         <p class="hook-line fade-up">
@@ -568,244 +554,215 @@
     </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════
-     HERO'S ARC PATH — The Transformation Journey
-     ══════════════════════════════════════════════════ -->
-<div class="path-wrapper">
+<!-- ══════════════════════════════════════════════════════
+     HERO'S ARC PATH — Visual Journey (Pigglee-style)
+     ══════════════════════════════════════════════════════ -->
+<div class="path-section">
     <div class="container">
-        <div class="path-intro fade-up">
-            <div class="section-label">Your Transformation Path</div>
-            <div class="section-accent"></div>
-            <h2>Here's What Changed in 8 Weeks</h2>
-            <p>3,600 leads a year. A 2% close rate. Thousands of buyers slipping through the cracks. Follow the path to see what we fixed.</p>
+        <div class="path-header fade-up">
+            <h2>Your Transformation Path</h2>
+            <p>Follow the journey from where you are today to where you could be in 8 weeks.</p>
         </div>
     </div>
 
     <div class="timeline">
 
-        <!-- STOP 1: The Problem (left) -->
-        <div class="path-stop fade-up">
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>The Problem We Found</h3>
-                    <div class="card-sub">300 leads/month, but 98% were being lost — no follow-up, no scoring, no nurture.</div>
-                    <div class="mini-stats">
-                        <div class="mini-stat">
-                            <div class="num">3,528</div>
-                            <div class="lbl">Lost Leads / Year</div>
-                        </div>
-                        <div class="mini-stat">
-                            <div class="num">24h+</div>
-                            <div class="lbl">Response Time</div>
-                        </div>
-                        <div class="mini-stat">
-                            <div class="num">2%</div>
-                            <div class="lbl">Close Rate</div>
-                        </div>
-                        <div class="mini-stat">
-                            <div class="num">98</div>
-                            <div class="lbl">CRM Record Cap</div>
-                        </div>
-                    </div>
+        <!-- NODE 1: Discovery (left) -->
+        <div class="path-row left fade-up">
+            <div class="pill-side">
+                <div class="pill-label pill-orange">Discovery</div>
+                <div class="connector"></div>
+            </div>
+            <div class="node">
+                <div class="node-outer ring-orange">
+                    <div class="node-inner"><i class="fa fa-search"></i></div>
                 </div>
             </div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-exclamation"></i></div>
-                <div class="node-label">Discovery</div>
-            </div>
-            <div class="path-spacer"></div>
+            <div class="spacer"></div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">3,528 leads lost / year</span>
+            <p>300 leads/month, 2% close rate. 98% of the pipeline was vanishing.</p>
         </div>
 
-        <!-- STOP 2: Before State (right) -->
-        <div class="path-stop fade-up">
-            <div class="path-spacer"></div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-times"></i></div>
-                <div class="node-label">Before</div>
-            </div>
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>Where Things Stood</h3>
-                    <div class="ba-mini before">
-                        <h4><i class="fa fa-times-circle"></i> Pain Points</h4>
-                        <ul>
-                            <li><span class="ic"><i class="fa fa-times"></i></span> CRM capped at 98 records — couldn't add more without manual cost</li>
-                            <li><span class="ic"><i class="fa fa-times"></i></span> Outsourced answering service with 24h+ response time</li>
-                            <li><span class="ic"><i class="fa fa-times"></i></span> Both owners doing ALL lead triage by hand</li>
-                            <li><span class="ic"><i class="fa fa-times"></i></span> Leads contacted once, then abandoned forever</li>
-                            <li><span class="ic"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
-                        </ul>
-                    </div>
+        <!-- NODE 2: Pain Points (right) -->
+        <div class="path-row right fade-up">
+            <div class="spacer"></div>
+            <div class="node">
+                <div class="node-outer ring-red">
+                    <div class="node-inner node-red"><i class="fa fa-times"></i></div>
                 </div>
             </div>
+            <div class="connector"></div>
+            <div class="pill-label pill-red">Pain Points</div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">24h+ response time</span>
+            <p>CRM capped at 98 records. Outsourced answering. Leads contacted once, then abandoned.</p>
         </div>
 
-        <!-- STOP 3: After State (left) -->
-        <div class="path-stop fade-up">
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>What We Built</h3>
-                    <div class="ba-mini after">
-                        <h4><i class="fa fa-check-circle"></i> Transformation</h4>
-                        <ul>
-                            <li><span class="ic"><i class="fa fa-check"></i></span> Unlimited CRM, auto-capture from every channel</li>
-                            <li><span class="ic"><i class="fa fa-check"></i></span> AI agent responds in under 60 seconds, 24/7</li>
-                            <li><span class="ic"><i class="fa fa-check"></i></span> Auto lead scoring: motivation, urgency, qualification</li>
-                            <li><span class="ic"><i class="fa fa-check"></i></span> 90-day nurture re-engaging the 98% that disappeared</li>
-                            <li><span class="ic"><i class="fa fa-check"></i></span> Multi-brand separation — clean pipeline, zero confusion</li>
-                        </ul>
-                    </div>
+        <!-- Center transition dot -->
+        <div class="center-dot fade-up">
+            <div class="mini-circle"><i class="fa fa-bolt"></i></div>
+        </div>
+
+        <!-- NODE 3: Transformation (left) -->
+        <div class="path-row left fade-up">
+            <div class="pill-side">
+                <div class="pill-label pill-green">Transformation</div>
+                <div class="connector"></div>
+            </div>
+            <div class="node">
+                <div class="node-outer ring-green">
+                    <div class="node-inner node-green"><i class="fa fa-cogs"></i></div>
                 </div>
             </div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-check"></i></div>
-                <div class="node-label">After</div>
-            </div>
-            <div class="path-spacer"></div>
+            <div class="spacer"></div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">AI responds in &lt;60s</span>
+            <p>Unlimited CRM. Auto lead scoring. 90-day nurture. Multi-brand pipeline.</p>
         </div>
 
-        <!-- STOP 4: Results + Quote (right) -->
-        <div class="path-stop fade-up">
-            <div class="path-spacer"></div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-trophy"></i></div>
-                <div class="node-label">Results</div>
-            </div>
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>First 8 Weeks</h3>
-                    <div class="card-sub">From reduced response time alone:</div>
-                    <div class="mini-stats" style="margin-bottom: 16px;">
-                        <div class="mini-stat">
-                            <div class="num">+2</div>
-                            <div class="lbl">Extra Deals</div>
-                        </div>
-                        <div class="mini-stat">
-                            <div class="num">$10K+</div>
-                            <div class="lbl">Margin / Deal</div>
-                        </div>
-                    </div>
-                    <div class="path-quote">"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</div>
-                    <div class="path-attribution">— Dan, Co-Owner, EZ Homes</div>
+        <!-- NODE 4: Results (right) -->
+        <div class="path-row right fade-up">
+            <div class="spacer"></div>
+            <div class="node">
+                <div class="node-outer ring-orange">
+                    <div class="node-inner node-gold"><i class="fa fa-trophy"></i></div>
                 </div>
             </div>
+            <div class="connector"></div>
+            <div class="pill-label pill-orange">Results</div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">+2 extra deals in 8 weeks</span>
+            <p>$10K+ margin per deal. From reduced response time alone.</p>
         </div>
 
-        <!-- STOP 5: Ceiling (left) -->
-        <div class="path-stop fade-up">
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>What's Your Ceiling?</h3>
-                    <p class="ceiling-text">
-                        Most manufactured home dealers believe their ceiling is <strong>$700K — $1.2M</strong> in annual revenue.
-                        The top 5% are doing <span class="ceiling-stat">$3M — $8M+</span>.
-                    </p>
-                    <p class="ceiling-text" style="margin-top: 12px;">
-                        The difference isn't more trucks or people. It's <strong>how many leads actually turn into deals</strong>.
-                        With <strong>300 leads/month</strong> at <strong>2% close rate</strong> — you don't have a lead problem.
-                        You have a <strong>conversion infrastructure problem</strong>. And that's the easiest kind to fix.
-                    </p>
+        <!-- Center transition dot -->
+        <div class="center-dot fade-up">
+            <div class="mini-circle" style="background:#248ADE;"><i class="fa fa-arrow-up"></i></div>
+        </div>
+
+        <!-- NODE 5: Ceiling (left) -->
+        <div class="path-row left fade-up">
+            <div class="pill-side">
+                <div class="pill-label pill-navy">Your Ceiling</div>
+                <div class="connector"></div>
+            </div>
+            <div class="node">
+                <div class="node-outer ring-navy">
+                    <div class="node-inner node-navy"><i class="fa fa-line-chart"></i></div>
                 </div>
             </div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-line-chart"></i></div>
-                <div class="node-label">Ceiling</div>
-            </div>
-            <div class="path-spacer"></div>
+            <div class="spacer"></div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">$3M — $8M+</span>
+            <p>Top 5% of dealers. Not more trucks or people — better conversion infrastructure.</p>
         </div>
 
-        <!-- STOP 6: New Vehicle (right) -->
-        <div class="path-stop fade-up">
-            <div class="path-spacer"></div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-rocket"></i></div>
-                <div class="node-label">New Vehicle</div>
-            </div>
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>You Don't Need More Leads</h3>
-                    <div class="card-sub">You need a new vehicle. The old playbook doesn't scale.</div>
-                    <div class="vehicle-mini">
-                        <div class="vm-col vm-old">
-                            <h5>Old Way</h5>
-                            <ul>
-                                <li><i class="fa fa-long-arrow-right" style="color:#ccc;font-size:11px;"></i> Hire more salespeople</li>
-                                <li><i class="fa fa-long-arrow-right" style="color:#ccc;font-size:11px;"></i> Spend $5K+/mo marketing</li>
-                                <li><i class="fa fa-long-arrow-right" style="color:#ccc;font-size:11px;"></i> Answer every call yourself</li>
-                                <li><i class="fa fa-long-arrow-right" style="color:#ccc;font-size:11px;"></i> Lose 98% of leads</li>
-                            </ul>
-                        </div>
-                        <div class="vm-col vm-new">
-                            <h5>New Vehicle</h5>
-                            <ul>
-                                <li><i class="fa fa-bolt" style="color:#248ADE;font-size:11px;"></i> AI responds &lt;60s, 24/7</li>
-                                <li><i class="fa fa-bolt" style="color:#248ADE;font-size:11px;"></i> Auto scoring & routing</li>
-                                <li><i class="fa fa-bolt" style="color:#248ADE;font-size:11px;"></i> 90-day nurture runs itself</li>
-                                <li><i class="fa fa-bolt" style="color:#248ADE;font-size:11px;"></i> Close 3-5x from same leads</li>
-                            </ul>
-                        </div>
-                    </div>
+        <!-- NODE 6: New Vehicle (right) -->
+        <div class="path-row right fade-up">
+            <div class="spacer"></div>
+            <div class="node">
+                <div class="node-outer ring-blue">
+                    <div class="node-inner"><i class="fa fa-rocket"></i></div>
                 </div>
             </div>
+            <div class="connector"></div>
+            <div class="pill-label pill-blue">New Vehicle</div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">Close 3-5x more</span>
+            <p>Same leads. AI-powered infrastructure. You only talk to qualified, ready buyers.</p>
         </div>
 
-        <!-- STOP 7: SEO (left) -->
-        <div class="path-stop fade-up">
-            <div class="path-content">
-                <div class="path-card">
-                    <h3>Your Online Presence</h3>
-                    <div class="card-sub">How your digital assets stack up — regardless of how you feel about it.</div>
-                    <div class="seo-mini-grid">
-                        <div class="seo-mini">
-                            <div class="seo-mini-icon"><i class="fa fa-search"></i></div>
-                            <div class="seo-mini-body">
-                                <div class="seo-num">12+</div>
-                                <div class="seo-txt">Keyword gaps where competitors outrank you on high-intent terms</div>
-                            </div>
-                        </div>
-                        <div class="seo-mini">
-                            <div class="seo-mini-icon"><i class="fa fa-map-marker"></i></div>
-                            <div class="seo-mini-body">
-                                <div class="seo-num">Pos 6-10</div>
-                                <div class="seo-txt">Page 1 — but not top 3 where 75% of clicks happen</div>
-                            </div>
-                        </div>
-                        <div class="seo-mini">
-                            <div class="seo-mini-icon"><i class="fa fa-line-chart"></i></div>
-                            <div class="seo-mini-body">
-                                <div class="seo-num">3-5</div>
-                                <div class="seo-txt">Quick wins that could move you into top 3 and 2-3x organic traffic</div>
-                            </div>
-                        </div>
-                    </div>
+        <!-- NODE 7: SEO Snapshot (left) -->
+        <div class="path-row left fade-up">
+            <div class="pill-side">
+                <div class="pill-label pill-teal">SEO Snapshot</div>
+                <div class="connector"></div>
+            </div>
+            <div class="node">
+                <div class="node-outer ring-teal">
+                    <div class="node-inner node-teal"><i class="fa fa-globe"></i></div>
                 </div>
             </div>
-            <div class="path-node">
-                <div class="node-circle"><i class="fa fa-globe"></i></div>
-                <div class="node-label">SEO Snapshot</div>
-            </div>
-            <div class="path-spacer"></div>
+            <div class="spacer"></div>
+        </div>
+        <div class="path-desc fade-up">
+            <span class="stat-highlight">12+ keyword gaps</span>
+            <p>Position 6-10 on page 1. 3-5 quick wins to break into top 3.</p>
         </div>
 
-        <!-- END NODE -->
-        <div class="path-end fade-up">
-            <div class="end-node"><i class="fa fa-star"></i></div>
-            <p class="end-text">
-                Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>
-                For the first time in history, this is actually realistic.
-            </p>
+        <!-- Center end dot -->
+        <div class="center-dot fade-up">
+            <div class="mini-circle" style="background:#e8a838; width:50px; height:50px; font-size:20px;"><i class="fa fa-star"></i></div>
         </div>
 
-    </div><!-- .timeline -->
-</div><!-- .path-wrapper -->
+    </div>
+</div>
 
-<!-- ══════ CALCULATOR (full width, dark) ══════ -->
-<section class="calculator-section">
+<!-- ══════ TRANSITION TO DETAIL ══════ -->
+<div class="path-to-detail"></div>
+
+<!-- ══════ BEFORE / AFTER DETAIL ══════ -->
+<section class="detail detail-dark">
     <div class="container">
-        <div class="section-label fade-up">Your Numbers, Your Opportunity</div>
+        <div class="section-label fade-up">The Full Picture</div>
         <div class="section-accent fade-up"></div>
-        <h2 class="fade-up">See What's Possible</h2>
-        <p class="section-sub fade-up">Pre-filled with industry averages. Adjust the sliders to match your business.</p>
+        <h2 class="section-title fade-up">Before vs. After — Side by Side</h2>
+
+        <div class="ba-grid fade-up">
+            <div class="ba-card ba-before">
+                <h3><i class="fa fa-times-circle"></i> Before</h3>
+                <ul>
+                    <li><span class="ic"><i class="fa fa-times"></i></span> CRM capped at 98 records</li>
+                    <li><span class="ic"><i class="fa fa-times"></i></span> 24h+ response time</li>
+                    <li><span class="ic"><i class="fa fa-times"></i></span> Both owners doing lead triage by hand</li>
+                    <li><span class="ic"><i class="fa fa-times"></i></span> Leads contacted once, then abandoned</li>
+                    <li><span class="ic"><i class="fa fa-times"></i></span> No scoring — hot and cold treated the same</li>
+                </ul>
+            </div>
+            <div class="ba-arrow">
+                <div class="ba-arrow-circle"><i class="fa fa-arrow-right"></i></div>
+            </div>
+            <div class="ba-card ba-after">
+                <h3><i class="fa fa-check-circle"></i> After</h3>
+                <ul>
+                    <li><span class="ic"><i class="fa fa-check"></i></span> Unlimited CRM, auto-capture</li>
+                    <li><span class="ic"><i class="fa fa-check"></i></span> AI responds in &lt;60 seconds, 24/7</li>
+                    <li><span class="ic"><i class="fa fa-check"></i></span> Auto lead scoring & routing</li>
+                    <li><span class="ic"><i class="fa fa-check"></i></span> 90-day nurture re-engages the 98%</li>
+                    <li><span class="ic"><i class="fa fa-check"></i></span> Multi-brand pipeline separation</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="quote-block fade-up">
+            <div class="quote-mark">"</div>
+            <p>"If we were able to pluck another 10 to 20 homes a year out of going back and nurturing leads... that's another $200,000 in margin."</p>
+            <div class="attribution">— Dan, Co-Owner, EZ Homes</div>
+        </div>
+    </div>
+</section>
+
+<!-- Wave -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#f8fafc"/>
+    </svg>
+</div>
+
+<!-- ══════ CALCULATOR ══════ -->
+<section class="calc-section">
+    <div class="container">
+        <div class="section-label fade-up" style="color:#50A2E5;">Your Numbers, Your Opportunity</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">See What's Possible</h2>
+        <p class="section-sub fade-up">Pre-filled with industry averages. Adjust to match your business.</p>
 
         <div class="calc-box fade-up">
             <h3>ROI Calculator</h3>
@@ -862,13 +819,59 @@
     </div>
 </section>
 
+<!-- Wave -->
+<div class="wave-divider">
+    <svg viewBox="0 0 1440 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0,0 C360,60 1080,60 1440,0 L1440,60 L0,60 Z" fill="#ffffff"/>
+    </svg>
+</div>
+
+<!-- ══════ NEW VEHICLE ══════ -->
+<section class="detail detail-light">
+    <div class="container">
+        <div class="section-label fade-up" style="color:#50A2E5;">A Different Way to Get There</div>
+        <div class="section-accent fade-up"></div>
+        <h2 class="section-title fade-up">You Don't Need More Leads. You Need a New Vehicle.</h2>
+        <p class="section-sub fade-up">The old playbook doesn't scale. What if the bottleneck isn't volume — it's infrastructure?</p>
+
+        <div class="vehicle-grid fade-up">
+            <div class="v-card v-old">
+                <h4>The Old Way</h4>
+                <ul>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hire more salespeople</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Spend $5K+/mo on marketing</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Answer every call yourself</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Hope the CRM doesn't break</li>
+                    <li><i class="fa fa-long-arrow-right" style="color:#ccc;"></i> Lose 98% of leads anyway</li>
+                </ul>
+            </div>
+            <div class="v-arrow">
+                <div class="v-arrow-icon"><i class="fa fa-arrow-right"></i></div>
+            </div>
+            <div class="v-card v-new">
+                <h4>The New Vehicle</h4>
+                <ul>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> AI responds in &lt;60 seconds, 24/7</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Every lead scored & routed automatically</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> 90-day nurture runs itself</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> You only talk to qualified, ready buyers</li>
+                    <li><i class="fa fa-bolt" style="color:#248ADE;"></i> Close 3-5x more from the same leads</li>
+                </ul>
+            </div>
+        </div>
+
+        <p class="v-punchline fade-up">
+            Business owners just like you <strong>don't have to grind harder to pass that ceiling</strong>.<br>
+            For the first time in history, this is actually realistic.
+        </p>
+    </div>
+</section>
+
 <!-- ══════ CTA ══════ -->
 <section class="cta-section">
     <div class="container">
         <h2 class="fade-up">Want to See What This Looks Like for You?</h2>
-        <p class="cta-sub fade-up">
-            No pitch. No commitment. We'll walk through your numbers and show you what's actually possible.
-        </p>
+        <p class="cta-sub fade-up">No pitch. No commitment. We'll walk through your numbers and show you what's actually possible.</p>
         <a href="https://www.ezhomesfast.com/Sales/About/GeneralQuestion" class="cta-btn fade-up">Let's See What's Possible</a>
         <p class="cta-note fade-up">15 minutes. Your numbers. Zero pressure.</p>
     </div>
@@ -890,13 +893,11 @@
 </footer>
 
 <script>
-// Scroll animations
 const obs = new IntersectionObserver(entries => {
     entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
 }, { threshold: 0.12 });
 document.querySelectorAll('.fade-up').forEach(el => obs.observe(el));
 
-// Calculator logic
 const $ = id => document.getElementById(id);
 function fmt(n) { return n >= 1000 ? '$' + n.toLocaleString('en-US') : '$' + n; }
 
