@@ -32,7 +32,7 @@
     <style>
         body { font-family: 'Raleway', sans-serif; background: #0c1528; color: #e8e8e8; }
 
-        /* ============ HERO ============ */
+        /* ============ HERO — Charlotte Wealth exact tone ============ */
         .hero {
             position: relative; min-height: 100vh;
             display: flex; flex-direction: column;
@@ -40,33 +40,38 @@
         }
         .hero-bg {
             position: absolute; inset: 0;
-            background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=85&auto=format') center 40%/cover no-repeat;
+            /* NYC skyline — positioned at bottom so buildings anchor the lower half */
+            background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=85&auto=format') center bottom/cover no-repeat;
         }
-        /* Deep blue-purple hue wash — the "mysterious" layer */
+        /*
+         * Charlotte Wealth exact hue: saturated royal blue (#1a3a8a range),
+         * NOT purple. Deep blue top → vivid blue glow around city →
+         * slightly lighter where city lights bleed through.
+         */
         .hero-hue {
             position: absolute; inset: 0;
             background: linear-gradient(
                 180deg,
-                rgba(18,22,60,0.55) 0%,
-                rgba(30,48,96,0.35) 30%,
-                rgba(40,55,120,0.25) 50%,
-                rgba(18,22,60,0.50) 70%,
-                rgba(12,21,40,0.85) 100%
+                rgba(10,20,60,0.88) 0%,       /* very dark blue top — logo/nav zone */
+                rgba(15,30,80,0.75) 20%,       /* still dark, slightly brighter */
+                rgba(20,45,110,0.55) 40%,      /* starts opening up — the transition */
+                rgba(25,55,140,0.35) 55%,      /* vivid blue wash — city starts here */
+                rgba(30,60,150,0.30) 70%,      /* peak blue glow around buildings */
+                rgba(15,35,90,0.50) 85%,       /* slightly darker at very bottom */
+                rgba(10,20,55,0.75) 100%       /* fade to dark for service cards */
             );
         }
-        /* Soft purple bloom — dreamy glow in upper area */
+        /* Warm blue bloom centered on city area — mimics city light glow */
         .hero-bloom {
             position: absolute; inset: 0;
             background:
-                radial-gradient(ellipse 70% 50% at 50% 45%, rgba(90,80,180,0.12) 0%, transparent 70%),
-                radial-gradient(ellipse 50% 40% at 30% 55%, rgba(60,100,200,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse 40% 35% at 70% 50%, rgba(100,70,180,0.06) 0%, transparent 55%);
+                radial-gradient(ellipse 90% 45% at 50% 68%, rgba(30,70,170,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 30% at 35% 72%, rgba(40,80,190,0.10) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 25% at 65% 70%, rgba(50,90,200,0.08) 0%, transparent 50%);
         }
-        /* Bottom fade into page */
+        /* No bottom fade — service cards handle the transition */
         .hero-bottom-fade {
-            position: absolute; bottom: 0; left: 0; right: 0; height: 200px;
-            background: linear-gradient(to bottom, transparent, rgba(12,21,40,0.95));
-            pointer-events: none; z-index: 5;
+            display: none;
         }
 
         /* ============ NAV — inside hero, NOT fixed ============ */
@@ -115,9 +120,9 @@
             margin-top: auto;
         }
         .svc-overlay {
-            background: rgba(16,24,50,0.70);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
+            background: rgba(12,20,48,0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             padding: 28px 32px;
             border-top: 1px solid rgba(255,255,255,0.06);
             display: flex; align-items: center; justify-content: space-between;
@@ -310,7 +315,7 @@
             <p class="font-body text-[15px] md:text-base text-white/35 font-300 max-w-md mx-auto mb-10 leading-relaxed">Financial engineering consultancy specializing in quantitative analysis, risk management, and professional training.</p>
         </div>
         <div data-reveal="d2">
-            <a href="#contact" class="btn-accent">Contact Us</a>
+            <a href="#contact" class="btn-accent" style="padding:18px 72px; font-size:.75rem;">Contact Us</a>
         </div>
     </div>
 
