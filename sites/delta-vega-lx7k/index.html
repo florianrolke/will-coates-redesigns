@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jonathan Schachter, PhD — Quantitative Analyst | LIBOR Specialist</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0b0f1a;
+      --bg-secondary: #111827;
+      --bg-card: #1a1f2e;
+      --accent: #7456f1;
+      --accent-light: #a78bfa;
+      --gold: #C9A96E;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-primary);
+      color: #f1f5f9;
+      overflow-x: hidden;
+    }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
+
+    /* ═══════ EFFECT 8: Preloader ═══════ */
+    .preloader-line {
+      animation: lineExpand 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.3s forwards;
+    }
+    .preloader-name {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.8s forwards;
+    }
+    .preloader-tag {
+      animation: fadeUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 1.0s forwards;
+    }
+    @keyframes lineExpand { to { width: 120px; } }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    #preloader.exit {
+      animation: preloaderExit 0.8s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+    }
+    @keyframes preloaderExit {
+      0%   { clip-path: inset(0 0 0 0); }
+      100% { clip-path: inset(0 0 100% 0); }
+    }
+
+    /* ═══════ EFFECT 1: Gradient-Filled Text ═══════ */
+    .gradient-text {
+      background: linear-gradient(135deg, #7456f1, #c084fc, #a78bfa, #7456f1);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: shimmer 5s ease-in-out infinite;
+    }
+    @keyframes shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    /* ═══════ EFFECT 7: Metallic Platinum Text ═══════ */
+    .metallic-platinum {
+      background: linear-gradient(135deg, #667 0%, #dde 25%, #fff 37%, #ccd 50%, #889 62%, #bbc 75%, #667 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: metalShift 6s ease-in-out infinite;
+    }
+    .metallic-gold {
+      background: linear-gradient(135deg, #8B6914 0%, #DAA520 20%, #FFD700 35%, #FFEAA7 50%, #DAA520 65%, #B8860B 80%, #8B6914 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: metalShift 6s ease-in-out infinite;
+    }
+    @keyframes metalShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .metallic-border {
+      position: relative;
+    }
+    .metallic-border::after {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: linear-gradient(135deg, #667, #dde, #fff, #ccd, #889, #bbc, #667);
+      background-size: 300% 300%;
+      animation: metalShift 6s ease-in-out infinite;
+      z-index: -1;
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: exclude;
+      -webkit-mask-composite: xor;
+      padding: 1px;
+    }
+
+    /* ═══════ EFFECT 3: Marquee ═══════ */
+    .marquee-track { animation: marquee 35s linear infinite; }
+    .marquee-container:hover .marquee-track { animation-play-state: paused; }
+    @keyframes marquee {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ═══════ EFFECT 4: Split Letter ═══════ */
+    .split-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(100%) rotateX(-80deg);
+      transform-origin: bottom center;
+    }
+    .split-text.animate .split-char {
+      animation: charReveal 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes charReveal {
+      to { opacity: 1; transform: translateY(0) rotateX(0deg); }
+    }
+
+    /* ═══════ EFFECT 2: Magnetic Button ═══════ */
+    .magnetic-btn {
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.5s, color 0.5s, background 0.5s;
+      will-change: transform;
+    }
+    .magnetic-text {
+      transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* ═══════ EFFECT 6: Scroll Progress ═══════ */
+    #scrollProgress {
+      transition: none;
+    }
+
+    /* ═══════ Section Transitions ═══════ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Luxury spacing */
+    .luxury-section { padding: clamp(80px, 12vh, 160px) 0; }
+
+    /* Thin scrollbar */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg-primary); }
+    ::-webkit-scrollbar-thumb { background: #7456f133; border-radius: 2px; }
+
+    /* Nav blur */
+    .nav-blur {
+      backdrop-filter: blur(20px) saturate(1.8);
+      -webkit-backdrop-filter: blur(20px) saturate(1.8);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EFFECT 6: Scroll Progress Line                     -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="fixed top-0 left-0 w-full h-[2px] z-[9999]">
+  <div id="scrollProgress" class="h-full bg-gradient-to-r from-[#7456f1] to-[#c084fc] w-0 origin-left"></div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EFFECT 8: Luxury Preloader                         -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div id="preloader" class="fixed inset-0 z-[10000] bg-[#0b0f1a] flex items-center justify-center">
+  <div class="text-center">
+    <div class="w-0 h-[1px] bg-gradient-to-r from-transparent via-[#7456f1] to-transparent mx-auto mb-8 preloader-line"></div>
+    <h2 class="text-white text-2xl font-serif tracking-[0.5em] uppercase opacity-0 preloader-name" style="font-family:'Playfair Display',serif">
+      Delta Vega
+    </h2>
+    <p class="text-white/30 text-xs uppercase tracking-[0.4em] mt-3 opacity-0 preloader-tag">
+      Quantitative Excellence
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- Navigation                                         -->
+<!-- ═══════════════════════════════════════════════════ -->
+<nav class="fixed top-0 left-0 w-full z-[100] nav-blur bg-[#0b0f1a]/80 border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+    <a href="#" class="text-white text-sm uppercase tracking-[0.4em] font-light" style="font-family:'Playfair Display',serif">
+      Delta Vega
+    </a>
+    <div class="hidden md:flex items-center gap-10">
+      <a href="#about" class="text-white/40 text-xs uppercase tracking-[0.3em] hover:text-white transition-colors duration-500">About</a>
+      <a href="#expertise" class="text-white/40 text-xs uppercase tracking-[0.3em] hover:text-white transition-colors duration-500">Expertise</a>
+      <a href="#work" class="text-white/40 text-xs uppercase tracking-[0.3em] hover:text-white transition-colors duration-500">Work</a>
+      <a href="#contact" class="magnetic-btn inline-flex items-center gap-2 px-6 py-2 border border-white/20 text-white/60 text-xs uppercase tracking-[0.3em] hover:border-[#7456f1] hover:text-white transition-all duration-500 rounded-sm">
+        <span class="magnetic-text">Contact</span>
+      </a>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- HERO — EFFECT 1 (Gradient Text) + EFFECT 5 (Blob) -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="relative h-screen flex items-center justify-center overflow-hidden">
+  <!-- EFFECT 5: Morphing SVG Blob Background -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <svg viewBox="0 0 800 600" class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] opacity-15">
+      <defs>
+        <linearGradient id="blobGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#7456f1"/>
+          <stop offset="50%" stop-color="#a78bfa"/>
+          <stop offset="100%" stop-color="#4c1d95"/>
+        </linearGradient>
+        <filter id="blobGoo">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="14" result="blur"/>
+          <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 28 -12" result="goo"/>
+        </filter>
+      </defs>
+      <g filter="url(#blobGoo)">
+        <path fill="url(#blobGrad)">
+          <animate attributeName="d" dur="14s" repeatCount="indefinite"
+            values="
+              M400,300 Q520,180 580,300 Q640,420 520,470 Q400,520 280,420 Q160,320 280,220 Q340,160 400,300Z;
+              M430,270 Q560,200 600,320 Q640,440 500,490 Q380,540 260,430 Q140,340 270,210 Q350,150 430,270Z;
+              M370,320 Q480,160 570,280 Q660,400 540,480 Q400,550 280,440 Q160,360 260,230 Q320,160 370,320Z;
+              M400,300 Q520,180 580,300 Q640,420 520,470 Q400,520 280,420 Q160,320 280,220 Q340,160 400,300Z;
+            "/>
+        </path>
+        <circle r="90" fill="url(#blobGrad)" opacity="0.5">
+          <animateMotion dur="18s" repeatCount="indefinite"
+            path="M200,300 Q380,120 550,300 Q380,480 200,300Z"/>
+        </circle>
+      </g>
+    </svg>
+  </div>
+
+  <!-- Hero Content -->
+  <div class="relative z-10 text-center px-6 max-w-5xl mx-auto">
+    <p class="text-white/30 text-xs uppercase tracking-[0.5em] mb-8 reveal">Quantitative Analyst &bull; LIBOR Specialist</p>
+
+    <!-- EFFECT 4: Split Letter Animation on name -->
+    <h1 class="split-text text-6xl md:text-8xl lg:text-9xl font-bold leading-[0.9] mb-6"
+        data-text="Jonathan Schachter" style="font-family:'Playfair Display',serif">
+      Jonathan Schachter
+    </h1>
+
+    <!-- EFFECT 1: Gradient shimmer subtitle -->
+    <p class="gradient-text text-xl md:text-2xl font-light tracking-wide mb-4" style="font-family:'Playfair Display',serif; font-style:italic">
+      PhD in Quantitative Finance
+    </p>
+
+    <p class="text-white/40 text-sm md:text-base max-w-xl mx-auto mb-12 reveal" style="transition-delay:0.4s">
+      Delivering rigorous quantitative solutions for interest rate derivatives,
+      LIBOR transition, and risk analytics across global financial institutions.
+    </p>
+
+    <!-- EFFECT 2: Magnetic CTA Button -->
+    <div class="reveal" style="transition-delay:0.6s">
+      <a href="#contact" class="magnetic-btn inline-flex items-center gap-3 px-10 py-4 border border-white/20 text-white text-sm uppercase tracking-[0.3em] hover:border-[#7456f1] hover:text-[#c084fc] transition-all duration-500 rounded-sm metallic-border">
+        <span class="magnetic-text">Schedule a Consultation</span>
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3">
+    <span class="text-white/20 text-[10px] uppercase tracking-[0.5em]">Scroll</span>
+    <div class="w-[1px] h-8 bg-gradient-to-b from-white/20 to-transparent animate-pulse"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EFFECT 3: Infinite Marquee Band                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<div class="marquee-container overflow-hidden py-6 border-y border-white/5 bg-[#0b0f1a]">
+  <div class="marquee-track flex whitespace-nowrap">
+    <div class="marquee-content flex items-center gap-16 pr-16">
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">LIBOR</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Derivatives</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Risk Analytics</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Quantitative Models</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Interest Rates</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+    </div>
+    <div class="marquee-content flex items-center gap-16 pr-16" aria-hidden="true">
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">LIBOR</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Derivatives</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Risk Analytics</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Quantitative Models</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+      <span class="text-white/10 text-6xl md:text-7xl font-extralight tracking-tight" style="font-family:'Playfair Display',serif">Interest Rates</span>
+      <span class="text-[#7456f1]/40 text-xs">&#9670;</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ABOUT Section                                      -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="about" class="luxury-section">
+  <div class="max-w-6xl mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-16 items-center">
+      <!-- Left: Label + Image -->
+      <div class="md:col-span-5 reveal">
+        <p class="text-white/20 text-[10px] uppercase tracking-[0.5em] mb-6">[ 01 ] About</p>
+        <div class="relative">
+          <!-- Profile placeholder with morphing blob accent -->
+          <div class="relative overflow-hidden rounded-sm aspect-[3/4] bg-[#111827]">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#7456f1]/10 to-transparent"></div>
+            <div class="absolute inset-0 flex items-center justify-center">
+              <div class="text-center">
+                <div class="w-32 h-32 rounded-full bg-gradient-to-br from-[#7456f1]/30 to-[#4c1d95]/20 mx-auto mb-4 flex items-center justify-center">
+                  <span class="metallic-platinum text-5xl font-bold" style="font-family:'Playfair Display',serif">JS</span>
+                </div>
+                <p class="text-white/20 text-xs uppercase tracking-[0.3em]">Jonathan Schachter, PhD</p>
+              </div>
+            </div>
+          </div>
+          <!-- Decorative line -->
+          <div class="absolute -bottom-4 -right-4 w-24 h-24 border-r border-b border-[#7456f1]/20"></div>
+        </div>
+      </div>
+
+      <!-- Right: Bio text -->
+      <div class="md:col-span-7 reveal" style="transition-delay:0.2s">
+        <h2 class="split-text text-4xl md:text-5xl font-bold mb-8 leading-tight"
+            data-text="Precision in Every Model" style="font-family:'Playfair Display',serif">
+          Precision in Every Model
+        </h2>
+        <div class="space-y-6 text-white/50 text-base leading-relaxed max-w-lg">
+          <p>
+            With over two decades in quantitative finance, Jonathan Schachter brings
+            deep expertise in interest rate derivatives, LIBOR transition strategies,
+            and advanced risk analytics to the world's leading financial institutions.
+          </p>
+          <p>
+            His work spans the full spectrum of quantitative analysis — from building
+            multi-curve pricing engines to advising on regulatory compliance for
+            benchmark rate transitions affecting trillions in notional value.
+          </p>
+          <p>
+            A published researcher and sought-after consultant, Jonathan combines
+            academic rigor with practical market insight to deliver solutions that
+            perform under real-world conditions.
+          </p>
+        </div>
+        <div class="mt-10 flex items-center gap-6">
+          <a href="https://www.linkedin.com/in/jonathanschachter" target="_blank"
+             class="magnetic-btn inline-flex items-center gap-2 text-white/30 text-xs uppercase tracking-[0.3em] hover:text-[#7456f1] transition-colors duration-500">
+            <span class="magnetic-text">LinkedIn Profile</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-width="1.5" d="M7 17L17 7M17 7H7M17 7v10"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EFFECT 10: Animated Counter Stats                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="py-24 border-y border-white/5">
+  <div class="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 px-8 text-center">
+    <div class="reveal">
+      <span class="counter text-5xl md:text-6xl font-extralight text-white tabular-nums" style="font-family:'Playfair Display',serif"
+            data-target="25" data-suffix="+">0</span>
+      <p class="text-white/25 text-[10px] uppercase tracking-[0.5em] mt-4">Years Experience</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.1s">
+      <span class="counter text-5xl md:text-6xl font-extralight text-white tabular-nums" style="font-family:'Playfair Display',serif"
+            data-target="3.2" data-prefix="$" data-suffix="T" data-decimals="1">0</span>
+      <p class="text-white/25 text-[10px] uppercase tracking-[0.5em] mt-4">Notional Analyzed</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.2s">
+      <span class="counter text-5xl md:text-6xl font-extralight text-white tabular-nums" style="font-family:'Playfair Display',serif"
+            data-target="40" data-suffix="+">0</span>
+      <p class="text-white/25 text-[10px] uppercase tracking-[0.5em] mt-4">Publications</p>
+    </div>
+    <div class="reveal" style="transition-delay:0.3s">
+      <span class="counter text-5xl md:text-6xl font-extralight text-white tabular-nums" style="font-family:'Playfair Display',serif"
+            data-target="12">0</span>
+      <p class="text-white/25 text-[10px] uppercase tracking-[0.5em] mt-4">Global Institutions</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EXPERTISE Section                                  -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="expertise" class="luxury-section">
+  <div class="max-w-6xl mx-auto px-8">
+    <p class="text-white/20 text-[10px] uppercase tracking-[0.5em] mb-4 reveal">[ 02 ] Expertise</p>
+    <h2 class="text-4xl md:text-6xl font-bold mb-20 leading-tight reveal metallic-platinum" style="font-family:'Playfair Display',serif">
+      Core Competencies
+    </h2>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-[1px] bg-white/5">
+      <!-- Card 1 -->
+      <div class="bg-[#0b0f1a] p-10 group reveal hover:bg-[#111827] transition-colors duration-700">
+        <div class="text-[#7456f1]/20 text-7xl font-extralight mb-6" style="font-family:'Playfair Display',serif">01</div>
+        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#a78bfa] transition-colors duration-500" style="font-family:'Playfair Display',serif">
+          LIBOR Transition
+        </h3>
+        <p class="text-white/35 text-sm leading-relaxed">
+          End-to-end advisory on benchmark rate transitions — SOFR, SONIA, €STR.
+          Multi-curve framework design, fallback provisions, and basis risk quantification
+          for portfolios exceeding $500B notional.
+        </p>
+        <div class="mt-8 w-0 group-hover:w-12 h-[1px] bg-[#7456f1] transition-all duration-700"></div>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="bg-[#0b0f1a] p-10 group reveal hover:bg-[#111827] transition-colors duration-700" style="transition-delay:0.15s">
+        <div class="text-[#7456f1]/20 text-7xl font-extralight mb-6" style="font-family:'Playfair Display',serif">02</div>
+        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#a78bfa] transition-colors duration-500" style="font-family:'Playfair Display',serif">
+          Derivatives Pricing
+        </h3>
+        <p class="text-white/35 text-sm leading-relaxed">
+          Monte Carlo and lattice-based pricing engines for exotic interest rate
+          derivatives. Swaptions, caps/floors, CMS products, and path-dependent
+          structures with calibrated volatility surfaces.
+        </p>
+        <div class="mt-8 w-0 group-hover:w-12 h-[1px] bg-[#7456f1] transition-all duration-700"></div>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="bg-[#0b0f1a] p-10 group reveal hover:bg-[#111827] transition-colors duration-700" style="transition-delay:0.3s">
+        <div class="text-[#7456f1]/20 text-7xl font-extralight mb-6" style="font-family:'Playfair Display',serif">03</div>
+        <h3 class="text-xl font-bold text-white mb-4 group-hover:text-[#a78bfa] transition-colors duration-500" style="font-family:'Playfair Display',serif">
+          Risk Analytics
+        </h3>
+        <p class="text-white/35 text-sm leading-relaxed">
+          Value-at-Risk frameworks, stress testing suites, and regulatory capital
+          optimization. Historical and Monte Carlo VaR with full backtesting,
+          Basel III/IV compliance, and FRTB implementation.
+        </p>
+        <div class="mt-8 w-0 group-hover:w-12 h-[1px] bg-[#7456f1] transition-all duration-700"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- EFFECT 9: Horizontal Scroll Portfolio              -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="work" class="horizontal-scroll-section relative" style="height: 300vh;">
+  <div class="sticky top-0 h-screen flex items-center overflow-hidden">
+    <!-- Section label -->
+    <div class="absolute top-28 left-8 z-10">
+      <p class="text-white/20 text-[10px] uppercase tracking-[0.5em]">[ 03 ] Selected Work</p>
+    </div>
+
+    <!-- Scrolling track -->
+    <div class="h-scroll-track flex gap-10 pl-[10vw] items-center" style="will-change: transform;">
+      <!-- Card 1 -->
+      <div class="flex-shrink-0 w-[80vw] md:w-[45vw] group">
+        <div class="relative overflow-hidden rounded-sm aspect-[16/10] mb-6 bg-[#111827]">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#7456f1]/20 via-transparent to-[#4c1d95]/10"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-6xl mb-3 opacity-20">&#9651;</div>
+              <span class="text-white/30 text-xs uppercase tracking-[0.4em]">Case Study</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-[#7456f1]/60 text-[10px] uppercase tracking-[0.5em]">Interest Rate Modeling</span>
+          </div>
+        </div>
+        <h3 class="text-white text-2xl font-bold" style="font-family:'Playfair Display',serif">LIBOR Transition Framework</h3>
+        <p class="text-white/30 text-sm mt-3 max-w-md leading-relaxed">
+          Designed multi-curve modeling architecture for SOFR migration across a $2.4T notional derivative portfolio at a top-10 global bank.
+        </p>
+      </div>
+
+      <!-- Card 2 -->
+      <div class="flex-shrink-0 w-[80vw] md:w-[45vw] group">
+        <div class="relative overflow-hidden rounded-sm aspect-[16/10] mb-6 bg-[#111827]">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#4c1d95]/20 via-transparent to-[#7456f1]/10"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-6xl mb-3 opacity-20">&#9671;</div>
+              <span class="text-white/30 text-xs uppercase tracking-[0.4em]">Case Study</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-[#7456f1]/60 text-[10px] uppercase tracking-[0.5em]">Derivatives Pricing</span>
+          </div>
+        </div>
+        <h3 class="text-white text-2xl font-bold" style="font-family:'Playfair Display',serif">Exotic Options Engine</h3>
+        <p class="text-white/30 text-sm mt-3 max-w-md leading-relaxed">
+          Built a Monte Carlo pricing engine for path-dependent exotic derivatives including autocallables, snowballs, and TARNs.
+        </p>
+      </div>
+
+      <!-- Card 3 -->
+      <div class="flex-shrink-0 w-[80vw] md:w-[45vw] group">
+        <div class="relative overflow-hidden rounded-sm aspect-[16/10] mb-6 bg-[#111827]">
+          <div class="absolute inset-0 bg-gradient-to-br from-[#7456f1]/15 via-transparent to-[#a78bfa]/10"></div>
+          <div class="absolute inset-0 flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-6xl mb-3 opacity-20">&#9633;</div>
+              <span class="text-white/30 text-xs uppercase tracking-[0.4em]">Case Study</span>
+            </div>
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-[#0b0f1a] via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-6 left-6 right-6">
+            <span class="text-[#7456f1]/60 text-[10px] uppercase tracking-[0.5em]">Risk Analytics</span>
+          </div>
+        </div>
+        <h3 class="text-white text-2xl font-bold" style="font-family:'Playfair Display',serif">VaR Backtesting Suite</h3>
+        <p class="text-white/30 text-sm mt-3 max-w-md leading-relaxed">
+          Developed comprehensive Value-at-Risk framework with historical simulation, Monte Carlo, and regulatory stress testing for Basel III compliance.
+        </p>
+      </div>
+
+      <!-- Spacer -->
+      <div class="flex-shrink-0 w-[20vw]"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- Testimonial / Quote Section                        -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section class="luxury-section border-t border-white/5">
+  <div class="max-w-4xl mx-auto px-8 text-center reveal">
+    <div class="w-12 h-[1px] bg-[#7456f1]/40 mx-auto mb-12"></div>
+    <blockquote class="text-2xl md:text-4xl font-light leading-relaxed text-white/70 mb-8" style="font-family:'Playfair Display',serif; font-style:italic">
+      "Jonathan's quantitative rigor and deep understanding of rate markets
+      made him indispensable during our LIBOR transition. His models didn't
+      just work in theory — they performed under stress."
+    </blockquote>
+    <p class="text-white/25 text-xs uppercase tracking-[0.4em]">
+      Senior Managing Director — Global Investment Bank
+    </p>
+    <div class="w-12 h-[1px] bg-[#7456f1]/40 mx-auto mt-12"></div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- CONTACT Section                                    -->
+<!-- ═══════════════════════════════════════════════════ -->
+<section id="contact" class="luxury-section">
+  <div class="max-w-6xl mx-auto px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-20 items-center">
+      <div class="reveal">
+        <p class="text-white/20 text-[10px] uppercase tracking-[0.5em] mb-4">[ 04 ] Contact</p>
+        <h2 class="text-4xl md:text-6xl font-bold mb-8 leading-tight" style="font-family:'Playfair Display',serif">
+          <span class="metallic-gold">Let's Work</span><br>
+          <span class="text-white">Together</span>
+        </h2>
+        <p class="text-white/40 text-base leading-relaxed max-w-md mb-10">
+          Whether you need quantitative modeling, LIBOR transition advisory,
+          or risk analytics expertise — I bring two decades of institutional
+          experience to every engagement.
+        </p>
+        <div class="space-y-4">
+          <a href="mailto:jonathan@delta-vega.com"
+             class="magnetic-btn flex items-center gap-4 text-white/50 text-sm hover:text-white transition-colors duration-500 group">
+            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#7456f1] transition-colors duration-500">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+              </svg>
+            </span>
+            <span class="magnetic-text">jonathan@delta-vega.com</span>
+          </a>
+          <a href="https://www.linkedin.com/in/jonathanschachter" target="_blank"
+             class="magnetic-btn flex items-center gap-4 text-white/50 text-sm hover:text-white transition-colors duration-500 group">
+            <span class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-[#7456f1] transition-colors duration-500">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+              </svg>
+            </span>
+            <span class="magnetic-text">LinkedIn Profile</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: CTA Card -->
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="relative p-10 bg-[#111827] rounded-sm border border-white/5">
+          <h3 class="text-xl font-bold text-white mb-4" style="font-family:'Playfair Display',serif">
+            Engagement Inquiry
+          </h3>
+          <p class="text-white/35 text-sm mb-8 leading-relaxed">
+            Describe your quantitative challenge. I typically respond within 24 hours
+            to discuss scope, approach, and timeline.
+          </p>
+          <form class="space-y-5">
+            <input type="text" placeholder="Your Name"
+                   class="w-full bg-transparent border-b border-white/10 py-3 text-white text-sm placeholder:text-white/20 focus:border-[#7456f1] focus:outline-none transition-colors duration-500">
+            <input type="email" placeholder="Email Address"
+                   class="w-full bg-transparent border-b border-white/10 py-3 text-white text-sm placeholder:text-white/20 focus:border-[#7456f1] focus:outline-none transition-colors duration-500">
+            <textarea placeholder="Describe your project..."
+                      rows="3"
+                      class="w-full bg-transparent border-b border-white/10 py-3 text-white text-sm placeholder:text-white/20 focus:border-[#7456f1] focus:outline-none transition-colors duration-500 resize-none"></textarea>
+            <button type="submit"
+                    class="magnetic-btn w-full py-4 bg-[#7456f1] text-white text-xs uppercase tracking-[0.3em] hover:bg-[#5b3ed1] transition-colors duration-500 rounded-sm mt-4">
+              <span class="magnetic-text">Send Inquiry</span>
+            </button>
+          </form>
+          <!-- Decorative corner -->
+          <div class="absolute top-0 right-0 w-16 h-16 border-t border-r border-[#7456f1]/20"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- Footer                                             -->
+<!-- ═══════════════════════════════════════════════════ -->
+<footer class="py-12 border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+    <p class="text-white/15 text-xs uppercase tracking-[0.3em]">
+      &copy; 2026 Jonathan Schachter, PhD. All rights reserved.
+    </p>
+    <p class="text-white/15 text-xs tracking-wide">
+      delta-vega.com
+    </p>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════════ -->
+<!-- ALL SCRIPTS                                        -->
+<!-- ═══════════════════════════════════════════════════ -->
+<script>
+// ── EFFECT 8: Preloader Exit ──
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+      preloader.classList.add('exit');
+      setTimeout(() => { preloader.style.display = 'none'; }, 800);
+    }
+  }, 2200);
+});
+
+// ── EFFECT 6: Scroll Progress ──
+const progressBar = document.getElementById('scrollProgress');
+let progressTicking = false;
+window.addEventListener('scroll', () => {
+  if (!progressTicking) {
+    requestAnimationFrame(() => {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (docHeight > 0) progressBar.style.width = `${(scrollTop / docHeight) * 100}%`;
+      progressTicking = false;
+    });
+    progressTicking = true;
+  }
+}, { passive: true });
+
+// ── EFFECT 4: Split-Letter Animation ──
+function splitText(el) {
+  const text = el.getAttribute('data-text') || el.textContent.trim();
+  el.innerHTML = '';
+  el.setAttribute('aria-label', text);
+  [...text].forEach((char, i) => {
+    const span = document.createElement('span');
+    span.textContent = char === ' ' ? '\u00A0' : char;
+    span.className = 'split-char';
+    span.style.animationDelay = `${i * 35}ms`;
+    el.appendChild(span);
+  });
+}
+
+// ── Section Reveal Observer ──
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      // Split-text elements
+      if (entry.target.classList.contains('split-text')) {
+        splitText(entry.target);
+        entry.target.classList.add('animate');
+      }
+      // General reveals
+      if (entry.target.classList.contains('reveal')) {
+        entry.target.classList.add('visible');
+      }
+      revealObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.reveal, .split-text').forEach(el => revealObserver.observe(el));
+
+// ── EFFECT 10: Animated Counters ──
+function animateCounter(el) {
+  const target = parseFloat(el.dataset.target);
+  const decimals = parseInt(el.dataset.decimals) || 0;
+  const prefix = el.dataset.prefix || '';
+  const suffix = el.dataset.suffix || '';
+  const duration = 2200;
+  const start = performance.now();
+  function update(now) {
+    const elapsed = now - start;
+    const progress = Math.min(elapsed / duration, 1);
+    const eased = 1 - Math.pow(1 - progress, 3);
+    el.textContent = `${prefix}${(eased * target).toFixed(decimals)}${suffix}`;
+    if (progress < 1) requestAnimationFrame(update);
+  }
+  requestAnimationFrame(update);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      counterObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+
+// ── EFFECT 2: Magnetic Buttons ──
+document.querySelectorAll('.magnetic-btn').forEach(btn => {
+  const strength = 0.25;
+  const radius = 80;
+  btn.addEventListener('mousemove', (e) => {
+    const rect = btn.getBoundingClientRect();
+    const cx = rect.left + rect.width / 2;
+    const cy = rect.top + rect.height / 2;
+    const dx = e.clientX - cx;
+    const dy = e.clientY - cy;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < radius) {
+      btn.style.transform = `translate(${dx * strength}px, ${dy * strength}px)`;
+      const text = btn.querySelector('.magnetic-text');
+      if (text) text.style.transform = `translate(${dx * strength * 0.4}px, ${dy * strength * 0.4}px)`;
+    }
+  });
+  btn.addEventListener('mouseleave', () => {
+    btn.style.transform = 'translate(0, 0)';
+    const text = btn.querySelector('.magnetic-text');
+    if (text) text.style.transform = 'translate(0, 0)';
+  });
+});
+
+// ── EFFECT 9: Horizontal Scroll ──
+const hSection = document.querySelector('.horizontal-scroll-section');
+const hTrack = document.querySelector('.h-scroll-track');
+if (hSection && hTrack) {
+  function onHScroll() {
+    const rect = hSection.getBoundingClientRect();
+    const sectionHeight = hSection.offsetHeight - window.innerHeight;
+    if (sectionHeight <= 0) return;
+    const scrollProgress = Math.max(0, Math.min(1, -rect.top / sectionHeight));
+    const maxTranslate = hTrack.scrollWidth - window.innerWidth;
+    hTrack.style.transform = `translateX(${-scrollProgress * maxTranslate}px)`;
+  }
+  window.addEventListener('scroll', onHScroll, { passive: true });
+}
+</script>
+
+</body>
+</html>
