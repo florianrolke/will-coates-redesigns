@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Vega | Financial Engineering Consultancy</title>
+    <link rel="icon" href="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Palanquin:wght@300;400;500;600;700&family=Overpass:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#09240F',
+                        accent: '#CC0000',
+                        copper: '#b87333',
+                        'copper-light': '#d4956b',
+                        cream: '#faf8f4',
+                        charcoal: '#1a1a1a',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+                        body: ['Palanquin', 'sans-serif'],
+                        nav: ['Overpass', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Palanquin', sans-serif; }
+
+        /* ============ ANIMATIONS ============ */
+        .reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(.25,.46,.45,.94), transform 0.9s cubic-bezier(.25,.46,.45,.94);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .rd1 { transition-delay: .1s } .rd2 { transition-delay: .2s }
+        .rd3 { transition-delay: .3s } .rd4 { transition-delay: .4s }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center; overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        .hero-gradient {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg,
+                rgba(9,36,15,0.92) 0%,
+                rgba(9,36,15,0.78) 35%,
+                rgba(9,36,15,0.55) 60%,
+                rgba(9,36,15,0.30) 80%,
+                rgba(9,36,15,0.15) 100%
+            );
+        }
+
+        /* ============ GLASSMORPHISM ============ */
+        .glass {
+            background: rgba(255,255,255,0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .glass-light {
+            background: rgba(255,255,255,0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255,255,255,0.5);
+        }
+        .glass-dark {
+            background: rgba(9,36,15,0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(184,115,51,0.15);
+        }
+
+        /* ============ DIAGONAL SECTION CUT ============ */
+        .diagonal-top {
+            position: relative;
+        }
+        .diagonal-top::before {
+            content: '';
+            position: absolute; top: -60px; left: 0; right: 0;
+            height: 120px;
+            background: inherit;
+            transform: skewY(-2.5deg);
+            transform-origin: top left;
+            z-index: 1;
+        }
+
+        /* ============ VERTICAL SIDEBAR TEXT ============ */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            font-family: 'Overpass', sans-serif;
+            font-size: 10px;
+            letter-spacing: 0.35em;
+            text-transform: uppercase;
+            color: rgba(184,115,51,0.25);
+            position: absolute;
+            left: 24px;
+            top: 50%;
+            transform: rotate(180deg) translateX(50%);
+        }
+
+        /* ============ DIAMOND MOTIFS ============ */
+        .diamond {
+            width: 8px; height: 8px;
+            background: rgba(184,115,51,0.5);
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+        .diamond-sm {
+            width: 5px; height: 5px;
+            background: rgba(184,115,51,0.3);
+            transform: rotate(45deg);
+            display: inline-block;
+        }
+        .diamond-line {
+            display: flex; align-items: center; gap: 12px;
+        }
+        .diamond-line::before, .diamond-line::after {
+            content: '';
+            width: 40px; height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(184,115,51,0.4), transparent);
+        }
+
+        /* ============ SECTION NUMBERS ============ */
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 7rem;
+            font-weight: 400;
+            line-height: 1;
+            color: rgba(184,115,51,0.08);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+        }
+
+        /* ============ STAGGERED CARDS ============ */
+        .stagger-up { transform: translateY(-24px); }
+        .stagger-down { transform: translateY(24px); }
+
+        /* ============ COPPER LINE ============ */
+        .copper-line {
+            width: 50px; height: 1px;
+            background: linear-gradient(90deg, #b87333, #d4956b);
+        }
+
+        /* ============ NAV ============ */
+        .nav-solid {
+            background: rgba(9,36,15,0.96) !important;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 30px rgba(0,0,0,0.3);
+        }
+
+        /* ============ BRAND WATERMARK ============ */
+        .watermark {
+            position: absolute;
+            right: 5%; top: 50%;
+            transform: translateY(-50%);
+            width: 320px; height: 320px;
+            background: url('https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png') center/contain no-repeat;
+            opacity: 0.03;
+            pointer-events: none;
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn-copper {
+            display: inline-block;
+            background: linear-gradient(135deg, #b87333, #d4956b);
+            color: #fff; padding: 15px 36px;
+            font-family: 'Overpass',sans-serif; font-weight: 600;
+            font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+            border-radius: 0; transition: all .4s ease;
+            box-shadow: 0 4px 20px rgba(184,115,51,0.2);
+        }
+        .btn-copper:hover {
+            box-shadow: 0 8px 32px rgba(184,115,51,0.35);
+            transform: translateY(-2px);
+        }
+        .btn-outline {
+            display: inline-block;
+            border: 1px solid rgba(255,255,255,0.25);
+            color: #fff; padding: 14px 32px;
+            font-family: 'Overpass',sans-serif; font-weight: 500;
+            font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(184,115,51,0.5);
+        }
+        .btn-copper-outline {
+            display: inline-block;
+            border: 1px solid rgba(184,115,51,0.4);
+            color: #b87333; padding: 15px 36px;
+            font-family: 'Overpass',sans-serif; font-weight: 600;
+            font-size: .7rem; letter-spacing: .14em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-copper-outline:hover {
+            background: rgba(184,115,51,0.06);
+            border-color: #b87333;
+        }
+
+        /* ============ PHOTO BREAK ============ */
+        .photo-break {
+            position: relative; overflow: hidden;
+        }
+        .photo-break-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        .photo-break-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(135deg, rgba(9,36,15,0.85), rgba(9,36,15,0.70));
+        }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar { width: 4px }
+        ::-webkit-scrollbar-track { background: #09240F }
+        ::-webkit-scrollbar-thumb { background: rgba(184,115,51,0.25); border-radius: 2px }
+
+        /* ============ FOOTER ============ */
+        .footer { background: #061509; }
+    </style>
+</head>
+<body class="bg-cream text-gray-900 antialiased">
+
+<!-- ═══════════ NAVIGATION ═══════════ -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-8 lg:px-12 py-5">
+        <div class="flex items-center justify-between">
+            <a href="#home" class="flex items-center gap-3">
+                <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega" class="h-8 invert opacity-80">
+                <div>
+                    <span class="font-heading text-base font-medium tracking-wide text-white/90 block leading-none">Delta Vega</span>
+                    <span class="font-nav text-[7px] uppercase tracking-[.3em] text-copper/50 block mt-0.5">Financial Engineering</span>
+                </div>
+            </a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="font-nav text-[10px] uppercase tracking-[.2em] text-white/45 hover:text-copper transition-colors">Home</a>
+                <a href="#about" class="font-nav text-[10px] uppercase tracking-[.2em] text-white/45 hover:text-copper transition-colors">About</a>
+                <a href="#services" class="font-nav text-[10px] uppercase tracking-[.2em] text-white/45 hover:text-copper transition-colors">Services</a>
+                <a href="#insights" class="font-nav text-[10px] uppercase tracking-[.2em] text-white/45 hover:text-copper transition-colors">Insights</a>
+                <a href="#contact" class="font-nav text-[10px] uppercase tracking-[.2em] text-white/45 hover:text-copper transition-colors">Contact</a>
+                <a href="mailto:js1@delta-vega.com" class="font-nav text-[10px] uppercase tracking-[.2em] text-copper border border-copper/30 px-5 py-2 hover:bg-copper/10 transition-all">Get in Touch</a>
+            </div>
+            <button id="mobile-btn" class="md:hidden text-white/70">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden pt-5 pb-3 border-t border-white/10 mt-4">
+            <a href="#home" class="block py-3 font-nav text-[10px] uppercase tracking-[.2em] text-white/50 hover:text-copper">Home</a>
+            <a href="#about" class="block py-3 font-nav text-[10px] uppercase tracking-[.2em] text-white/50 hover:text-copper">About</a>
+            <a href="#services" class="block py-3 font-nav text-[10px] uppercase tracking-[.2em] text-white/50 hover:text-copper">Services</a>
+            <a href="#insights" class="block py-3 font-nav text-[10px] uppercase tracking-[.2em] text-white/50 hover:text-copper">Insights</a>
+            <a href="#contact" class="block py-3 font-nav text-[10px] uppercase tracking-[.2em] text-white/50 hover:text-copper">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════ HERO ═══════════ -->
+<section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-gradient"></div>
+
+    <!-- Vertical sidebar text -->
+    <div class="vertical-text hidden lg:block" style="left:28px; top:50%; z-index:10">Financial Engineering Consultancy</div>
+
+    <div class="max-w-7xl mx-auto px-8 lg:px-16 w-full relative z-10">
+        <div class="max-w-2xl pt-24">
+            <div class="reveal">
+                <div class="diamond-line mb-8">
+                    <span class="diamond"></span>
+                </div>
+                <p class="font-nav text-[10px] uppercase tracking-[.4em] text-copper/70 mb-6">Expertise in Risk &amp; Quantitative Finance</p>
+            </div>
+            <h1 class="font-heading font-normal leading-[1.08] mb-8 reveal rd1">
+                <span class="text-5xl sm:text-6xl md:text-7xl text-white block">Navigating</span>
+                <span class="text-5xl sm:text-6xl md:text-7xl text-white block">Complex</span>
+                <span class="text-5xl sm:text-6xl md:text-7xl text-copper-light block italic">Markets</span>
+            </h1>
+            <div class="reveal rd2">
+                <p class="font-body text-lg text-white/45 leading-relaxed max-w-md mb-10">Expert-led training, publications, and consulting in financial engineering, risk management, and quantitative analysis.</p>
+            </div>
+            <div class="flex flex-wrap gap-4 reveal rd3">
+                <a href="#services" class="btn-copper">Explore Services</a>
+                <a href="#insights" class="btn-outline">Risk Talks</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Glassmorphism stat bar floating at bottom -->
+    <div class="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 w-full max-w-4xl px-8 reveal rd4">
+        <div class="glass rounded-sm grid grid-cols-2 md:grid-cols-4 gap-px">
+            <div class="p-6 text-center">
+                <p class="font-heading text-2xl text-copper">FE</p>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-white/35 mt-1">Consultancy</p>
+            </div>
+            <div class="p-6 text-center border-l border-white/5">
+                <p class="font-heading text-2xl text-copper">Risk</p>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-white/35 mt-1">Management</p>
+            </div>
+            <div class="p-6 text-center border-l border-white/5">
+                <p class="font-heading text-2xl text-copper">Live</p>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-white/35 mt-1">Risk Talks</p>
+            </div>
+            <div class="p-6 text-center border-l border-white/5">
+                <p class="font-heading text-2xl text-copper">Global</p>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-white/35 mt-1">Reach</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ ABOUT — Numbered editorial with watermark ═══════════ -->
+<section id="about" class="relative bg-white py-28 lg:py-40 px-8 lg:px-16 overflow-hidden">
+    <div class="watermark"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+            <!-- Left: section intro -->
+            <div class="lg:col-span-5 reveal">
+                <div class="relative">
+                    <span class="section-num">01</span>
+                    <p class="font-nav text-[10px] uppercase tracking-[.3em] text-copper mb-5 relative z-10">About Delta Vega</p>
+                    <h2 class="font-heading text-4xl md:text-5xl font-normal text-brand leading-[1.12] mb-6 relative z-10">
+                        Where Finance<br>Meets <em class="italic text-copper">Precision</em>
+                    </h2>
+                </div>
+                <div class="diamond-line mb-8">
+                    <span class="diamond-sm"></span>
+                </div>
+                <p class="font-body text-gray-600 text-lg leading-relaxed mb-6">Delta Vega is a financial engineering consultancy that bridges theory and practice. Through expert-led video content, rigorous training programs, and authoritative publications, we equip financial professionals with the quantitative tools they need.</p>
+                <p class="font-body text-gray-400 leading-relaxed">Our regular Risk Talks bring the industry together for free discussions on the latest developments in risk management, quantitative finance, and market dynamics.</p>
+            </div>
+            <!-- Right: staggered glass cards -->
+            <div class="lg:col-span-7 grid md:grid-cols-2 gap-6">
+                <div class="glass-light rounded-sm p-8 reveal stagger-up">
+                    <div class="w-10 h-10 border border-copper/25 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-brand mb-2">Training Programs</h3>
+                    <p class="font-body text-gray-500 text-sm leading-relaxed">Structured courses in derivatives pricing, risk modelling, portfolio theory, and quantitative methods.</p>
+                </div>
+                <div class="glass-light rounded-sm p-8 reveal rd1 stagger-down">
+                    <div class="w-10 h-10 border border-copper/25 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-brand mb-2">Video Content</h3>
+                    <p class="font-body text-gray-500 text-sm leading-relaxed">In-depth video lectures and walkthroughs on complex financial engineering concepts and real-world applications.</p>
+                </div>
+                <div class="glass-light rounded-sm p-8 reveal rd2 stagger-up">
+                    <div class="w-10 h-10 border border-copper/25 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-brand mb-2">Publications</h3>
+                    <p class="font-body text-gray-500 text-sm leading-relaxed">Research papers, technical guides, and industry analysis for practitioners in quantitative finance.</p>
+                </div>
+                <div class="glass-light rounded-sm p-8 reveal rd3 stagger-down">
+                    <div class="w-10 h-10 border border-copper/25 flex items-center justify-center mb-5">
+                        <svg class="w-5 h-5 text-copper" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 0 0 6 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0 1 18 16.5h-2.25m-7.5 0h7.5m-7.5 0-1 3m8.5-3 1 3m0 0 .5 1.5m-.5-1.5h-9.5m0 0-.5 1.5m.75-9 3-3 2.148 2.148A12.061 12.061 0 0 1 16.5 7.605"/>
+                        </svg>
+                    </div>
+                    <h3 class="font-heading text-xl font-medium text-brand mb-2">Risk Talks</h3>
+                    <p class="font-body text-gray-500 text-sm leading-relaxed">Free, regular sessions covering current market risks, regulatory changes, and quantitative strategies via Zoom and YouTube.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ DIAGONAL PHOTO BREAK ═══════════ -->
+<section class="photo-break py-20 relative" style="clip-path: polygon(0 8%, 100% 0, 100% 92%, 0 100%);">
+    <div class="photo-break-bg"></div>
+    <div class="photo-break-overlay"></div>
+    <div class="max-w-4xl mx-auto text-center relative z-10 py-12 px-8">
+        <div class="reveal">
+            <div class="diamond-line justify-center mb-8">
+                <span class="diamond"></span>
+            </div>
+            <p class="font-heading text-2xl md:text-3xl lg:text-4xl text-white/80 font-normal italic leading-relaxed">
+                "The goal of financial engineering is not to eliminate risk, but to understand it deeply enough to manage it with precision."
+            </p>
+            <div class="copper-line mx-auto mt-8 mb-4"></div>
+            <p class="font-nav text-[9px] uppercase tracking-[.25em] text-copper/50">Delta Vega Philosophy</p>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ SERVICES — Editorial numbered sections ═══════════ -->
+<section id="services" class="bg-brand py-28 lg:py-40 px-8 lg:px-16 relative overflow-hidden">
+    <!-- Vertical sidebar text -->
+    <div class="vertical-text hidden lg:block" style="left:28px; top:50%; z-index:10; color: rgba(184,115,51,0.12)">Services &amp; Offerings</div>
+
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-20 reveal">
+            <div class="diamond-line justify-center mb-6">
+                <span class="diamond-sm"></span>
+            </div>
+            <p class="font-nav text-[10px] uppercase tracking-[.3em] text-copper/50 mb-5">What We Offer</p>
+            <h2 class="font-heading text-4xl md:text-5xl font-normal text-white">Our <em class="italic text-copper-light">Core</em> Services</h2>
+        </div>
+
+        <!-- Service 1: Training -->
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center mb-24">
+            <div class="relative reveal">
+                <span class="section-num" style="color: rgba(184,115,51,0.06)">02</span>
+                <div class="relative z-10">
+                    <p class="font-nav text-[10px] uppercase tracking-[.25em] text-copper/60 mb-4">Training Programs</p>
+                    <h3 class="font-heading text-3xl md:text-4xl font-normal text-white leading-tight mb-6">Structured Learning for <em class="italic text-copper-light">Practitioners</em></h3>
+                    <div class="copper-line mb-6"></div>
+                    <p class="font-body text-white/35 leading-relaxed mb-8">From derivatives pricing to portfolio optimisation, our training programs are designed for professionals who need to apply quantitative methods in their daily work. Each course combines theoretical rigour with practical case studies.</p>
+                    <a href="https://delta-vega.com" class="btn-copper">View Training</a>
+                </div>
+            </div>
+            <div class="reveal rd1">
+                <div class="glass rounded-sm overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&q=80&auto=format" alt="Financial Training" class="w-full h-72 object-cover opacity-70">
+                    <div class="p-6">
+                        <div class="flex items-center gap-4">
+                            <span class="diamond-sm"></span>
+                            <span class="font-nav text-[9px] uppercase tracking-[.2em] text-white/30">Derivatives</span>
+                            <span class="diamond-sm"></span>
+                            <span class="font-nav text-[9px] uppercase tracking-[.2em] text-white/30">Risk Models</span>
+                            <span class="diamond-sm"></span>
+                            <span class="font-nav text-[9px] uppercase tracking-[.2em] text-white/30">Portfolio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service 2: Video & Publications (reversed) -->
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div class="reveal order-2 lg:order-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="glass-dark rounded-sm p-8 text-center stagger-up">
+                        <svg class="w-8 h-8 text-copper mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z"/>
+                        </svg>
+                        <p class="font-heading text-lg text-white/70">Video</p>
+                        <p class="font-nav text-[8px] uppercase tracking-[.2em] text-white/25 mt-1">Lectures & Walkthroughs</p>
+                    </div>
+                    <div class="glass-dark rounded-sm p-8 text-center stagger-down">
+                        <svg class="w-8 h-8 text-copper mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 0 0 6 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 0 1 6 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 0 1 6-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0 0 18 18a8.967 8.967 0 0 0-6 2.292m0-14.25v14.25"/>
+                        </svg>
+                        <p class="font-heading text-lg text-white/70">Publications</p>
+                        <p class="font-nav text-[8px] uppercase tracking-[.2em] text-white/25 mt-1">Research & Guides</p>
+                    </div>
+                    <div class="glass-dark rounded-sm p-8 text-center col-span-2 stagger-up">
+                        <svg class="w-8 h-8 text-copper mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"/>
+                        </svg>
+                        <p class="font-heading text-lg text-white/70">Risk Talks</p>
+                        <p class="font-nav text-[8px] uppercase tracking-[.2em] text-white/25 mt-1">Free via Zoom & YouTube</p>
+                    </div>
+                </div>
+            </div>
+            <div class="relative reveal order-1 lg:order-2">
+                <span class="section-num" style="color: rgba(184,115,51,0.06)">03</span>
+                <div class="relative z-10">
+                    <p class="font-nav text-[10px] uppercase tracking-[.25em] text-copper/60 mb-4">Content & Community</p>
+                    <h3 class="font-heading text-3xl md:text-4xl font-normal text-white leading-tight mb-6">Knowledge That <em class="italic text-copper-light">Compounds</em></h3>
+                    <div class="copper-line mb-6"></div>
+                    <p class="font-body text-white/35 leading-relaxed mb-8">Our video lectures make complex topics accessible. Our publications provide the depth practitioners demand. And our regular Risk Talks create a community of professionals sharing insights on current market challenges — always free, always open.</p>
+                    <a href="https://delta-vega.com" class="btn-outline">Watch Risk Talks</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ INSIGHTS — Glassmorphism cards on image ═══════════ -->
+<section id="insights" class="relative py-28 lg:py-36 px-8 lg:px-16 overflow-hidden">
+    <div class="absolute inset-0 bg-cream"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+        <div class="text-center mb-16 reveal">
+            <div class="relative inline-block">
+                <span class="section-num" style="left:-30px; color: rgba(184,115,51,0.06)">04</span>
+                <p class="font-nav text-[10px] uppercase tracking-[.3em] text-copper mb-5 relative z-10">Latest Insights</p>
+                <h2 class="font-heading text-4xl md:text-5xl font-normal text-brand relative z-10">From Our <em class="italic text-copper">Desk</em></h2>
+            </div>
+            <div class="diamond-line justify-center mt-8">
+                <span class="diamond-sm"></span>
+            </div>
+        </div>
+        <div class="grid md:grid-cols-3 gap-8">
+            <div class="group reveal">
+                <div class="overflow-hidden rounded-sm mb-5">
+                    <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80&auto=format" alt="Market Analysis" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-copper/60 mb-2">Risk Management</p>
+                <h3 class="font-heading text-xl font-medium text-brand mb-2 group-hover:text-copper transition-colors">Understanding Tail Risk in Modern Portfolios</h3>
+                <p class="font-body text-gray-400 text-sm leading-relaxed">Examining extreme market events and the quantitative tools needed to model and hedge against tail risks effectively.</p>
+            </div>
+            <div class="group reveal rd1">
+                <div class="overflow-hidden rounded-sm mb-5">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80&auto=format" alt="Data Analytics" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-copper/60 mb-2">Quantitative Finance</p>
+                <h3 class="font-heading text-xl font-medium text-brand mb-2 group-hover:text-copper transition-colors">Monte Carlo Methods in Derivatives Pricing</h3>
+                <p class="font-body text-gray-400 text-sm leading-relaxed">A practical guide to simulation-based pricing techniques for complex financial instruments and structured products.</p>
+            </div>
+            <div class="group reveal rd2">
+                <div class="overflow-hidden rounded-sm mb-5">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80&auto=format" alt="Financial Models" class="w-full h-56 object-cover transition-transform duration-700 group-hover:scale-105">
+                </div>
+                <p class="font-nav text-[9px] uppercase tracking-[.2em] text-copper/60 mb-2">Training</p>
+                <h3 class="font-heading text-xl font-medium text-brand mb-2 group-hover:text-copper transition-colors">Building Robust Stress Testing Frameworks</h3>
+                <p class="font-body text-gray-400 text-sm leading-relaxed">How leading institutions design stress tests that satisfy regulators while providing genuinely useful risk insights.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ CTA ═══════════ -->
+<section id="contact" class="bg-brand py-32 lg:py-40 px-8 relative overflow-hidden">
+    <div class="watermark" style="opacity:0.02; right:10%; width:400px; height:400px;"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+        <div class="reveal">
+            <div class="diamond-line justify-center mb-8">
+                <span class="diamond"></span>
+            </div>
+            <p class="font-nav text-[10px] uppercase tracking-[.3em] text-copper/50 mb-8">Get Started</p>
+            <h2 class="font-heading text-4xl md:text-5xl lg:text-6xl font-normal text-white leading-tight mb-8">
+                Ready to Deepen<br>Your <em class="italic text-copper-light">Expertise?</em>
+            </h2>
+            <div class="copper-line mx-auto mb-8"></div>
+            <p class="font-body text-white/35 text-lg leading-relaxed mb-14 max-w-xl mx-auto">Whether you're looking for structured training, want to explore our publications, or simply want to join our next Risk Talk — we'd love to hear from you.</p>
+        </div>
+        <div class="reveal rd1">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-8 mb-14">
+                <a href="mailto:js1@delta-vega.com" class="flex items-center gap-3 text-white/40 hover:text-copper transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75"/>
+                    </svg>
+                    <span class="font-nav text-sm tracking-wide">js1@delta-vega.com</span>
+                </a>
+                <span class="text-white/15 hidden sm:block">|</span>
+                <a href="https://delta-vega.com" class="flex items-center gap-3 text-white/40 hover:text-copper transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418"/>
+                    </svg>
+                    <span class="font-nav text-sm tracking-wide">delta-vega.com</span>
+                </a>
+            </div>
+            <a href="mailto:js1@delta-vega.com" class="btn-copper">Contact Delta Vega</a>
+        </div>
+    </div>
+</section>
+
+<!-- ═══════════ FOOTER ═══════════ -->
+<footer class="footer py-16 px-8 lg:px-16">
+    <div class="max-w-7xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12 mb-12">
+            <div>
+                <div class="flex items-center gap-3 mb-5">
+                    <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega" class="h-7 invert opacity-50">
+                    <div>
+                        <span class="font-heading text-base font-medium text-white/60 block leading-none">Delta Vega</span>
+                        <span class="font-nav text-[7px] uppercase tracking-[.2em] text-copper/30">Financial Engineering</span>
+                    </div>
+                </div>
+                <p class="font-body text-white/20 leading-relaxed text-sm">Expert consultancy in financial engineering, risk management, and quantitative finance.</p>
+            </div>
+            <div>
+                <h4 class="font-nav text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Resources</h4>
+                <div class="space-y-3">
+                    <a href="#services" class="font-body text-white/25 hover:text-copper transition-colors text-sm block">Training</a>
+                    <a href="#services" class="font-body text-white/25 hover:text-copper transition-colors text-sm block">Video</a>
+                    <a href="#services" class="font-body text-white/25 hover:text-copper transition-colors text-sm block">Publications</a>
+                    <a href="#insights" class="font-body text-white/25 hover:text-copper transition-colors text-sm block">Risk Talks</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-nav text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Contact</h4>
+                <p class="font-body text-white/25 mb-2 text-sm">js1@delta-vega.com</p>
+                <p class="font-body text-white/25 mb-2 text-sm">delta-vega.com</p>
+                <div class="diamond-line mt-5">
+                    <span class="diamond-sm"></span>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-body text-white/12 text-sm">&copy; Delta Vega. All rights reserved.</p>
+            <p class="font-body text-white/8 text-xs">Financial Engineering Consultancy</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('nav-solid', window.scrollY > 60));
+
+    const mobileBtn = document.getElementById('mobile-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { t.scrollIntoView({ behavior:'smooth', block:'start' }); mobileMenu.classList.add('hidden'); }
+        });
+    });
+
+    const obs = new IntersectionObserver(es => {
+        es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -50px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
