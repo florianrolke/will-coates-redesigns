@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Vega — Quantitative Analytics & LIBOR Expertise</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+    :root {
+      --bg-deep: #0a0f1a;
+      --bg-navy: #102136;
+      --bg-card: #0e1a2e;
+      --accent: #7456f1;
+      --accent-dim: rgba(116, 86, 241, 0.3);
+      --accent-glow: rgba(116, 86, 241, 0.08);
+      --text-light: #E7EBEE;
+      --text-muted: #4d5d6d;
+      --gold: #d4af37;
+      --line: rgba(116, 86, 241, 0.15);
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--bg-deep);
+      color: var(--text-light);
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ===== FILM GRAIN OVERLAY (#3) ===== */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      pointer-events: none;
+      opacity: 0.032;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
+      background-size: 256px 256px;
+      mix-blend-mode: overlay;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 4vw;
+      transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(10, 15, 26, 0.92);
+      backdrop-filter: blur(16px);
+      border-bottom-color: var(--line);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display: flex;
+      gap: 2.5rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: var(--text-light); }
+
+    /* ===== HERO — PARALLAX DEPTH LAYERS (#9) + CURSOR SPOTLIGHT (#4) + METALLIC TEXT (#7) ===== */
+    .hero {
+      position: relative;
+      height: 100vh;
+      min-height: 700px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    /* Spotlight */
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        650px circle at var(--spot-x, 50%) var(--spot-y, 50%),
+        var(--accent-glow),
+        transparent 60%
+      );
+      pointer-events: none;
+      z-index: 4;
+      transition: background 0.12s ease;
+    }
+    .parallax-layer {
+      position: absolute;
+      inset: 0;
+      will-change: transform;
+    }
+    .layer-bg {
+      background: linear-gradient(135deg, #0a0f1a 0%, #1a1040 50%, #0a0f1a 100%);
+      z-index: 0;
+    }
+    .layer-bg .bg-shapes {
+      position: absolute;
+      inset: 0;
+      opacity: 0.07;
+    }
+    .layer-bg .bg-shapes div {
+      position: absolute;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+    }
+    .layer-bg .bg-shapes div:nth-child(1) { width: 500px; height: 500px; top: 10%; left: -10%; }
+    .layer-bg .bg-shapes div:nth-child(2) { width: 350px; height: 350px; top: 40%; right: -5%; }
+    .layer-bg .bg-shapes div:nth-child(3) { width: 200px; height: 200px; bottom: 15%; left: 30%; }
+    .layer-mid {
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0.25;
+    }
+    .layer-mid svg { width: 100%; height: 100%; }
+    .layer-fg {
+      z-index: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 0 2rem;
+    }
+    .hero-tag {
+      font-size: 0.68rem;
+      font-weight: 500;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    /* Metallic gradient text (#7) */
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 7vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      background: linear-gradient(135deg, #c0c0c0 0%, #f5f0e8 25%, #d4af37 50%, #f5f0e8 75%, #c0c0c0 100%);
+      background-size: 200% 200%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: metallic-shimmer 6s ease-in-out infinite;
+      margin-bottom: 1.5rem;
+    }
+    @keyframes metallic-shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero-sub {
+      font-size: 1.05rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      max-width: 520px;
+    }
+    .hero-cta {
+      margin-top: 2.5rem;
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      padding: 14px 38px;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: none;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover { background: #5e3fde; transform: translateY(-2px); }
+    .btn-outline {
+      padding: 14px 38px;
+      background: transparent;
+      color: var(--text-light);
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border: 1px solid var(--accent-dim);
+      cursor: pointer;
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .btn-outline:hover { background: rgba(116, 86, 241, 0.08); border-color: var(--accent); }
+    .hero-scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      animation: float-hint 2.5s ease-in-out infinite;
+    }
+    .hero-scroll-hint span {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hero-scroll-hint .line {
+      width: 1px;
+      height: 30px;
+      background: linear-gradient(to bottom, var(--accent), transparent);
+    }
+    @keyframes float-hint {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ===== MARQUEE RIBBON (#1) ===== */
+    .marquee-ribbon {
+      overflow: hidden;
+      background: var(--bg-navy);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      white-space: nowrap;
+    }
+    .marquee-track {
+      display: inline-flex;
+      gap: 3rem;
+      animation: marquee-scroll 30s linear infinite;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 300;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: rgba(231, 235, 238, 0.45);
+    }
+    .marquee-track .sep { color: var(--accent); font-size: 0.65rem; }
+    @keyframes marquee-scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* ===== STATS BAR — ANIMATED COUNTERS (#10) ===== */
+    .stats-bar {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0;
+      padding: 4.5rem 2rem;
+      background: var(--bg-deep);
+    }
+    .stat {
+      text-align: center;
+      flex: 1;
+      max-width: 240px;
+    }
+    .stat-number-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: center;
+    }
+    .stat-prefix, .stat-number, .stat-suffix {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1;
+    }
+    .stat-number { font-size: 3.5rem; }
+    .stat-prefix { font-size: 2rem; color: var(--accent); margin-right: 3px; }
+    .stat-suffix { font-size: 1.3rem; color: var(--accent); margin-left: 3px; }
+    .stat-label {
+      display: block;
+      margin-top: 0.75rem;
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .stat-divider {
+      width: 1px;
+      height: 55px;
+      background: linear-gradient(to bottom, transparent, var(--accent-dim), transparent);
+      flex-shrink: 0;
+    }
+
+    /* ===== ABOUT — GEOMETRIC MASK (#2) + SPLIT LAYOUT ===== */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      min-height: 80vh;
+      align-items: center;
+      padding: 6rem 6vw;
+      gap: 4rem;
+      background: var(--bg-navy);
+    }
+    .geo-mask-container {
+      position: relative;
+      width: 380px;
+      height: 380px;
+      margin: 0 auto;
+    }
+    .geo-mask {
+      width: 100%;
+      height: 100%;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      overflow: hidden;
+      background: linear-gradient(135deg, #1a1040, #2d1b69);
+    }
+    .geo-mask-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 7rem;
+      font-weight: 300;
+      color: rgba(116, 86, 241, 0.3);
+    }
+    .geo-frame {
+      position: absolute;
+      inset: -14px;
+      clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+      border: 1px solid var(--accent-dim);
+      pointer-events: none;
+    }
+    .geo-accent-line {
+      position: absolute;
+      width: 60px;
+      height: 1px;
+      background: var(--accent-dim);
+    }
+    .geo-accent-line.top-right { top: 45%; right: -40px; }
+    .geo-accent-line.bottom-left { bottom: 45%; left: -40px; }
+    .about-text h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.6rem;
+      font-weight: 300;
+      line-height: 1.25;
+      margin-bottom: 1.5rem;
+    }
+    .about-text h2 em {
+      font-style: italic;
+      color: var(--accent);
+      font-weight: 300;
+    }
+    .about-text p {
+      font-size: 0.92rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.85;
+      margin-bottom: 1.25rem;
+      max-width: 480px;
+    }
+    .about-text .credential-badges {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .credential-badge {
+      padding: 6px 16px;
+      border: 1px solid var(--line);
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: border-color 0.3s;
+    }
+    .credential-badge:hover { border-color: var(--accent); }
+
+    /* ===== SERVICES — HORIZONTAL SCROLL (#6) ===== */
+    .services-section {
+      padding: 5rem 0 0;
+      background: var(--bg-deep);
+    }
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding: 0 6vw 3rem;
+    }
+    .section-header h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2.2rem;
+      font-weight: 300;
+    }
+    .section-header .count-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    .hscroll-wrapper { height: 250vh; }
+    .hscroll-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      padding: 0 6vw;
+    }
+    .hscroll-track {
+      display: flex;
+      gap: 2rem;
+    }
+    .service-card {
+      min-width: 340px;
+      flex-shrink: 0;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 2.5rem 2rem;
+      transition: border-color 0.4s, transform 0.4s;
+      position: relative;
+      overflow: hidden;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--accent), transparent);
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+    .service-card:hover { border-color: var(--accent-dim); transform: translateY(-4px); }
+    .service-card:hover::before { opacity: 1; }
+    .service-card .card-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3rem;
+      font-weight: 300;
+      color: rgba(116, 86, 241, 0.15);
+      line-height: 1;
+      margin-bottom: 1.5rem;
+    }
+    .service-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+    }
+    .service-card p {
+      font-size: 0.82rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      line-height: 1.75;
+    }
+    .service-card .card-tag {
+      display: inline-block;
+      margin-top: 1.5rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border-bottom: 1px solid var(--accent-dim);
+      padding-bottom: 2px;
+    }
+
+    /* ===== TESTIMONIAL — FRAME DECORATORS (#8) ===== */
+    .testimonial-section {
+      padding: 8rem 2rem;
+      background: var(--bg-navy);
+      display: flex;
+      justify-content: center;
+    }
+    .frame-decorator {
+      position: relative;
+      padding: 4rem 5rem;
+      max-width: 720px;
+    }
+    .corner { position: absolute; width: 35px; height: 35px; }
+    .corner::before, .corner::after {
+      content: '';
+      position: absolute;
+      background: var(--accent-dim);
+    }
+    .tl { top: 0; left: 0; }
+    .tl::before { top: 0; left: 0; width: 35px; height: 1px; }
+    .tl::after { top: 0; left: 0; width: 1px; height: 35px; }
+    .tr { top: 0; right: 0; }
+    .tr::before { top: 0; right: 0; width: 35px; height: 1px; }
+    .tr::after { top: 0; right: 0; width: 1px; height: 35px; }
+    .bl { bottom: 0; left: 0; }
+    .bl::before { bottom: 0; left: 0; width: 35px; height: 1px; }
+    .bl::after { bottom: 0; left: 0; width: 1px; height: 35px; }
+    .br { bottom: 0; right: 0; }
+    .br::before { bottom: 0; right: 0; width: 35px; height: 1px; }
+    .br::after { bottom: 0; right: 0; width: 1px; height: 35px; }
+    .frame-decorator blockquote {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.55rem;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--text-light);
+      line-height: 1.85;
+      text-align: center;
+    }
+    .frame-decorator cite {
+      display: block;
+      margin-top: 2rem;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.68rem;
+      font-style: normal;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-align: center;
+    }
+    /* Luxury divider */
+    .luxury-divider {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      max-width: 200px;
+      margin: 2rem auto 0;
+    }
+    .luxury-divider::before, .luxury-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-dim), transparent);
+    }
+    .luxury-divider .diamond {
+      width: 6px;
+      height: 6px;
+      transform: rotate(45deg);
+      border: 1px solid var(--accent);
+    }
+
+    /* ===== CTA — SPLIT TEXT REVEAL (#5) ===== */
+    .cta-section {
+      padding: 8rem 2rem;
+      background: var(--bg-deep);
+      text-align: center;
+    }
+    .cta-section .split-reveal {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+    .split-char {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity 0.45s ease, transform 0.45s ease;
+    }
+    .revealed .split-char {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .cta-section .cta-sub {
+      font-size: 0.9rem;
+      font-weight: 300;
+      color: var(--text-muted);
+      max-width: 500px;
+      margin: 0 auto 2.5rem;
+    }
+
+    /* ===== PUBLICATIONS GRID ===== */
+    .publications {
+      padding: 6rem 6vw;
+      background: var(--bg-deep);
+    }
+    .pub-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    .pub-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      padding: 2rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .pub-card:hover { border-color: var(--accent-dim); transform: translateY(-3px); }
+    .pub-card .pub-year {
+      font-size: 0.6rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+    .pub-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      margin-bottom: 0.75rem;
+      line-height: 1.4;
+    }
+    .pub-card p {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      line-height: 1.7;
+    }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 4rem 6vw 2.5rem;
+      background: var(--bg-navy);
+      border-top: 1px solid var(--line);
+    }
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 3rem;
+    }
+    .footer-brand {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+    }
+    .footer-brand span { color: var(--accent); }
+    .footer-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.3s;
+    }
+    .footer-links a:hover { color: var(--text-light); }
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      padding-top: 2rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.65rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 900px) {
+      .about { grid-template-columns: 1fr; text-align: center; }
+      .about-text p { max-width: 100%; }
+      .about-text .credential-badges { justify-content: center; }
+      .geo-mask-container { width: 280px; height: 280px; }
+      .stats-bar { flex-wrap: wrap; gap: 2rem; }
+      .stat-divider { display: none; }
+      .pub-grid { grid-template-columns: 1fr; }
+      .frame-decorator { padding: 2.5rem 2rem; }
+      .nav-links { display: none; }
+      .footer-top { flex-direction: column; gap: 2rem; }
+      .service-card { min-width: 280px; }
+    }
+
+    /* ===== REDUCED MOTION ===== */
+    @media (prefers-reduced-motion: reduce) {
+      .marquee-track { animation: none; }
+      .parallax-layer { transform: none !important; }
+      .split-char { opacity: 1; transform: none; transition: none; }
+      .hero-title { animation: none; background-position: 50% 50%; }
+      .hero-scroll-hint { animation: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav id="mainNav">
+    <div class="nav-logo">DELTA <span>VEGA</span></div>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Expertise</a></li>
+      <li><a href="#publications">Research</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO — Parallax (#9) + Spotlight (#4) + Metallic Text (#7) -->
+  <section class="hero" id="heroSpotlight">
+    <div class="parallax-layer layer-bg" data-speed="0.3">
+      <div class="bg-shapes">
+        <div></div><div></div><div></div>
+      </div>
+    </div>
+    <div class="parallax-layer layer-mid" data-speed="0.6">
+      <svg viewBox="0 0 1400 700" preserveAspectRatio="none">
+        <path d="M0,500 Q200,200 400,350 T800,280 T1200,350 T1400,300" stroke="rgba(116,86,241,0.25)" fill="none" stroke-width="1"/>
+        <path d="M0,520 Q250,250 500,380 T900,300 T1300,370 T1400,330" stroke="rgba(116,86,241,0.12)" fill="none" stroke-width="1"/>
+        <path d="M0,540 Q300,300 600,400 T1000,320 T1400,360" stroke="rgba(116,86,241,0.06)" fill="none" stroke-width="0.5"/>
+      </svg>
+    </div>
+    <div class="parallax-layer layer-fg" data-speed="1.0">
+      <div class="hero-tag">Jonathan Schachter, PhD</div>
+      <h1 class="hero-title" data-split>Quantitative Precision</h1>
+      <p class="hero-sub">Institutional-grade LIBOR analytics, interest rate modeling, and expert quantitative testimony trusted by the world's leading financial institutions.</p>
+      <div class="hero-cta">
+        <button class="btn-primary" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Schedule Consultation</button>
+        <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Expertise</button>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll</span>
+      <div class="line"></div>
+    </div>
+  </section>
+
+  <!-- MARQUEE RIBBON (#1) -->
+  <div class="marquee-ribbon">
+    <div class="marquee-track">
+      <span>LIBOR Analytics</span><span class="sep">&#x2726;</span>
+      <span>Interest Rate Modeling</span><span class="sep">&#x2726;</span>
+      <span>Quantitative Research</span><span class="sep">&#x2726;</span>
+      <span>Expert Testimony</span><span class="sep">&#x2726;</span>
+      <span>Derivatives Valuation</span><span class="sep">&#x2726;</span>
+      <span>Risk Management</span><span class="sep">&#x2726;</span>
+      <span>LIBOR Analytics</span><span class="sep">&#x2726;</span>
+      <span>Interest Rate Modeling</span><span class="sep">&#x2726;</span>
+      <span>Quantitative Research</span><span class="sep">&#x2726;</span>
+      <span>Expert Testimony</span><span class="sep">&#x2726;</span>
+      <span>Derivatives Valuation</span><span class="sep">&#x2726;</span>
+      <span>Risk Management</span><span class="sep">&#x2726;</span>
+    </div>
+  </div>
+
+  <!-- STATS BAR — Animated Counters (#10) -->
+  <section class="stats-bar">
+    <div class="stat">
+      <div class="stat-number-row">
+        <span class="stat-prefix">$</span>
+        <span class="stat-number" data-target="4.2" data-decimal="true">0</span>
+        <span class="stat-suffix">B+</span>
+      </div>
+      <span class="stat-label">Positions Analyzed</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number-row">
+        <span class="stat-number" data-target="200">0</span>
+        <span class="stat-suffix">+</span>
+      </div>
+      <span class="stat-label">Expert Reports</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number-row">
+        <span class="stat-number" data-target="25">0</span>
+        <span class="stat-suffix">yrs</span>
+      </div>
+      <span class="stat-label">Industry Experience</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat">
+      <div class="stat-number-row">
+        <span class="stat-number" data-target="50">0</span>
+        <span class="stat-suffix">+</span>
+      </div>
+      <span class="stat-label">Litigation Cases</span>
+    </div>
+  </section>
+
+  <!-- ABOUT — Geometric Mask (#2) -->
+  <section class="about" id="about">
+    <div class="geo-mask-container">
+      <div class="geo-mask">
+        <div class="geo-mask-inner">JS</div>
+      </div>
+      <div class="geo-frame"></div>
+      <div class="geo-accent-line top-right"></div>
+      <div class="geo-accent-line bottom-left"></div>
+    </div>
+    <div class="about-text">
+      <h2>Where Mathematics<br>Meets <em>Markets</em></h2>
+      <p>Jonathan Schachter, PhD brings over two decades of quantitative expertise to the intersection of financial analytics and legal testimony. Specializing in LIBOR-related disputes, his analysis has been instrumental in settlements exceeding $4.2 billion.</p>
+      <p>With a foundation in stochastic calculus and a career spanning institutional trading desks, regulatory bodies, and expert witness engagements, Dr. Schachter delivers precision where it matters most.</p>
+      <div class="credential-badges">
+        <span class="credential-badge">PhD Mathematics</span>
+        <span class="credential-badge">CFA Charterholder</span>
+        <span class="credential-badge">Expert Witness</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES — Horizontal Scroll (#6) -->
+  <section class="services-section" id="services">
+    <div class="section-header">
+      <h2>Areas of Expertise</h2>
+      <span class="count-label">01 — 05</span>
+    </div>
+    <div class="hscroll-wrapper">
+      <div class="hscroll-sticky">
+        <div class="hscroll-track" id="servicesTrack">
+          <div class="service-card">
+            <div class="card-num">01</div>
+            <h3>LIBOR Transition Analysis</h3>
+            <p>Comprehensive analytics for LIBOR cessation impact assessment, SOFR migration strategies, and fallback provision evaluation across derivative portfolios.</p>
+            <span class="card-tag">Core Specialty</span>
+          </div>
+          <div class="service-card">
+            <div class="card-num">02</div>
+            <h3>Interest Rate Derivatives</h3>
+            <p>Valuation modeling for swaps, swaptions, caps/floors, and exotic rate structures. Multi-curve framework implementation and CVA/DVA adjustments.</p>
+            <span class="card-tag">Quantitative</span>
+          </div>
+          <div class="service-card">
+            <div class="card-num">03</div>
+            <h3>Expert Testimony</h3>
+            <p>Litigation support and expert witness services for LIBOR manipulation cases, benchmark rate disputes, and financial product mis-selling claims.</p>
+            <span class="card-tag">Legal</span>
+          </div>
+          <div class="service-card">
+            <div class="card-num">04</div>
+            <h3>Risk Analytics</h3>
+            <p>Value-at-Risk modeling, stress testing frameworks, and portfolio risk decomposition for fixed income and derivative books.</p>
+            <span class="card-tag">Risk</span>
+          </div>
+          <div class="service-card">
+            <div class="card-num">05</div>
+            <h3>Regulatory Advisory</h3>
+            <p>Guidance on benchmark reform compliance, Dodd-Frank implications, and regulatory reporting requirements for interest rate products.</p>
+            <span class="card-tag">Compliance</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIAL — Frame Decorators (#8) -->
+  <section class="testimonial-section">
+    <div class="frame-decorator">
+      <div class="corner tl"></div>
+      <div class="corner tr"></div>
+      <div class="corner bl"></div>
+      <div class="corner br"></div>
+      <blockquote>
+        "Jonathan's quantitative analysis was instrumental in our $2.4 billion LIBOR settlement. His ability to distill complex rate mechanics into clear, defensible testimony is unmatched."
+      </blockquote>
+      <cite>— Senior Partner, Global Litigation Practice</cite>
+      <div class="luxury-divider">
+        <div class="diamond"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLICATIONS -->
+  <section class="publications" id="publications">
+    <div class="section-header">
+      <h2>Selected Research</h2>
+      <span class="count-label">Recent Publications</span>
+    </div>
+    <div class="pub-grid">
+      <div class="pub-card">
+        <div class="pub-year">2024</div>
+        <h3>SOFR Adoption Dynamics and Residual LIBOR Exposure</h3>
+        <p>Analysis of transition completeness across major derivative markets and identification of legacy exposure concentrations.</p>
+      </div>
+      <div class="pub-card">
+        <div class="pub-year">2023</div>
+        <h3>Quantifying LIBOR Manipulation Impact on Municipal Portfolios</h3>
+        <p>Methodological framework for assessing damages in benchmark rate manipulation cases involving public entity portfolios.</p>
+      </div>
+      <div class="pub-card">
+        <div class="pub-year">2022</div>
+        <h3>Multi-Curve Framework for Post-LIBOR Derivatives Valuation</h3>
+        <p>Technical approach to consistent valuation across collateralized and uncollateralized derivative structures in the new rate environment.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA — Split Text Reveal (#5) -->
+  <section class="cta-section" id="contact">
+    <h2 class="split-reveal" data-split>Let's Discuss Your Case</h2>
+    <p class="cta-sub">Whether you require expert testimony, quantitative analysis, or strategic advisory on rate-related matters — precision starts with a conversation.</p>
+    <button class="btn-primary">Schedule a Consultation</button>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-top">
+      <div class="footer-brand">DELTA <span>VEGA</span></div>
+      <ul class="footer-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#services">Expertise</a></li>
+        <li><a href="#publications">Research</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2024 Delta Vega Analytics. All rights reserved.</span>
+      <span>Jonathan Schachter, PhD — New York</span>
+    </div>
+  </footer>
+
+  <!-- ===== JAVASCRIPT ===== -->
+  <script>
+    // Nav scroll effect
+    const nav = document.getElementById('mainNav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Cursor spotlight (#4)
+    const hero = document.getElementById('heroSpotlight');
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      hero.style.setProperty('--spot-x', `${e.clientX - rect.left}px`);
+      hero.style.setProperty('--spot-y', `${e.clientY - rect.top}px`);
+    });
+
+    // Parallax depth layers (#9)
+    const layers = document.querySelectorAll('.parallax-layer');
+    window.addEventListener('scroll', () => {
+      const y = window.scrollY;
+      layers.forEach(l => {
+        const speed = parseFloat(l.dataset.speed);
+        l.style.transform = `translateY(${y * (1 - speed) * 0.5}px)`;
+      });
+    }, { passive: true });
+
+    // Animated counters (#10)
+    (function() {
+      const counters = document.querySelectorAll('.stat-number');
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el = entry.target;
+          const target = parseFloat(el.dataset.target);
+          const isDecimal = el.dataset.decimal === 'true';
+          const duration = 2200;
+          const start = performance.now();
+          function tick(now) {
+            const p = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - p, 3);
+            el.textContent = isDecimal ? (target * eased).toFixed(1) : Math.floor(target * eased);
+            if (p < 1) requestAnimationFrame(tick);
+          }
+          requestAnimationFrame(tick);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      counters.forEach(c => obs.observe(c));
+    })();
+
+    // Split-text character reveal (#5)
+    document.querySelectorAll('[data-split]').forEach(el => {
+      const text = el.textContent;
+      el.innerHTML = '';
+      [...text].forEach((char, i) => {
+        const span = document.createElement('span');
+        span.textContent = char === ' ' ? '\u00A0' : char;
+        span.className = 'split-char';
+        span.style.transitionDelay = `${i * 30}ms`;
+        el.appendChild(span);
+      });
+      const obs = new IntersectionObserver(([entry]) => {
+        if (entry.isIntersecting) { el.classList.add('revealed'); obs.disconnect(); }
+      }, { threshold: 0.4 });
+      obs.observe(el);
+    });
+
+    // Horizontal scroll (#6)
+    (function() {
+      const wrapper = document.querySelector('.hscroll-wrapper');
+      if (!wrapper) return;
+      const track = document.getElementById('servicesTrack');
+      const sticky = document.querySelector('.hscroll-sticky');
+      window.addEventListener('scroll', () => {
+        const rect = wrapper.getBoundingClientRect();
+        const progress = -rect.top / (wrapper.offsetHeight - window.innerHeight);
+        const clamped = Math.max(0, Math.min(1, progress));
+        const maxTx = track.scrollWidth - sticky.offsetWidth + 60;
+        track.style.transform = `translateX(-${clamped * maxTx}px)`;
+      }, { passive: true });
+    })();
+  </script>
+
+</body>
+</html>

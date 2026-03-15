@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Delta Vega — Quantitative Risk Advisory</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Overpass:wght@300;400;500;600&family=Palanquin:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; padding: 0; overflow-x: hidden; }
+    /* Hide scrollbar for cleaner look */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #060d0a; }
+    ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(201,169,110,0.5); }
+  </style>
+</head>
+<body class="bg-[#09240F] text-white">
+
+  <!-- ============================================ -->
+  <!-- SECTION 1: CENTER-LOGO SPLIT NAVIGATION      -->
+  <!-- ============================================ -->
+  <nav class="fixed top-0 w-full z-50 transition-all duration-500" id="mainNav">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+      <!-- Left nav items -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#about" class="text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors font-light"
+           style="font-family: 'Overpass', sans-serif;">About</a>
+        <a href="#services" class="text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors font-light"
+           style="font-family: 'Overpass', sans-serif;">Services</a>
+        <a href="#approach" class="text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors font-light"
+           style="font-family: 'Overpass', sans-serif;">Approach</a>
+      </div>
+
+      <!-- Center logo -->
+      <div class="flex flex-col items-center">
+        <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png"
+             alt="Delta Vega" class="h-10 w-auto brightness-0 invert">
+        <span class="text-[9px] uppercase tracking-[0.4em] text-white/40 mt-1"
+              style="font-family: 'Overpass', sans-serif;">Financial Engineering</span>
+      </div>
+
+      <!-- Right nav items -->
+      <div class="hidden md:flex items-center space-x-8">
+        <a href="#team" class="text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors font-light"
+           style="font-family: 'Overpass', sans-serif;">Team</a>
+        <a href="#insights" class="text-xs uppercase tracking-[0.25em] text-white/70 hover:text-white transition-colors font-light"
+           style="font-family: 'Overpass', sans-serif;">Insights</a>
+        <a href="#contact" class="px-5 py-2 border border-white/30 text-xs uppercase tracking-[0.25em] text-white hover:bg-white hover:text-[#09240F] transition-all"
+           style="font-family: 'Overpass', sans-serif;">Contact</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="md:hidden text-white" onclick="document.getElementById('mobileMenu').classList.toggle('hidden')">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileMenu" class="hidden md:hidden bg-[#09240F]/95 backdrop-blur-lg px-6 pb-6">
+      <a href="#about" class="block py-3 text-xs uppercase tracking-[0.25em] text-white/70" style="font-family: 'Overpass', sans-serif;">About</a>
+      <a href="#services" class="block py-3 text-xs uppercase tracking-[0.25em] text-white/70" style="font-family: 'Overpass', sans-serif;">Services</a>
+      <a href="#team" class="block py-3 text-xs uppercase tracking-[0.25em] text-white/70" style="font-family: 'Overpass', sans-serif;">Team</a>
+      <a href="#insights" class="block py-3 text-xs uppercase tracking-[0.25em] text-white/70" style="font-family: 'Overpass', sans-serif;">Insights</a>
+      <a href="#contact" class="block py-3 text-xs uppercase tracking-[0.25em] text-white/70" style="font-family: 'Overpass', sans-serif;">Contact</a>
+    </div>
+  </nav>
+
+  <!-- ============================================ -->
+  <!-- SECTION 2: ANGLED PHOTO CROP HERO             -->
+  <!-- ============================================ -->
+  <section class="relative h-screen overflow-hidden bg-[#09240F]">
+    <!-- Geometric line art watermark -->
+    <div class="absolute inset-0 pointer-events-none z-0" style="opacity: 0.03;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="gridPattern" width="60" height="60" patternUnits="userSpaceOnUse">
+            <path d="M 60 0 L 0 60" stroke="#c9a96e" stroke-width="0.5" fill="none"/>
+            <circle cx="0" cy="60" r="1.5" fill="#c9a96e"/>
+            <circle cx="60" cy="0" r="1.5" fill="#c9a96e"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#gridPattern)"/>
+      </svg>
+    </div>
+
+    <!-- Photo — occupies right 65%, clipped at angle -->
+    <div class="absolute top-0 right-0 w-[65%] h-full z-[1]"
+         style="clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80"
+           alt="Glass office towers"
+           class="w-full h-full object-cover">
+      <!-- Gradient shield -->
+      <div class="absolute inset-0"
+           style="background: linear-gradient(to right, #09240F 0%, rgba(9,36,15,0.7) 30%, rgba(9,36,15,0.2) 60%, transparent 100%);"></div>
+    </div>
+
+    <!-- Hero text -->
+    <div class="relative z-10 h-full flex items-center">
+      <div class="max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-lg">
+          <p class="text-[10px] uppercase tracking-[0.4em] text-[#c9a96e] mb-6 animate-fade-in"
+             style="font-family: 'Overpass', sans-serif;">
+            Quantitative Risk Advisory
+          </p>
+
+          <h1 class="text-5xl md:text-7xl font-light text-white leading-[1.08] mb-8"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Precision<br>
+            <em class="font-normal italic text-[#c9a96e]">in Every</em><br>
+            Variable
+          </h1>
+
+          <div class="w-16 h-px bg-[#c9a96e] mb-8"></div>
+
+          <p class="text-white/60 text-sm leading-relaxed max-w-sm mb-10"
+             style="font-family: 'Palanquin', sans-serif;">
+            Delta Vega combines advanced financial engineering with rigorous
+            quantitative research to navigate complex risk landscapes.
+          </p>
+
+          <div class="flex flex-wrap items-center gap-4">
+            <a href="#contact"
+               class="px-8 py-3.5 bg-[#CC0000] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#a30000] transition-colors"
+               style="font-family: 'Overpass', sans-serif;">
+              Schedule Consultation
+            </a>
+            <a href="#services"
+               class="px-8 py-3.5 border border-white/25 text-white/80 text-xs uppercase tracking-[0.2em] hover:border-white hover:text-white transition-all"
+               style="font-family: 'Overpass', sans-serif;">
+              Our Approach
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center">
+      <span class="text-[9px] uppercase tracking-[0.3em] text-white/30 mb-3"
+            style="font-family: 'Overpass', sans-serif;">Scroll</span>
+      <div class="w-px h-8 bg-gradient-to-b from-white/40 to-transparent"></div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 3: CLEAN WHITE ABOUT + GOLD FRAME     -->
+  <!-- ============================================ -->
+  <section id="about" class="py-24 md:py-32 bg-white relative">
+    <!-- Geometric watermark -->
+    <div class="absolute inset-0 pointer-events-none" style="opacity: 0.025;">
+      <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <pattern id="aboutGrid" width="80" height="80" patternUnits="userSpaceOnUse">
+            <rect x="0" y="0" width="80" height="80" fill="none" stroke="#09240F" stroke-width="0.3"/>
+            <circle cx="40" cy="40" r="2" fill="none" stroke="#09240F" stroke-width="0.3"/>
+          </pattern>
+        </defs>
+        <rect width="100%" height="100%" fill="url(#aboutGrid)"/>
+      </svg>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 relative z-10">
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-16 items-center">
+        <!-- Text — 7 cols -->
+        <div class="md:col-span-7">
+          <p class="text-[10px] uppercase tracking-[0.4em] text-[#c9a96e] mb-4"
+             style="font-family: 'Overpass', sans-serif;">Who We Are</p>
+
+          <h2 class="text-3xl md:text-5xl font-light text-[#09240F] leading-[1.15] mb-6"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Where Mathematics<br>
+            Meets <em class="italic text-[#c9a96e]">Markets</em>
+          </h2>
+
+          <div class="w-12 h-px bg-[#c9a96e] mb-8"></div>
+
+          <p class="text-[#09240F]/70 leading-relaxed mb-6 max-w-lg"
+             style="font-family: 'Palanquin', sans-serif;">
+            Founded on the principle that financial risk demands quantitative rigour,
+            Delta Vega delivers bespoke advisory services to institutions navigating
+            derivative pricing, portfolio optimisation, and regulatory capital frameworks.
+          </p>
+
+          <p class="text-[#09240F]/50 text-sm leading-relaxed max-w-lg"
+             style="font-family: 'Palanquin', sans-serif;">
+            Our team combines deep academic research with practical market experience,
+            bridging the gap between theoretical models and real-world implementation.
+          </p>
+        </div>
+
+        <!-- Photo — 5 cols with gold frame -->
+        <div class="md:col-span-5 relative">
+          <div class="absolute -top-3 -right-3 w-full h-full border-2 border-[#c9a96e]/40"></div>
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80"
+               alt="Modern office interior"
+               class="relative w-full aspect-[4/5] object-cover" style="filter: grayscale(20%);">
+          <div class="absolute -bottom-4 -left-4 w-20 h-20 border-b-2 border-l-2 border-[#c9a96e]/30"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 4: NUMBERED SERVICES (01, 02, 03)     -->
+  <!-- ============================================ -->
+  <section id="services">
+    <!-- Service 01 -->
+    <div class="relative min-h-[80vh] flex items-center overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=80"
+           alt="City skyline at night" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0a1628]/90 via-[#0a1628]/70 to-[#0a1628]/40"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-xl">
+          <div class="w-12 h-px bg-[#c9a96e]/50 mb-8"></div>
+          <span class="text-8xl md:text-9xl font-extralight block leading-none mb-2"
+                style="font-family: 'Cormorant Garamond', serif; color: rgba(255,255,255,0.06);">01</span>
+          <h3 class="text-xl md:text-2xl uppercase tracking-[0.2em] text-white font-light mb-6"
+              style="font-family: 'Overpass', sans-serif;">
+            Risk Advisory
+          </h3>
+          <p class="text-white/60 leading-relaxed mb-8 max-w-md"
+             style="font-family: 'Palanquin', sans-serif;">
+            Comprehensive risk identification, measurement, and mitigation strategies
+            tailored to your institution's unique exposure profile and regulatory environment.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-xs uppercase tracking-[0.2em] text-[#c9a96e] hover:text-white transition-colors"
+             style="font-family: 'Overpass', sans-serif;">
+            View Projects
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 02 -->
+    <div class="relative min-h-[80vh] flex items-center overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1486325212027-8a9ce184b882?w=1920&q=80"
+           alt="City skyline warm" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#09240F]/90 via-[#09240F]/70 to-[#09240F]/40"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-xl">
+          <div class="w-12 h-px bg-[#c9a96e]/50 mb-8"></div>
+          <span class="text-8xl md:text-9xl font-extralight block leading-none mb-2"
+                style="font-family: 'Cormorant Garamond', serif; color: rgba(255,255,255,0.06);">02</span>
+          <h3 class="text-xl md:text-2xl uppercase tracking-[0.2em] text-white font-light mb-6"
+              style="font-family: 'Overpass', sans-serif;">
+            Financial Engineering
+          </h3>
+          <p class="text-white/60 leading-relaxed mb-8 max-w-md"
+             style="font-family: 'Palanquin', sans-serif;">
+            Structured product design, derivative pricing models, and portfolio
+            construction frameworks built on robust quantitative foundations.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-xs uppercase tracking-[0.2em] text-[#c9a96e] hover:text-white transition-colors"
+             style="font-family: 'Overpass', sans-serif;">
+            View Projects
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Service 03 -->
+    <div class="relative min-h-[80vh] flex items-center overflow-hidden">
+      <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80"
+           alt="Professional workspace" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <div class="absolute inset-0 bg-gradient-to-r from-[#0a1628]/90 via-[#0a1628]/70 to-[#0a1628]/40"></div>
+
+      <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+        <div class="max-w-xl">
+          <div class="w-12 h-px bg-[#c9a96e]/50 mb-8"></div>
+          <span class="text-8xl md:text-9xl font-extralight block leading-none mb-2"
+                style="font-family: 'Cormorant Garamond', serif; color: rgba(255,255,255,0.06);">03</span>
+          <h3 class="text-xl md:text-2xl uppercase tracking-[0.2em] text-white font-light mb-6"
+              style="font-family: 'Overpass', sans-serif;">
+            Quantitative Research
+          </h3>
+          <p class="text-white/60 leading-relaxed mb-8 max-w-md"
+             style="font-family: 'Palanquin', sans-serif;">
+            Original research in stochastic modelling, volatility surface dynamics,
+            and machine learning applications for financial markets.
+          </p>
+          <a href="#contact" class="inline-flex items-center text-xs uppercase tracking-[0.2em] text-[#c9a96e] hover:text-white transition-colors"
+             style="font-family: 'Overpass', sans-serif;">
+            View Research
+            <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 5: DARK-NAVY TEAM SPLIT               -->
+  <!-- ============================================ -->
+  <section id="team" class="bg-[#0a1628]">
+    <div class="grid grid-cols-1 md:grid-cols-2 min-h-[70vh]">
+      <!-- People photo -->
+      <div class="relative overflow-hidden">
+        <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&q=80"
+             alt="Financial professionals"
+             class="w-full h-full object-cover min-h-[400px]" loading="lazy">
+        <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-[#0a1628]/50"></div>
+      </div>
+
+      <!-- Text content -->
+      <div class="flex items-center px-8 md:px-16 py-16">
+        <div class="max-w-md">
+          <p class="text-[10px] uppercase tracking-[0.4em] text-[#c9a96e] mb-4"
+             style="font-family: 'Overpass', sans-serif;">Our Expertise</p>
+
+          <h2 class="text-3xl md:text-4xl font-light text-white leading-[1.2] mb-8"
+              style="font-family: 'Cormorant Garamond', serif;">
+            A Diverse Background<br>
+            of <em class="italic text-[#c9a96e]">Specialists</em>
+          </h2>
+
+          <!-- Dashed bullet list -->
+          <ul class="space-y-5 mb-10">
+            <li class="flex items-start gap-4">
+              <span class="w-6 h-px bg-[#c9a96e]/60 mt-2.5 flex-shrink-0"></span>
+              <p class="text-white/60 text-sm leading-relaxed"
+                 style="font-family: 'Palanquin', sans-serif;">
+                PhD-level researchers in stochastic calculus and computational finance
+              </p>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="w-6 h-px bg-[#c9a96e]/60 mt-2.5 flex-shrink-0"></span>
+              <p class="text-white/60 text-sm leading-relaxed"
+                 style="font-family: 'Palanquin', sans-serif;">
+                Former sell-side quants from global investment banks
+              </p>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="w-6 h-px bg-[#c9a96e]/60 mt-2.5 flex-shrink-0"></span>
+              <p class="text-white/60 text-sm leading-relaxed"
+                 style="font-family: 'Palanquin', sans-serif;">
+                Regulatory capital specialists with Basel III/IV implementation experience
+              </p>
+            </li>
+            <li class="flex items-start gap-4">
+              <span class="w-6 h-px bg-[#c9a96e]/60 mt-2.5 flex-shrink-0"></span>
+              <p class="text-white/60 text-sm leading-relaxed"
+                 style="font-family: 'Palanquin', sans-serif;">
+                Cross-asset trading experience across equity, fixed income, and commodities
+              </p>
+            </li>
+          </ul>
+
+          <!-- Gold CTA button -->
+          <a href="#contact"
+             class="inline-block px-8 py-3.5 bg-[#c9a96e] text-[#0a1628] text-xs uppercase tracking-[0.2em] font-medium hover:bg-[#b8944f] transition-colors"
+             style="font-family: 'Overpass', sans-serif;">
+            Meet the Team
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 6: INSIGHTS / RISK TALKS              -->
+  <!-- ============================================ -->
+  <section id="insights" class="py-24 md:py-32 bg-white">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="flex items-end justify-between mb-16">
+        <div>
+          <p class="text-[10px] uppercase tracking-[0.4em] text-[#c9a96e] mb-4"
+             style="font-family: 'Overpass', sans-serif;">Risk Talks</p>
+          <h2 class="text-3xl md:text-4xl font-light text-[#09240F]"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Latest <em class="italic text-[#c9a96e]">Insights</em>
+          </h2>
+        </div>
+        <a href="#" class="hidden md:inline-flex items-center text-xs uppercase tracking-[0.2em] text-[#09240F]/50 hover:text-[#09240F] transition-colors"
+           style="font-family: 'Overpass', sans-serif;">
+          View All
+          <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Card 1 -->
+        <article class="group cursor-pointer">
+          <div class="relative overflow-hidden mb-6">
+            <div class="aspect-[16/10] bg-[#f5f3ef]">
+              <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=600&q=80"
+                   alt="Glass buildings"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div class="absolute top-0 left-0 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+          </div>
+          <p class="text-[9px] uppercase tracking-[0.3em] text-[#c9a96e] mb-2"
+             style="font-family: 'Overpass', sans-serif;">Vol Surface</p>
+          <h3 class="text-lg font-light text-[#09240F] mb-2 group-hover:text-[#c9a96e] transition-colors"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Local Volatility Calibration Under Stress Scenarios
+          </h3>
+          <p class="text-[#09240F]/40 text-xs" style="font-family: 'Overpass', sans-serif;">March 2026</p>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="group cursor-pointer">
+          <div class="relative overflow-hidden mb-6">
+            <div class="aspect-[16/10] bg-[#f5f3ef]">
+              <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80"
+                   alt="Charts and analysis"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div class="absolute top-0 left-0 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+          </div>
+          <p class="text-[9px] uppercase tracking-[0.3em] text-[#c9a96e] mb-2"
+             style="font-family: 'Overpass', sans-serif;">Regulatory</p>
+          <h3 class="text-lg font-light text-[#09240F] mb-2 group-hover:text-[#c9a96e] transition-colors"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Basel IV Implementation: A Practical Framework
+          </h3>
+          <p class="text-[#09240F]/40 text-xs" style="font-family: 'Overpass', sans-serif;">February 2026</p>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="group cursor-pointer">
+          <div class="relative overflow-hidden mb-6">
+            <div class="aspect-[16/10] bg-[#f5f3ef]">
+              <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&q=80"
+                   alt="Office interior"
+                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700">
+            </div>
+            <div class="absolute top-0 left-0 w-5 h-5 border-t border-l border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+            <div class="absolute bottom-0 right-0 w-5 h-5 border-b border-r border-[#c9a96e]/0 group-hover:border-[#c9a96e]/60 transition-all duration-500"></div>
+          </div>
+          <p class="text-[9px] uppercase tracking-[0.3em] text-[#c9a96e] mb-2"
+             style="font-family: 'Overpass', sans-serif;">Machine Learning</p>
+          <h3 class="text-lg font-light text-[#09240F] mb-2 group-hover:text-[#c9a96e] transition-colors"
+              style="font-family: 'Cormorant Garamond', serif;">
+            Neural SDEs for Interest Rate Modelling
+          </h3>
+          <p class="text-[#09240F]/40 text-xs" style="font-family: 'Overpass', sans-serif;">January 2026</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 7: FADED CITYSCAPE CTA                -->
+  <!-- ============================================ -->
+  <section id="contact" class="relative py-24 md:py-32 overflow-hidden bg-[#09240F]">
+    <!-- Faded cityscape watermark -->
+    <div class="absolute inset-0 pointer-events-none">
+      <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=80"
+           alt="" class="w-full h-full object-cover object-center"
+           style="opacity: 0.06; filter: grayscale(100%);" loading="lazy">
+      <div class="absolute inset-0"
+           style="background: linear-gradient(to bottom, #09240F 0%, transparent 20%, transparent 80%, #09240F 100%);"></div>
+      <div class="absolute inset-0"
+           style="background: linear-gradient(to right, #09240F 0%, transparent 15%, transparent 85%, #09240F 100%);"></div>
+    </div>
+
+    <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+      <p class="text-[10px] uppercase tracking-[0.5em] text-[#c9a96e]/60 mb-6"
+         style="font-family: 'Overpass', sans-serif;">Get in Touch</p>
+
+      <h2 class="text-3xl md:text-5xl font-light text-white leading-[1.15] mb-6"
+          style="font-family: 'Cormorant Garamond', serif;">
+        Let's Discuss Your<br>
+        <em class="italic text-[#c9a96e]">Risk Landscape</em>
+      </h2>
+
+      <div class="w-16 h-px bg-[#c9a96e]/40 mx-auto mb-8"></div>
+
+      <div class="flex flex-wrap justify-center gap-8 mb-12 text-white/40 text-xs uppercase tracking-[0.15em]"
+           style="font-family: 'Overpass', sans-serif;">
+        <span>London</span>
+        <span class="text-[#c9a96e]/30">|</span>
+        <span>info@delta-vega.com</span>
+        <span class="text-[#c9a96e]/30">|</span>
+        <span>Risk Talks Podcast</span>
+      </div>
+
+      <a href="mailto:info@delta-vega.com"
+         class="inline-block px-10 py-4 bg-[#CC0000] text-white text-xs uppercase tracking-[0.2em] hover:bg-[#a30000] transition-colors"
+         style="font-family: 'Overpass', sans-serif;">
+        Schedule a Call
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!-- SECTION 8: MINIMAL FOOTER                     -->
+  <!-- ============================================ -->
+  <footer class="bg-[#060d0a] py-16">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="w-full h-px bg-[#c9a96e]/10 mb-12"></div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-start">
+        <!-- Logo -->
+        <div>
+          <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png"
+               alt="Delta Vega" class="h-8 w-auto brightness-0 invert mb-3">
+          <p class="text-white/25 text-xs" style="font-family: 'Overpass', sans-serif;">
+            Quantitative Risk Advisory
+          </p>
+        </div>
+
+        <!-- Nav links -->
+        <div class="grid grid-cols-2 gap-y-3 text-xs uppercase tracking-[0.15em]"
+             style="font-family: 'Overpass', sans-serif;">
+          <a href="#about" class="text-white/30 hover:text-white/60 transition-colors">About</a>
+          <a href="#team" class="text-white/30 hover:text-white/60 transition-colors">Team</a>
+          <a href="#services" class="text-white/30 hover:text-white/60 transition-colors">Services</a>
+          <a href="#insights" class="text-white/30 hover:text-white/60 transition-colors">Insights</a>
+          <a href="#contact" class="text-white/30 hover:text-white/60 transition-colors">Contact</a>
+          <a href="#" class="text-white/30 hover:text-white/60 transition-colors">Risk Talks</a>
+        </div>
+
+        <!-- Legal -->
+        <div class="md:text-right">
+          <p class="text-white/15 text-[10px]" style="font-family: 'Overpass', sans-serif;">
+            &copy; 2026 Delta Vega Ltd. All rights reserved.
+          </p>
+        </div>
+      </div>
+
+      <!-- Geometric accent -->
+      <div class="mt-16 flex justify-center">
+        <svg width="60" height="30" viewBox="0 0 60 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M30 0 L60 30 L0 30 Z" stroke="rgba(201,169,110,0.1)" stroke-width="0.5" fill="none"/>
+          <circle cx="30" cy="20" r="2" fill="rgba(201,169,110,0.08)"/>
+        </svg>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================ -->
+  <!-- SCROLL ANIMATIONS                             -->
+  <!-- ============================================ -->
+  <script>
+    // Nav solidify on scroll
+    window.addEventListener('scroll', () => {
+      const nav = document.getElementById('mainNav');
+      if (window.scrollY > 80) {
+        nav.style.backgroundColor = 'rgba(9, 36, 15, 0.95)';
+        nav.style.backdropFilter = 'blur(12px)';
+        nav.style.borderBottom = '1px solid rgba(201, 169, 110, 0.15)';
+      } else {
+        nav.style.backgroundColor = 'transparent';
+        nav.style.backdropFilter = 'none';
+        nav.style.borderBottom = 'none';
+      }
+    });
+
+    // Scroll-triggered fade-in
+    const observerOptions = { threshold: 0.1, rootMargin: '0px 0px -40px 0px' };
+    const fadeObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }
+      });
+    }, observerOptions);
+
+    // Stagger children within sections
+    document.querySelectorAll('#about > div > div > div, #team .max-w-md > *, #insights .grid > article, #contact > div > *').forEach((el, i) => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(20px)';
+      el.style.transition = `opacity 0.7s cubic-bezier(0.25, 1, 0.5, 1) ${i * 0.08}s, transform 0.7s cubic-bezier(0.25, 1, 0.5, 1) ${i * 0.08}s`;
+      fadeObserver.observe(el);
+    });
+
+    // Service sections animate independently
+    document.querySelectorAll('#services > div > div:last-child > div').forEach(el => {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(24px)';
+      el.style.transition = 'opacity 0.8s cubic-bezier(0.25, 1, 0.5, 1), transform 0.8s cubic-bezier(0.25, 1, 0.5, 1)';
+      fadeObserver.observe(el);
+    });
+
+    // Close mobile menu on link click
+    document.querySelectorAll('#mobileMenu a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.add('hidden');
+      });
+    });
+  </script>
+
+</body>
+</html>
