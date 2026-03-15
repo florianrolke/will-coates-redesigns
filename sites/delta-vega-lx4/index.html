@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Vega - Financial Engineering & Risk Advisory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0a1a2e',
+                        copper: '#b87333',
+                        copperLight: '#d4956a',
+                        copperDark: '#8c5a28',
+                        navy: '#0d1f3c',
+                        cream: '#faf6f0',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+                        body: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #faf6f0; }
+
+        /* ============ HERO — Left-to-right white fade gradient over photo ============ */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center; overflow: hidden;
+        }
+        .hero-img {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        /* Reading-zone gradient: cream on left fading to transparent on right */
+        .hero-fade {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(10,26,46,0.92) 0%,
+                rgba(10,26,46,0.78) 35%,
+                rgba(10,26,46,0.45) 60%,
+                rgba(10,26,46,0.20) 80%,
+                transparent 100%
+            );
+        }
+
+        /* ============ DIAMOND LOGO ============ */
+        .diamond-logo {
+            width: 44px; height: 44px;
+            transform: rotate(45deg);
+            border: 2px solid rgba(184,115,51,0.6);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .diamond-logo img {
+            transform: rotate(-45deg);
+            height: 24px; width: auto;
+            filter: brightness(0) invert(1) opacity(0.85);
+        }
+
+        /* ============ SPLIT NAV — flanking centered diamond ============ */
+        .nav-link {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px; font-weight: 400;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            transition: color 0.4s;
+        }
+        .nav-link:hover { color: #d4956a; }
+        #navbar.nav-solid {
+            background: rgba(10,26,46,0.96);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 40px rgba(0,0,0,0.25);
+            border-bottom: 1px solid rgba(184,115,51,0.1);
+        }
+
+        /* ============ DIAGONAL GOLD STRIPE TRANSITION ============ */
+        .diagonal-stripe {
+            position: relative; height: 80px; overflow: hidden;
+        }
+        .diagonal-stripe::before {
+            content: '';
+            position: absolute; inset: -20px -5% -20px -5%;
+            width: 110%;
+            background: linear-gradient(135deg,
+                transparent 42%,
+                rgba(184,115,51,0.12) 42%,
+                rgba(184,115,51,0.08) 50%,
+                transparent 50%
+            );
+        }
+
+        /* ============ COPPER ACCENT LINE ============ */
+        .copper-line {
+            width: 48px; height: 2px;
+            background: linear-gradient(90deg, #b87333, #d4956a);
+            border-radius: 1px;
+        }
+
+        /* ============ GOLD PICTURE FRAME ============ */
+        .picture-frame {
+            position: relative; display: inline-block;
+        }
+        .picture-frame::before {
+            content: '';
+            position: absolute;
+            inset: -12px;
+            border: 1.5px solid rgba(184,115,51,0.25);
+            pointer-events: none;
+        }
+        /* Corner accents */
+        .picture-frame::after {
+            content: '';
+            position: absolute;
+            top: -16px; left: -16px;
+            width: 24px; height: 24px;
+            border-top: 2px solid #b87333;
+            border-left: 2px solid #b87333;
+            pointer-events: none;
+        }
+        .corner-br {
+            position: absolute;
+            bottom: -16px; right: -16px;
+            width: 24px; height: 24px;
+            border-bottom: 2px solid #b87333;
+            border-right: 2px solid #b87333;
+            pointer-events: none;
+        }
+
+        /* ============ SEPIA WATERMARK ============ */
+        .watermark-bg {
+            position: relative;
+        }
+        .watermark-bg::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1200&q=40&auto=format') center/cover no-repeat;
+            opacity: 0.035;
+            filter: sepia(100%) brightness(1.2);
+            mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 20%, black 80%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* ============ SEMI-TRANSPARENT OVERLAY CARDS ============ */
+        .overlay-card {
+            background: rgba(10,26,46,0.88);
+            border: 1px solid rgba(184,115,51,0.12);
+            backdrop-filter: blur(8px);
+            transition: all 0.5s cubic-bezier(.25,.46,.45,.94);
+        }
+        .overlay-card:hover {
+            background: rgba(10,26,46,0.92);
+            border-color: rgba(184,115,51,0.3);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.2);
+        }
+
+        /* ============ BRIDGING CARDS ============ */
+        .bridge-cards {
+            position: relative;
+            margin-top: -64px;
+            z-index: 20;
+        }
+
+        /* ============ TWO-COLUMN EDITORIAL TEXT ============ */
+        .editorial-text {
+            column-count: 2;
+            column-gap: 48px;
+            column-rule: 1px solid rgba(184,115,51,0.1);
+        }
+        @media (max-width: 768px) {
+            .editorial-text { column-count: 1; }
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn-copper {
+            display: inline-block;
+            background: linear-gradient(135deg, #b87333, #a06028);
+            color: #fff; padding: 15px 38px;
+            font-family: 'Outfit',sans-serif; font-weight: 500;
+            font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+            border-radius: 0; transition: all .4s ease;
+            box-shadow: 0 4px 24px rgba(184,115,51,0.2);
+        }
+        .btn-copper:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(184,115,51,0.35);
+        }
+        .btn-outline {
+            display: inline-block;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.7); padding: 14px 34px;
+            font-family: 'Outfit',sans-serif; font-weight: 400;
+            font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-outline:hover {
+            background: rgba(255,255,255,0.06);
+            border-color: rgba(184,115,51,0.5);
+            color: #d4956a;
+        }
+        .btn-dark {
+            display: inline-block;
+            background: #0a1a2e; color: #d4956a;
+            padding: 15px 38px;
+            font-family: 'Outfit',sans-serif; font-weight: 500;
+            font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-dark:hover {
+            background: #122240;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(10,26,46,0.3);
+        }
+
+        /* ============ CIRCULAR PLAY BUTTON ============ */
+        .play-circle {
+            width: 64px; height: 64px;
+            border: 2px solid rgba(184,115,51,0.4);
+            border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            background: rgba(184,115,51,0.08);
+            transition: all 0.4s ease;
+            cursor: pointer;
+        }
+        .play-circle:hover {
+            border-color: rgba(184,115,51,0.7);
+            background: rgba(184,115,51,0.15);
+            transform: scale(1.05);
+        }
+        .play-circle svg {
+            width: 20px; height: 20px;
+            fill: #d4956a;
+            margin-left: 3px;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        [data-reveal] {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+        }
+        [data-reveal].visible { opacity: 1; transform: translateY(0); }
+        [data-reveal="d1"] { transition-delay: .1s }
+        [data-reveal="d2"] { transition-delay: .2s }
+        [data-reveal="d3"] { transition-delay: .3s }
+        [data-reveal="d4"] { transition-delay: .4s }
+        [data-reveal="d5"] { transition-delay: .5s }
+
+        /* ============ PHOTO SECTION ============ */
+        .photo-overlay-section {
+            position: relative; min-height: 50vh;
+            overflow: hidden;
+        }
+        .photo-overlay-section .bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+
+        /* ============ FOOTER ============ */
+        .footer { background: #060e18; border-top: 1px solid rgba(184,115,51,0.06); }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar { width: 5px }
+        ::-webkit-scrollbar-track { background: #060e18 }
+        ::-webkit-scrollbar-thumb { background: rgba(184,115,51,0.2); border-radius: 3px }
+    </style>
+</head>
+<body class="text-gray-900 antialiased">
+
+<!-- ============ NAVIGATION — Split nav flanking centered diamond logo ============ -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5">
+        <div class="flex items-center justify-between">
+            <!-- Left nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#about" class="nav-link">About</a>
+            </div>
+            <!-- Centered diamond logo -->
+            <a href="#home" class="diamond-logo mx-auto md:mx-0">
+                <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega">
+            </a>
+            <!-- Right nav -->
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#services" class="nav-link">Services</a>
+                <a href="#contact" class="nav-link" style="color:#d4956a; border:1px solid rgba(184,115,51,0.3); padding:7px 18px;">Risk Talks</a>
+            </div>
+            <!-- Mobile -->
+            <button id="mobile-btn" class="md:hidden text-white/60">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t border-white/10 mt-4 space-y-3">
+            <a href="#home" class="block nav-link py-2">Home</a>
+            <a href="#about" class="block nav-link py-2">About</a>
+            <a href="#services" class="block nav-link py-2">Services</a>
+            <a href="#contact" class="block nav-link py-2">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO — Directional fade with reading zone ============ -->
+<section id="home" class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-fade"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
+        <div class="max-w-2xl pt-24">
+            <div data-reveal>
+                <p class="font-body text-[10px] uppercase tracking-[.35em] text-copper/70 mb-7">Jonathan Schachter, PhD &mdash; Quantitative Analyst</p>
+            </div>
+            <h1 class="font-heading font-normal leading-[1.08] mb-8" data-reveal="d1">
+                <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white block">Financial</span>
+                <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white block">Engineering <em class="italic text-copperLight font-normal">&amp;</em></span>
+                <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white block">Risk Advisory</span>
+            </h1>
+            <div data-reveal="d2">
+                <p class="font-body text-base md:text-lg text-white/45 leading-relaxed max-w-md mb-10">Delivering specialized training, publications, and technical expertise in LIBOR, SOFR, VaR, and quantitative risk management.</p>
+            </div>
+            <div class="flex flex-wrap items-center gap-5" data-reveal="d3">
+                <a href="#contact" class="btn-copper">Risk Talks</a>
+                <a href="#services" class="btn-outline">Explore Services</a>
+                <!-- Circular play button -->
+                <div class="play-circle ml-2" title="Watch Introduction">
+                    <svg viewBox="0 0 24 24"><polygon points="8,5 19,12 8,19"/></svg>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Scroll cue -->
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" data-reveal="d4">
+        <span class="font-body text-[9px] uppercase tracking-[.3em] text-white/20">Scroll</span>
+        <div class="w-px h-14 bg-gradient-to-b from-copper/30 to-transparent"></div>
+    </div>
+</section>
+
+<!-- ============ BRIDGING CARDS — overlapping hero/about boundary ============ -->
+<div class="bridge-cards max-w-5xl mx-auto px-6 lg:px-12">
+    <div class="grid md:grid-cols-3 gap-0">
+        <div class="overlay-card p-8 text-center" data-reveal>
+            <svg class="w-7 h-7 text-copperLight mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+            </svg>
+            <h3 class="font-heading text-lg text-white mb-2">Publications</h3>
+            <p class="font-body text-white/35 text-sm leading-relaxed">Technical papers and research on financial engineering models.</p>
+        </div>
+        <div class="overlay-card p-8 text-center border-x-0" data-reveal="d1" style="border-left:none;border-right:none;">
+            <svg class="w-7 h-7 text-copperLight mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/>
+            </svg>
+            <h3 class="font-heading text-lg text-white mb-2">Video Content</h3>
+            <p class="font-body text-white/35 text-sm leading-relaxed">Educational video lectures and expert-led demonstrations.</p>
+        </div>
+        <div class="overlay-card p-8 text-center" data-reveal="d2">
+            <svg class="w-7 h-7 text-copperLight mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+            </svg>
+            <h3 class="font-heading text-lg text-white mb-2">Training</h3>
+            <p class="font-body text-white/35 text-sm leading-relaxed">Structured programs for professional development in risk.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============ DIAGONAL STRIPE TRANSITION ============ -->
+<div class="diagonal-stripe bg-cream"></div>
+
+<!-- ============ ABOUT — Sepia watermark + editorial text + picture frame ============ -->
+<section id="about" class="bg-cream py-28 lg:py-36 px-6 lg:px-12 watermark-bg">
+    <div class="max-w-6xl mx-auto relative z-10">
+        <div class="grid lg:grid-cols-5 gap-16 lg:gap-20 items-start">
+            <!-- Left: picture-framed image -->
+            <div class="lg:col-span-2" data-reveal>
+                <div class="picture-frame">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=600&q=80&auto=format"
+                         alt="Financial Analysis" class="w-full object-cover" style="aspect-ratio:4/5;">
+                    <div class="corner-br"></div>
+                </div>
+            </div>
+            <!-- Right: editorial content -->
+            <div class="lg:col-span-3">
+                <div data-reveal>
+                    <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper mb-5">About Delta Vega</p>
+                    <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-brand leading-[1.12] mb-6">
+                        Where Quantitative<br>Precision Meets<br><em class="italic text-copper">Expert Insight</em>
+                    </h2>
+                    <div class="copper-line mb-8"></div>
+                </div>
+                <div class="editorial-text font-body text-gray-600 text-base leading-[1.85] mb-10" data-reveal="d1">
+                    <p class="mb-4">Delta Vega is a financial engineering consultancy specializing in quantitative analysis, risk management, and regulatory compliance. Founded by Jonathan Schachter, PhD, the firm provides comprehensive training programs, technical publications, and educational resources designed for today's evolving financial landscape.</p>
+                    <p>Our approach combines rigorous theoretical frameworks with practical application, covering LIBOR transition, SOFR modeling, CCAR stress testing, VaR methodologies, and model risk management under SR 11-7 guidelines. Participants gain actionable insights they can implement immediately.</p>
+                </div>
+                <a href="#services" class="btn-dark" data-reveal="d2">Our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ PHOTO BREAK — 50/50 images with overlay cards ============ -->
+<section class="photo-overlay-section">
+    <div class="bg"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-brand/90 via-brand/60 to-transparent"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-32 lg:py-40">
+        <div class="max-w-lg" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper/60 mb-5">Free & Open to the Public</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mb-6">
+                Risk Management<br><em class="italic text-copperLight">Talks</em>
+            </h2>
+            <div class="copper-line mb-8"></div>
+            <p class="font-body text-white/40 text-base leading-relaxed mb-10">Join our regular discussions on quantitative risk, financial modeling, and market developments. Available via Zoom and YouTube, free for all financial professionals.</p>
+            <a href="#contact" class="btn-copper">Join Next Session</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SERVICES — Cards on cream background ============ -->
+<section id="services" class="bg-cream py-28 lg:py-36 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper mb-5">Our Expertise</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-brand">What We Offer</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-8">
+            <!-- Card 1 -->
+            <div class="bg-white p-10 lg:p-12 border border-gray-100 hover:border-copper/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl" data-reveal>
+                <span class="font-heading text-5xl text-copper/10 block mb-4">01</span>
+                <h3 class="font-heading text-2xl text-brand mb-3">Training Programs</h3>
+                <div class="copper-line mb-5"></div>
+                <p class="font-body text-gray-500 leading-relaxed">Structured courses enhancing technical skills across financial engineering disciplines, from introductory models to advanced quantitative methods.</p>
+                <a href="#contact" class="inline-flex items-center gap-2 font-body text-sm text-copper mt-6 hover:gap-3 transition-all">
+                    Learn more <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 2 -->
+            <div class="bg-white p-10 lg:p-12 border border-gray-100 hover:border-copper/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl" data-reveal="d1">
+                <span class="font-heading text-5xl text-copper/10 block mb-4">02</span>
+                <h3 class="font-heading text-2xl text-brand mb-3">Video Resources</h3>
+                <div class="copper-line mb-5"></div>
+                <p class="font-body text-gray-500 leading-relaxed">Educational video content providing visual learning experiences, demonstrations, and expert-led walkthroughs of complex financial models.</p>
+                <a href="#contact" class="inline-flex items-center gap-2 font-body text-sm text-copper mt-6 hover:gap-3 transition-all">
+                    Learn more <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 3 -->
+            <div class="bg-white p-10 lg:p-12 border border-gray-100 hover:border-copper/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl" data-reveal="d2">
+                <span class="font-heading text-5xl text-copper/10 block mb-4">03</span>
+                <h3 class="font-heading text-2xl text-brand mb-3">Publications</h3>
+                <div class="copper-line mb-5"></div>
+                <p class="font-body text-gray-500 leading-relaxed">Technical papers and research materials for in-depth study, reference, and staying current with evolving standards in risk management.</p>
+                <a href="#contact" class="inline-flex items-center gap-2 font-body text-sm text-copper mt-6 hover:gap-3 transition-all">
+                    Learn more <span>&rarr;</span>
+                </a>
+            </div>
+            <!-- Card 4 -->
+            <div class="bg-white p-10 lg:p-12 border border-gray-100 hover:border-copper/20 transition-all duration-500 hover:-translate-y-1 hover:shadow-xl" data-reveal="d3">
+                <span class="font-heading text-5xl text-copper/10 block mb-4">04</span>
+                <h3 class="font-heading text-2xl text-brand mb-3">Consulting</h3>
+                <div class="copper-line mb-5"></div>
+                <p class="font-body text-gray-500 leading-relaxed">Expert guidance addressing your specific challenges in LIBOR transition, SOFR modeling, CCAR, VaR, and SR 11-7 model risk compliance.</p>
+                <a href="#contact" class="inline-flex items-center gap-2 font-body text-sm text-copper mt-6 hover:gap-3 transition-all">
+                    Learn more <span>&rarr;</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ DIAGONAL STRIPE TRANSITION ============ -->
+<div class="diagonal-stripe bg-cream" style="transform:scaleY(-1)"></div>
+
+<!-- ============ CTA — Dark navy with radial copper glow ============ -->
+<section id="contact" class="bg-brand py-32 lg:py-40 px-6 lg:px-12 relative overflow-hidden">
+    <!-- Radial copper glow -->
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 40%, rgba(184,115,51,0.06) 0%, transparent 70%);"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+        <div data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper/50 mb-7">Start the Conversation</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mb-6">
+                Ready to Elevate<br>Your <em class="italic text-copperLight">Expertise?</em>
+            </h2>
+            <div class="copper-line mx-auto mb-10"></div>
+            <p class="font-body text-white/35 text-lg leading-relaxed mb-14 max-w-xl mx-auto">Connect with us to learn about our training programs, publications, and complimentary risk management talks.</p>
+        </div>
+        <div data-reveal="d1">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-10 mb-14">
+                <a href="mailto:js1@delta-vega.com" class="flex items-center gap-3 text-white/40 hover:text-copperLight transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                    </svg>
+                    <span class="font-body text-sm tracking-wide">js1@delta-vega.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/jonathan-schachter-ph-d/" target="_blank" class="flex items-center gap-3 text-white/40 hover:text-copperLight transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                    </svg>
+                    <span class="font-body text-sm tracking-wide">LinkedIn</span>
+                </a>
+            </div>
+            <a href="mailto:js1@delta-vega.com" class="btn-copper">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer py-16 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12 mb-14">
+            <div>
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="diamond-logo" style="width:32px;height:32px;">
+                        <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega" style="height:18px;">
+                    </div>
+                    <span class="font-heading text-lg text-white/60">Delta Vega</span>
+                </div>
+                <p class="font-body text-white/20 leading-relaxed text-sm">Financial engineering consultancy specializing in quantitative analysis, risk management, and training.</p>
+            </div>
+            <div>
+                <h4 class="font-body text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Navigation</h4>
+                <div class="flex flex-col space-y-3">
+                    <a href="#home" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">Home</a>
+                    <a href="#about" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">About</a>
+                    <a href="#services" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">Services</a>
+                    <a href="#contact" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">Contact</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-body text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Contact</h4>
+                <p class="font-body text-white/25 mb-2 text-sm">js1@delta-vega.com</p>
+                <p class="font-body text-white/20 text-sm">Jonathan Schachter, PhD</p>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-body text-white/12 text-sm">&copy; 2025 Delta Vega. All rights reserved.</p>
+            <p class="font-body text-white/8 text-xs">Quantitative Analysis &bull; Risk Advisory &bull; Financial Engineering</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Nav scroll
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('nav-solid', window.scrollY > 60));
+
+    // Mobile menu
+    const mobileBtn = document.getElementById('mobile-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { t.scrollIntoView({ behavior:'smooth', block:'start' }); mobileMenu.classList.add('hidden'); }
+        });
+    });
+
+    // Reveal on scroll
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
