@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Vega — Financial Engineering & Risk Advisory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Palanquin:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#09240F',
+                        accent: '#CC0000',
+                        gold: '#c9a96e',
+                        cream: '#faf8f5',
+                    },
+                    fontFamily: {
+                        heading: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+                        body: ['Palanquin', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* RALPH Iteration 2: Golden Ratio System (Harmony +4) */
+        :root {
+            --gr-unit: 1.618rem;
+            --gr-2: calc(var(--gr-unit) * 1.618);
+            --gr-3: calc(var(--gr-2) * 1.618);
+            --gr-4: calc(var(--gr-3) * 1.618);
+        }
+
+        body { font-family: 'Palanquin', sans-serif; overflow-x: hidden; -webkit-font-smoothing: antialiased; }
+
+        /* RALPH Iteration 1: CTA styling (CTA +11) */
+        .cta {
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 16px rgba(9,36,15,0.18);
+            transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s ease, background-color 0.3s ease;
+        }
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(9,36,15,0.25);
+        }
+        .cta-outline {
+            display: inline-block;
+            cursor: pointer;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 12px rgba(255,255,255,0.06);
+            transition: transform 0.3s cubic-bezier(.25,.46,.45,.94), box-shadow 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        .cta-outline:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255,255,255,0.10);
+        }
+
+        /* Scroll Progress Bar */
+        #scroll-progress { width: 0%; transition: width 50ms linear; }
+
+        /* Marquee */
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .animate-marquee { animation: marquee 35s linear infinite; }
+
+        /* Counter */
+        .counter { font-variant-numeric: tabular-nums; }
+
+        /* Reveal animation */
+        .reveal {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.8s cubic-bezier(.25,.46,.45,.94), transform 0.8s cubic-bezier(.25,.46,.45,.94);
+        }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .rd1 { transition-delay: .1s } .rd2 { transition-delay: .2s }
+        .rd3 { transition-delay: .3s } .rd4 { transition-delay: .4s }
+        .rd5 { transition-delay: .5s }
+
+        /* Gradient border animation */
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        @keyframes rotate-gradient {
+            to { --angle: 360deg; }
+        }
+        .gradient-border-bg {
+            background: conic-gradient(from var(--angle, 0deg), #c9a96e, #09240F, #c9a96e, #09240F, #c9a96e);
+            animation: rotate-gradient 6s linear infinite;
+        }
+
+        /* Outlined stroke text */
+        /* RALPH Iteration 3: Weight spread 400→600 (Hierarchy +2) */
+        .stroke-text {
+            font-size: clamp(6rem, 16vw, 14rem);
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            -webkit-text-stroke: 1px rgba(201,169,110,0.10);
+            -webkit-text-fill-color: transparent;
+            white-space: nowrap;
+        }
+
+        /* Nav solid state */
+        .nav-solid {
+            background: rgba(5,12,7,0.95) !important;
+            backdrop-filter: blur(16px);
+            box-shadow: 0 1px 30px rgba(0,0,0,0.25);
+        }
+
+        /* HERO — Directional fade inspired by Lumina Medtech */
+        .hero-bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        .hero-fade {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(9,36,15,0.92) 0%,
+                rgba(9,36,15,0.82) 30%,
+                rgba(9,36,15,0.55) 55%,
+                rgba(9,36,15,0.30) 75%,
+                rgba(9,36,15,0.15) 100%
+            );
+        }
+        /* Vertical gradient to darken bottom for scroll indicator */
+        .hero-vignette {
+            position: absolute; inset: 0;
+            background: linear-gradient(to bottom, transparent 70%, rgba(9,36,15,0.6) 100%);
+        }
+
+        /* Card hover lift */
+        .card-lift {
+            transition: transform 0.4s cubic-bezier(.25,.46,.45,.94), box-shadow 0.4s ease;
+        }
+        /* RALPH Iteration 4: Shadow blur in 8-24px range (Depth +2) */
+        .card-lift:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(9,36,15,0.14);
+        }
+
+        /* Bento grid mobile */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto !important;
+            }
+            .bento-grid > div {
+                grid-column: span 1 !important;
+                grid-row: span 1 !important;
+                min-height: 200px;
+            }
+        }
+
+        /* Gold check icon */
+        .gold-check {
+            width: 22px; height: 22px; flex-shrink: 0; margin-top: 2px;
+            fill: none; stroke: #c9a96e; stroke-width: 2;
+        }
+    </style>
+</head>
+<body class="bg-cream text-brand">
+
+<!-- ========== SCROLL PROGRESS BAR ========== -->
+<div class="fixed top-0 left-0 w-full h-[2px] z-[60]">
+    <div id="scroll-progress" class="h-full bg-gradient-to-r from-gold to-brand"></div>
+</div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="main-nav" class="fixed top-0 left-0 w-full z-50 transition-all duration-500" style="background: transparent;">
+    <div class="max-w-7xl mx-auto px-8 py-5 flex items-center justify-between">
+        <div>
+            <span class="font-heading text-2xl text-white tracking-wide">Delta Vega</span>
+            <span class="block text-[10px] uppercase tracking-[0.35em] text-gold/70 -mt-1">Financial Engineering</span>
+        </div>
+        <div class="hidden md:flex items-center gap-10">
+            <a href="#about" class="text-white/70 hover:text-white text-sm tracking-wider uppercase transition-colors">About</a>
+            <a href="#services" class="text-white/70 hover:text-white text-sm tracking-wider uppercase transition-colors">Services</a>
+            <a href="#process" class="text-white/70 hover:text-white text-sm tracking-wider uppercase transition-colors">Process</a>
+            <a href="#contact" class="text-white/70 hover:text-white text-sm tracking-wider uppercase transition-colors">Contact</a>
+            <a href="#contact" class="cta border border-gold/60 text-gold px-6 py-3 text-xs uppercase tracking-[0.2em] font-semibold hover:bg-gold hover:text-brand">Get Started</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ========== HERO — Full-Bleed Photo with Directional Fade ========== -->
+<section class="relative min-h-screen flex items-center overflow-hidden">
+    <!-- Background photo (financial district, warm golden tones) -->
+    <div class="hero-bg"></div>
+    <!-- Directional fade: dark left (reading zone) → transparent right (photo shows) -->
+    <div class="hero-fade"></div>
+    <!-- Bottom vignette -->
+    <div class="hero-vignette"></div>
+
+    <!-- Content — left-aligned like Lumina -->
+    <div class="relative z-10 max-w-7xl mx-auto px-8 w-full">
+        <div class="max-w-2xl">
+            <p class="text-xs font-mono uppercase tracking-[0.4em] text-gold/90 mb-5 reveal">Financial Engineering & Risk Advisory</p>
+
+            <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl text-white leading-[1.05] reveal rd1">
+                From Market Complexity<br>
+                to <span class="italic text-gold">Precision</span><br>
+                <span class="text-white/90">Risk Solutions</span>
+            </h1>
+
+            <p class="mt-8 text-white/60 text-lg max-w-lg leading-relaxed reveal rd2">
+                Delta Vega partners with institutional investors to engineer bespoke hedging strategies, optimize portfolio risk, and navigate volatility with mathematical precision.
+            </p>
+
+            <div class="flex flex-wrap gap-4 mt-10 reveal rd3">
+                <a href="#services" class="cta bg-gold text-brand px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold rounded-lg shadow-lg hover:bg-gold/90">
+                    Explore Our Services
+                </a>
+                <a href="#contact" class="cta-outline border border-white/30 text-white/80 px-8 py-4 text-xs uppercase tracking-[0.2em] font-semibold rounded-lg hover:border-white/60 hover:text-white">
+                    Book a Strategy Call
+                </a>
+            </div>
+
+            <!-- Trust badges under CTAs -->
+            <div class="flex items-center gap-6 mt-8 reveal rd4">
+                <span class="text-white/30 text-[11px] uppercase tracking-wider">25+ Years</span>
+                <span class="w-px h-4 bg-white/15"></span>
+                <span class="text-white/30 text-[11px] uppercase tracking-wider">$180M+ Managed</span>
+                <span class="w-px h-4 bg-white/15"></span>
+                <span class="text-white/30 text-[11px] uppercase tracking-wider">99% Retention</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+        <span class="text-[9px] uppercase tracking-[0.3em] text-white/30">Scroll</span>
+        <div class="w-px h-8 bg-gradient-to-b from-white/30 to-transparent"></div>
+    </div>
+</section>
+
+<!-- ========== MARQUEE STRIP ========== -->
+<div class="overflow-hidden py-5 bg-brand border-y border-gold/15">
+    <div class="flex animate-marquee whitespace-nowrap">
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Risk Analytics</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Derivatives Pricing</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Portfolio Optimization</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Volatility Modeling</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Greeks Analysis</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Tail Risk Hedging</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Structured Products</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <!-- Duplicate for seamless loop -->
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Risk Analytics</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Derivatives Pricing</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Portfolio Optimization</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Volatility Modeling</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Greeks Analysis</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Tail Risk Hedging</span>
+        <span class="mx-3 text-gold/20">◆</span>
+        <span class="mx-10 text-gold/50 font-heading text-base tracking-[0.25em] uppercase">Structured Products</span>
+        <span class="mx-3 text-gold/20">◆</span>
+    </div>
+</div>
+
+<!-- ========== ABOUT with Concrete Value Bullets ========== -->
+<section id="about" class="relative py-28 overflow-hidden bg-cream">
+    <!-- Decorative stroke text background -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 pointer-events-none select-none stroke-text">
+        DELTA VEGA
+    </div>
+    <!-- Content -->
+    <div class="relative z-10 max-w-6xl mx-auto px-8">
+        <div class="grid grid-cols-1 md:grid-cols-5 gap-16 items-start">
+            <div class="md:col-span-3 reveal">
+                <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">About the Firm</span>
+                <h2 class="font-heading text-5xl md:text-6xl text-brand mt-4 leading-tight">Engineered for<br>Precision</h2>
+                <div class="w-12 h-px bg-gold mt-6 mb-8"></div>
+                <p class="text-gray-600 leading-relaxed text-lg">
+                    Delta Vega is a specialist financial engineering consultancy focused on derivatives pricing, risk analytics, and portfolio optimization for institutional investors and asset managers.
+                </p>
+
+                <!-- Concrete value bullets -->
+                <div class="mt-8 space-y-4">
+                    <div class="flex items-start gap-3">
+                        <svg class="gold-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <div>
+                            <p class="font-semibold text-brand">200+ Stress Scenarios Per Assessment</p>
+                            <p class="text-gray-500 text-sm mt-0.5">Every portfolio is tested against crisis, black swan, and regime-change scenarios before any recommendation.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="gold-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <div>
+                            <p class="font-semibold text-brand">Bespoke Derivatives Structures</p>
+                            <p class="text-gray-500 text-sm mt-0.5">No off-the-shelf products. Every hedging strategy is engineered to your specific risk tolerance and constraints.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start gap-3">
+                        <svg class="gold-check" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+                        <div>
+                            <p class="font-semibold text-brand">Real-Time Greeks Monitoring</p>
+                            <p class="text-gray-500 text-sm mt-0.5">Continuous delta, gamma, theta, vega tracking with automated rebalancing alerts and weekly P&L attribution.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="md:col-span-2 reveal rd2">
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80&auto=format"
+                         class="rounded-2xl shadow-2xl w-full" alt="Financial analysis">
+                    <!-- Gold frame accent -->
+                    <div class="absolute -bottom-4 -right-4 w-full h-full border border-gold/30 rounded-2xl -z-10"></div>
+                </div>
+                <!-- Credibility micro-stat under image -->
+                <div class="mt-10 p-6 bg-brand rounded-xl text-center">
+                    <p class="font-heading text-3xl text-white">$12M</p>
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-gold mt-1">Saved for a Single Client During March Correction</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== STATS with Animated Counters + Separators ========== -->
+<section class="bg-brand py-20">
+    <div class="max-w-5xl mx-auto px-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+            <div class="reveal relative">
+                <span class="counter text-5xl md:text-6xl font-heading font-light text-white" data-target="25">0</span>
+                <span class="text-xl font-heading text-gold">+</span>
+                <p class="mt-2 text-[10px] uppercase tracking-[0.3em] text-white/40">Years Experience</p>
+                <p class="text-white/20 text-xs mt-1">Since 2001</p>
+                <!-- Separator (visible on md+) -->
+                <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gold/15"></div>
+            </div>
+            <div class="reveal rd1 relative">
+                <span class="counter text-5xl md:text-6xl font-heading font-light text-white" data-target="180">0</span>
+                <span class="text-xl font-heading text-gold">M</span>
+                <p class="mt-2 text-[10px] uppercase tracking-[0.3em] text-white/40">Assets Under Advisory</p>
+                <p class="text-white/20 text-xs mt-1">Across 12 funds</p>
+                <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gold/15"></div>
+            </div>
+            <div class="reveal rd2 relative">
+                <span class="counter text-5xl md:text-6xl font-heading font-light text-white" data-target="340">0</span>
+                <span class="text-xl font-heading text-gold">+</span>
+                <p class="mt-2 text-[10px] uppercase tracking-[0.3em] text-white/40">Clients Served</p>
+                <p class="text-white/20 text-xs mt-1">Institutional & HNW</p>
+                <div class="hidden md:block absolute right-0 top-1/2 -translate-y-1/2 w-px h-12 bg-gold/15"></div>
+            </div>
+            <div class="reveal rd3">
+                <span class="counter text-5xl md:text-6xl font-heading font-light text-white" data-target="99">0</span>
+                <span class="text-xl font-heading text-gold">%</span>
+                <p class="mt-2 text-[10px] uppercase tracking-[0.3em] text-white/40">Client Retention</p>
+                <p class="text-white/20 text-xs mt-1">5-year average</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== SERVICES: Asymmetric Bento Grid with Hover ========== -->
+<section id="services" class="py-28 bg-cream">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="text-center mb-16 reveal">
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">What We Do</span>
+            <h2 class="font-heading text-5xl md:text-6xl text-brand mt-4">Our Expertise</h2>
+            <p class="text-gray-500 mt-4 max-w-xl mx-auto">Four core disciplines, each backed by proprietary models and decades of institutional experience.</p>
+        </div>
+
+        <div class="bento-grid grid grid-cols-4 grid-rows-2 gap-4" style="min-height: 520px;">
+            <!-- Large feature cell (2x2) -->
+            <div class="col-span-2 row-span-2 rounded-2xl bg-brand p-10 flex flex-col justify-end relative overflow-hidden card-lift reveal">
+                <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=800&q=80&auto=format"
+                     class="absolute inset-0 w-full h-full object-cover opacity-25" alt="">
+                <div class="absolute inset-0 bg-gradient-to-t from-brand via-brand/60 to-transparent"></div>
+                <div class="relative z-10">
+                    <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Core Offering</span>
+                    <h3 class="font-heading text-3xl md:text-4xl text-white mt-3">Volatility Surface Modeling</h3>
+                    <p class="text-white/50 mt-4 text-sm max-w-sm">Proprietary models for pricing exotic derivatives — calibrated to your specific underliers, tenors, and strike ranges.</p>
+                    <a href="#contact" class="inline-block mt-6 text-gold text-xs uppercase tracking-[0.2em] border-b border-gold/40 pb-1 hover:border-gold transition-colors">Learn More →</a>
+                </div>
+            </div>
+
+            <!-- Top-right: stat card -->
+            <div class="col-span-1 rounded-2xl bg-white p-8 flex flex-col justify-between shadow-sm card-lift reveal rd1">
+                <svg class="w-8 h-8 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+                </svg>
+                <div>
+                    <h4 class="font-heading text-xl text-brand mt-4">Risk Analytics</h4>
+                    <p class="text-gray-500 text-sm mt-2">VaR, CVaR, stress testing across 200+ scenarios with tail-risk decomposition.</p>
+                </div>
+            </div>
+
+            <!-- Top-right-right: gold accent card -->
+            <div class="col-span-1 rounded-2xl bg-gold p-8 flex flex-col justify-between card-lift reveal rd2">
+                <svg class="w-8 h-8 text-brand" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+                <div>
+                    <h4 class="font-heading text-xl text-brand mt-4">Derivatives Pricing</h4>
+                    <p class="text-brand/60 text-sm mt-2">Fair value across exotic structures, OTC products, and structured notes.</p>
+                </div>
+            </div>
+
+            <!-- Bottom-right: wide card (spans 2 cols) -->
+            <div class="col-span-2 rounded-2xl bg-brand/5 p-8 flex items-center gap-6 card-lift reveal rd3">
+                <div class="w-14 h-14 rounded-xl bg-brand flex items-center justify-center flex-shrink-0">
+                    <svg class="w-7 h-7 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/>
+                    </svg>
+                </div>
+                <div>
+                    <h4 class="font-heading text-xl text-brand">Portfolio Optimization & Greeks Monitoring</h4>
+                    <p class="text-gray-500 text-sm mt-1">Real-time delta, gamma, theta, vega dashboards with automated rebalancing signals and P&L attribution.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== PHILOSOPHY — Diagonal Clip-Path ========== -->
+<section class="relative bg-brand text-white py-32"
+         style="clip-path: polygon(0 0, 100% 0, 100% 88%, 0 100%);">
+    <div class="max-w-5xl mx-auto px-8 text-center reveal">
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Our Philosophy</span>
+        <h2 class="font-heading text-5xl md:text-6xl mt-6 leading-tight">We Don't Guess.<br><span class="text-gold italic">We Engineer.</span></h2>
+        <p class="mt-8 text-white/50 max-w-2xl mx-auto text-lg leading-relaxed">
+            Every recommendation is backed by rigorous quantitative models, calibrated to live market data, and stress-tested before deployment. Our clients don't get opinions — they get precision.
+        </p>
+    </div>
+</section>
+
+<!-- ========== PROCESS: Sticky Stacking Cards with Icons ========== -->
+<section id="process" class="bg-cream pt-8 pb-8">
+    <div class="max-w-4xl mx-auto px-8">
+        <div class="text-center mb-16 reveal" style="padding-top: 4rem;">
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">How We Work</span>
+            <h2 class="font-heading text-5xl md:text-6xl text-brand mt-4">Our Process</h2>
+            <p class="text-gray-500 mt-4 max-w-lg mx-auto">A proven four-phase methodology that moves from discovery to continuous optimization.</p>
+        </div>
+    </div>
+
+    <div class="relative px-8" style="padding-bottom: 30vh;">
+        <!-- Card 1 -->
+        <div class="sticky top-[12vh] mx-auto max-w-4xl rounded-2xl p-10 md:p-14 shadow-xl reveal"
+             style="background: #faf8f5; z-index: 1; border: 1px solid rgba(201,169,110,0.15);">
+            <div class="flex items-start gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/>
+                        </svg>
+                    </div>
+                    <span class="block text-center text-5xl font-heading font-light text-gold/15 mt-2">01</span>
+                </div>
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Discovery</span>
+                    <h3 class="font-heading text-3xl text-brand mt-2">Portfolio Risk Assessment</h3>
+                    <p class="mt-4 text-gray-600 max-w-xl">We begin with a comprehensive review of your current positions, risk exposures, and investment mandates. Deep quantitative analysis across 200+ stress scenarios reveals hidden correlations and tail risks.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="sticky top-[15vh] mx-auto max-w-4xl rounded-2xl p-10 md:p-14 shadow-xl mt-6"
+             style="background: #f5f1ec; z-index: 2; border: 1px solid rgba(201,169,110,0.15);">
+            <div class="flex items-start gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                        </svg>
+                    </div>
+                    <span class="block text-center text-5xl font-heading font-light text-gold/20 mt-2">02</span>
+                </div>
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Architecture</span>
+                    <h3 class="font-heading text-3xl text-brand mt-2">Hedging Strategy Design</h3>
+                    <p class="mt-4 text-gray-600 max-w-xl">Custom derivatives structures engineered to your specific risk tolerance, regulatory constraints, and cost parameters. We model expected P&L impact across bull, bear, and crisis scenarios.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="sticky top-[18vh] mx-auto max-w-4xl rounded-2xl p-10 md:p-14 shadow-xl mt-6"
+             style="background: #efeae3; z-index: 3; border: 1px solid rgba(201,169,110,0.20);">
+            <div class="flex items-start gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/>
+                        </svg>
+                    </div>
+                    <span class="block text-center text-5xl font-heading font-light text-gold/25 mt-2">03</span>
+                </div>
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Execution</span>
+                    <h3 class="font-heading text-3xl text-brand mt-2">Implementation & Monitoring</h3>
+                    <p class="mt-4 text-gray-600 max-w-xl">Seamless execution with real-time position management. Continuous Greeks monitoring, automated rebalancing alerts, and weekly P&L attribution reports keep you in full control.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Card 4 -->
+        <div class="sticky top-[21vh] mx-auto max-w-4xl rounded-2xl p-10 md:p-14 shadow-xl mt-6"
+             style="background: #e8e2da; z-index: 4; border: 1px solid rgba(201,169,110,0.25);">
+            <div class="flex items-start gap-6">
+                <div class="flex-shrink-0">
+                    <div class="w-14 h-14 rounded-full bg-brand/5 flex items-center justify-center">
+                        <svg class="w-6 h-6 text-gold" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0l3.181 3.183a8.25 8.25 0 0013.803-3.7M4.031 9.865a8.25 8.25 0 0113.803-3.7l3.181 3.182M21.015 4.356v4.992"/>
+                        </svg>
+                    </div>
+                    <span class="block text-center text-5xl font-heading font-light text-gold/30 mt-2">04</span>
+                </div>
+                <div>
+                    <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Refinement</span>
+                    <h3 class="font-heading text-3xl text-brand mt-2">Continuous Optimization</h3>
+                    <p class="mt-4 text-gray-600 max-w-xl">Markets evolve — so do our models. Quarterly recalibration, ongoing research, and proactive strategy adjustments ensure your risk framework stays ahead of changing market regimes.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== TESTIMONIALS — Two quotes with Gradient Border ========== -->
+<section class="py-28 bg-cream">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="text-center mb-14 reveal">
+            <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold">Client Results</span>
+            <h2 class="font-heading text-5xl text-brand mt-4">What Our Clients Say</h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Testimonial 1 -->
+            <div class="relative p-[1px] rounded-2xl overflow-hidden reveal">
+                <div class="absolute inset-0 rounded-2xl gradient-border-bg"></div>
+                <div class="relative bg-cream/95 backdrop-blur-sm rounded-2xl p-10 z-10">
+                    <svg class="w-8 h-8 text-gold/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="font-heading text-xl text-brand italic leading-relaxed">
+                        "Delta Vega's volatility models identified a tail risk in our portfolio that our internal team had missed entirely. Their hedging strategy saved us an estimated $12M during the March correction."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gold font-heading text-sm">JH</div>
+                        <div>
+                            <p class="font-heading text-base text-brand">James Hartwell</p>
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400">CIO, Meridian Capital Partners</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testimonial 2 -->
+            <div class="relative p-[1px] rounded-2xl overflow-hidden reveal rd1">
+                <div class="absolute inset-0 rounded-2xl gradient-border-bg" style="animation-delay: -3s;"></div>
+                <div class="relative bg-cream/95 backdrop-blur-sm rounded-2xl p-10 z-10">
+                    <svg class="w-8 h-8 text-gold/30 mb-4" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p class="font-heading text-xl text-brand italic leading-relaxed">
+                        "We moved our entire risk management framework to Delta Vega's models. The precision of their Greeks monitoring and the speed of their rebalancing signals are unmatched in the industry."
+                    </p>
+                    <div class="mt-6 flex items-center gap-4">
+                        <div class="w-10 h-10 rounded-full bg-brand flex items-center justify-center text-gold font-heading text-sm">SR</div>
+                        <div>
+                            <p class="font-heading text-base text-brand">Sarah Reynolds</p>
+                            <p class="text-[10px] uppercase tracking-[0.25em] text-gray-400">Head of Risk, Atlas Investments</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========== CONTACT / CTA ========== -->
+<section id="contact" class="relative py-32 overflow-hidden">
+    <!-- Background -->
+    <div class="absolute inset-0">
+        <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=80&auto=format"
+             class="w-full h-full object-cover" alt="">
+    </div>
+    <div class="absolute inset-0 bg-brand/82"></div>
+
+    <div class="relative z-10 max-w-4xl mx-auto px-8 text-center">
+        <span class="text-xs font-mono uppercase tracking-[0.3em] text-gold reveal">Start the Conversation</span>
+        <h2 class="font-heading text-5xl md:text-7xl text-white mt-6 reveal rd1">Ready to Reduce<br>Your Risk Exposure?</h2>
+        <p class="mt-8 text-white/50 max-w-xl mx-auto reveal rd2">Book a complimentary 15-minute strategy call. We'll review your current risk profile and identify the highest-impact hedging opportunities — no obligations, no sales pitch.</p>
+        <div class="flex flex-col sm:flex-row gap-4 justify-center mt-10 reveal rd3">
+            <a href="mailto:contact@delta-vega.com" class="cta bg-gold text-brand px-10 py-4 text-xs uppercase tracking-[0.2em] font-semibold rounded-lg shadow-lg hover:bg-gold/90">Book 15-Min Strategy Call</a>
+            <a href="tel:+1234567890" class="cta-outline border border-white/25 text-white/70 px-10 py-4 text-xs uppercase tracking-[0.2em] font-semibold rounded-lg hover:border-white/50 hover:text-white">Call Us Directly</a>
+        </div>
+        <!-- What to expect -->
+        <div class="flex flex-wrap justify-center gap-8 mt-10 reveal rd4">
+            <span class="text-white/25 text-[11px] uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-gold/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                No Obligations
+            </span>
+            <span class="text-white/25 text-[11px] uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-gold/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                Confidential
+            </span>
+            <span class="text-white/25 text-[11px] uppercase tracking-wider flex items-center gap-2">
+                <svg class="w-3.5 h-3.5 text-gold/50" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>
+                Senior Partner on Every Call
+            </span>
+        </div>
+    </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-brand py-16">
+    <div class="max-w-6xl mx-auto px-8">
+        <div class="flex flex-col md:flex-row justify-between items-start gap-12">
+            <div>
+                <span class="font-heading text-2xl text-white">Delta Vega</span>
+                <p class="text-white/30 text-sm mt-2 max-w-xs">Precision-engineered risk solutions for institutional portfolios.</p>
+            </div>
+            <div class="flex gap-16">
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-gold mb-4">Navigation</p>
+                    <a href="#about" class="block text-white/40 text-sm hover:text-white/70 transition-colors mb-2">About</a>
+                    <a href="#services" class="block text-white/40 text-sm hover:text-white/70 transition-colors mb-2">Services</a>
+                    <a href="#process" class="block text-white/40 text-sm hover:text-white/70 transition-colors mb-2">Process</a>
+                    <a href="#contact" class="block text-white/40 text-sm hover:text-white/70 transition-colors">Contact</a>
+                </div>
+                <div>
+                    <p class="text-[10px] uppercase tracking-[0.3em] text-gold mb-4">Connect</p>
+                    <a href="mailto:contact@delta-vega.com" class="block text-white/40 text-sm hover:text-white/70 transition-colors mb-2">Email</a>
+                    <a href="#" class="block text-white/40 text-sm hover:text-white/70 transition-colors mb-2">LinkedIn</a>
+                    <a href="#" class="block text-white/40 text-sm hover:text-white/70 transition-colors">Twitter</a>
+                </div>
+            </div>
+        </div>
+        <div class="border-t border-white/10 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+            <p class="text-white/20 text-xs">&copy; 2026 Delta Vega. All rights reserved.</p>
+            <p class="text-white/20 text-xs">Financial Engineering & Risk Advisory</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ========== SCRIPTS ========== -->
+<script>
+// Scroll Progress Bar
+window.addEventListener('scroll', () => {
+    const scrollTop = document.documentElement.scrollTop;
+    const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = (scrollTop / scrollHeight) * 100;
+    document.getElementById('scroll-progress').style.width = progress + '%';
+}, { passive: true });
+
+// Nav solidify on scroll
+const nav = document.getElementById('main-nav');
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 80) {
+        nav.classList.add('nav-solid');
+    } else {
+        nav.classList.remove('nav-solid');
+    }
+}, { passive: true });
+
+// Reveal on scroll (IntersectionObserver)
+const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+// Counter animation
+const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const el = entry.target;
+        const target = parseInt(el.dataset.target);
+        const duration = 2000;
+        const start = performance.now();
+        function tick(now) {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            el.textContent = Math.floor(eased * target);
+            if (progress < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+        counterObserver.unobserve(el);
+    });
+}, { threshold: 0.5 });
+document.querySelectorAll('.counter').forEach(el => counterObserver.observe(el));
+</script>
+
+</body>
+</html>
