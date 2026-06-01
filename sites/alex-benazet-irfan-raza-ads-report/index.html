@@ -1,0 +1,218 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Real Estate Ad Intelligence | Alex Benazet & Irfan Raza</title>
+  <style>
+    :root { --ink:#15161a; --muted:#667085; --line:#d9dee7; --paper:#f7f8fb; --blue:#123c7c; --cyan:#00a7c8; --gold:#f4b942; }
+    * { box-sizing:border-box; } body { margin:0; font-family:Inter,ui-sans-serif,system-ui,sans-serif; background:var(--paper); color:var(--ink); }
+    .hero { min-height:82vh; color:white; display:grid; align-items:end; background:linear-gradient(120deg, rgba(8,20,45,.96), rgba(18,60,124,.86) 52%, rgba(0,167,200,.62)), radial-gradient(circle at 82% 18%, rgba(244,185,66,.42), transparent 28%), #123c7c; }
+    .hero-inner { width:min(1180px,calc(100% - 36px)); margin:0 auto; padding:92px 0 58px; display:grid; grid-template-columns:1.05fr .95fr; gap:38px; align-items:end; }
+    .eyebrow { color:#c9f5ff; text-transform:uppercase; font-size:12px; font-weight:850; letter-spacing:.08em; }
+    h1 { font-size:clamp(42px,7vw,84px); line-height:.95; margin:14px 0 18px; letter-spacing:0; }
+    .hero p { font-size:clamp(17px,2vw,22px); line-height:1.55; max-width:760px; color:rgba(255,255,255,.88); }
+    .panel { background:rgba(255,255,255,.96); color:var(--ink); border-radius:8px; padding:20px; box-shadow:0 18px 50px rgba(0,0,0,.22); }
+    .metrics { display:grid; grid-template-columns:repeat(2,1fr); gap:12px; } .metric { border:1px solid var(--line); border-radius:6px; padding:14px; background:white; }
+    .metric strong { display:block; color:var(--blue); font-size:32px; } .metric span { display:block; color:var(--muted); font-size:12px; font-weight:800; text-transform:uppercase; }
+    main section { width:min(1180px,calc(100% - 36px)); margin:0 auto; padding:54px 0; } h2 { font-size:clamp(30px,4vw,48px); line-height:1.05; margin:0 0 18px; }
+    .grid4 { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); background:white; }
+    .insight { min-height:170px; padding:20px; border-right:1px solid var(--line); border-bottom:1px solid var(--line); } .insight b { color:var(--blue); text-transform:uppercase; font-size:12px; }
+    .mosaic { display:grid; grid-template-columns:repeat(5,1fr); gap:10px; } figure { margin:0; position:relative; aspect-ratio:4/5; overflow:hidden; border-radius:8px; background:#111827; }
+    figure img, figure video { width:100%; height:100%; object-fit:cover; display:block; } figcaption { position:absolute; inset:auto 0 0; padding:26px 10px 10px; color:white; font-size:11px; background:linear-gradient(transparent,rgba(0,0,0,.75)); }
+    .filterbar { position:sticky; top:0; z-index:5; background:rgba(247,248,251,.95); border-block:1px solid var(--line); padding:12px 0; backdrop-filter:blur(12px); } .filterbar div { width:min(1180px,calc(100% - 36px)); margin:0 auto; display:flex; gap:8px; flex-wrap:wrap; }
+    button { min-height:36px; border:1px solid var(--line); border-radius:999px; background:white; padding:0 12px; font-weight:800; cursor:pointer; } button.active { color:white; background:var(--blue); border-color:var(--blue); }
+    .creative-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; } .creative-card { display:grid; grid-template-columns:.85fr 1.15fr; min-height:350px; background:white; border:1px solid var(--line); border-radius:8px; overflow:hidden; }
+    .creative-media,.placeholder { width:100%; height:100%; min-height:350px; object-fit:cover; display:grid; place-items:center; background:#101828; color:white; text-align:center; padding:18px; }
+    .body { padding:20px; } .tags { display:flex; flex-wrap:wrap; gap:7px; margin-bottom:12px; } .tags span { border:1px solid var(--line); color:var(--blue); border-radius:999px; padding:5px 9px; font-size:11px; font-weight:850; }
+    .body h3 { margin:0 0 10px; font-size:22px; } .body p { color:#475467; line-height:1.5; white-space:pre-wrap; } dl { display:grid; gap:7px; } dl div { display:grid; grid-template-columns:78px 1fr; gap:8px; font-size:12px; } dt { color:var(--muted); font-weight:800; } dd { margin:0; word-break:break-word; }
+    footer { width:min(1180px,calc(100% - 36px)); margin:0 auto; border-top:1px solid var(--line); padding:28px 0 50px; color:var(--muted); }
+    @media(max-width:960px) { .hero-inner,.creative-card { grid-template-columns:1fr; } .grid4,.creative-grid { grid-template-columns:1fr; } .mosaic { grid-template-columns:repeat(2,1fr); } }
+  </style>
+</head>
+<body>
+  <header class="hero"><div class="hero-inner"><div><div class="eyebrow">Real Estate Investor Creative Intelligence</div><h1>Revamp 365 and DealMachine ads, decoded for Alex & Irfan.</h1><p>A full active Meta Ad Library pull with local videos, images, transcripts, offer patterns, and swipeable creative references for real estate investing lead generation.</p></div><aside class="panel"><div class="metrics"><div class="metric"><strong>9</strong><span>Active ads captured</span></div><div class="metric"><strong>8</strong><span>Videos downloaded</span></div><div class="metric"><strong>8</strong><span>Images saved</span></div><div class="metric"><strong>$0.0000</strong><span>Apify scrape cost</span></div></div></aside></div></header>
+  <main>
+    <section><h2>Executive Pattern Read</h2><div class="grid4">
+      <article class="insight"><b>Competitive set</b><p>DealMachine for Real Estate Investing: 8, Revamp 365: 1</p></article>
+      <article class="insight"><b>Creative mix</b><p>video: 8, dco: 1</p></article>
+      <article class="insight"><b>Transcripts</b><p>8 video scripts captured for hook and offer analysis.</p></article>
+      <article class="insight"><b>Core use</b><p>Build faster investor-facing hooks around seller leads, workflows, proof, and software-enabled speed.</p></article>
+    </div></section>
+    <section><h2>Creative Board</h2><div class="mosaic"><figure><video src="creatives/videos/1082147410663412.mp4" muted loop playsinline preload="metadata"></video><figcaption>Tired of Wrong Numbers? Try This Instead</figcaption></figure>
+<figure><video src="creatives/videos/1331143159034374.mp4" muted loop playsinline preload="metadata"></video><figcaption>Find Motivated Seller Leads Others Miss</figcaption></figure>
+<figure><video src="creatives/videos/1331345771796604.mp4" muted loop playsinline preload="metadata"></video><figcaption>This one is for our email template for wholesalers to send potential buyers. He...</figcaption></figure>
+<figure><video src="creatives/videos/1335815231366943.mp4" muted loop playsinline preload="metadata"></video><figcaption>Tired of feeling uncertain about your business agreements? Introducing our reli...</figcaption></figure>
+<figure><video src="creatives/videos/1428984421538871.mp4" muted loop playsinline preload="metadata"></video><figcaption>Try DealMachine Free for 7 Days</figcaption></figure>
+<figure><video src="creatives/videos/1434005794795072.mp4" muted loop playsinline preload="metadata"></video><figcaption>Unlock Your Real Estate Superpower</figcaption></figure>
+<figure><video src="creatives/videos/24653591847639558.mp4" muted loop playsinline preload="metadata"></video><figcaption>Tired of Wrong Numbers? Try This Instead</figcaption></figure>
+<figure><video src="creatives/videos/939306135173062.mp4" muted loop playsinline preload="metadata"></video><figcaption>50 Warm Seller Leads in 30 Days — Guaranteed</figcaption></figure></div></section>
+    <section><h2>Message Families</h2><div class="grid4"><article class="insight"><b>Offer / incentive</b><p>5 ads</p></article><article class="insight"><b>Lead generation</b><p>3 ads</p></article><article class="insight"><b>General brand / awareness</b><p>1 ads</p></article></div></section>
+  </main>
+  <div class="filterbar"><div><button class="active" data-filter="all">All 9</button><button data-filter="Offer / incentive">Offer / incentive 5</button><button data-filter="Lead generation">Lead generation 3</button><button data-filter="General brand / awareness">General brand / awareness 1</button></div></div>
+  <main><section><h2>Creative Library</h2><div class="creative-grid">
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Offer / incentive">
+          <div class="media"><video class="creative-media" src="creatives/videos/1082147410663412.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Offer / incentive</span></div>
+            <h3>Tired of Wrong Numbers? Try This Instead</h3>
+            <p>22 leads in one day. Real owners. No dead ends. DealMachine just works. Get instant access and start winning deals with DealMachine&#x27;s 7-day free trial!</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1082147410663412" target="_blank" rel="noreferrer">1082147410663412</a></dd></div>
+              <div><dt>Started</dt><dd>2025-10-10 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Get offer</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/try-for-free</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>he got 15 leads in one day. He actually got 22 yesterday. That one was killing it. The thing that is such a difference too, is I feel like when we were calling on stream, why are all those different areas and we were pulling lists from there, you would call and you&#x27;d say, hey, it&#x27;s Jason or whoever this is, and it&#x27;s not the right person. On DealMachine, the second I pulled the first list, we saw the right people. Like my callers, they were texting me, they were like, man, these are great lists. This is the person. Every time I say, hey, is this John? It&#x27;s John. That&#x27;s the big thing. Like even if they don&#x27;t wanna sell their house, at least speaking to the correct person, you know what I mean? That goes a long way.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Lead generation">
+          <div class="media"><video class="creative-media" src="creatives/videos/1331143159034374.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Lead generation</span></div>
+            <h3>Find Motivated Seller Leads Others Miss</h3>
+            <p>Everyone says good leads are hard to find… until you know where to look.
+DealMachine helps you uncover off-market properties, skip trace owners, and reach them before your competition does.
+
+Stop guessing. Start finding deals.</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1331143159034374" target="_blank" rel="noreferrer">1331143159034374</a></dd></div>
+              <div><dt>Started</dt><dd>2026-03-02 08:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Learn more</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>Hold on! Hold on! Hold on! Hold on! Her sister was a witch! Right? And what was her sister? A princess! The Witch of the East, bro!</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Offer / incentive">
+          <div class="media"><video class="creative-media" src="creatives/videos/1331345771796604.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Offer / incentive</span></div>
+            <h3>This one is for our email template for wholesalers to send potential buyers. Here is the landing page for it</h3>
+            <p>Tired of sending emails that go unnoticed? Stand out from the competition with our expertly crafted wholesale email template, designed to get results.</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1331345771796604" target="_blank" rel="noreferrer">1331345771796604</a></dd></div>
+              <div><dt>Started</dt><dd>2025-10-20 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Learn more</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/buyer-email-template</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>Let me be real, your email sucks and that&#x27;s why your buyers are ghosting you. Nobody&#x27;s reading your five paragraph email. If it&#x27;s buried in fluff, missing key numbers and doesn&#x27;t scream urgency, it&#x27;s going to go straight to spam. And that&#x27;s why serious investors keep it stupid simple. These templates are templates used by our team that are selling deals fast. Do you want the email template the pros are using? Click the link and we&#x27;ll send it to you.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Offer / incentive">
+          <div class="media"><video class="creative-media" src="creatives/videos/1335815231366943.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Offer / incentive</span></div>
+            <h3>Tired of feeling uncertain about your business agreements? Introducing our reliable purchase agreement and assignment contract solutions - giving you peace of mind with every deal.</h3>
+            <p>Tired of feeling uncertain about your business agreements? Introducing our reliable purchase agreement and assignment contract solutions - giving you peace of mind with every deal.</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1335815231366943" target="_blank" rel="noreferrer">1335815231366943</a></dd></div>
+              <div><dt>Started</dt><dd>2025-10-17 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Learn more</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/contract</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>I had a seller who tried to back out last minute. Said they didn&#x27;t want to work with some middle man. I didn&#x27;t argue. I just pointed out one sentence in our agreement and that is the assignment clause. It gives me the right to transfer the deal without his permission. Most people don&#x27;t realize this is how wholesaling works. You control the deal by not owning the house, but owning the contract. That clause turned a dead deal into a 12K assignment. If you&#x27;re not using contracts written for wholesalers, you&#x27;re leaving money and leverage on the table. Click the link to get the contract we actually use.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Offer / incentive">
+          <div class="media"><video class="creative-media" src="creatives/videos/1428984421538871.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Offer / incentive</span></div>
+            <h3>Try DealMachine Free for 7 Days</h3>
+            <p>WARNING: Don&#x27;t Make a Cash Offer Without Knowing This!
+David reveals the secrets to making an unbeatable offer. Get instant access and start winning deals with DealMachine&#x27;s 7-day free trial!</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1428984421538871" target="_blank" rel="noreferrer">1428984421538871</a></dd></div>
+              <div><dt>Started</dt><dd>2025-10-10 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Get offer</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/try-for-free</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>There&#x27;s three levels of rehab. If it needs carpet and paint, I do $15 a square foot. If it also has outdated kitchens and baths, I do $35 a square foot. And if it also needs a roof and a new furnace or AC, $55 a square foot. My maximum offer price is my 75% of ARV minus the rehab costs, and that&#x27;s what I can offer. DealMachine doesn&#x27;t just help you find deals, it tells you exactly what to say in real time, guiding you through every step of the conversation so you can focus on what really matters, making a profit. So start today with a free trial and continue for only $119 per month after that.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Lead generation">
+          <div class="media"><video class="creative-media" src="creatives/videos/1434005794795072.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Lead generation</span></div>
+            <h3>Unlock Your Real Estate Superpower</h3>
+            <p>What if you could find motivated sellers, skip trace owners, and close deals — all from the palm of your hand? 🧠💊
+DealMachine gives real estate investors the unfair advantage they&#x27;ve been looking for.
+✅ Find off-market properties instantly
+✅ Contact owners in seconds
+✅ Scale your deal flow like never before
+The only question is — are you ready to take it?</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1434005794795072" target="_blank" rel="noreferrer">1434005794795072</a></dd></div>
+              <div><dt>Started</dt><dd>2026-03-02 08:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Learn more</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>your cash at the day trading firm. I&#x27;ve been upping the dose for over a week. It seemed to cut my learning curve.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="Offer / incentive">
+          <div class="media"><video class="creative-media" src="creatives/videos/24653591847639558.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>VIDEO</span><span>Offer / incentive</span></div>
+            <h3>Tired of Wrong Numbers? Try This Instead</h3>
+            <p>22 leads in one day. Real owners. No dead ends. DealMachine just works. Get instant access and start winning deals with DealMachine&#x27;s 7-day free trial!</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=24653591847639558" target="_blank" rel="noreferrer">24653591847639558</a></dd></div>
+              <div><dt>Started</dt><dd>2025-10-10 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Get offer</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/try-for-free</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>We did a $20,000 fee on a $45,000 purchase price. The thing that is such a difference too, is I feel like when we were calling on all those different areas and we were pulling lists from there, you would call and you&#x27;d say, hey, it&#x27;s Jason or whoever this is, and it&#x27;s not the right person. On DealMachine, the second I pulled the first list, we saw the right people. Like my callers, they were texting me. They were like, man, these are great lists. This is the person. Every time I say, hey, is this John? It&#x27;s John. That&#x27;s the big thing. Even if they don&#x27;t want to sell their house, at least speaking to the correct person, you know what I mean? That goes a long way.</p></details>
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="DealMachine for Real Estate Investing" data-bucket="General brand / awareness">
+          <div class="media"><div class="placeholder">No direct media URL</div></div>
+          <div class="body">
+            <div class="tags"><span>DealMachine for Real Estate Investing</span><span>DCO</span><span>General brand / awareness</span></div>
+            <h3>{{product.name}}</h3>
+            <p>{{product.brand}}</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=854843624268880" target="_blank" rel="noreferrer">854843624268880</a></dd></div>
+              <div><dt>Started</dt><dd>2026-03-02 08:00:00</dd></div>
+              <div><dt>CTA</dt><dd>Learn more</dd></div>
+              <div><dt>Landing</dt><dd>https://www.dealmachine.com/</dd></div>
+            </dl>
+            
+          </div>
+        </article>
+        
+        <article class="creative-card" data-brand="Revamp 365" data-bucket="Lead generation">
+          <div class="media"><video class="creative-media" src="creatives/videos/939306135173062.mp4" controls preload="metadata"></video></div>
+          <div class="body">
+            <div class="tags"><span>Revamp 365</span><span>VIDEO</span><span>Lead generation</span></div>
+            <h3>50 Warm Seller Leads in 30 Days — Guaranteed</h3>
+            <p>50 Warm Seller Leads in 30 Days — Guaranteed</p>
+            <dl>
+              <div><dt>Ad ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=939306135173062" target="_blank" rel="noreferrer">939306135173062</a></dd></div>
+              <div><dt>Started</dt><dd>2026-04-06 07:00:00</dd></div>
+              <div><dt>CTA</dt><dd>See details</dd></div>
+              <div><dt>Landing</dt><dd>https://revamp365.ai/guarantee</dd></div>
+            </dl>
+            <details><summary>Video transcript</summary><p>50 warm seller leads in 30 days or you don&#x27;t pay. That is not a tagline, that is a guarantee. One of our users had a lead sitting in a CRM. He has five full-time sales reps and nobody touched this lead in seven months. He uploaded it to Revamp365 on a Tuesday. By Friday, our AI had that seller on the phone, pushed it over to a closer and they did a $15,000 deal on day number four. Revamp365 is an AI-powered acquisitions platform that I built as an active wholesaler for wholesalers and flippers. 200 million property records, AI voice agents to field your inbound calls and follow up with leads that are already in your system. They can book appointments for you around the clock. Built-in CRM, skip tracing, automations, emails, text messages, phone system. One platform that replaces your entire tech stack for less than what it would cost you to hire one VA alone. So here&#x27;s the deal. 50 warm, qualified seller leads in the first 30 days pushed directly to your sales team or you don&#x27;t pay. No asterisk, no fine print. We either earn it or we don&#x27;t. Click the link below this video. Watch a short breakdown on the next page. I&#x27;ll show you exactly how it works and why nobody else in this space would even touch this guarantee. Click the link, I&#x27;ll see you on the other side.</p></details>
+          </div>
+        </article>
+        </div></section></main>
+  <footer>Source links: Revamp 365 page ID 2394602187248439; DealMachine for Real Estate Investing page ID 1363500973709506. Data collected from Meta Ad Library through Apify and saved locally in this project folder.</footer>
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const cards = document.querySelectorAll('.creative-card');
+    buttons.forEach(button => button.addEventListener('click', () => {
+      const filter = button.dataset.filter;
+      buttons.forEach(item => item.classList.remove('active'));
+      button.classList.add('active');
+      cards.forEach(card => card.style.display = filter === 'all' || card.dataset.bucket === filter ? '' : 'none');
+    }));
+  </script>
+</body></html>
