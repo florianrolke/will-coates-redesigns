@@ -1,0 +1,1667 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Coffee Ads Report | Creative Intelligence Demo</title>
+  <style>
+    :root {
+      --green: #1f4d37;
+      --green-dark: #102b20;
+      --leaf: #6f9b63;
+      --gold: #d6a449;
+      --cream: #fff8ec;
+      --paper: #fffdf8;
+      --ink: #1e1712;
+      --muted: #766b61;
+      --line: rgba(34, 24, 15, .14);
+      --shadow: 0 18px 44px rgba(31, 23, 14, .14);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--paper);
+      color: var(--ink);
+      letter-spacing: 0;
+    }
+    a { color: inherit; }
+    .topbar {
+      background: var(--green-dark);
+      color: var(--cream);
+      text-align: center;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 650;
+    }
+    .nav {
+      height: 68px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 4vw, 54px);
+      border-bottom: 1px solid rgba(255,255,255,.22);
+      position: absolute;
+      z-index: 3;
+      width: 100%;
+      color: white;
+    }
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(22px, 3vw, 34px);
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      font-size: 13px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .hero {
+      min-height: 88vh;
+      position: relative;
+      display: grid;
+      align-items: end;
+      overflow: hidden;
+      color: white;
+      background:
+        linear-gradient(90deg, rgba(9, 28, 20, .94), rgba(15, 55, 38, .75) 45%, rgba(15, 55, 38, .16)),
+        url('creatives/page-images/1467372171252327_01.jpg') center/cover;
+    }
+    .hero-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 110px 0 62px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .82fr);
+      gap: 42px;
+      align-items: end;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: #ffe3a6;
+      text-transform: uppercase;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 38px;
+      height: 2px;
+      background: var(--gold);
+    }
+    h1 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(44px, 7vw, 86px);
+      line-height: .96;
+      margin: 18px 0 18px;
+      max-width: 890px;
+      letter-spacing: 0;
+    }
+    .hero-copy {
+      font-size: clamp(17px, 2vw, 22px);
+      line-height: 1.55;
+      max-width: 720px;
+      color: rgba(255,255,255,.92);
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 26px;
+    }
+    .button {
+      min-height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 18px;
+      border-radius: 4px;
+      font-weight: 800;
+      text-decoration: none;
+      border: 1px solid rgba(255,255,255,.55);
+    }
+    .button.primary {
+      background: var(--gold);
+      color: #241609;
+      border-color: var(--gold);
+    }
+    .metric-panel {
+      background: rgba(255,248,236,.96);
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: var(--shadow);
+    }
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .metric {
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 14px;
+      background: white;
+    }
+    .metric strong {
+      display: block;
+      font-size: 31px;
+      line-height: 1;
+      color: var(--green);
+    }
+    .metric span {
+      display: block;
+      margin-top: 7px;
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 750;
+      text-transform: uppercase;
+    }
+    main section {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 58px 0;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 24px;
+      margin-bottom: 24px;
+    }
+    h2 {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.04;
+      margin: 0;
+    }
+    .section-note {
+      max-width: 520px;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+    .insight-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+    .insight {
+      min-height: 190px;
+      padding: 22px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #fff;
+    }
+    .insight b {
+      display: block;
+      color: var(--green);
+      font-size: 13px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .insight p {
+      margin: 0;
+      line-height: 1.55;
+    }
+    .split {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .pattern-list {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+    }
+    .pattern-list li {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 15px 18px;
+      border-bottom: 1px solid var(--line);
+    }
+    .pattern-list li:last-child { border-bottom: 0; }
+    .pattern-list span {
+      color: var(--muted);
+      font-weight: 750;
+    }
+    .mosaic {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+    .mosaic-tile {
+      margin: 0;
+      aspect-ratio: 4/5;
+      position: relative;
+      overflow: hidden;
+      border-radius: 8px;
+      background: #17120e;
+      box-shadow: 0 8px 20px rgba(0,0,0,.12);
+    }
+    .mosaic-tile img,
+    .mosaic-tile video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .mosaic-tile figcaption {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      padding: 26px 10px 10px;
+      color: white;
+      font-size: 11px;
+      line-height: 1.25;
+      background: linear-gradient(transparent, rgba(0,0,0,.72));
+    }
+    .recommendations {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .rec {
+      background: var(--green);
+      color: white;
+      border-radius: 8px;
+      padding: 22px;
+      min-height: 210px;
+    }
+    .rec h3 {
+      margin: 0 0 12px;
+      font-size: 20px;
+    }
+    .rec p {
+      margin: 0;
+      line-height: 1.55;
+      color: rgba(255,255,255,.88);
+    }
+    .filterbar {
+      position: sticky;
+      top: 0;
+      z-index: 4;
+      background: rgba(255,253,248,.96);
+      backdrop-filter: blur(16px);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 12px 0;
+    }
+    .filterbar-inner {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    button {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: white;
+      color: var(--ink);
+      padding: 0 12px;
+      cursor: pointer;
+      font-weight: 750;
+    }
+    button.active {
+      background: var(--green);
+      color: white;
+      border-color: var(--green);
+    }
+    button span {
+      opacity: .68;
+      margin-left: 4px;
+    }
+    .creative-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+    .creative-card {
+      display: grid;
+      grid-template-columns: minmax(190px, .82fr) minmax(0, 1.18fr);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: white;
+      min-height: 360px;
+    }
+    .creative-shell {
+      background: #15120f;
+      min-height: 100%;
+    }
+    .creative-media {
+      width: 100%;
+      height: 100%;
+      min-height: 360px;
+      object-fit: cover;
+      display: block;
+    }
+    .creative-placeholder {
+      height: 100%;
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      padding: 20px;
+      text-align: center;
+      color: var(--cream);
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 25px;
+    }
+    .creative-placeholder span {
+      display: block;
+      margin-top: 6px;
+      font-family: Inter, sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,.7);
+      text-transform: uppercase;
+      font-weight: 800;
+    }
+    .creative-body {
+      padding: 20px;
+    }
+    .card-kicker {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+    .card-kicker span {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 11px;
+      color: var(--green);
+      font-weight: 850;
+    }
+    .creative-body h3 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .copy {
+      color: #4d4239;
+      line-height: 1.5;
+      margin: 0 0 14px;
+      white-space: pre-wrap;
+    }
+    dl {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+    }
+    dl div {
+      display: grid;
+      grid-template-columns: 78px 1fr;
+      gap: 8px;
+      font-size: 12px;
+    }
+    dt {
+      color: var(--muted);
+      font-weight: 800;
+    }
+    dd {
+      margin: 0;
+      word-break: break-word;
+    }
+    details {
+      margin-top: 14px;
+      border-top: 1px solid var(--line);
+      padding-top: 12px;
+    }
+    summary {
+      cursor: pointer;
+      font-weight: 850;
+      color: var(--green);
+    }
+    details p {
+      line-height: 1.5;
+      color: #4d4239;
+    }
+    .footer {
+      width: min(1180px, calc(100% - 36px));
+      margin: 0 auto;
+      padding: 28px 0 54px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    @media (max-width: 960px) {
+      .nav-links { display: none; }
+      .hero-inner,
+      .split,
+      .creative-card {
+        grid-template-columns: 1fr;
+      }
+      .metric-panel { margin-top: 10px; }
+      .insight-grid,
+      .recommendations,
+      .creative-grid {
+        grid-template-columns: 1fr;
+      }
+      .mosaic { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .creative-media,
+      .creative-placeholder {
+        min-height: 280px;
+        max-height: 520px;
+      }
+      .section-head {
+        display: block;
+      }
+      .section-note { margin-top: 12px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">“Authentic Jamaican Blue Mountain Coffee — Direct from Jamaican Estates, Certified and Freshly Roasted.”</div>
+  <header class="hero" id="top">
+    <nav class="nav">
+      <div class="brand">Coffee Ads Report</div>
+      <div class="nav-links"><span>Meta Ad Library</span><span>Local Creatives</span><span>Transcripts</span></div>
+    </nav>
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow">Competitive Creative Intelligence</div>
+        <h1>Active coffee ads, decoded into a creative swipefile.</h1>
+        <p class="hero-copy">A visual demo report built from the active Meta Ad Library set: returned coffee creatives, local image/video assets, transcripts, and repeatable paid-ad patterns.</p>
+        <div class="hero-actions">
+          <a class="button primary" href="#library">Review Creative Library</a>
+          <a class="button" href="#recommendations">See Strategic Angles</a>
+        </div>
+      </div>
+      <aside class="metric-panel">
+        <div class="metric-grid">
+          <div class="metric"><strong>38</strong><span>Active ads captured</span></div>
+          <div class="metric"><strong>20</strong><span>Videos downloaded</span></div>
+          <div class="metric"><strong>32</strong><span>Image files saved</span></div>
+          <div class="metric"><strong>$0.0285</strong><span>Apify page scrape</span></div>
+        </div>
+      </aside>
+    </div>
+  </header>
+
+  <main>
+    <section>
+      <div class="section-head">
+        <h2>The Shape Of The Competitor’s System</h2>
+        <p class="section-note">Volcanica is not running one big idea. It is running a small set of repeatable conversion frames: subscription perks, origin credibility, reorder nudges, and dynamic catalog coverage.</p>
+      </div>
+      <div class="insight-grid">
+        <article class="insight"><b>Main engine</b><p>The dominant offer is Coffee Club convenience plus “Free Oat Milk For Life.” It appears across repeated video variants and dynamic creative placements.</p></article>
+        <article class="insight"><b>Proof texture</b><p>They use origin and farmer stories, especially Mela / Finca Las Mercedes, to make premium coffee feel human and sourced rather than commodity.</p></article>
+        <article class="insight"><b>Retargeting cue</b><p>The “Still asleep? Your favorite brew misses you!” ads read like warm retargeting or reorder prompts. Short, direct, and easy to adapt for coffee buyers.</p></article>
+        <article class="insight"><b>Creative volume</b><p>The page scrape returned 38 active ads, but only a handful of message families. The leverage is not new strategy every time; it is variants around winners.</p></article>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div>
+          <h2>Message Families</h2>
+          <p class="section-note">Grouped by the strategic job each ad is doing.</p>
+          <ul class="pattern-list"><li><strong>Subscription &amp; free oat milk</strong><span>19 ads</span></li>
+<li><strong>Dynamic catalog / DCO</strong><span>6 ads</span></li>
+<li><strong>Origin story / direct trade</strong><span>5 ads</span></li>
+<li><strong>Morning reorder nudge</strong><span>4 ads</span></li>
+<li><strong>Assortment &amp; single-origin range</strong><span>3 ads</span></li>
+<li><strong>Cause / event</strong><span>1 ads</span></li></ul>
+        </div>
+        <div>
+          <h2>Creative Board</h2>
+          <div class="mosaic">
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1050008288198328.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1235005788749883.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1242135391417850.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1265163795749323.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1375339161141427.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1389469089535210.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1446263010237095.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                
+
+                <figure class="mosaic-tile">
+                  <video src="creatives/page-videos/1464949798592036.mp4" muted loop playsinline preload="metadata"></video>
+                  <figcaption>Free Oat Milk In EVERY Box</figcaption>
+                </figure>
+                </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="split">
+        <div>
+          <h2>Repeated Headlines</h2>
+          <p class="section-note">The report favors repeated patterns over one-off copy. These are the phrases Volcanica is letting run.</p>
+        </div>
+        <ul class="pattern-list"><li><span>Free Oat Milk In EVERY Box</span><strong>19</strong></li>
+<li><span>{{product.name}}</span><strong>6</strong></li>
+<li><span>Direct-Trade Coffee</span><strong>5</strong></li>
+<li><span>Start your day with Volcanica!</span><strong>4</strong></li>
+<li><span>Explore 150+ Small-Batch, Family-Farmed Coffees</span><strong>1</strong></li>
+<li><span>Shop Best Selling Coffees</span><strong>1</strong></li>
+<li><span>Quality Coffee Crafted by Nature, Perfected by Us</span><strong>1</strong></li>
+<li><span>Drink Good. Do Good.</span><strong>1</strong></li></ul>
+      </div>
+    </section>
+
+    <section id="recommendations">
+      <div class="section-head">
+        <h2>Coffee Angles To Build Next</h2>
+        <p class="section-note">These are not copy-paste clones. They are strategic adaptations from patterns competitors are already paying to run.</p>
+      </div>
+      <div class="recommendations">
+        <article class="rec"><h3>VIP Blue Mountain Club</h3><p>Adapt the “free oat milk” mechanic into a premium subscription perk: free Jamaican treat, sample roast, or member-only estate drop. The point is a tangible recurring bonus.</p></article>
+        <article class="rec"><h3>Estate Story UGC</h3><p>Turn Jamaican origin into a face-led video: farmer, roaster, founder, or customer narrating why certified Blue Mountain tastes different from ordinary premium coffee.</p></article>
+        <article class="rec"><h3>Morning Reorder Nudge</h3><p>Use the sleepy/warm reminder frame for retargeting: “Your Blue Mountain morning is waiting.” Keep it short, familiar, and product-forward.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <div class="filterbar" id="library">
+    <div class="filterbar-inner">
+      <button type="button" class="active" data-filter="all">All <span>38</span></button>
+      <button type="button" data-filter="Subscription &amp; free oat milk">Subscription &amp; free oat milk <span>19</span></button>
+<button type="button" data-filter="Dynamic catalog / DCO">Dynamic catalog / DCO <span>6</span></button>
+<button type="button" data-filter="Origin story / direct trade">Origin story / direct trade <span>5</span></button>
+<button type="button" data-filter="Morning reorder nudge">Morning reorder nudge <span>4</span></button>
+<button type="button" data-filter="Assortment &amp; single-origin range">Assortment &amp; single-origin range <span>3</span></button>
+<button type="button" data-filter="Cause / event">Cause / event <span>1</span></button>
+    </div>
+  </div>
+
+  <main>
+    <section>
+      <div class="section-head">
+        <h2>Creative Library</h2>
+        <p class="section-note">All 38 active Volcanica rows returned by the page-based Meta scrape. Videos are embedded locally; image ads use the downloaded local image files.</p>
+      </div>
+      <div class="creative-grid">
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1050008288198328.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1050008288198328" target="_blank" rel="noreferrer">1050008288198328</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>The perks of this coffee club are ridiculously good and wait for the last one. This is the Volcanica Coffee Club. Choose between three or six coffees. I drink a lot of coffee, so I went for six and no matter which six you pick, the price is the same. Next, choose between 20 plus specialty coffees, mix and match origins, swap picks whenever inspiration strikes, pause, cancel, or even gift a box to a friend. Total control with zero commitment, just great coffee, all for a fixed price. Some of the perks of the club are free shipping, access to limited edition flavors, free gifts with a rewards program. This one, absolutely crazy, but I get free milk for life. Plus every box purchased means three families in need get clean drinking water through charity water. Like me, there&#x27;s already thousands of people swapping to this way of drinking coffee. Join the club today.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1235005788749883.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1235005788749883" target="_blank" rel="noreferrer">1235005788749883</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Milk Oh, that&#x27;s so good.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1242135391417850.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1242135391417850" target="_blank" rel="noreferrer">1242135391417850</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Music</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1265163795749323.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1265163795749323" target="_blank" rel="noreferrer">1265163795749323</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>I&#x27;m one of the first people in the world to get this, a Volcanica coffee subscription box. So let&#x27;s see what&#x27;s inside. So we&#x27;ve got three coffees plus the oat milk. Ethiopian yoga chef, this is one of my favourites. Medium roast, delicious. What else? Columbia. Single origin, I&#x27;ve never had this one before. And Dominican Republic. Oh, this is a honey process. I love honey process coffee. I&#x27;m going to go ahead and make a cup now. If you want to try three new coffees every month from around the globe that are all delicious, then get this subscription box. Click the link around the video.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1375339161141427.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1375339161141427" target="_blank" rel="noreferrer">1375339161141427</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>I&#x27;m one of the first people in the world to get this, a Volcanica coffee subscription box. So let&#x27;s see what&#x27;s inside. So we&#x27;ve got three coffees plus the oat milk. Ethiopian yoga chef, this is one of my favourites. Medium roast, delicious. What else? Columbia. Single origin, I&#x27;ve never had this one before. And Dominican Republic. Oh, this is a honey process. I love honey process coffee. I&#x27;m going to go ahead and make a cup now. If you want to try three new coffees every month from around the globe that are all delicious, then get this subscription box. Click the link around the video.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1389469089535210.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">⭐ Your box of instant good vibes. 
+
+Enjoy a curated selection of premium coffee delivered fresh to your door each month
+☕FREE oat milk for life 
+☕Free shipping for every box 
+☕Enjoy cash-back rewards</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1389469089535210" target="_blank" rel="noreferrer">1389469089535210</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-19 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Look what just arrived. My first delivery from Volcanica&#x27;s Coffee Club. Inside is freshly roasted coffee sourced from volcanic regions delivered straight to my door. It smells incredible. Seriously, I wish you could smell this through the screen. And they are not kidding about the perks. Hear me loud and clear. I am getting free oat milk for life with my subscription. This is how you do coffee right. Premium, convenient, and way more delicious than any grocery store grab. Ready for better coffee? Then join the club and get free oat milk for life.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1446263010237095.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1446263010237095" target="_blank" rel="noreferrer">1446263010237095</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-09 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>🎶 🎶 🎶 🎶 Oh, that&#x27;s so good.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1464949798592036.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">⭐ Your box of instant good vibes. 
+
+Enjoy a curated selection of premium coffee delivered fresh to your door each month
+☕FREE oat milk for life 
+☕Free shipping for every box 
+☕Enjoy cash-back rewards</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1464949798592036" target="_blank" rel="noreferrer">1464949798592036</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Look what just arrived. My first delivery from Volcanica&#x27;s Coffee Club. Inside is freshly roasted coffee sourced from volcanic regions delivered straight to my door. It smells incredible. Seriously, I wish you could smell this through the screen. And they are not kidding about the perks. Hear me loud and clear. I am getting free oat milk for life with my subscription. This is how you do coffee right. Premium, convenient, and way more delicious than any grocery store grab. Ready for better coffee? Then join the club and get free oat milk for life.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1629902514726491.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1629902514726491" target="_blank" rel="noreferrer">1629902514726491</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-08 08:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>The perks of this coffee club are ridiculously good and wait for the last one. This is the Volcanica Coffee Club. Choose between three or six coffees. I drink a lot of coffee, so I went for six and no matter which six you pick, the price is the same. Next, choose between 20 plus specialty coffees, mix and match origins, swap picks whenever inspiration strikes, pause, cancel, or even gift a box to a friend. Total control with zero commitment, just great coffee, all for a fixed price. Some of the perks of the club are free shipping, access to limited edition flavors, free gifts with a rewards program. This one, absolutely crazy, but I get free milk for life. Plus every box purchased means three families in need get clean drinking water through charity water. Like me, there&#x27;s already thousands of people swapping to this way of drinking coffee. Join the club today.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1640896557103889.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1640896557103889" target="_blank" rel="noreferrer">1640896557103889</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Music</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1651045006164785.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1651045006164785" target="_blank" rel="noreferrer">1651045006164785</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Music</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1785827380184889.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">⭐ Your box of instant good vibes. 
+
+Enjoy a curated selection of premium coffee delivered fresh to your door each month
+☕FREE oat milk for life 
+☕Free shipping for every box 
+☕Enjoy cash-back rewards</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1785827380184889" target="_blank" rel="noreferrer">1785827380184889</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Look what just arrived. My first delivery from Volcanica&#x27;s Coffee Club. Inside is freshly roasted coffee sourced from volcanic regions delivered straight to my door. It smells incredible. Seriously, I wish you could smell this through the screen. And they are not kidding about the perks. Hear me loud and clear. I am getting free oat milk for life with my subscription. This is how you do coffee right. Premium, convenient, and way more delicious than any grocery store grab. Ready for better coffee? Then join the club and get free oat milk for life.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1838724726797274.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1838724726797274" target="_blank" rel="noreferrer">1838724726797274</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>I&#x27;m one of the first people in the world to get this, a Volcanica coffee subscription box. So let&#x27;s see what&#x27;s inside. So we&#x27;ve got three coffees plus the oat milk. Ethiopian yoga chef, this is one of my favourites. Medium roast, delicious. What else? Columbia. Single origin, I&#x27;ve never had this one before. And Dominican Republic. Oh, this is a honey process. I love honey process coffee. I&#x27;m going to go ahead and make a cup now. If you want to try three new coffees every month from around the globe that are all delicious, then get this subscription box. Click the link around the video.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/2060467164892381.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=2060467164892381" target="_blank" rel="noreferrer">2060467164892381</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Music Oh that&#x27;s so good</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/26839069349046922.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=26839069349046922" target="_blank" rel="noreferrer">26839069349046922</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-08 08:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>I&#x27;m one of the first people in the world to get this, a Volcanica coffee subscription box. So let&#x27;s see what&#x27;s inside. So we&#x27;ve got three coffees plus the oat milk. Ethiopian yoga chef, this is one of my favourites. Medium roast, delicious. What else? Columbia. Single origin, I&#x27;ve never had this one before. And Dominican Republic. Oh, this is a honey process. I love honey process coffee. I&#x27;m going to go ahead and make a cup now. If you want to try three new coffees every month from around the globe that are all delicious, then get this subscription box. Click the link around the video.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/2822082844799425.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=2822082844799425" target="_blank" rel="noreferrer">2822082844799425</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>The perks of this coffee club are ridiculously good and wait for the last one. This is the Volcanica Coffee Club. Choose between three or six coffees. I drink a lot of coffee, so I went for six and no matter which six you pick, the price is the same. Next, choose between 20 plus specialty coffees, mix and match origins, swap picks whenever inspiration strikes, pause, cancel, or even gift a box to a friend. Total control with zero commitment, just great coffee, all for a fixed price. Some of the perks of the club are free shipping, access to limited edition flavors, free gifts with a rewards program. This one, absolutely crazy, but I get free milk for life. Plus every box purchased means three families in need get clean drinking water through charity water. Like me, there&#x27;s already thousands of people swapping to this way of drinking coffee. Join the club today.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/826527440478516.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=826527440478516" target="_blank" rel="noreferrer">826527440478516</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>My house is now a green house of colors. I don&#x27;t want to live this life. Let&#x27;s go clean up my mess. Just getting started with my day. Making my curry. That&#x27;s so good!</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/889351933941744.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">⭐ Your box of instant good vibes. 
+
+Enjoy a curated selection of premium coffee delivered fresh to your door each month
+☕FREE oat milk for life 
+☕Free shipping for every box 
+☕Enjoy cash-back rewards</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=889351933941744" target="_blank" rel="noreferrer">889351933941744</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-10 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Look what just arrived. My first delivery from Volcanica&#x27;s Coffee Club. Inside is freshly roasted coffee sourced from volcanic regions delivered straight to my door. It smells incredible. Seriously, I wish you could smell this through the screen. And they are not kidding about the perks. Hear me loud and clear. I am getting free oat milk for life with my subscription. This is how you do coffee right. Premium, convenient, and way more delicious than any grocery store grab. Ready for better coffee? Then join the club and get free oat milk for life.</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Subscription &amp; free oat milk">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/897053786548400.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Subscription &amp; free oat milk</span>
+                </div>
+                <h3>Free Oat Milk In EVERY Box</h3>
+                <p class="copy">✅ Premium Coffee
+✅ Free Oat Milk For Life
+✅ Delivered to Your Door
+
+Welcome to the easiest way to great mornings. Join the Volcanica Coffee Club for fresh-roasted coffee, exclusive perks, and effortless deliveries that make your a.m. feel like a café.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=897053786548400" target="_blank" rel="noreferrer">897053786548400</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-08 08:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>Music</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="video" data-bucket="Assortment &amp; single-origin range">
+              <div class="creative-shell">
+                <video class="creative-media" src="creatives/page-videos/1298852918496650.mp4" controls preload="metadata"></video>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>VIDEO</span>
+                  <span>Assortment &amp; single-origin range</span>
+                </div>
+                <h3>Shop Best Selling Coffees</h3>
+                <p class="copy">Explore the world with your cup with Volcanica Coffee. Discover small-batch, single-origin beans, unique blends, decaf, and flavored coffees—all sustainably sourced from family farms.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1298852918496650" target="_blank" rel="noreferrer">1298852918496650</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/all-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>1 video / 1 images</dd></div>
+                </dl>
+                
+              <details>
+                <summary>Video transcript</summary>
+                <p>you</p>
+              </details>
+            
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Morning reorder nudge">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1016854201299294_01.jpg" alt="Start your day with Volcanica!">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Morning reorder nudge</span>
+                </div>
+                <h3>Start your day with Volcanica!</h3>
+                <p class="copy">😴 Still asleep? Your favorite brew misses you!</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1016854201299294" target="_blank" rel="noreferrer">1016854201299294</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/premium-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1026741809918211" target="_blank" rel="noreferrer">1026741809918211</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1034704352398753" target="_blank" rel="noreferrer">1034704352398753</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/espresso-dark-roast-decaf-coffee?_pos=1&amp;_sid=d3ec6d26e&amp;_ss=r&amp;selling_plan=2409791546</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1455670775949428" target="_blank" rel="noreferrer">1455670775949428</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-08 08:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Origin story / direct trade">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1467372171252327_01.jpg" alt="Direct-Trade Coffee">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Origin story / direct trade</span>
+                </div>
+                <h3>Direct-Trade Coffee</h3>
+                <p class="copy">Mela&#x27;s worked on this coffee farm her entire life. Taste the rich history of Finca Las Mercedes.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1467372171252327" target="_blank" rel="noreferrer">1467372171252327</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/costa-rica-coffee-las-mercedes-washed?_pos=2&amp;_sid=fdcbf8fe3&amp;_ss=r&amp;selling_plan=2408611898</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Origin story / direct trade">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1476544493599981_01.jpg" alt="Direct-Trade Coffee">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Origin story / direct trade</span>
+                </div>
+                <h3>Direct-Trade Coffee</h3>
+                <p class="copy">Mela&#x27;s worked on this coffee farm her entire life. Taste the rich history of Finca Las Mercedes.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1476544493599981" target="_blank" rel="noreferrer">1476544493599981</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-21 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/costa-rica-coffee-las-mercedes-washed?_pos=2&amp;_sid=fdcbf8fe3&amp;_ss=r&amp;selling_plan=2408611898</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Assortment &amp; single-origin range">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1672009817349808_01.jpg" alt="Quality Coffee Crafted by Nature, Perfected by Us">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Assortment &amp; single-origin range</span>
+                </div>
+                <h3>Quality Coffee Crafted by Nature, Perfected by Us</h3>
+                <p class="copy">Exceptional coffee starts long before the roast. Sourced from mineral-rich volcanic soils around the globe, our single-origin beans are nurtured by nature and meticulously roasted in small batches to unleash their full, exotic flavor profiles. Taste coffee the way nature intended.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1672009817349808" target="_blank" rel="noreferrer">1672009817349808</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/search?q=single+origin</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Morning reorder nudge">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1686137372751988_01.jpg" alt="Start your day with Volcanica!">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Morning reorder nudge</span>
+                </div>
+                <h3>Start your day with Volcanica!</h3>
+                <p class="copy">😴 Still asleep? Your favorite brew misses you!</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1686137372751988" target="_blank" rel="noreferrer">1686137372751988</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/premium-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Origin story / direct trade">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/1890064538324567_01.jpg" alt="Direct-Trade Coffee">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Origin story / direct trade</span>
+                </div>
+                <h3>Direct-Trade Coffee</h3>
+                <p class="copy">Mela&#x27;s worked on this coffee farm her entire life. Taste the rich history of Finca Las Mercedes.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=1890064538324567" target="_blank" rel="noreferrer">1890064538324567</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/costa-rica-coffee-las-mercedes-washed?_pos=2&amp;_sid=fdcbf8fe3&amp;_ss=r&amp;selling_plan=2408611898</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=25892922833740584" target="_blank" rel="noreferrer">25892922833740584</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-04-15 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Origin story / direct trade">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/2880464465636824_01.jpg" alt="Direct-Trade Coffee">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Origin story / direct trade</span>
+                </div>
+                <h3>Direct-Trade Coffee</h3>
+                <p class="copy">Mela&#x27;s worked on this coffee farm her entire life. Taste the rich history of Finca Las Mercedes.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=2880464465636824" target="_blank" rel="noreferrer">2880464465636824</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-21 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/costa-rica-coffee-las-mercedes-washed?_pos=2&amp;_sid=fdcbf8fe3&amp;_ss=r&amp;selling_plan=2408611898</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Morning reorder nudge">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/4320249108195458_01.jpg" alt="Start your day with Volcanica!">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Morning reorder nudge</span>
+                </div>
+                <h3>Start your day with Volcanica!</h3>
+                <p class="copy">😴 Still asleep? Your favorite brew misses you!</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=4320249108195458" target="_blank" rel="noreferrer">4320249108195458</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/premium-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Cause / event">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/4366441333578825_01.jpg" alt="Drink Good. Do Good.">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Cause / event</span>
+                </div>
+                <h3>Drink Good. Do Good.</h3>
+                <p class="copy">Join us for the Clean Water Project - Friday, July 10th, The Experience Lab in The Factory at Franklin.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=4366441333578825" target="_blank" rel="noreferrer">4366441333578825</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-28 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://www.facebook.com/events/3452131098295934</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Morning reorder nudge">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/4400046410259291_01.jpg" alt="Start your day with Volcanica!">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Morning reorder nudge</span>
+                </div>
+                <h3>Start your day with Volcanica!</h3>
+                <p class="copy">😴 Still asleep? Your favorite brew misses you!</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=4400046410259291" target="_blank" rel="noreferrer">4400046410259291</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-18 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/premium-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Assortment &amp; single-origin range">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/836598215771905_01.jpg" alt="Explore 150+ Small-Batch, Family-Farmed Coffees">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Assortment &amp; single-origin range</span>
+                </div>
+                <h3>Explore 150+ Small-Batch, Family-Farmed Coffees</h3>
+                <p class="copy">By prioritizing small-batch roasting, we consistently maintain the exceptional quality of our beans, ensuring every single harvest is sustainably sourced and crafted with care.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=836598215771905" target="_blank" rel="noreferrer">836598215771905</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-05-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/collections/all-coffees</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=915074264655550" target="_blank" rel="noreferrer">915074264655550</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-04-07 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="image" data-bucket="Origin story / direct trade">
+              <div class="creative-shell">
+                <img class="creative-media" src="creatives/page-images/957828999971258_01.jpg" alt="Direct-Trade Coffee">
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>IMAGE</span>
+                  <span>Origin story / direct trade</span>
+                </div>
+                <h3>Direct-Trade Coffee</h3>
+                <p class="copy">Mela&#x27;s worked on this coffee farm her entire life. Taste the rich history of Finca Las Mercedes.</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=957828999971258" target="_blank" rel="noreferrer">957828999971258</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-25 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/products/costa-rica-coffee-las-mercedes-washed?_pos=2&amp;_sid=fdcbf8fe3&amp;_ss=r&amp;selling_plan=2408611898</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 1 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            
+
+            <article class="creative-card" data-type="dco" data-bucket="Dynamic catalog / DCO">
+              <div class="creative-shell">
+                <div class="creative-placeholder">Dynamic creative<br><span>No direct media URL</span></div>
+              </div>
+              <div class="creative-body">
+                <div class="card-kicker">
+                  <span>DCO</span>
+                  <span>Dynamic catalog / DCO</span>
+                </div>
+                <h3>{{product.name}}</h3>
+                <p class="copy">{{product.brand}}</p>
+                <dl>
+                  <div><dt>Library ID</dt><dd><a href="https://www.facebook.com/ads/library/?id=966433159049737" target="_blank" rel="noreferrer">966433159049737</a></dd></div>
+                  <div><dt>Started</dt><dd>2026-03-27 07:00:00</dd></div>
+                  <div><dt>Landing</dt><dd>https://volcanicacoffee.com/pages/coffee-club</dd></div>
+                  <div><dt>Assets</dt><dd>0 videos / 0 images</dd></div>
+                </dl>
+                
+              </div>
+            </article>
+            </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    Source context: Volcanica creatives were collected from Meta Ad Library through Apify and saved locally in this project folder. Report data: <code>{&quot;rows&quot;: 38, &quot;videos&quot;: 20, &quot;images&quot;: 32, &quot;transcripts&quot;: 20, &quot;cost&quot;: &quot;0.0285&quot;, &quot;types&quot;: {&quot;video&quot;: 20, &quot;image&quot;: 12, &quot;dco&quot;: 6}, &quot;buckets&quot;: {&quot;Subscription &amp; free oat milk&quot;: 19, &quot;Assortment &amp; single-origin range&quot;: 3, &quot;Dynamic catalog / DCO&quot;: 6, &quot;Origin story / direct trade&quot;: 5, &quot;Morning reorder nudge&quot;: 4, &quot;Cause / event&quot;: 1}}</code>
+  </footer>
+
+  <script>
+    const buttons = document.querySelectorAll('[data-filter]');
+    const cards = document.querySelectorAll('.creative-card');
+    buttons.forEach(button => {
+      button.addEventListener('click', () => {
+        const filter = button.dataset.filter;
+        buttons.forEach(item => item.classList.remove('active'));
+        button.classList.add('active');
+        cards.forEach(card => {
+          const show = filter === 'all' || card.dataset.bucket === filter;
+          card.style.display = show ? '' : 'none';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+
+
