@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonathan F. Schachter, PhD — Columbia IEOR — Research Dossier & Department Map</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#0a1a2e',
+                        copper: '#b87333',
+                        copperLight: '#d4956a',
+                        copperDark: '#8c5a28',
+                        navy: '#0d1f3c',
+                        cream: '#faf6f0',
+                        columbia: '#9bcbeb',
+                        columbiaDeep: '#1d4f91',
+                    },
+                    fontFamily: {
+                        heading: ['"Playfair Display"', 'Georgia', 'serif'],
+                        body: ['Outfit', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Outfit', sans-serif; background: #faf6f0; }
+
+        /* ============ HERO ============ */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; align-items: center; overflow: hidden;
+        }
+        .hero-img {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        .hero-fade {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                to right,
+                rgba(10,26,46,0.95) 0%,
+                rgba(10,26,46,0.82) 35%,
+                rgba(10,26,46,0.55) 62%,
+                rgba(10,26,46,0.40) 100%
+            );
+        }
+
+        /* ============ COLUMBIA WORDMARK BAND (blue underlay) ============ */
+        .columbia-band {
+            position: relative;
+            background: linear-gradient(135deg, #1d4f91 0%, #2a5ca6 55%, #1d4f91 100%);
+            border: 1px solid rgba(155,203,235,0.35);
+            box-shadow: 0 24px 70px rgba(10,26,46,0.5);
+            padding: 46px 40px;
+            overflow: hidden;
+        }
+        .columbia-band::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=60&auto=format') center/cover no-repeat;
+            opacity: 0.14;
+            mix-blend-mode: luminosity;
+            pointer-events: none;
+        }
+        .columbia-band-inner {
+            position: relative; z-index: 2;
+            display: flex; flex-direction: column; align-items: center; text-align: center;
+        }
+        .columbia-crown {
+            width: 92px; height: auto; margin-bottom: 18px;
+            filter: drop-shadow(0 3px 16px rgba(0,0,0,0.35));
+        }
+        .columbia-name {
+            font-family: 'Playfair Display', serif;
+            color: #fff; font-size: 34px; line-height: 1.04; font-weight: 600;
+            letter-spacing: 0.03em; text-transform: uppercase;
+        }
+        .columbia-city {
+            font-family: 'Outfit', sans-serif;
+            color: rgba(255,255,255,0.92); font-size: 11px; letter-spacing: 0.42em;
+            text-transform: uppercase; margin-top: 14px; font-weight: 300;
+        }
+        .columbia-dept {
+            margin-top: 22px; padding-top: 18px;
+            border-top: 1px solid rgba(155,203,235,0.4);
+            font-family: 'Outfit', sans-serif; color: #cfe6f5;
+            font-size: 12px; letter-spacing: 0.34em; text-transform: uppercase;
+        }
+
+        /* ============ DIAMOND LOGO ============ */
+        .diamond-logo {
+            width: 44px; height: 44px;
+            transform: rotate(45deg);
+            border: 2px solid rgba(184,115,51,0.6);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .diamond-logo span {
+            transform: rotate(-45deg);
+            font-family: 'Playfair Display', serif;
+            font-size: 11px; color: rgba(255,255,255,0.85);
+            letter-spacing: 0.05em; font-weight: 500;
+        }
+
+        /* ============ NAV ============ */
+        .nav-link {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px; font-weight: 400;
+            letter-spacing: 0.22em; text-transform: uppercase;
+            color: rgba(255,255,255,0.45);
+            transition: color 0.4s;
+        }
+        .nav-link:hover { color: #d4956a; }
+        #navbar.nav-solid {
+            background: rgba(10,26,46,0.96);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 1px 40px rgba(0,0,0,0.25);
+            border-bottom: 1px solid rgba(184,115,51,0.1);
+        }
+
+        /* ============ DIAGONAL GOLD STRIPE ============ */
+        .diagonal-stripe { position: relative; height: 80px; overflow: hidden; }
+        .diagonal-stripe::before {
+            content: '';
+            position: absolute; inset: -20px -5% -20px -5%;
+            width: 110%;
+            background: linear-gradient(135deg,
+                transparent 42%, rgba(184,115,51,0.12) 42%,
+                rgba(184,115,51,0.08) 50%, transparent 50%);
+        }
+
+        /* ============ COPPER ACCENT LINE ============ */
+        .copper-line {
+            width: 48px; height: 2px;
+            background: linear-gradient(90deg, #b87333, #d4956a);
+            border-radius: 1px;
+        }
+
+        /* ============ SECTION NUMERAL ============ */
+        .section-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem; line-height: 1;
+            color: rgba(184,115,51,0.18);
+        }
+
+        /* ============ WHY-IT-MATTERS BLOCK (always beige) ============ */
+        .why-section { background: #faf6f0; position: relative; }
+        .why-block {
+            position: relative; background: #fff;
+            border: 1px solid rgba(184,115,51,0.15);
+            border-left: 3px solid #b87333;
+            padding: 40px 44px;
+            box-shadow: 0 12px 48px rgba(10,26,46,0.04);
+        }
+        .why-label {
+            font-family: 'Outfit', sans-serif;
+            font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+            color: #b87333; margin-bottom: 16px; display: block;
+        }
+
+        /* ============ DARK CONTENT SECTION ============ */
+        .content-dark { background: #0a1a2e; position: relative; overflow: hidden; }
+        .content-dark::before {
+            content: '';
+            position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 80% 20%, rgba(184,115,51,0.05) 0%, transparent 55%);
+            pointer-events: none;
+        }
+
+        /* ============ BULLET LIST ============ */
+        .lux-list { list-style: none; padding: 0; }
+        .lux-list li {
+            position: relative; padding-left: 26px; margin-bottom: 16px;
+            font-family: 'Outfit', sans-serif; line-height: 1.7;
+        }
+        .lux-list li::before {
+            content: ''; position: absolute; left: 0; top: 11px;
+            width: 8px; height: 8px; transform: rotate(45deg);
+            border: 1px solid rgba(184,115,51,0.6);
+        }
+
+        /* ============ ACADEMIC / DATA TABLE ============ */
+        .data-table { width: 100%; border-collapse: collapse; }
+        .data-table caption {
+            font-family: 'Outfit', sans-serif; font-size: 10px;
+            letter-spacing: 0.2em; text-transform: uppercase;
+            color: rgba(184,115,51,0.7); text-align: left;
+            padding-bottom: 14px;
+        }
+        .data-table th {
+            font-family: 'Outfit', sans-serif;
+            font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
+            color: rgba(184,115,51,0.7); padding: 14px 16px;
+            border-bottom: 1px solid rgba(184,115,51,0.18);
+            text-align: left;
+        }
+        .data-table td {
+            font-family: 'Outfit', sans-serif; font-size: 14px;
+            color: rgba(255,255,255,0.6); padding: 13px 16px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            vertical-align: top;
+        }
+        .data-table tr:last-child td { border-bottom: none; }
+        .data-table .inst { color: rgba(255,255,255,0.92); font-weight: 500; }
+        .data-table .deg { color: rgba(212,149,106,0.85); font-size: 13px; }
+        .data-table .crs { color: rgba(255,255,255,0.45); font-size: 13px; font-style: italic; }
+        .data-table tr.req td { background: rgba(34,197,94,0.05); }
+
+        .tag {
+            display: inline-block; font-size: 9px; letter-spacing: 0.1em;
+            text-transform: uppercase; padding: 4px 10px; white-space: nowrap;
+        }
+        .tag-req { background: rgba(34,197,94,0.12); color: rgba(134,239,172,0.85); border: 1px solid rgba(34,197,94,0.2); }
+        .tag-elec { background: rgba(184,115,51,0.1); color: rgba(212,149,106,0.8); border: 1px solid rgba(184,115,51,0.2); }
+        .tag-light { background: rgba(234,179,8,0.08); color: rgba(253,224,71,0.7); border: 1px solid rgba(234,179,8,0.2); }
+        .tag-none { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.3); border: 1px solid rgba(255,255,255,0.08); }
+
+        /* ============ FREQUENCY BARS ============ */
+        .freq-row { display: grid; grid-template-columns: 150px 1fr 44px; align-items: center; gap: 16px; margin-bottom: 14px; }
+        .freq-label { font-family: 'Outfit', sans-serif; font-size: 13px; color: rgba(255,255,255,0.65); letter-spacing: 0.04em; }
+        .freq-track { height: 26px; background: rgba(255,255,255,0.04); position: relative; overflow: hidden; }
+        .freq-fill { height: 100%; background: linear-gradient(90deg, #8c5a28, #d4956a); }
+        .freq-val { font-family: 'Playfair Display', serif; font-size: 17px; color: #d4956a; text-align: right; }
+
+        /* ============ STAT GRID ============ */
+        .stat-card {
+            border: 1px solid rgba(184,115,51,0.15);
+            padding: 28px 24px; text-align: center;
+            background: rgba(255,255,255,0.02);
+        }
+        .stat-num { font-family: 'Playfair Display', serif; font-size: 2.6rem; line-height: 1; color: #fff; margin-bottom: 8px; }
+        .stat-lab { font-family: 'Outfit', sans-serif; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(184,115,51,0.7); }
+
+        /* ============ PULL QUOTE ============ */
+        .pull-quote {
+            border-left: 2px solid rgba(184,115,51,0.4);
+            padding-left: 28px;
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn-copper {
+            display: inline-block;
+            background: linear-gradient(135deg, #b87333, #a06028);
+            color: #fff; padding: 15px 38px;
+            font-family: 'Outfit',sans-serif; font-weight: 500;
+            font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+            border-radius: 0; transition: all .4s ease;
+            box-shadow: 0 4px 24px rgba(184,115,51,0.2);
+        }
+        .btn-copper:hover { transform: translateY(-2px); box-shadow: 0 8px 32px rgba(184,115,51,0.35); }
+        .btn-outline {
+            display: inline-block;
+            border: 1.5px solid rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.7); padding: 14px 34px;
+            font-family: 'Outfit',sans-serif; font-weight: 400;
+            font-size: .72rem; letter-spacing: .14em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.06); border-color: rgba(184,115,51,0.5); color: #d4956a; }
+
+        /* ============ ANIMATIONS ============ */
+        [data-reveal] {
+            opacity: 0; transform: translateY(28px);
+            transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+        }
+        [data-reveal].visible { opacity: 1; transform: translateY(0); }
+        [data-reveal="d1"] { transition-delay: .1s }
+        [data-reveal="d2"] { transition-delay: .2s }
+        [data-reveal="d3"] { transition-delay: .3s }
+
+        /* ============ FOOTER ============ */
+        .footer { background: #060e18; border-top: 1px solid rgba(184,115,51,0.06); }
+
+        /* ============ SCROLLBAR ============ */
+        ::-webkit-scrollbar { width: 5px }
+        ::-webkit-scrollbar-track { background: #060e18 }
+        ::-webkit-scrollbar-thumb { background: rgba(184,115,51,0.2); border-radius: 3px }
+    </style>
+</head>
+<body class="text-gray-900 antialiased">
+
+<!-- ============ NAVIGATION ============ -->
+<nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-500">
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 py-5">
+        <div class="flex items-center justify-between">
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#survey" class="nav-link">The Survey</a>
+            </div>
+            <a href="#home" class="diamond-logo mx-auto md:mx-0"><span>JFS</span></a>
+            <div class="hidden md:flex items-center gap-8">
+                <a href="#s1" class="nav-link">Department Map</a>
+                <a href="#bottom-line" class="nav-link" style="color:#d4956a; border:1px solid rgba(184,115,51,0.3); padding:7px 18px;">Bottom Line</a>
+            </div>
+            <button id="mobile-btn" class="md:hidden text-white/60">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/></svg>
+            </button>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden pt-4 pb-2 border-t border-white/10 mt-4 space-y-3">
+            <a href="#home" class="block nav-link py-2">Home</a>
+            <a href="#survey" class="block nav-link py-2">The Survey</a>
+            <a href="#s1" class="block nav-link py-2">Department Map</a>
+            <a href="#bottom-line" class="block nav-link py-2">Bottom Line</a>
+        </div>
+    </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<section id="home" class="hero">
+    <div class="hero-img"></div>
+    <div class="hero-fade"></div>
+    <div class="max-w-7xl mx-auto px-6 lg:px-12 w-full relative z-10">
+        <div class="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center pt-24">
+            <!-- Left: title -->
+            <div class="lg:col-span-7">
+                <div data-reveal>
+                    <p class="font-body text-[10px] uppercase tracking-[.35em] text-copper/70 mb-7">Jonathan F. Schachter, PhD &mdash; Research Dossier for the Columbia IEOR Application</p>
+                </div>
+                <h1 class="font-heading font-normal leading-[1.08] mb-8" data-reveal="d1">
+                    <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white block">Should Financial</span>
+                    <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-white block">Engineering Teach</span>
+                    <span class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-copperLight italic block">Artificial Intelligence?</span>
+                </h1>
+                <div data-reveal="d2">
+                    <p class="font-body text-base md:text-lg text-white/45 leading-relaxed max-w-lg mb-10">Original research by Delta Vega &mdash; a 65-program global survey of AI in financial engineering curricula &mdash; paired with a complete map of Columbia's IEOR department and the single competency gap that runs through all of it.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-5" data-reveal="d3">
+                    <a href="#survey" class="btn-copper">The Survey</a>
+                    <a href="#s1" class="btn-outline">Department Map</a>
+                </div>
+            </div>
+            <!-- Right: Columbia wordmark on blue underlay -->
+            <div class="lg:col-span-5" data-reveal="d2">
+                <div class="columbia-band">
+                    <div class="columbia-band-inner">
+                        <svg class="columbia-crown" viewBox="0 0 120 90" xmlns="http://www.w3.org/2000/svg" fill="#ffffff">
+                            <!-- stylised heraldic crown with cross pommels -->
+                            <g>
+                                <rect x="33" y="6" width="3" height="9"/><rect x="30" y="9" width="9" height="3"/>
+                                <rect x="58.5" y="2" width="3" height="9"/><rect x="55.5" y="5" width="9" height="3"/>
+                                <rect x="84" y="6" width="3" height="9"/><rect x="81" y="9" width="9" height="3"/>
+                                <circle cx="34.5" cy="20" r="4"/><circle cx="60" cy="16" r="4"/><circle cx="85.5" cy="20" r="4"/>
+                                <path d="M22 30 L34.5 22 L60 18 L85.5 22 L98 30 L93 58 Q60 70 27 58 Z"/>
+                                <rect x="20" y="60" width="80" height="9" rx="2"/>
+                                <circle cx="40" cy="42" r="3.5" fill="#1d4f91"/>
+                                <circle cx="60" cy="40" r="3.5" fill="#1d4f91"/>
+                                <circle cx="80" cy="42" r="3.5" fill="#1d4f91"/>
+                            </g>
+                        </svg>
+                        <div class="columbia-name">Columbia<br>University</div>
+                        <div class="columbia-city">In the City of New York</div>
+                        <div class="columbia-dept">Industrial Engineering &amp; Operations Research</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3" data-reveal="d3">
+        <span class="font-body text-[9px] uppercase tracking-[.3em] text-white/20">Scroll</span>
+        <div class="w-px h-14 bg-gradient-to-b from-copper/30 to-transparent"></div>
+    </div>
+</section>
+
+<!-- ============================================================= -->
+<!-- THE DELTA VEGA SURVEY — original research (expert positioning) -->
+<!-- ============================================================= -->
+<section id="survey" class="content-dark py-28 lg:py-36 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto relative z-10">
+        <!-- Header -->
+        <div class="max-w-3xl mb-16" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper/60 mb-5">Original Research &mdash; Delta Vega Global Survey</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mb-7">
+                The Prevalence of AI in<br>Financial Engineering Programs<br><em class="italic text-copperLight">Worldwide</em>
+            </h2>
+            <div class="copper-line mb-8"></div>
+            <p class="font-body text-white/50 text-lg leading-[1.8]">Because our model-risk textbook contains an extensive chapter on AI model validation, Delta Vega conducted a structured survey of how widely AI &mdash; machine learning, deep learning, data science &mdash; is taught across master's-level financial engineering, mathematical finance, and computational finance programs. The intent: to help instructors evaluate AI's place in a curriculum, and to help students differentiate between programs.</p>
+        </div>
+
+        <!-- Headline stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-px bg-copper/10 mb-20" data-reveal="d1">
+            <div class="stat-card bg-brand"><div class="stat-num">65</div><div class="stat-lab">Programs Surveyed</div></div>
+            <div class="stat-card bg-brand"><div class="stat-num">11</div><div class="stat-lab">Countries</div></div>
+            <div class="stat-card bg-brand"><div class="stat-num">~50%</div><div class="stat-lab">Offer an AI Course</div></div>
+            <div class="stat-card bg-brand"><div class="stat-num">12%</div><div class="stat-lab">Require One</div></div>
+        </div>
+
+        <!-- Two columns: methodology / geography -->
+        <div class="grid lg:grid-cols-2 gap-16 mb-20">
+            <!-- Geographic distribution -->
+            <div data-reveal>
+                <table class="data-table">
+                    <caption>Table 1 &mdash; Geographic Distribution (English-language programs)</caption>
+                    <thead><tr><th>Country</th><th style="text-align:right;">Degree Programs</th></tr></thead>
+                    <tbody>
+                        <tr><td class="inst">United States</td><td style="text-align:right;color:#d4956a;">26</td></tr>
+                        <tr><td class="inst">United Kingdom</td><td style="text-align:right;color:#d4956a;">25</td></tr>
+                        <tr><td class="inst">Australia</td><td style="text-align:right;">4</td></tr>
+                        <tr><td class="inst">Canada</td><td style="text-align:right;">2</td></tr>
+                        <tr><td class="inst">Singapore</td><td style="text-align:right;">2</td></tr>
+                        <tr><td>Belgium &middot; France &middot; Germany</td><td style="text-align:right;">1 each</td></tr>
+                        <tr><td>New Zealand &middot; South Africa &middot; Sweden</td><td style="text-align:right;">1 each</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <!-- Word frequency -->
+            <div data-reveal="d1">
+                <p class="font-body text-[10px] uppercase tracking-[.2em] text-copper/70 mb-6">Table 2 &mdash; Terminology in AI Course Titles</p>
+                <div class="freq-row"><span class="freq-label">Machine Learning</span><div class="freq-track"><div class="freq-fill" style="width:100%"></div></div><span class="freq-val">36</span></div>
+                <div class="freq-row"><span class="freq-label">Data Science</span><div class="freq-track"><div class="freq-fill" style="width:16.7%"></div></div><span class="freq-val">6</span></div>
+                <div class="freq-row"><span class="freq-label">Deep Learning</span><div class="freq-track"><div class="freq-fill" style="width:11.1%"></div></div><span class="freq-val">4</span></div>
+                <div class="freq-row"><span class="freq-label">Statistical Learning</span><div class="freq-track"><div class="freq-fill" style="width:8.3%"></div></div><span class="freq-val">3</span></div>
+                <div class="freq-row"><span class="freq-label">Big Data</span><div class="freq-track"><div class="freq-fill" style="width:5.6%"></div></div><span class="freq-val">2</span></div>
+                <p class="font-body text-white/35 text-sm leading-relaxed mt-6 italic">"Machine Learning" dominates the curricular vocabulary &mdash; appearing in titles six times as often as the next term. The field has a common language, but not yet a common standard for what comes after the model is built.</p>
+            </div>
+        </div>
+
+        <!-- Required-course programs -->
+        <div class="border border-copper/15 p-10 lg:p-12 mb-20" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.2em] text-copper/70 mb-3">Table 3 &mdash; The Eight Programs That <span class="text-copperLight">Require</span> an AI Course (12% of cohort)</p>
+            <div class="copper-line mb-8"></div>
+            <div class="grid md:grid-cols-2 gap-x-12 gap-y-4">
+                <ul class="lux-list text-white/55 text-base">
+                    <li>Data Science &amp; Machine Learning in Finance <span class="text-white/35">(FM 5323)</span></li>
+                    <li>Foundations &amp; Applications of Machine Learning <span class="text-white/35">(core)</span></li>
+                    <li>Machine Learning <span class="text-white/35">(computational statistics curriculum)</span></li>
+                    <li>Machine Learning I &amp; II <span class="text-white/35">(CMU 46927)</span></li>
+                </ul>
+                <ul class="lux-list text-white/55 text-base">
+                    <li>Machine Learning in Finance <span class="text-white/35">(Illinois FIN 553)</span></li>
+                    <li>Machine Learning Methods <span class="text-white/35">(Data Science curriculum)</span></li>
+                    <li>Machine Learning Methods for Risk Modelling <span class="text-white/35">(core)</span></li>
+                    <li>Simulation &amp; Machine Learning for Finance <span class="text-white/35">(Warwick MA907)</span></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- Institution pivot table sample -->
+        <div data-reveal>
+            <table class="data-table">
+                <caption>Table 4 &mdash; Pivot by Institution &amp; Degree (representative extract from the 65-program dataset)</caption>
+                <thead><tr><th style="width:26%">Institution</th><th style="width:30%">Degree Program</th><th>AI / ML Courses Listed</th></tr></thead>
+                <tbody>
+                    <tr><td class="inst">Baruch / CUNY</td><td class="deg">MS Financial Engineering</td><td class="crs">Data Science I: Big Data in Finance (MTH 9898); Data Science II: Machine Learning (MTH 9899); NLP (MTH 9796)</td></tr>
+                    <tr><td class="inst">Bayes Business School</td><td class="deg">Quantitative Finance MSc</td><td class="crs">Optional AI / ML electives</td></tr>
+                    <tr><td class="inst">Birkbeck College</td><td class="deg">Quantitative Finance with Data Science MSc</td><td class="crs">Data Science track embedded</td></tr>
+                    <tr><td class="inst">Boston University</td><td class="deg">MS Mathematical Finance &amp; FinTech</td><td class="crs">Advanced ML Applications for Finance (QST MF 815); Deep Learning &amp; Statistical Learning (QST MF 850)</td></tr>
+                    <tr class="req"><td class="inst">Carnegie Mellon</td><td class="deg">MS Computational Finance</td><td class="crs">Machine Learning I; Machine Learning II (46927) &mdash; <span style="color:rgba(134,239,172,0.85)">required</span></td></tr>
+                    <tr class="req"><td class="inst">Columbia (IEOR)</td><td class="deg">MS Financial Engineering</td><td class="crs">ML for FE &amp; OR (E4525); Deep Learning (E4742); AI Applications in Finance (E4737) &mdash; <span style="color:rgba(212,149,106,0.85)">all elective</span></td></tr>
+                </tbody>
+            </table>
+            <p class="font-body text-white/30 text-sm mt-6 italic">Full dataset published to the <span class="text-copperLight">Teaching Financial Model Risk &amp; Governance</span> group. The survey is an exhaustive institution-by-institution pivot; the rows above are a representative extract.</p>
+        </div>
+
+        <!-- Open question (his framing) -->
+        <div class="mt-20 pull-quote max-w-3xl" data-reveal>
+            <p class="font-heading text-2xl md:text-3xl text-white font-normal italic leading-[1.35] mb-6">"Should AI courses be part of an FE master's program? What specifically should be taught? Should it be required or optional &mdash; and should dissertations, capstones, or independent research be required as adjuvants?"</p>
+            <p class="font-body text-sm text-copper uppercase tracking-widest">The open questions this dossier sets out to answer for Columbia</p>
+        </div>
+    </div>
+</section>
+
+<!-- WHY IT MATTERS — survey -->
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why this matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">This survey is Jonathan's credential of authority. He is not a candidate offering opinions about AI in finance &mdash; he is the author of the <span class="text-brand font-medium">only global benchmark</span> of how AI is actually taught across the field, grounded in a textbook chapter on AI model validation. Leading with original research reframes the entire application: the committee meets a scholar who has already mapped their field's curriculum landscape, and who arrives with data rather than assertions.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 1 — Department bigger than MSFE -->
+<!-- ============================================================= -->
+<section id="s1" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">01</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">The department is much<br>bigger than <em class="italic text-copperLight">MSFE</em></h2>
+            <div class="copper-line mb-9"></div>
+        </div>
+        <div class="font-body text-white/55 text-lg leading-[1.85] max-w-3xl" data-reveal="d1">
+            <p>IEOR runs <span class="text-copperLight">five separate MS programs</span>, five undergraduate majors, two PhD tracks, and eight research centers. The five graduate programs are: <span class="text-white/80">MSFE</span> (financial engineering), <span class="text-white/80">MSOR</span> (operations research), <span class="text-white/80">MSIE</span> (industrial engineering), <span class="text-white/80">MSE</span> (management science, joint with CBS), and <span class="text-white/80">MSBA</span> (business analytics, joint with CBS). All are STEM-certified.</p>
+        </div>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">His cover letter should demonstrate he understands the full department &mdash; <span class="text-brand font-medium">not just MSFE</span>. The hiring committee is IEOR faculty, not the MSFE director alone. Showing he can contribute across programs immediately widens his appeal and differentiates him from candidates who only know the finance track.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 2 — AI spreading fast -->
+<!-- ============================================================= -->
+<section id="s2" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">02</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">AI/ML is spreading fast<br>across <em class="italic text-copperLight">all programs</em></h2>
+            <div class="copper-line mb-9"></div>
+        </div>
+        <ul class="lux-list text-white/55 text-lg max-w-3xl" data-reveal="d1">
+            <li><span class="text-white/85">MSBA</span> (their fastest-growing program, joint with CBS): ML is a <span class="text-copperLight">required core course</span> &mdash; IEOR E4523 Data Analytics and Machine Learning &mdash; every student takes it.</li>
+            <li><span class="text-white/85">MSOR</span>: has a dedicated "Machine Learning &amp; Artificial Intelligence" concentration (one of eight).</li>
+            <li><span class="text-white/85">MSE FinTech track</span>: sits at the intersection of financial services + technology.</li>
+            <li><span class="text-white/85">Undergrad</span>: has a named course &mdash; IEOR E4010 Artificial Intelligence for OR and FE.</li>
+            <li><span class="text-white/85">MSFE</span>: five AI electives (already audited).</li>
+        </ul>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">Jonathan isn't proposing to add AI to a department that ignores it. He's proposing to fill a <span class="text-brand font-medium">specific, named gap</span> in a department that's already all-in on AI &mdash; a much stronger position. He should open by acknowledging IEOR's commitment to ML/analytics, then pivot to the missing layer.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 3 — Same gap across every program (TABLE) -->
+<!-- ============================================================= -->
+<section id="s3" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">03</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">The same gap exists across<br><em class="italic text-copperLight">every single program</em></h2>
+            <div class="copper-line mb-9"></div>
+            <p class="font-body text-white/50 text-lg leading-relaxed max-w-3xl mb-12">Across all six programs (MSFE, MSOR, MSIE, MSE, MSBA, undergrad), the pattern is identical:</p>
+        </div>
+        <div class="border border-copper/15" data-reveal="d1">
+            <table class="data-table">
+                <thead><tr><th>Program</th><th>AI in Curriculum</th><th>LLMs</th><th>Model Risk / Uncertainty / Governance</th></tr></thead>
+                <tbody>
+                    <tr><td class="inst">MSFE</td><td><span class="tag tag-elec">Electives</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-light">Light touch</span></td></tr>
+                    <tr><td class="inst">MSOR</td><td><span class="tag tag-elec">Elective + concentration</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-none">None</span></td></tr>
+                    <tr><td class="inst">MSIE</td><td><span class="tag tag-elec">Elective option</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-none">None</span></td></tr>
+                    <tr><td class="inst">MSE</td><td><span class="tag tag-elec">Elective / FinTech</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-none">None</span></td></tr>
+                    <tr><td class="inst">MSBA</td><td><span class="tag tag-req">Core required</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-none">None</span></td></tr>
+                    <tr><td class="inst">Undergrad</td><td><span class="tag tag-elec">Named AI course</span></td><td><span class="tag tag-none">None</span></td><td><span class="tag tag-none">None</span></td></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">Jonathan's differentiation is not just for MSFE students &mdash; it's a <span class="text-brand font-medium">department-wide gap</span>. A course on trustworthy AI / model risk / uncertainty quantification would serve MSBA students (taught to build analytics models but not validate them), MSOR ML-concentration students, MSE FinTech students, and MSFE students simultaneously. This makes him a hire who serves the whole department.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 4 — CAIRFI (re-worded, academic) -->
+<!-- ============================================================= -->
+<section id="s4" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">04</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">A direct alignment with the<br>department's <em class="italic text-copperLight">research agenda</em></h2>
+            <div class="copper-line mb-9"></div>
+        </div>
+        <div class="font-body text-white/55 text-lg leading-[1.85] max-w-3xl" data-reveal="d1">
+            <p>In 2024 Columbia launched the <span class="text-white/85">Center for AI and Responsible Financial Innovation (CAIRFI)</span>, a five-year partnership with Capital One, with the stated mission of "the responsible advancement of AI in financial services." Its funded research spans AI agents in finance, trustworthy lending, domain-specialized LLMs, AI privacy and security, and causal inference &mdash; the precise problem set Jonathan's model-risk and governance work addresses.</p>
+        </div>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">CAIRFI demonstrates that responsible AI is already a strategic priority at Columbia &mdash; on the research side. Jonathan's contribution is its <span class="text-brand font-medium">pedagogical counterpart</span>: a teaching program that trains students in the validation and governance the center researches. Framing his proposal as the classroom complement to an existing institutional commitment signals genuine familiarity with the department and positions him as a colleague who extends its agenda, not one arriving with an unrelated idea.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 5 — Henry Lam -->
+<!-- ============================================================= -->
+<section id="s5" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">05</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">Positioning relative to<br>existing faculty: <em class="italic text-copperLight">Henry Lam</em></h2>
+            <div class="copper-line mb-9"></div>
+        </div>
+        <div class="font-body text-white/55 text-lg leading-[1.85] max-w-3xl" data-reveal="d1">
+            <p>Professor Henry Lam works in <span class="text-white/85">risk analysis, simulation, and uncertainty quantification</span> &mdash; the closest existing faculty research to Jonathan's area. His emphasis, however, is UQ for operations research and simulation, rather than AI/ML governance in finance under the current regulatory regime.</p>
+        </div>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">Jonathan should frame his work as <span class="text-brand font-medium">complementary, not competing</span>. Lam brings uncertainty quantification to classical simulation models; Jonathan brings it to machine-learning and AI systems under SR 26-2. Same rigour, adjacent domains &mdash; a natural basis for collaboration. Acknowledging Lam directly shows the committee Jonathan has read the faculty and understands precisely where he adds something new.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============================================================= -->
+<!-- SECTION 6 — Healthcare Analytics -->
+<!-- ============================================================= -->
+<section id="s6" class="content-dark py-28 lg:py-32 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto relative z-10">
+        <div data-reveal>
+            <span class="section-num">06</span>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.12] mt-4 mb-7">A cross-cutting reach:<br>the <em class="italic text-copperLight">healthcare analytics</em> angle</h2>
+            <div class="copper-line mb-9"></div>
+        </div>
+        <div class="font-body text-white/55 text-lg leading-[1.85] max-w-3xl" data-reveal="d1">
+            <p>MSIE's Healthcare Management concentration and MSBA's Healthcare Analytics concentration are substantial programs. Clinical AI &mdash; diagnostic models, readmission prediction, clinical decision support &mdash; carries <span class="text-white/85">model-risk consequences arguably greater than finance</span>. No course anywhere in IEOR currently addresses AI governance or uncertainty in healthcare.</p>
+        </div>
+    </div>
+</section>
+<div class="why-section py-16 lg:py-20 px-6 lg:px-12">
+    <div class="max-w-4xl mx-auto" data-reveal>
+        <div class="why-block">
+            <span class="why-label">Why it matters for Jonathan</span>
+            <p class="font-body text-gray-700 text-lg leading-[1.8]">Jonathan need not lead with healthcare &mdash; it isn't his primary domain &mdash; but it strengthens the case: <span class="text-brand font-medium italic">model risk and uncertainty quantification are as critical for clinical AI as for financial AI, and IEOR teaches both.</span> It demonstrates that an investment in him serves multiple programs across the department.</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============ DIAGONAL STRIPE TRANSITION ============ -->
+<div class="diagonal-stripe bg-cream"></div>
+
+<!-- ============ BOTTOM LINE ============ -->
+<section id="bottom-line" class="bg-brand py-32 lg:py-40 px-6 lg:px-12 relative overflow-hidden">
+    <div class="absolute inset-0" style="background:radial-gradient(ellipse at 50% 40%, rgba(184,115,51,0.07) 0%, transparent 70%);"></div>
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+        <div data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.3em] text-copper/50 mb-7">The Bottom Line</p>
+            <h2 class="font-heading text-3xl md:text-4xl lg:text-5xl font-normal text-white leading-[1.18] mb-10">
+                A scholar who has <em class="italic text-copperLight">mapped the field</em>, and who fills the one gap that runs through all six IEOR programs.
+            </h2>
+            <div class="copper-line mx-auto mb-10"></div>
+            <p class="font-body text-white/40 text-lg leading-relaxed mb-14 max-w-xl mx-auto">Jonathan arrives with original research, a model-risk textbook, regulatory fluency under SR 26-2, and a teaching program that serves as the practical complement to what CAIRFI already funds on the research side.</p>
+        </div>
+        <div data-reveal="d1">
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-10 mb-4">
+                <a href="mailto:js1@delta-vega.com" class="flex items-center gap-3 text-white/40 hover:text-copperLight transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.2"><path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/></svg>
+                    <span class="font-body text-sm tracking-wide">js1@delta-vega.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/jonathan-schachter-ph-d/" target="_blank" class="flex items-center gap-3 text-white/40 hover:text-copperLight transition-colors">
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                    <span class="font-body text-sm tracking-wide">Jonathan Schachter, PhD</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer py-16 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-3 gap-12 mb-14">
+            <div>
+                <div class="flex items-center gap-4 mb-5">
+                    <div class="diamond-logo" style="width:32px;height:32px;"><span style="font-size:9px;">JFS</span></div>
+                    <span class="font-heading text-lg text-white/60">Jonathan F. Schachter</span>
+                </div>
+                <p class="font-body text-white/20 leading-relaxed text-sm">PhD. Founder, Delta Vega. Author of a textbook on financial model risk. Research dossier prepared for the Columbia University IEOR application.</p>
+            </div>
+            <div>
+                <h4 class="font-body text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Contents</h4>
+                <div class="flex flex-col space-y-3">
+                    <a href="#survey" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">The Global Survey</a>
+                    <a href="#s1" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">Department Map</a>
+                    <a href="#s3" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">The Department-Wide Gap</a>
+                    <a href="#s4" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">CAIRFI Alignment</a>
+                    <a href="#bottom-line" class="font-body text-white/25 hover:text-copperLight transition-colors text-sm">Bottom Line</a>
+                </div>
+            </div>
+            <div>
+                <h4 class="font-body text-[9px] uppercase tracking-[.2em] text-copper/35 mb-5">Contact</h4>
+                <p class="font-body text-white/25 mb-2 text-sm">js1@delta-vega.com</p>
+                <p class="font-body text-white/20 text-sm">Delta Vega &mdash; Financial Engineering &amp; Risk Advisory</p>
+            </div>
+        </div>
+        <div class="border-t border-white/5 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4">
+            <p class="font-body text-white/12 text-sm">&copy; 2026 Jonathan F. Schachter. All rights reserved.</p>
+            <p class="font-body text-white/8 text-xs">Original Research &bull; Columbia IEOR &bull; Model Risk &amp; AI Governance</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => navbar.classList.toggle('nav-solid', window.scrollY > 60));
+    const mobileBtn = document.getElementById('mobile-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    mobileBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) { t.scrollIntoView({ behavior:'smooth', block:'start' }); mobileMenu.classList.add('hidden'); }
+        });
+    });
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html>
