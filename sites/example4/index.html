@@ -1,0 +1,563 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delta Vega — Financial Engineering & Risk Advisory</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700&family=Raleway:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        royal: '#162040',
+                        royalDeep: '#0c1528',
+                        midBlue: '#1e3060',
+                        accent: '#4a8fe7',
+                        accentSoft: '#5e9ef0',
+                        silver: '#b0bcd0',
+                        cream: '#f7f5f0',
+                    },
+                    fontFamily: {
+                        heading: ['Cinzel', 'Georgia', 'serif'],
+                        body: ['Raleway', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Raleway', sans-serif; background: #0c1528; color: #e8e8e8; }
+
+        /* ============ HERO — Charlotte Wealth exact tone ============ */
+        .hero {
+            position: relative; min-height: 100vh;
+            display: flex; flex-direction: column;
+            overflow: hidden;
+        }
+        .hero-bg {
+            position: absolute; inset: 0;
+            /* NYC skyline — positioned at bottom so buildings anchor the lower half */
+            background: url('https://images.unsplash.com/photo-1534430480872-3498386e7856?w=1920&q=85&auto=format') center bottom/cover no-repeat;
+        }
+        /*
+         * Charlotte Wealth exact hue: saturated royal blue (#1a3a8a range),
+         * NOT purple. Deep blue top → vivid blue glow around city →
+         * slightly lighter where city lights bleed through.
+         */
+        .hero-hue {
+            position: absolute; inset: 0;
+            background: linear-gradient(
+                180deg,
+                rgba(10,20,60,0.88) 0%,       /* very dark blue top — logo/nav zone */
+                rgba(15,30,80,0.75) 20%,       /* still dark, slightly brighter */
+                rgba(20,45,110,0.55) 40%,      /* starts opening up — the transition */
+                rgba(25,55,140,0.35) 55%,      /* vivid blue wash — city starts here */
+                rgba(30,60,150,0.30) 70%,      /* peak blue glow around buildings */
+                rgba(15,35,90,0.50) 85%,       /* slightly darker at very bottom */
+                rgba(10,20,55,0.75) 100%       /* fade to dark for service cards */
+            );
+        }
+        /* Warm blue bloom centered on city area — mimics city light glow */
+        .hero-bloom {
+            position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 90% 45% at 50% 68%, rgba(30,70,170,0.18) 0%, transparent 70%),
+                radial-gradient(ellipse 60% 30% at 35% 72%, rgba(40,80,190,0.10) 0%, transparent 55%),
+                radial-gradient(ellipse 50% 25% at 65% 70%, rgba(50,90,200,0.08) 0%, transparent 50%);
+        }
+        /* No bottom fade — service cards handle the transition */
+        .hero-bottom-fade {
+            display: none;
+        }
+
+        /* ============ NAV — inside hero, NOT fixed ============ */
+        .hero-nav {
+            position: relative; z-index: 30;
+            padding: 32px 0 0;
+        }
+        .nav-link {
+            font-family: 'Cinzel', serif;
+            font-size: 10.5px; font-weight: 500;
+            letter-spacing: 0.14em; text-transform: uppercase;
+            color: rgba(255,255,255,0.40);
+            transition: color 0.4s;
+        }
+        .nav-link:hover { color: rgba(255,255,255,0.80); }
+
+        /* Shield logo */
+        .shield {
+            width: 80px; height: 88px;
+            position: relative;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .shield-bg {
+            position: absolute; inset: 0;
+            clip-path: polygon(50% 0%, 100% 18%, 100% 68%, 50% 100%, 0% 68%, 0% 18%);
+            background: linear-gradient(180deg, rgba(255,255,255,0.10) 0%, rgba(255,255,255,0.02) 100%);
+            border: 1px solid rgba(255,255,255,0.10);
+        }
+        .shield img {
+            height: 32px; width: auto;
+            filter: brightness(0) invert(1) opacity(0.85);
+            position: relative; z-index: 2;
+        }
+
+        /* ============ HERO CENTER CONTENT ============ */
+        .hero-content {
+            flex: 1; display: flex; flex-direction: column;
+            align-items: center; justify-content: center;
+            position: relative; z-index: 10;
+            text-align: center; padding: 0 24px;
+        }
+
+        /* ============ SERVICE OVERLAY CARDS ============ */
+        .service-strip {
+            position: relative; z-index: 10;
+            margin-top: auto;
+        }
+        .svc-overlay {
+            background: rgba(12,20,48,0.82);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            padding: 28px 32px;
+            border-top: 1px solid rgba(255,255,255,0.06);
+            display: flex; align-items: center; justify-content: space-between;
+            cursor: pointer;
+            transition: background 0.4s;
+        }
+        .svc-overlay:hover { background: rgba(16,24,50,0.82); }
+        .svc-overlay + .svc-overlay { border-left: 1px solid rgba(255,255,255,0.04); }
+        .svc-overlay h3 {
+            font-family: 'Cinzel', serif; font-size: 13px; font-weight: 600;
+            letter-spacing: 0.06em; text-transform: uppercase;
+            color: rgba(255,255,255,0.85); line-height: 1.5;
+        }
+        .svc-overlay p {
+            font-family: 'Raleway', sans-serif; font-size: 12.5px;
+            font-style: italic; color: rgba(176,188,208,0.40); margin-top: 5px;
+        }
+        .svc-overlay .arr {
+            font-size: 28px; font-weight: 200; color: rgba(255,255,255,0.15);
+            transition: color 0.3s, transform 0.3s;
+        }
+        .svc-overlay:hover .arr { color: rgba(255,255,255,0.5); transform: translateX(4px); }
+
+        /* ============ ABOUT ============ */
+        .about { background: #0e1830; }
+        .corner-frame { position: relative; }
+        .corner-frame::before {
+            content: ''; position: absolute;
+            top: -10px; left: -10px; width: 70px; height: 70px;
+            border-top: 1.5px solid rgba(74,143,231,0.25);
+            border-left: 1.5px solid rgba(74,143,231,0.25);
+            pointer-events: none;
+        }
+        .corner-frame::after {
+            content: ''; position: absolute;
+            bottom: -10px; right: -10px; width: 70px; height: 70px;
+            border-bottom: 1.5px solid rgba(74,143,231,0.25);
+            border-right: 1.5px solid rgba(74,143,231,0.25);
+            pointer-events: none;
+        }
+
+        /* ============ ACCENT LINE ============ */
+        .accent-line { width: 44px; height: 2px; background: linear-gradient(90deg, #4a8fe7, #5e9ef0); border-radius: 1px; }
+
+        /* ============ STATS ============ */
+        .stats-bar {
+            background: linear-gradient(135deg, #131e3a 0%, #1e3060 50%, #131e3a 100%);
+            border-top: 1px solid rgba(74,143,231,0.06);
+            border-bottom: 1px solid rgba(74,143,231,0.06);
+        }
+
+        /* ============ PHOTO BREAK ============ */
+        .photo-break { position: relative; min-height: 48vh; overflow: hidden; }
+        .photo-break .bg {
+            position: absolute; inset: 0;
+            background: url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1920&q=80&auto=format') center/cover no-repeat;
+        }
+        .photo-break .ov {
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, rgba(12,21,40,0.94) 0%, rgba(18,30,58,0.75) 45%, rgba(18,30,58,0.35) 100%);
+        }
+
+        /* ============ SERVICES GRID ============ */
+        .services-section { background: #0c1528; }
+        .detail-card {
+            background: rgba(22,32,64,0.5);
+            border: 1px solid rgba(74,143,231,0.06);
+            padding: 44px 36px; position: relative; overflow: hidden;
+            transition: all 0.5s ease;
+        }
+        .detail-card::before {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+            background: linear-gradient(90deg, #4a8fe7, #5e9ef0);
+            transform: scaleX(0); transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        .detail-card:hover::before { transform: scaleX(1); }
+        .detail-card:hover {
+            background: rgba(22,32,64,0.8);
+            border-color: rgba(74,143,231,0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 16px 48px rgba(0,0,0,0.3);
+        }
+
+        /* ============ CTA ============ */
+        .cta-section {
+            background: linear-gradient(170deg, #162040 0%, #0c1528 100%);
+            position: relative; overflow: hidden;
+        }
+        .cta-section::before {
+            content: ''; position: absolute; inset: 0;
+            background: radial-gradient(ellipse at 40% 40%, rgba(74,143,231,0.05) 0%, transparent 60%);
+        }
+
+        /* ============ BUTTONS ============ */
+        .btn-accent {
+            display: inline-block;
+            background: linear-gradient(135deg, #4a8fe7, #3a7dd4);
+            color: #fff; padding: 16px 44px;
+            font-family: 'Cinzel', serif; font-weight: 600;
+            font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+            transition: all .4s ease;
+            box-shadow: 0 4px 28px rgba(74,143,231,0.25);
+        }
+        .btn-accent:hover { transform: translateY(-2px); box-shadow: 0 8px 40px rgba(74,143,231,0.35); }
+        .btn-outline {
+            display: inline-block;
+            border: 1.5px solid rgba(255,255,255,0.15);
+            color: rgba(255,255,255,0.50); padding: 15px 40px;
+            font-family: 'Cinzel', serif; font-weight: 500;
+            font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+            transition: all .4s ease;
+        }
+        .btn-outline:hover { background: rgba(255,255,255,0.04); border-color: rgba(74,143,231,0.35); color: #5e9ef0; }
+
+        /* ============ FOOTER — Charlotte Wealth style ============ */
+        .footer {
+            background: #080e1c;
+            border-top: 1px solid rgba(255,255,255,0.03);
+        }
+        .footer-link {
+            font-family: 'Cinzel', serif; font-size: 10.5px; font-weight: 500;
+            letter-spacing: 0.07em; text-transform: uppercase;
+            color: rgba(255,255,255,0.35); display: block; padding: 5px 0;
+            transition: color 0.3s;
+        }
+        .footer-link:hover { color: #5e9ef0; }
+        .contact-icon {
+            width: 34px; height: 34px; border-radius: 50%;
+            background: rgba(74,143,231,0.08);
+            display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+        }
+
+        /* ============ ANIMATIONS ============ */
+        [data-reveal] {
+            opacity: 0; transform: translateY(24px);
+            transition: opacity 0.9s cubic-bezier(.16,1,.3,1), transform 0.9s cubic-bezier(.16,1,.3,1);
+        }
+        [data-reveal].visible { opacity: 1; transform: translateY(0); }
+        [data-reveal="d1"] { transition-delay: .12s }
+        [data-reveal="d2"] { transition-delay: .24s }
+        [data-reveal="d3"] { transition-delay: .36s }
+        [data-reveal="d4"] { transition-delay: .48s }
+
+        ::-webkit-scrollbar { width: 4px }
+        ::-webkit-scrollbar-track { background: #080e1c }
+        ::-webkit-scrollbar-thumb { background: rgba(74,143,231,0.15); border-radius: 2px }
+    </style>
+</head>
+<body class="antialiased">
+
+<!-- ============ HERO ============ -->
+<section id="home" class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-hue"></div>
+    <div class="hero-bloom"></div>
+    <div class="hero-bottom-fade"></div>
+
+    <!-- NAV — part of hero, NOT fixed -->
+    <div class="hero-nav">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12">
+            <!-- Shield centered -->
+            <div class="flex justify-center mb-4">
+                <a href="#home" class="shield">
+                    <div class="shield-bg"></div>
+                    <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega">
+                </a>
+            </div>
+            <!-- Nav links -->
+            <div class="hidden md:flex items-center justify-center gap-9">
+                <a href="#home" class="nav-link" style="color:rgba(255,255,255,0.65)">Home</a>
+                <a href="#about" class="nav-link">About Us</a>
+                <a href="#services" class="nav-link">Services</a>
+                <span class="text-white/8 text-xs">|</span>
+                <a href="#risk-talks" class="nav-link">Risk Talks</a>
+                <a href="#services" class="nav-link">Resources</a>
+                <a href="#contact" class="nav-link">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Center content -->
+    <div class="hero-content">
+        <div data-reveal>
+            <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.5rem] font-400 text-white tracking-[0.12em] uppercase leading-tight mb-5">
+                Delta Vega
+            </h1>
+        </div>
+        <div data-reveal="d1">
+            <p class="font-body text-[15px] md:text-base text-white/35 font-300 max-w-md mx-auto mb-10 leading-relaxed">Financial engineering consultancy specializing in quantitative analysis, risk management, and professional training.</p>
+        </div>
+        <div data-reveal="d2">
+            <a href="#contact" class="btn-accent" style="padding:18px 72px; font-size:.75rem;">Contact Us</a>
+        </div>
+    </div>
+
+    <!-- Decorative carousel arrow -->
+    <div class="absolute right-8 top-1/2 -translate-y-1/2 z-10 hidden lg:block">
+        <div class="w-11 h-11 border border-white/10 rounded-full flex items-center justify-center hover:border-white/25 transition-colors cursor-pointer">
+            <svg class="w-4 h-4 text-white/20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Service overlay strip -->
+    <div class="service-strip w-full">
+        <div class="grid md:grid-cols-3">
+            <div class="svc-overlay" data-reveal>
+                <div>
+                    <h3>Training<br>Programs</h3>
+                    <p>Expert-Led Professional Development</p>
+                </div>
+                <span class="arr">&rsaquo;</span>
+            </div>
+            <div class="svc-overlay" data-reveal="d1">
+                <div>
+                    <h3>Risk Management<br>& Advisory</h3>
+                    <p>LIBOR, SOFR, VaR & Model Risk</p>
+                </div>
+                <span class="arr">&rsaquo;</span>
+            </div>
+            <div class="svc-overlay" data-reveal="d2">
+                <div>
+                    <h3>Publications<br>& Research</h3>
+                    <p>Technical Papers & Video Resources</p>
+                </div>
+                <span class="arr">&rsaquo;</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ ABOUT ============ -->
+<section id="about" class="about py-28 lg:py-36 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+            <div data-reveal>
+                <div class="corner-frame">
+                    <img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=700&q=80&auto=format"
+                         alt="Financial Analysis" class="w-full object-cover" style="aspect-ratio:5/4;">
+                </div>
+            </div>
+            <div>
+                <div data-reveal>
+                    <p class="font-body text-[10px] uppercase tracking-[.28em] text-accent/60 mb-5 font-500">About Delta Vega</p>
+                    <h2 class="font-heading text-2xl md:text-3xl text-white/90 tracking-[.06em] uppercase leading-[1.2] mb-6">
+                        Precision-Driven<br>Financial Engineering
+                    </h2>
+                    <div class="accent-line mb-8"></div>
+                </div>
+                <div data-reveal="d1">
+                    <p class="font-body text-white/30 text-[15px] leading-[1.9] mb-5 font-300">Delta Vega is a New York-based financial engineering consultancy founded by Jonathan Schachter, PhD. The firm provides comprehensive training programs, technical publications, and educational resources.</p>
+                    <p class="font-body text-white/25 text-[15px] leading-[1.9] mb-10 font-300">Our approach covers LIBOR transition, SOFR modeling, CCAR stress testing, VaR methodologies, and model risk management under SR 11-7 guidelines.</p>
+                </div>
+                <a href="#services" class="btn-outline" data-reveal="d2">Our Services</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ STATS BAR ============ -->
+<div class="stats-bar py-14 px-6 lg:px-12">
+    <div class="max-w-5xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+        <div data-reveal>
+            <p class="font-heading text-2xl md:text-3xl text-white/80 tracking-wider mb-2">20+</p>
+            <p class="font-body text-[9px] uppercase tracking-[.2em] text-white/20 font-400">Years Experience</p>
+        </div>
+        <div data-reveal="d1">
+            <p class="font-heading text-2xl md:text-3xl text-white/80 tracking-wider mb-2">PhD</p>
+            <p class="font-body text-[9px] uppercase tracking-[.2em] text-white/20 font-400">Quantitative Analysis</p>
+        </div>
+        <div data-reveal="d2">
+            <p class="font-heading text-2xl md:text-3xl text-white/80 tracking-wider mb-2">Free</p>
+            <p class="font-body text-[9px] uppercase tracking-[.2em] text-white/20 font-400">Public Risk Talks</p>
+        </div>
+        <div data-reveal="d3">
+            <p class="font-heading text-2xl md:text-3xl text-white/80 tracking-wider mb-2">NYC</p>
+            <p class="font-body text-[9px] uppercase tracking-[.2em] text-white/20 font-400">New York Based</p>
+        </div>
+    </div>
+</div>
+
+<!-- ============ PHOTO BREAK — Risk Talks ============ -->
+<section id="risk-talks" class="photo-break">
+    <div class="bg"></div>
+    <div class="ov"></div>
+    <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 py-28 lg:py-36">
+        <div class="max-w-lg" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.28em] text-accent/40 mb-5 font-500">Free & Open to the Public</p>
+            <h2 class="font-heading text-2xl md:text-3xl text-white/90 tracking-[.06em] uppercase leading-[1.2] mb-6">
+                Risk Management Talks
+            </h2>
+            <div class="accent-line mb-8"></div>
+            <p class="font-body text-white/28 text-[15px] leading-relaxed mb-10 font-300">Join our regular discussions on quantitative risk, financial modeling, and market developments. Available via Zoom and YouTube.</p>
+            <a href="#contact" class="btn-accent">Join Next Session</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ SERVICES GRID ============ -->
+<section id="services" class="services-section py-28 lg:py-36 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="text-center mb-16" data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.28em] text-accent/50 mb-5 font-500">Our Expertise</p>
+            <h2 class="font-heading text-2xl md:text-3xl text-white/85 tracking-[.06em] uppercase">What We Offer</h2>
+        </div>
+        <div class="grid md:grid-cols-2 gap-6">
+            <div class="detail-card" data-reveal>
+                <span class="font-heading text-4xl text-accent/6 block mb-3">01</span>
+                <h3 class="font-heading text-sm text-white/80 tracking-[.08em] uppercase mb-3">Training Programs</h3>
+                <div class="accent-line mb-5"></div>
+                <p class="font-body text-white/25 leading-relaxed text-sm font-300">Structured courses enhancing technical skills across financial engineering disciplines, from introductory models to advanced quantitative methods.</p>
+            </div>
+            <div class="detail-card" data-reveal="d1">
+                <span class="font-heading text-4xl text-accent/6 block mb-3">02</span>
+                <h3 class="font-heading text-sm text-white/80 tracking-[.08em] uppercase mb-3">Video Resources</h3>
+                <div class="accent-line mb-5"></div>
+                <p class="font-body text-white/25 leading-relaxed text-sm font-300">Educational video content providing visual learning experiences and expert-led walkthroughs of complex financial models.</p>
+            </div>
+            <div class="detail-card" data-reveal="d2">
+                <span class="font-heading text-4xl text-accent/6 block mb-3">03</span>
+                <h3 class="font-heading text-sm text-white/80 tracking-[.08em] uppercase mb-3">Publications</h3>
+                <div class="accent-line mb-5"></div>
+                <p class="font-body text-white/25 leading-relaxed text-sm font-300">Technical papers and research materials for staying current with evolving risk management standards and regulatory requirements.</p>
+            </div>
+            <div class="detail-card" data-reveal="d3">
+                <span class="font-heading text-4xl text-accent/6 block mb-3">04</span>
+                <h3 class="font-heading text-sm text-white/80 tracking-[.08em] uppercase mb-3">Consulting</h3>
+                <div class="accent-line mb-5"></div>
+                <p class="font-body text-white/25 leading-relaxed text-sm font-300">Expert guidance for LIBOR transition, SOFR modeling, CCAR, VaR, and SR 11-7 model risk compliance.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section id="contact" class="cta-section py-28 lg:py-36 px-6 lg:px-12">
+    <div class="max-w-3xl mx-auto text-center relative z-10">
+        <div data-reveal>
+            <p class="font-body text-[10px] uppercase tracking-[.28em] text-accent/35 mb-7 font-500">Start the Conversation</p>
+            <h2 class="font-heading text-2xl md:text-3xl text-white/85 tracking-[.06em] uppercase leading-[1.2] mb-6">
+                Ready to Elevate Your Expertise?
+            </h2>
+            <div class="accent-line mx-auto mb-10"></div>
+            <p class="font-body text-white/25 text-[15px] leading-relaxed mb-14 max-w-lg mx-auto font-300">Connect with us to learn about our training programs, publications, and complimentary risk management talks.</p>
+        </div>
+        <div data-reveal="d1">
+            <a href="mailto:js1@delta-vega.com" class="btn-accent">Get in Touch</a>
+        </div>
+    </div>
+</section>
+
+<!-- ============ FOOTER — Charlotte Wealth style ============ -->
+<footer class="footer py-12 px-6 lg:px-12">
+    <div class="max-w-6xl mx-auto">
+        <div class="grid md:grid-cols-4 gap-10 lg:gap-14 items-start">
+            <!-- Logo + copyright -->
+            <div>
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="shield" style="width:40px;height:44px;">
+                        <div class="shield-bg"></div>
+                        <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="" style="height:16px;">
+                    </div>
+                    <div>
+                        <span class="font-heading text-xs text-white/55 tracking-[.08em] uppercase block">Delta Vega</span>
+                        <span class="font-body text-[8px] text-white/18 uppercase tracking-wider">Financial Engineering</span>
+                    </div>
+                </div>
+                <p class="font-body text-white/12 text-[11px] mt-5">Copyright Delta Vega 2025.<br>All Rights Reserved</p>
+            </div>
+            <!-- Nav col 1 -->
+            <div>
+                <a href="#home" class="footer-link">Home</a>
+                <a href="#about" class="footer-link">About Us</a>
+                <a href="#services" class="footer-link">Services</a>
+            </div>
+            <!-- Nav col 2 -->
+            <div>
+                <a href="#risk-talks" class="footer-link">Risk Talks</a>
+                <a href="#services" class="footer-link">Resources</a>
+                <a href="#contact" class="footer-link">Contact</a>
+            </div>
+            <!-- Contact with icons -->
+            <div class="space-y-4">
+                <div class="flex items-center gap-3">
+                    <div class="contact-icon">
+                        <svg class="w-3.5 h-3.5 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                        </svg>
+                    </div>
+                    <p class="font-body text-white/28 text-[11px] leading-relaxed">New York, NY<br>United States</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="contact-icon">
+                        <svg class="w-3.5 h-3.5 text-accent/60" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="1.5">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"/>
+                        </svg>
+                    </div>
+                    <p class="font-body text-white/28 text-[11px]"><span class="font-500">js1@delta-vega.com</span></p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div class="contact-icon">
+                        <svg class="w-3.5 h-3.5 text-accent/60" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                    </div>
+                    <p class="font-body text-white/28 text-[11px]"><span class="font-500">LinkedIn</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // Mobile menu
+    const mb = document.getElementById('mobile-btn');
+    if (mb) mb.addEventListener('click', () => document.getElementById('mobile-menu')?.classList.toggle('hidden'));
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+        a.addEventListener('click', e => {
+            e.preventDefault();
+            const t = document.querySelector(a.getAttribute('href'));
+            if (t) t.scrollIntoView({ behavior:'smooth', block:'start' });
+        });
+    });
+
+    // Reveal
+    const obs = new IntersectionObserver(entries => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.06, rootMargin: '0px 0px -30px 0px' });
+    document.querySelectorAll('[data-reveal]').forEach(el => obs.observe(el));
+</script>
+
+</body>
+</html><!-- deployed Sat Mar 14 21:53:16 WSN 2026 -->

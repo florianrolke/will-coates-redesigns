@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delta Vega — Quantitative Risk Advisory | v3 RALPH</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&family=Palanquin:wght@300;400;500&family=Overpass:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        forest: '#09240F',
+        navy: '#0a1628',
+        gold: '#c9a96e',
+        red: '#CC0000',
+        cream: '#faf8f5',
+        darkest: '#060d0a',
+      },
+      fontFamily: {
+        cormorant: ['Cormorant Garamond', 'serif'],
+        palanquin: ['Palanquin', 'sans-serif'],
+        overpass: ['Overpass', 'sans-serif'],
+      }
+    }
+  }
+}
+</script>
+<style>
+  /* Scrollbar */
+  ::-webkit-scrollbar { width: 4px; }
+  ::-webkit-scrollbar-track { background: #09240F; }
+  ::-webkit-scrollbar-thumb { background: rgba(201,169,110,0.3); border-radius: 2px; }
+  html { scroll-behavior: smooth; }
+
+  /* Preloader */
+  #preloader {
+    position: fixed; inset: 0; z-index: 10000;
+    background: #09240F;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    transition: clip-path 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    clip-path: inset(0 0 0 0);
+  }
+  #preloader.exit {
+    clip-path: inset(50% 0 50% 0);
+  }
+  #preloader .gold-line {
+    width: 0; height: 1px;
+    background: linear-gradient(90deg, #c9a96e, #b8944f);
+    transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  #preloader.animate .gold-line { width: 120px; }
+  #preloader .pre-title {
+    font-family: 'Cormorant Garamond', serif;
+    color: #c9a96e; font-size: 1.5rem;
+    letter-spacing: 0.5em; text-transform: uppercase;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.8s 0.5s, transform 0.8s 0.5s;
+  }
+  #preloader.animate .pre-title { opacity: 1; transform: translateY(0); }
+  #preloader .pre-subtitle {
+    font-family: 'Overpass', sans-serif;
+    color: rgba(201,169,110,0.4); font-size: 0.65rem;
+    letter-spacing: 0.4em; text-transform: uppercase;
+    opacity: 0; transform: translateY(10px);
+    transition: opacity 0.8s 1s, transform 0.8s 1s;
+  }
+  #preloader.animate .pre-subtitle { opacity: 1; transform: translateY(0); }
+
+  /* Scroll Progress */
+  #scroll-progress {
+    position: fixed; top: 0; left: 0; height: 2px;
+    background: linear-gradient(90deg, #c9a96e, #b8944f);
+    z-index: 9999; width: 0;
+    transition: none;
+  }
+
+  /* Metallic Gold Shimmer */
+  .metallic-gold {
+    background: linear-gradient(135deg, #8B6914 0%, #DAA520 20%, #FFD700 35%, #FFEAA7 50%, #DAA520 65%, #B8860B 80%, #8B6914 100%);
+    background-size: 200% 200%;
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: metalShift 6s ease-in-out infinite;
+  }
+  @keyframes metalShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+  }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* Magnetic Button */
+  .magnetic-btn {
+    position: relative; display: inline-flex;
+    align-items: center; justify-content: center;
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .magnetic-text {
+    will-change: transform;
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  /* Marquee */
+  @keyframes marqueeScroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+  .marquee-track {
+    display: flex; width: max-content;
+    animation: marqueeScroll 35s linear infinite;
+  }
+  .marquee-track:hover { animation-play-state: paused; }
+
+  /* Nav */
+  #main-nav {
+    transition: background 0.5s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  #main-nav.solid {
+    background: rgba(9,36,15,0.95) !important;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(201,169,110,0.3);
+  }
+
+  /* Service panel underline */
+  .service-panel .gold-underline {
+    width: 48px; height: 0.5px; background: #c9a96e;
+    transition: width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .service-panel:hover .gold-underline { width: 80px; }
+  .service-panel { transition: background 0.5s cubic-bezier(0.25, 1, 0.5, 1); }
+
+  /* Overlay card arrow */
+  .overlay-card .arrow {
+    transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), color 0.4s;
+  }
+  .overlay-card:hover .arrow {
+    transform: translateX(6px); color: #c9a96e;
+  }
+
+  /* Insight card brackets */
+  .insight-card .bracket-tl,
+  .insight-card .bracket-br {
+    position: absolute; width: 24px; height: 24px;
+    border-color: #c9a96e;
+    opacity: 0; transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+  .insight-card:hover .bracket-tl,
+  .insight-card:hover .bracket-br { opacity: 1; }
+  .insight-card .bracket-tl { top: 8px; left: 8px; border-top: 2px solid; border-left: 2px solid; }
+  .insight-card .bracket-br { bottom: 8px; right: 8px; border-bottom: 2px solid; border-right: 2px solid; }
+
+  /* Mobile menu */
+  #mobile-menu {
+    transform: translateX(100%);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  #mobile-menu.open { transform: translateX(0); }
+
+  /* Custom utilities */
+  .transition-luxury { transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1); }
+</style>
+</head>
+<body class="bg-forest text-white font-palanquin antialiased overflow-x-hidden">
+
+<!-- ========== PRELOADER ========== -->
+<div id="preloader">
+  <div class="gold-line mb-8"></div>
+  <div class="pre-title mb-3">Delta Vega</div>
+  <div class="pre-subtitle">Quantitative Excellence</div>
+</div>
+
+<!-- ========== SCROLL PROGRESS ========== -->
+<div id="scroll-progress"></div>
+
+<!-- ========== NAVIGATION ========== -->
+<nav id="main-nav" class="fixed top-0 left-0 right-0 z-[9998] bg-transparent border-b border-transparent">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="flex items-center justify-between h-20">
+      <!-- Left nav -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#about" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/60 hover:text-gold transition-colors duration-500">About</a>
+        <a href="#services" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/60 hover:text-gold transition-colors duration-500">Services</a>
+        <a href="#approach" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/60 hover:text-gold transition-colors duration-500">Approach</a>
+      </div>
+
+      <!-- Center logo -->
+      <div class="flex flex-col items-center">
+        <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega" class="h-9 brightness-0 invert">
+        <span class="font-overpass text-[9px] uppercase tracking-[0.3em] text-white/30 mt-0.5">Financial Engineering</span>
+      </div>
+
+      <!-- Right nav -->
+      <div class="hidden lg:flex items-center gap-8">
+        <a href="#team" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/60 hover:text-gold transition-colors duration-500">Team</a>
+        <a href="#insights" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/60 hover:text-gold transition-colors duration-500">Insights</a>
+        <a href="#contact" class="font-overpass text-[11px] uppercase tracking-[0.2em] border border-white/20 px-5 py-2 text-white/60 hover:bg-white hover:text-forest transition-all duration-500">Contact</a>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button id="hamburger" class="lg:hidden flex flex-col gap-1.5 p-2" aria-label="Menu">
+        <span class="block w-6 h-px bg-white/80"></span>
+        <span class="block w-4 h-px bg-gold ml-auto"></span>
+        <span class="block w-6 h-px bg-white/80"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div id="mobile-menu" class="fixed inset-0 z-[9997] bg-forest/98 flex flex-col items-center justify-center gap-8">
+  <a href="#about" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">About</a>
+  <a href="#services" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">Services</a>
+  <a href="#approach" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">Approach</a>
+  <a href="#team" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">Team</a>
+  <a href="#insights" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">Insights</a>
+  <a href="#contact" class="mobile-link font-cormorant text-3xl text-white/70 hover:text-gold transition-colors">Contact</a>
+</div>
+
+<!-- ========== HERO ========== -->
+<section id="hero" class="relative min-h-screen flex items-center overflow-hidden bg-forest">
+  <!-- Geometric gold diagonal grid watermark -->
+  <svg class="absolute inset-0 w-full h-full" style="opacity:0.03" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="heroGrid" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+        <line x1="0" y1="0" x2="80" y2="0" stroke="#c9a96e" stroke-width="0.5"/>
+        <line x1="0" y1="0" x2="0" y2="80" stroke="#c9a96e" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#heroGrid)"/>
+  </svg>
+
+  <!-- Right photo -->
+  <div class="absolute top-0 right-0 w-full lg:w-[65%] h-full">
+    <div class="absolute inset-0" style="clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);">
+      <img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1920&q=80" alt="" class="w-full h-full object-cover">
+    </div>
+    <!-- Gradient shield -->
+    <div class="absolute inset-0 bg-gradient-to-r from-forest via-forest/80 to-transparent"></div>
+  </div>
+
+  <!-- Hero content -->
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 w-full pt-32 pb-48 lg:pb-56">
+    <div class="max-w-xl">
+      <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-6">Quantitative Risk Advisory</p>
+      <h1 class="reveal font-cormorant text-5xl sm:text-6xl lg:text-7xl font-light leading-[1.05] mb-6">
+        Precision<br>
+        <span class="italic metallic-gold">in Every</span><br>
+        Variable
+      </h1>
+      <div class="reveal w-16 h-px bg-gold mb-6"></div>
+      <p class="reveal font-palanquin text-sm text-white/60 leading-relaxed max-w-md mb-10">
+        Delta Vega delivers institutional-grade quantitative risk advisory, combining mathematical rigour with deep market insight to protect and optimise portfolios across global markets.
+      </p>
+      <div class="reveal flex flex-wrap gap-4">
+        <a href="#contact" class="magnetic-btn bg-red text-white font-overpass text-[11px] uppercase tracking-[0.2em] px-8 py-4 hover:bg-red/90 transition-colors duration-500 shadow-[0_4px_20px_rgba(204,0,0,0.35)]">
+          <span class="magnetic-text">Schedule Consultation</span>
+        </a>
+        <a href="#approach" class="magnetic-btn border border-white/20 text-white/70 font-overpass text-[11px] uppercase tracking-[0.2em] px-8 py-4 hover:border-gold/50 hover:text-gold transition-all duration-500">
+          <span class="magnetic-text">Our Approach</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-32 lg:bottom-36 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+    <span class="font-overpass text-[9px] uppercase tracking-[0.3em] text-white/20">Scroll</span>
+    <div class="w-px h-8 bg-gradient-to-b from-gold/40 to-transparent"></div>
+  </div>
+
+  <!-- 3 Service Overlay Cards -->
+  <div class="absolute bottom-0 left-0 right-0 z-20">
+    <div class="max-w-7xl mx-auto px-0 lg:px-10">
+      <div class="grid grid-cols-1 lg:grid-cols-3">
+        <div class="overlay-card group px-8 py-6 cursor-pointer" style="background:rgba(9,36,15,0.75);backdrop-filter:blur(12px);">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/80 mb-1">Risk Advisory</h4>
+              <p class="font-cormorant text-[13px] italic text-gold/60">Institutional risk frameworks</p>
+            </div>
+            <span class="arrow text-white/30 text-xl font-light">&#8250;</span>
+          </div>
+        </div>
+        <div class="overlay-card group px-8 py-6 cursor-pointer border-l border-white/8" style="background:rgba(9,36,15,0.75);backdrop-filter:blur(12px);">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/80 mb-1">Financial Engineering</h4>
+              <p class="font-cormorant text-[13px] italic text-gold/60">Derivative pricing &amp; structuring</p>
+            </div>
+            <span class="arrow text-white/30 text-xl font-light">&#8250;</span>
+          </div>
+        </div>
+        <div class="overlay-card group px-8 py-6 cursor-pointer border-l border-white/8" style="background:rgba(9,36,15,0.75);backdrop-filter:blur(12px);">
+          <div class="flex items-center justify-between">
+            <div>
+              <h4 class="font-overpass text-[11px] uppercase tracking-[0.2em] text-white/80 mb-1">Quantitative Research</h4>
+              <p class="font-cormorant text-[13px] italic text-gold/60">Stochastic modelling &amp; ML</p>
+            </div>
+            <span class="arrow text-white/30 text-xl font-light">&#8250;</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== MARQUEE BAND ========== -->
+<section class="bg-forest border-y border-white/5 py-6 overflow-hidden">
+  <div class="marquee-track">
+    <span class="font-cormorant text-6xl lg:text-7xl text-white/[0.08] whitespace-nowrap px-4">RISK <span class="text-white/20">&#9670;</span> DERIVATIVES <span class="text-white/20">&#9670;</span> QUANTITATIVE <span class="text-white/20">&#9670;</span> STOCHASTIC <span class="text-white/20">&#9670;</span> ANALYTICS <span class="text-white/20">&#9670;</span>&nbsp;</span>
+    <span class="font-cormorant text-6xl lg:text-7xl text-white/[0.08] whitespace-nowrap px-4">RISK <span class="text-white/20">&#9670;</span> DERIVATIVES <span class="text-white/20">&#9670;</span> QUANTITATIVE <span class="text-white/20">&#9670;</span> STOCHASTIC <span class="text-white/20">&#9670;</span> ANALYTICS <span class="text-white/20">&#9670;</span>&nbsp;</span>
+  </div>
+</section>
+
+<!-- ========== ABOUT ========== -->
+<section id="about" class="relative bg-cream py-24 lg:py-32 overflow-hidden">
+  <!-- Geometric square grid watermark -->
+  <svg class="absolute inset-0 w-full h-full" style="opacity:0.025" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="aboutGrid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
+        <rect x="0" y="0" width="60" height="60" fill="none" stroke="#09240F" stroke-width="0.5"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#aboutGrid)"/>
+  </svg>
+
+  <div class="relative max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      <!-- Text (7 cols) -->
+      <div class="lg:col-span-7">
+        <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Who We Are</p>
+        <h2 class="reveal font-cormorant text-4xl lg:text-5xl font-light text-forest leading-tight mb-6">
+          Where Mathematics<br>Meets <span class="italic metallic-gold">Markets</span>
+        </h2>
+        <div class="reveal w-16 h-px bg-gold mb-8"></div>
+        <p class="reveal font-palanquin text-sm text-forest/60 leading-relaxed mb-6">
+          Founded on the principle that financial risk demands quantitative precision, Delta Vega has spent over fifteen years at the intersection of advanced mathematics and capital markets. Our team of quants, structurers, and risk specialists work with global institutions to solve their most complex challenges.
+        </p>
+        <p class="reveal font-palanquin text-sm text-forest/60 leading-relaxed">
+          From derivative pricing and regulatory capital optimisation to bespoke stochastic models, we provide the analytical depth that traditional consultancies cannot match. Every engagement is driven by rigour, transparency, and a commitment to measurable outcomes.
+        </p>
+      </div>
+
+      <!-- Photo (5 cols) -->
+      <div class="lg:col-span-5">
+        <div class="reveal relative">
+          <!-- Gold frame offset -->
+          <div class="absolute -top-3 -right-3 w-full h-full border-2 border-gold/40"></div>
+          <!-- Corner bracket bottom-left -->
+          <div class="absolute -bottom-4 -left-4 w-5 h-5 border-b-2 border-l-2 border-gold/30"></div>
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80" alt="Delta Vega Office" class="relative w-full aspect-[4/5] object-cover" loading="lazy" style="filter:grayscale(20%);">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== ANIMATED STATS BAR ========== -->
+<section class="py-16 lg:py-20 border-y border-white/5" style="background:linear-gradient(135deg, #09240F, #0a1628, #09240F);">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4 text-center">
+      <div class="reveal">
+        <div class="font-cormorant text-5xl lg:text-6xl font-light text-white">
+          <span class="counter" data-target="15" data-suffix="+">0</span>
+        </div>
+        <p class="font-overpass text-[11px] uppercase tracking-[0.4em] text-white/35 mt-2">Years Advisory</p>
+      </div>
+      <div class="reveal">
+        <div class="font-cormorant text-5xl lg:text-6xl font-light text-white">
+          <span class="counter" data-target="2.8" data-prefix="$" data-suffix="T" data-decimal="1">0</span>
+        </div>
+        <p class="font-overpass text-[11px] uppercase tracking-[0.4em] text-white/35 mt-2">Notional Analyzed</p>
+      </div>
+      <div class="reveal">
+        <div class="font-cormorant text-5xl lg:text-6xl font-light text-white">
+          <span class="counter" data-target="30" data-suffix="+">0</span>
+        </div>
+        <p class="font-overpass text-[11px] uppercase tracking-[0.4em] text-white/35 mt-2">Research Papers</p>
+      </div>
+      <div class="reveal">
+        <div class="font-cormorant text-5xl lg:text-6xl font-light text-white">
+          <span class="counter" data-target="8">0</span>
+        </div>
+        <p class="font-overpass text-[11px] uppercase tracking-[0.4em] text-white/35 mt-2">Global Institutions</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== RHYTHM BREAK — Cream Divider ========== -->
+<section class="bg-cream py-10 lg:py-12">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10 text-center">
+    <div class="w-12 h-px bg-gold/40 mx-auto mb-5"></div>
+    <p class="font-overpass text-[10px] uppercase tracking-[0.4em] text-forest/30">Explore Our Capabilities</p>
+  </div>
+</section>
+
+<!-- ========== SERVICES — 2x2 PANELS ON CITY BG ========== -->
+<section id="services" class="relative overflow-hidden">
+  <!-- City background -->
+  <img src="https://images.unsplash.com/photo-1486325212027-8a9ce184b882?w=1920&q=80" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <div class="absolute inset-0 bg-black/70"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-0">
+    <!-- Section header -->
+    <div class="text-center mb-12 lg:mb-0 lg:py-16">
+      <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-4">What We Do</p>
+      <h2 class="reveal font-cormorant text-4xl lg:text-5xl font-light leading-tight">
+        Our <span class="italic metallic-gold">Core Disciplines</span>
+      </h2>
+    </div>
+
+    <!-- 2x2 Grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-2">
+      <!-- Top Left: Dark Green -->
+      <div class="service-panel p-10 lg:py-12 lg:px-10 cursor-pointer hover:brightness-110 transition-all duration-500" style="background:rgba(9,36,15,0.85);">
+        <div class="reveal">
+          <h3 class="font-cormorant text-xl text-white mb-4">Securities &amp; Derivatives</h3>
+          <div class="gold-underline mb-5"></div>
+          <p class="font-palanquin text-sm text-white/60 leading-relaxed">Custom pricing models for exotic structures, volatility surface calibration, and hedging strategy design. We engineer bespoke solutions for the instruments that matter to your book.</p>
+        </div>
+      </div>
+      <!-- Top Right: Navy -->
+      <div class="service-panel p-10 lg:py-12 lg:px-10 cursor-pointer hover:brightness-110 transition-all duration-500" style="background:rgba(10,22,40,0.85);">
+        <div class="reveal">
+          <h3 class="font-cormorant text-xl text-white mb-4">Regulatory Capital</h3>
+          <div class="gold-underline mb-5"></div>
+          <p class="font-palanquin text-sm text-white/60 leading-relaxed">Basel III/IV implementation, FRTB internal model builds, and capital optimisation. We navigate the regulatory landscape so your capital works harder and your compliance is airtight.</p>
+        </div>
+      </div>
+      <!-- Bottom Left: Navy -->
+      <div class="service-panel p-10 lg:py-12 lg:px-10 cursor-pointer hover:brightness-110 transition-all duration-500" style="background:rgba(10,22,40,0.85);">
+        <div class="reveal">
+          <h3 class="font-cormorant text-xl text-white mb-4">Portfolio Optimisation</h3>
+          <div class="gold-underline mb-5"></div>
+          <p class="font-palanquin text-sm text-white/60 leading-relaxed">Multi-asset allocation frameworks, factor decomposition, and risk-parity strategies. Our quantitative models identify efficient frontiers that balance return targets against real-world constraints.</p>
+        </div>
+      </div>
+      <!-- Bottom Right: Burgundy -->
+      <div class="service-panel p-10 lg:py-12 lg:px-10 cursor-pointer hover:brightness-110 transition-all duration-500" style="background:rgba(128,0,0,0.85);">
+        <div class="reveal">
+          <h3 class="font-cormorant text-xl text-white mb-4">Risk Analytics</h3>
+          <div class="gold-underline mb-5"></div>
+          <p class="font-palanquin text-sm text-white/60 leading-relaxed">VaR, stress testing, scenario analysis, and counterparty credit risk. We build the analytical infrastructure that gives senior management and regulators confidence in your risk posture.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== TEAM SPLIT (DARK NAVY) ========== -->
+<section id="team" class="bg-navy py-0 overflow-hidden">
+  <div id="approach" class="grid grid-cols-1 lg:grid-cols-2 min-h-[600px]">
+    <!-- Photo left -->
+    <div class="relative h-80 lg:h-auto">
+      <img src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?w=1200&q=80" alt="Team" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+      <!-- Edge blend gradient into navy -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-transparent to-navy hidden lg:block"></div>
+      <div class="absolute inset-0 bg-gradient-to-b from-transparent to-navy lg:hidden"></div>
+    </div>
+    <!-- Text right -->
+    <div class="flex items-center px-8 lg:px-16 py-16 lg:py-24">
+      <div class="max-w-lg">
+        <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Our Expertise</p>
+        <h2 class="reveal font-cormorant text-4xl lg:text-5xl font-light leading-tight mb-6">
+          A Diverse Background<br>of <span class="italic metallic-gold">Specialists</span>
+        </h2>
+        <div class="reveal w-16 h-px bg-gold mb-8"></div>
+        <ul class="reveal space-y-4 mb-10">
+          <li class="flex items-start gap-4">
+            <span class="w-[6px] h-px bg-gold mt-[10px] flex-shrink-0"></span>
+            <span class="font-palanquin text-sm text-white/60 leading-relaxed">PhDs in mathematical finance, stochastic calculus, and computational statistics from leading research institutions</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-[6px] h-px bg-gold mt-[10px] flex-shrink-0"></span>
+            <span class="font-palanquin text-sm text-white/60 leading-relaxed">Veteran structurers and traders with decades of sell-side experience at bulge bracket banks</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-[6px] h-px bg-gold mt-[10px] flex-shrink-0"></span>
+            <span class="font-palanquin text-sm text-white/60 leading-relaxed">Regulatory specialists who have shaped Basel frameworks and FRTB implementation globally</span>
+          </li>
+          <li class="flex items-start gap-4">
+            <span class="w-[6px] h-px bg-gold mt-[10px] flex-shrink-0"></span>
+            <span class="font-palanquin text-sm text-white/60 leading-relaxed">Machine learning engineers building next-generation risk models and real-time analytics platforms</span>
+          </li>
+        </ul>
+        <a href="#contact" class="reveal magnetic-btn inline-block bg-gold text-forest font-overpass text-[11px] uppercase tracking-[0.2em] px-8 py-4 hover:bg-gold/90 transition-colors duration-500">
+          <span class="magnetic-text">Meet the Team</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== INSIGHTS ========== -->
+<section id="insights" class="bg-cream py-24 lg:py-32">
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <!-- Header -->
+    <div class="reveal flex flex-col sm:flex-row sm:items-end sm:justify-between mb-14">
+      <div>
+        <p class="font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Risk Talks</p>
+        <h2 class="font-cormorant text-4xl lg:text-5xl font-light text-forest">Latest Insights</h2>
+      </div>
+      <a href="#" class="font-overpass text-[11px] uppercase tracking-[0.2em] text-gold flex items-center gap-2 mt-4 sm:mt-0 hover:gap-3 transition-all duration-500">
+        View All <span>&#8594;</span>
+      </a>
+    </div>
+
+    <!-- 3 cards -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Card 1 -->
+      <article class="reveal insight-card group relative cursor-pointer">
+        <div class="relative overflow-hidden mb-5">
+          <div class="bracket-tl"></div>
+          <div class="bracket-br"></div>
+          <img src="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80" alt="Market Analysis" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        </div>
+        <p class="font-overpass text-[9px] uppercase tracking-[0.3em] text-gold mb-2">Market Risk</p>
+        <h3 class="font-cormorant text-xl text-forest group-hover:text-gold transition-colors duration-500 mb-2">Navigating Volatility Regimes in Post-QE Markets</h3>
+        <p class="font-overpass text-[10px] text-forest/30">12 March 2026</p>
+      </article>
+
+      <!-- Card 2 -->
+      <article class="reveal insight-card group relative cursor-pointer">
+        <div class="relative overflow-hidden mb-5">
+          <div class="bracket-tl"></div>
+          <div class="bracket-br"></div>
+          <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80" alt="Data Analytics" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        </div>
+        <p class="font-overpass text-[9px] uppercase tracking-[0.3em] text-gold mb-2">Regulatory</p>
+        <h3 class="font-cormorant text-xl text-forest group-hover:text-gold transition-colors duration-500 mb-2">FRTB 2.0: What the Latest Revisions Mean for Internal Models</h3>
+        <p class="font-overpass text-[10px] text-forest/30">28 February 2026</p>
+      </article>
+
+      <!-- Card 3 -->
+      <article class="reveal insight-card group relative cursor-pointer">
+        <div class="relative overflow-hidden mb-5">
+          <div class="bracket-tl"></div>
+          <div class="bracket-br"></div>
+          <img src="https://images.unsplash.com/photo-1504384764586-bb4cdc1707b0?w=600&q=80" alt="Quantitative Research" class="w-full aspect-[4/3] object-cover transition-transform duration-700 group-hover:scale-105" loading="lazy">
+        </div>
+        <p class="font-overpass text-[9px] uppercase tracking-[0.3em] text-gold mb-2">Research</p>
+        <h3 class="font-cormorant text-xl text-forest group-hover:text-gold transition-colors duration-500 mb-2">Machine Learning for Credit Risk: Beyond the Hype</h3>
+        <p class="font-overpass text-[10px] text-forest/30">15 February 2026</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ========== PHOTO BREAK / QUOTE ========== -->
+<section class="relative min-h-[50vh] flex items-center overflow-hidden">
+  <img src="https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=1920&q=80" alt="" class="absolute inset-0 w-full h-full object-cover" loading="lazy">
+  <!-- Directional gradient -->
+  <div class="absolute inset-0" style="background:linear-gradient(to right, rgba(9,36,15,0.92) 0%, rgba(9,36,15,0.6) 50%, transparent 100%);"></div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 py-20 lg:py-28">
+    <div class="max-w-2xl">
+      <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-6">Client Testimony</p>
+      <blockquote class="reveal font-cormorant text-2xl lg:text-3xl font-light italic text-white/90 leading-relaxed mb-8">
+        &ldquo;Delta Vega&rsquo;s quantitative rigour made them indispensable during our portfolio restructuring. Their ability to translate complex stochastic models into actionable strategies set them apart from every other advisory we&rsquo;ve engaged.&rdquo;
+      </blockquote>
+      <p class="reveal font-overpass text-[11px] uppercase tracking-[0.2em] text-white/40 mb-6">&mdash; Managing Director, Global Investment Bank</p>
+      <div class="reveal w-16 h-px bg-gold"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CTA SECTION ========== -->
+<section id="contact" class="relative bg-forest py-24 lg:py-32 overflow-hidden">
+  <!-- Faded cityscape watermark -->
+  <div class="absolute inset-0 flex items-center justify-center" style="opacity:0.06;">
+    <img src="https://images.unsplash.com/photo-1486325212027-8a9ce184b882?w=1920&q=80" alt="" class="w-full h-full object-cover" loading="lazy" style="filter:grayscale(100%);">
+    <!-- 4-edge feathering -->
+    <div class="absolute inset-0" style="box-shadow:inset 0 0 120px 80px #09240F;"></div>
+  </div>
+
+  <div class="relative z-10 max-w-4xl mx-auto px-6 lg:px-10 text-center">
+    <p class="reveal font-overpass text-[10px] uppercase tracking-[0.4em] text-gold mb-4">Get in Touch</p>
+    <h2 class="reveal font-cormorant text-4xl lg:text-5xl font-light leading-tight mb-6">
+      Let&rsquo;s Discuss Your<br><span class="italic metallic-gold">Risk Landscape</span>
+    </h2>
+    <div class="reveal w-16 h-px bg-gold mx-auto mb-10"></div>
+
+    <!-- Contact row with gold dividers -->
+    <div class="reveal flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-0 mb-12">
+      <span class="font-overpass text-[11px] uppercase tracking-[0.15em] text-white/50">London</span>
+      <span class="hidden sm:block w-px h-4 bg-gold/30 mx-6"></span>
+      <a href="mailto:info@delta-vega.com" class="font-overpass text-[11px] uppercase tracking-[0.15em] text-white/50 hover:text-gold transition-colors duration-500">info@delta-vega.com</a>
+      <span class="hidden sm:block w-px h-4 bg-gold/30 mx-6"></span>
+      <a href="#insights" class="font-overpass text-[11px] uppercase tracking-[0.15em] text-white/50 hover:text-gold transition-colors duration-500">Risk Talks</a>
+    </div>
+
+    <a href="mailto:info@delta-vega.com" class="reveal magnetic-btn inline-block bg-red text-white font-overpass text-[11px] uppercase tracking-[0.2em] px-10 py-4 hover:bg-red/90 transition-colors duration-500 shadow-[0_4px_20px_rgba(204,0,0,0.35)]">
+      <span class="magnetic-text">Schedule a Call</span>
+    </a>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-darkest pt-0 pb-12 relative">
+  <!-- Gold rule -->
+  <div class="w-full h-px bg-gold/20 mb-12"></div>
+
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
+      <!-- Logo + tagline -->
+      <div>
+        <img src="https://delta-vega.com/wp-content/uploads/brizy/imgs/Delta-Vega-Black-54x56x0x0x53x56x1620419163.png" alt="Delta Vega" class="h-10 brightness-0 invert mb-3">
+        <p class="font-palanquin text-xs text-white/25 leading-relaxed max-w-xs">Institutional-grade quantitative risk advisory. Precision in every variable.</p>
+      </div>
+
+      <!-- Nav links (2-col grid) -->
+      <div class="grid grid-cols-2 gap-x-8 gap-y-3">
+        <a href="#about" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">About</a>
+        <a href="#team" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">Team</a>
+        <a href="#services" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">Services</a>
+        <a href="#insights" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">Insights</a>
+        <a href="#approach" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">Approach</a>
+        <a href="#contact" class="font-overpass text-[11px] text-white/30 hover:text-gold transition-colors duration-500 py-2">Contact</a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="lg:text-right">
+        <p class="font-overpass text-[10px] text-white/15 uppercase tracking-[0.15em]">&copy; 2026 Delta Vega Ltd.</p>
+        <p class="font-overpass text-[10px] text-white/10 mt-1">All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Geometric triangle accent -->
+  <div class="flex justify-center mt-12">
+    <svg width="24" height="14" viewBox="0 0 24 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 0 L24 14 L0 14 Z" stroke="rgba(201,169,110,0.15)" stroke-width="1" fill="none"/>
+    </svg>
+  </div>
+</footer>
+
+<!-- ========== JAVASCRIPT ========== -->
+<script>
+(function() {
+  'use strict';
+
+  // ---- PRELOADER ----
+  const preloader = document.getElementById('preloader');
+  requestAnimationFrame(() => { preloader.classList.add('animate'); });
+  setTimeout(() => {
+    preloader.classList.add('exit');
+    setTimeout(() => { preloader.style.display = 'none'; }, 800);
+  }, 2200);
+
+  // ---- SCROLL PROGRESS BAR ----
+  const progressBar = document.getElementById('scroll-progress');
+  function updateProgress() {
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = progress + '%';
+    requestAnimationFrame(updateProgress);
+  }
+  requestAnimationFrame(updateProgress);
+
+  // ---- NAV SOLIDIFY ----
+  const nav = document.getElementById('main-nav');
+  function checkNav() {
+    if (window.scrollY > 80) {
+      nav.classList.add('solid');
+    } else {
+      nav.classList.remove('solid');
+    }
+  }
+  window.addEventListener('scroll', checkNav, { passive: true });
+  checkNav();
+
+  // ---- SCROLL REVEAL ----
+  const revealElements = document.querySelectorAll('.reveal');
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+  revealElements.forEach(el => revealObserver.observe(el));
+
+  // ---- ANIMATED COUNTERS ----
+  const counters = document.querySelectorAll('.counter');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const target = parseFloat(el.dataset.target);
+        const prefix = el.dataset.prefix || '';
+        const suffix = el.dataset.suffix || '';
+        const decimal = parseInt(el.dataset.decimal) || 0;
+        const duration = 2200;
+        const start = performance.now();
+
+        function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+
+        function animate(now) {
+          const elapsed = now - start;
+          const t = Math.min(elapsed / duration, 1);
+          const eased = easeOutCubic(t);
+          const current = eased * target;
+
+          if (decimal > 0) {
+            el.textContent = prefix + current.toFixed(decimal) + suffix;
+          } else {
+            el.textContent = prefix + Math.floor(current) + suffix;
+          }
+
+          if (t < 1) {
+            requestAnimationFrame(animate);
+          } else {
+            if (decimal > 0) {
+              el.textContent = prefix + target.toFixed(decimal) + suffix;
+            } else {
+              el.textContent = prefix + target + suffix;
+            }
+          }
+        }
+        requestAnimationFrame(animate);
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.3 });
+  counters.forEach(c => counterObserver.observe(c));
+
+  // ---- MAGNETIC BUTTONS ----
+  document.querySelectorAll('.magnetic-btn').forEach(btn => {
+    const text = btn.querySelector('.magnetic-text');
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px)`;
+      if (text) text.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
+    });
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+      if (text) text.style.transform = 'translate(0, 0)';
+    });
+  });
+
+  // ---- MOBILE MENU TOGGLE ----
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobile-menu');
+  hamburger.addEventListener('click', () => {
+    mobileMenu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.remove('open');
+    });
+  });
+
+})();
+</script>
+</body>
+</html>
