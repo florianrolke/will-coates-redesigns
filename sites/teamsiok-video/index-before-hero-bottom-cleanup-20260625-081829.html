@@ -79,24 +79,20 @@
             background-size: 256px 256px;
         }
         .hero-bottom-fade {
-            position: absolute; bottom: 0; left: 0; right: 0; height: 190px;
-            background: linear-gradient(to bottom, transparent 0%, rgba(250,248,245,.08) 48%, rgba(250,248,245,.54) 78%, #faf8f5 100%);
+            position: absolute; bottom: 0; left: 0; right: 0; height: 240px;
+            background: linear-gradient(to top, #faf8f5 0%, rgba(250,248,245,.82) 26%, rgba(250,248,245,.18) 68%, transparent 100%);
             z-index: 4;
         }
         .hero-copy { position: relative; z-index: 8; }
         .hero-copy h1 { text-shadow: 0 24px 80px rgba(0,0,0,.38); }
         .hero-copy p { text-shadow: 0 10px 40px rgba(0,0,0,.42); }
         .hero-accent-rule { width: 54px; height: 1px; background: #c9a96e; }
-        .hero-cta-reveal {
-            opacity: 0;
-            transform: translateY(14px) scale(.98);
-            pointer-events: none;
-            transition: opacity .55s ease, transform .55s cubic-bezier(.2,.7,.2,1);
-        }
-        .hero-cta-reveal.is-visible {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
+        .hero-video-badge {
+            position: absolute; right: clamp(24px, 6vw, 92px); bottom: clamp(44px, 8vw, 108px);
+            z-index: 8; max-width: 270px; padding: 18px 20px;
+            border-left: 1px solid rgba(201,169,110,.55);
+            background: linear-gradient(135deg, rgba(15,21,30,.48), rgba(15,21,30,.18));
+            backdrop-filter: blur(10px); color: rgba(255,255,255,.62);
         }
         @media (max-width: 768px) {
             .hero-bg video { object-position: 54% center; }
@@ -105,7 +101,7 @@
                     linear-gradient(180deg, rgba(7,10,15,.82) 0%, rgba(7,10,15,.52) 48%, rgba(7,10,15,.88) 100%),
                     linear-gradient(90deg, rgba(7,10,15,.78), rgba(7,10,15,.30));
             }
-            .hero-bottom-fade { height: 150px; }
+            .hero-video-badge { display: none; }
         }
 /* ============ NAV ============ */
         .nav-solid {
@@ -275,11 +271,25 @@
                 <span class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-white block">What Matters</span>
                 <span class="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-gold/95 block font-light italic">Most</span>
             </h1>
-            <div class="hero-accent-rule mb-10 reveal rd2"></div>
-            <div class="hero-cta-reveal" data-reveal-start="5.8" data-reveal-end="9.2" aria-hidden="true">
+            <div class="hero-accent-rule mb-9 reveal rd2"></div>
+            <div class="reveal rd2">
+                <p class="font-body text-lg md:text-xl text-white/62 leading-relaxed max-w-lg mb-12">A warmer, local insurance experience for families, homes, vehicles, and businesses across Peoria.</p>
+            </div>
+            <div class="flex flex-wrap gap-4 reveal rd3">
                 <a href="tel:6235666405" class="btn-accent">Start a Quote</a>
+                <a href="#services" class="btn-ghost">Explore Coverage</a>
             </div>
         </div>
+    </div>
+
+    <div class="hero-video-badge reveal rd3">
+        <p class="font-nav text-[9px] uppercase tracking-[.28em] text-gold/70 mb-3">Local Guidance</p>
+        <p class="font-body text-sm leading-relaxed">Insurance support with the calm, personal attention of a neighborhood office.</p>
+    </div>
+
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 reveal rd4" style="z-index:8">
+        <div class="w-px h-16 bg-gradient-to-b from-gold/35 to-transparent"></div>
+        <span class="font-nav text-[9px] uppercase tracking-[.28em] text-white/32">Scroll</span>
     </div>
 </section>
 
@@ -518,28 +528,6 @@
         es.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.06, rootMargin: '0px 0px -50px 0px' });
     document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
-
-    const heroVideo = document.querySelector('.hero-bg video');
-    const heroCta = document.querySelector('.hero-cta-reveal');
-    if (heroVideo && heroCta) {
-        let ctaLoopStarted = false;
-        const syncHeroCta = () => {
-            const start = Number(heroCta.dataset.revealStart || 5.8);
-            const end = Number(heroCta.dataset.revealEnd || 9.2);
-            const t = heroVideo.currentTime || 0;
-            const visible = t >= start && t <= end;
-            heroCta.classList.toggle('is-visible', visible);
-            heroCta.setAttribute('aria-hidden', visible ? 'false' : 'true');
-            requestAnimationFrame(syncHeroCta);
-        };
-        const startCtaLoop = () => {
-            if (ctaLoopStarted) return;
-            ctaLoopStarted = true;
-            syncHeroCta();
-        };
-        heroVideo.addEventListener('loadedmetadata', startCtaLoop, { once: true });
-        if (heroVideo.readyState >= 1) startCtaLoop();
-    }
 </script>
 
 <!-- GHL Chat Widget -->
