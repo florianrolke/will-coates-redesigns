@@ -52,7 +52,7 @@
   .hero h1{font-size:52px;font-weight:900;letter-spacing:-.04em;line-height:1.04;margin:20px auto 18px;max-width:920px}
   .hero h1 .grad{background:linear-gradient(90deg,#dff2ff,#c8f7dc);-webkit-background-clip:text;background-clip:text;color:transparent}
   .subhead{font-size:19px;color:rgba(255,255,255,.82);max-width:720px;margin:0 auto 30px}
-  .hero-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:760px;margin:0 auto 28px}
+  .hero-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;max-width:900px;margin:0 auto 28px}
   .hero-stat{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.22);border-radius:var(--radius);padding:16px 18px;backdrop-filter:blur(8px)}
   .hero-stat b{display:block;font-size:32px;line-height:1;font-weight:900}
   .hero-stat span{display:block;margin-top:6px;font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.72);font-weight:800}
@@ -90,6 +90,9 @@
   .touch-body{padding:17px}
   .touch-body b{display:block;font-size:17px;color:var(--ink);margin-bottom:5px}
   .touch-body span{display:block;font-size:13px;color:var(--muted)}
+  .casegrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:28px}
+  .case-tag{display:inline-block;font-size:11px;font-weight:850;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);background:var(--soft-blue);border:1px solid #d7e6ff;border-radius:999px;padding:3px 10px;margin-bottom:8px}
+  .case-tag.done{color:var(--green);background:#e8f7ee;border-color:#bfe9cd}
   .masterclasses{display:grid;grid-template-columns:1fr;gap:26px;margin-top:30px}
   .mastercard{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow)}
   .master-head{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#fff,#f8fbff)}
@@ -119,7 +122,7 @@
 
   @media(max-width:860px){
     .hero h1{font-size:38px}
-    .hero-stats,.proof-grid,.proof-pair,.relationship,.did,.masterclasses,.master-content{grid-template-columns:1fr}
+    .hero-stats,.proof-grid,.proof-pair,.relationship,.did,.masterclasses,.master-content,.casegrid{grid-template-columns:1fr}
     .proof{border-right:none;border-bottom:1px solid var(--line)}
     .proof:last-child{border-bottom:none}
     .master-media{border-right:none;border-bottom:1px solid var(--line)}.connector{display:none}
@@ -143,12 +146,13 @@
     </div>
 
     <div class="hero-inner">
-      <h1>How daily engagement created <span class="grad">446 community contributions</span> and brought members back.</h1>
-      <p class="subhead">A focused review of the posts, replies, direct outreach, and relationship follow-up that kept the AI Automations by Jack community active from May 28 to June 23.</p>
+      <h1>My daily engagement created <span class="grad">496 community contributions</span> and brought members back.</h1>
+      <p class="subhead"><strong style="color:#dff2ff">$726 ($495 + 3&times; $77) of immediate revenue + 9 scheduled masterclasses.</strong><br>Focus on private, unscalable, high-touch support, posts, replies, direct outreach, and relationship follow-up increased the engagement momentum of the community from May 28 to June 28.</p>
       <div class="hero-stats">
-        <div class="hero-stat"><b>446</b><span>Total contributions</span></div>
-        <div class="hero-stat"><b>33</b><span>Posts</span></div>
-        <div class="hero-stat"><b>413</b><span>Comments and replies</span></div>
+        <div class="hero-stat"><b>496</b><span>Total contributions</span></div>
+        <div class="hero-stat"><b>35</b><span>Posts</span></div>
+        <div class="hero-stat"><b>461</b><span>Comments and replies</span></div>
+        <div class="hero-stat"><b>9</b><span>Masterclasses confirmed &amp; scheduled</span></div>
       </div>
     </div>
   </div>
@@ -190,7 +194,7 @@
 <section>
   <div class="wrap">
     <h2>Connection kept alive</h2>
-    <h3>Not every conversation creates an immediate rejoin. The relationship still matters.</h3>
+    <h3>Not every conversation creates an immediate rejoin.</h3>
     <p class="lead">These members were not counted as direct reactivation wins from my outreach in this period. They are included because staying in touch keeps the community present in their mind and protects future participation.</p>
     <div class="relationship">
       <article class="touch"><img src="assets/anthony-carnelli-touchpoint.jpg" alt="Anthony Carnelli community touchpoint"><div class="touch-body"><b>Anthony Carnelli</b><span>Connection maintained through community follow-up.</span></div></article>
@@ -199,6 +203,39 @@
     </div>
   </div>
 </section>
+<section>
+  <div class="wrap">
+    <h3>6 case studies scheduled and realized</h3>
+    <p class="lead">Six member case studies — already realized or on track — documenting member wins from my engagement, with the Vojta project running alongside.</p>
+    <div class="casegrid">
+      <div class="touch">
+        <img src="assets/casestudy-jake-weller.jpg" alt="Jake Weller case study">
+        <div class="touch-body"><b>Jake Weller</b><span>Win realized or in progress — full write-up to follow.</span></div>
+      </div>
+      <div class="touch">
+        <img src="assets/casestudy-toni-martin.jpg" alt="Toni Martin case study">
+        <div class="touch-body"><b>Toni Martin</b><span>Win realized or in progress — full write-up to follow.</span></div>
+      </div>
+      <div class="touch">
+        <img src="assets/casestudy-simeon-nikolov.jpg" alt="Simeon Nikolov case study">
+        <div class="touch-body"><b>Simeon Nikolov</b><span>Win realized or in progress — full write-up to follow.</span></div>
+      </div>
+      <div class="touch">
+        <img src="assets/casestudy-aron-elston.jpg" alt="Aron Elston case study">
+        <div class="touch-body"><b>Aron Elston</b><span>Win realized or in progress — full write-up to follow.</span></div>
+      </div>
+      <div class="touch">
+        <img src="assets/casestudy-david-mullings.jpg" alt="David Mullings case study">
+        <div class="touch-body"><b>David Mullings</b><span>Win realized or in progress — full write-up to follow.</span></div>
+      </div>
+      <div class="touch">
+        <img src="assets/casestudy-vojta.jpg" alt="Vojta project">
+        <div class="touch-body"><b>Vojta</b><span>Project delivery alongside ongoing WhatsApp support.</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section>
   <div class="wrap">
     <h2>Upcoming masterclasses</h2>
@@ -246,16 +283,20 @@
 </section>
 <section>
   <div class="wrap">
-    <h2>Why this matters</h2>
-    <h3>Community momentum compounds when members feel seen.</h3>
+    <h2>Impacting the community momentum</h2>
+    <h3>Engagement compounds into a flywheel of wins.</h3>
     <div class="chain">
-      <div class="node"><b>Public activity</b><span>Posts, comments, replies, prompts</span></div>
+      <div class="node"><b>DM engagement + WhatsApp support + public activity</b><span>Direct messages, support, posts, comments, replies</span></div>
       <div class="connector">-></div>
-      <div class="node"><b>Private follow-up</b><span>Direct messages and reactivation nudges</span></div>
+      <div class="node"><b>More engagement + members sharing resources</b><span>Members participate and give back</span></div>
       <div class="connector">-></div>
       <div class="node"><b>More trust</b><span>Members know someone is paying attention</span></div>
       <div class="connector">-></div>
       <div class="node"><b>Better retention</b><span>People are more likely to stay active</span></div>
+      <div class="connector">-></div>
+      <div class="node"><b>More members' wins</b><span>Real outcomes worth sharing</span></div>
+      <div class="connector">-></div>
+      <div class="node"><b>Flywheel of momentum</b><span>Each win fuels the next round</span></div>
     </div>
   </div>
 </section>
@@ -263,9 +304,8 @@
 <section id="recommendation" class="close">
   <div class="wrap">
     <h2>Recommendation</h2>
-    <h3>Keep the engagement engine running next month.</h3>
-    <p>The first month created 446 public contribution points, three direct reactivation stories, and multiple kept-warm relationships. Continuing the work gives that momentum time to compound into stronger retention and a more active community.</p>
-    <a href="mailto:florian@florianrolke.com" class="cta">Continue the engagement work</a>
+    <h3>Keep the agreement between us and the engagement running from August onwards.</h3>
+    <p>I need to gracefully end a partnership and fulfill on promises made, as well as work through an immigration process. Let us resume the engagement at the end of July for August going forward. From September onwards my weekly 1:1 support for the GWJ members will conclude, and I will have another ~10h additionally to put into the main community.</p>
   </div>
 </section>
 
